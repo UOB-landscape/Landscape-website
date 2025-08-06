@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="default">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UOB Landscape</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="logo-space" title="Logo">
+    <img src="UOB-new-logo.png" alt="University of Bahrain" />
+  </div>
+  <nav>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="ourPlants.html">Our plants</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="map.html">Map</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="controls">
+      <button class="arabic-btn" onclick="translate()">عربي</button>
+      <div class="dropdown">
+        <button class="theme-btn" id="theme-btn">🎨</button>
+        <div class="theme-picker" id="theme-picker">
+          <div class="theme-option" data-theme="default"></div>
+          <div class="theme-option" data-theme="dark"></div>
+          <div class="theme-option" data-theme="solar"></div>
+          <div class="theme-option" data-theme="highcontrast"></div>
+        </div>
+      </div>
+      <input type="search" placeholder="Search…">
+    </div>
+  </nav>
+ 
+  <header id="hero"></header>
+  <main>
+    <h1>Welcome to UOB Landscape</h1>
+    <p>Established in 1986, the University of Bahrain is a public university that makes
+      distinctive contribution <br> to lead the nation in terms of human capital development,
+      leading innovation and driving the nation’s<br> economic development.<br>
+      <br>
+  </main>
+ 
+  <h2 style="text-align:center; margin-top: 40px;">Explore Our Landscape Locations</h2>
+  <div class="carousel-container">
+    <div class="carousel-wrapper">
+      <div class="carousel-track">
+        <!-- Image Set 1 -->
+        <div class="carousel-item">
+          <a href="CarPark.html">
+            <img src="Car park.jpg" alt="Car park"></a>
+          <div class="carousel-title">Car Park</div>
+        </div>
+        
+        <div class="carousel-item">
+          <a href="Buildings.html">
+            <img src="Building.jpg" alt="Building"></a>
+            <div class="carousel-title">Buildings</div>
+        </div>
+        
+        <div class="carousel-item">
+          <a href="Gates.html">
+            <img src="gate.jpg" alt="Gate"></a>
+          <div class="carousel-title">Gates</div>
+        </div>
+
+        <div class="carousel-item">
+          <a href="Roadside.html">
+            <img src="Roadside.jpg" alt="Roadside"></a>
+            <div class="carousel-title">Roadside</div>
+        </div>
+
+        <div class="carousel-item">
+          <a href="Residential.html">
+            <img src="Residential.jpg" alt="Residential"></a>
+            <div class="carousel-title">Residential</div>
+        </div>
+
+        <div class="carousel-item">
+          <a href="Infrastructure.html">
+            <img src="Infrastructure.jpg" alt="Infrastructure"></a>
+            <div class="carousel-title">Infrastructure</div>
+        </div>
+
+        <div class="carousel-item">
+          <a href="Facilities.html">
+            <img src="Facilities.jpg" alt="Facilities"></a>
+            <div class="carousel-title">Facilities</div>
+        </div>
+
+        
+        <!-- Image Set 2 (Duplicate for seamless loop) -->
+        <div class="carousel-item">
+          <a href="CarPark.html">
+            <img src="car park.jpg" alt="Car park"></a>
+          <div class="carousel-title">Car Park</div>
+        </div>
+        
+        <div class="carousel-item">
+          <a href="Buildings.html">
+            <img src="building.jpg" alt="Building"></a>
+            <div class="carousel-title">Buildings</div>
+        </div>
+        
+        <div class="carousel-item">
+          <a href="Gates.html">
+            <img src="gate.jpg" alt="Gate"></a>
+          <div class="carousel-title">Gates</div>
+        </div>
+
+        <div class="carousel-item">
+          <a href="Roadside.html">
+            <img src="Roadside.jpg" alt="Roadside"></a>
+            <div class="carousel-title">Roadside</div>
+        </div>
+
+        <div class="carousel-item">
+          <a href="Residential.html">
+            <img src="Residential.jpg" alt="Residential"></a>
+            <div class="carousel-title">Residential</div>
+        </div>
+
+        <div class="carousel-item">
+          <a href="Infrastructure.html">
+            <img src="Infrastructure.jpg" alt="Infrastructure"></a>
+            <div class="carousel-title">Infrastructure</div>
+        </div>
+
+        <div class="carousel-item">
+          <a href="Facilities.html">
+            <img src="Facilities.jpg" alt="Facilities"></a>
+            <div class="carousel-title">Facilities</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Generate 20 slides with captions
+    const captions = Array.from({ length: 20 }, (_, i) => `Caption ${i + 1}`);
+    const hero = document.getElementById('hero');
+
+    captions.forEach((text, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'slide' + (i === 0 ? ' active' : '');
+      slide.style.backgroundImage = `url('img${i + 1}.jpg')`;
+      slide.innerHTML = `<div class="text">${text}</div>`;
+      hero.appendChild(slide);
+    });
+
+    const square = document.createElement('div');
+    square.className = 'overlay-square';
+
+    const label = document.createElement('div');
+    label.className = 'overlay-label';
+    label.innerHTML = 'University of Bahrain<br>Landscapes';
+
+    square.appendChild(label);
+    hero.appendChild(square);
+
+    // Slide animation
+    const slides = document.querySelectorAll('.slide');
+    let idx = 0;
+    setInterval(() => {
+      slides[idx].classList.remove('active');
+      idx = (idx + 1) % slides.length;
+      slides[idx].classList.add('active');
+    }, 5000);
+
+    // Theme dropdown behavior
+    const btn = document.getElementById('theme-btn');
+    const picker = document.getElementById('theme-picker');
+
+    if (btn && picker) {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        picker.classList.toggle('active');
+      });
+
+      document.addEventListener('click', e => {
+        if (!e.target.closest('.dropdown')) {
+          picker.classList.remove('active');
+        }
+      });
+
+      picker.addEventListener('click', e => {
+        const t = e.target.dataset.theme;
+        if (t) {
+          document.documentElement.setAttribute('data-theme', t);
+          localStorage.setItem('theme', t);
+          picker.classList.remove('active');
+        }
+      });
+    }
+
+    // Apply saved theme on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('theme') || 'default';
+      document.documentElement.setAttribute('data-theme', saved);
+    });
+
+    // Placeholder translation logic
+    function translate() {
+      alert('Arabic translation logic goes here.');
+    }
+  </script>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>About UOB Landscape</h4>
+        <p>Empowering knowledge on geological safety and Landscape monitoring.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Our Plants</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Map</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Connect</h4>
+        <p>Email: landscape@uob.edu.bh</p>
+        <p>Phone: +973 1743 8181</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 UOB Landscape. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
