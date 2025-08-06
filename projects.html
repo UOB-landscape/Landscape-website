@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="default">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UOB Landscape – Projects</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Global Navigation -->
+  <div class="logo-space" title="Logo">
+    <img src="UOB-new-logo.png" alt="University of Bahrain" />
+  </div>
+  <nav>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="ourPlants.html">Our plants</a></li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="map.html">Map</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="controls">
+      <button class="arabic-btn" onclick="translate()">عربي</button>
+      <div class="dropdown">
+        <button class="theme-btn" id="theme-btn">🎨</button>
+        <div class="theme-picker" id="theme-picker">
+          <div class="theme-option" data-theme="default"></div>
+          <div class="theme-option" data-theme="dark"></div>
+          <div class="theme-option" data-theme="solar"></div>
+          <div class="theme-option" data-theme="highcontrast"></div>
+        </div>
+      </div>
+      <input type="search" placeholder="Search…" />
+    </div>
+  </nav>
+
+  <!-- Projects Sub‑Navigation -->
+  <nav class="projects-subnav">
+    <ul>
+      <li><a href="#before-after" id="tab-before">Before & After</a></li>
+      <li><a href="#reports" id="tab-reports">Reports</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="before-after" class="projects-section">
+      <h1>Before & After Projects</h1>
+      <!-- Filter Buttons -->
+    <div class="project-filters">
+        <button class="project-filter-btn active" data-filter="S45">
+            <div class="image-area">
+            </div>
+            <div class="label">S45</div>
+        </button>
+        <button class="project-filter-btn" data-filter="S40">
+            <div class="image-area">
+            </div>
+            <div class="label">S40</div>
+        </button>
+        <button class="project-filter-btn" data-filter="S41">
+            <div class="image-area">
+            </div>
+            <div class="label">S41</div>
+        </button>
+        <button class="project-filter-btn" data-filter="S47">
+            <div class="image-area">
+            </div>
+            <div class="label">S47</div>
+        </button>
+        <button class="project-filter-btn" data-filter="S50">
+            <div class="image-area">
+            </div>
+            <div class="label">S50</div>
+        </button>
+        <button class="project-filter-btn" data-filter="S51">
+            <div class="image-area">
+            </div>
+            <div class="label">S51</div>
+        </button>
+        <button class="project-filter-btn" data-filter="CarPark">
+            <div class="image-area">
+            </div>
+            <div class="label">Car Park</div>
+        </button>
+        <button class="project-filter-btn" data-filter="S52">
+            <div class="image-area">
+            </div>
+            <div class="label">S52</div>
+        </button>
+        <button class="project-filter-btn" data-filter="S53">
+            <div class="image-area">
+            </div>
+            <div class="label">S53</div>
+        </button>
+        <button class="project-filter-btn" data-filter="S54">
+            <div class="image-area">
+            </div>
+            <div class="label">S54</div>
+        </button>
+        <button class="project-filter-btn" data-filter="S55">
+            <div class="image-area">
+            </div>
+            <div class="label">S55</div>
+        </button>
+    </div>
+
+      <!-- Filtered Content Sections -->
+      <div id="project-contents">
+        <div class="project-filter-section" data-type="S45" style="display: block;">
+          <h3>S45 Project</h3>
+          <p>To empower organizational performance and academic excellence through innovative quality assurance practices, <br>
+            collaborative efforts, ensuring internal and external compliance and improving stakeholder satisfaction.<br>
+            To empower organizational performance and academic excellence through innovative quality assurance practices,<br> 
+            collaborative efforts, ensuring internal and external compliance and improving stakeholder satisfaction.</p>
+          <div class="container">
+            <div class="slider-container" id="sliderContainer">
+              <div class="instructions">Drag the sliders to compare all three stages</div>
+              <div class="image-layer proposal-image">
+                <img src="proposal.png" alt="Proposal">
+                <div class="label proposal-label">Proposal</div>
+              </div>
+              <div class="image-layer after-image" id="afterImage">
+                <img src="after.jpg" alt="After">
+                <div class="label after-label">After</div>
+              </div>
+              <div class="image-layer before-image" id="beforeImage">
+                <img src="before.jpg" alt="Before">
+                <div class="label before-label">Before</div>
+              </div>
+              <div class="slider-line slider-line-1" id="sliderLine1" style="left: 33%;">
+                <div class="slider-handle slider-handle-1" id="sliderHandle1"></div>
+              </div>
+              <div class="slider-line slider-line-2" id="sliderLine2" style="left: 66%;">
+                <div class="slider-handle slider-handle-2" id="sliderHandle2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-filter-section" data-type="S40" style="display: none;">
+            <h3>S40 Project</h3>
+            <p>Content for Section 40 project goes here...</p>
+        </div>
+
+        <div class="project-filter-section" data-type="S41" style="display: none;">
+            <h3>S41 Project</h3>
+            <p>Content for Section 41 project goes here...</p>
+        </div>
+
+        <div class="project-filter-section" data-type="S47" style="display: none;">
+            <h3>S47 Project</h3>
+            <p>Content for Section 47 project goes here...</p>
+        </div>
+
+        <div class="project-filter-section" data-type="S50" style="display: none;">
+            <h3>S50 Project</h3>
+            <p>Content for Section 50 project goes here...</p>
+        </div>
+
+        <div class="project-filter-section" data-type="S51" style="display: none;">
+            <h3>S51 Project</h3>
+            <p>Content for Section 51 project goes here...</p>
+        </div>
+
+        <div class="project-filter-section" data-type="CarPark" style="display: none;">
+            <h3>S48 Project (Car Park)</h3>
+            <p>Content for Car Park project goes here...</p>
+        </div>
+    </div>
+
+      <script>
+        class ThreeImageSlider {
+          constructor(containerId) {
+            this.container = document.getElementById(containerId);
+            this.sliderLine1 = document.getElementById('sliderLine1');
+            this.sliderLine2 = document.getElementById('sliderLine2');
+            this.sliderHandle1 = document.getElementById('sliderHandle1');
+            this.sliderHandle2 = document.getElementById('sliderHandle2');
+            this.beforeImage = document.getElementById('beforeImage');
+            this.afterImage = document.getElementById('afterImage');
+
+            this.isDragging = false;
+            this.activeSlider = null;
+
+            this.slider1Position = 33;
+            this.slider2Position = 66;
+
+            this.init();
+          }
+
+          init() {
+            this.bindEvents();
+            this.updateSliders();
+          }
+
+          bindEvents() {
+            this.sliderHandle1.addEventListener('mousedown', (e) => this.startDrag(e, 1));
+            this.sliderHandle2.addEventListener('mousedown', (e) => this.startDrag(e, 2));
+            document.addEventListener('mousemove', (e) => this.drag(e));
+            document.addEventListener('mouseup', () => this.stopDrag());
+
+            this.sliderHandle1.addEventListener('touchstart', (e) => this.startDrag(e, 1), { passive: false });
+            this.sliderHandle2.addEventListener('touchstart', (e) => this.startDrag(e, 2), { passive: false });
+            document.addEventListener('touchmove', (e) => this.drag(e), { passive: false });
+            document.addEventListener('touchend', () => this.stopDrag());
+          }
+
+          startDrag(e, sliderNumber) {
+            this.isDragging = true;
+            this.activeSlider = sliderNumber;
+
+            if (sliderNumber === 1) {
+              this.sliderLine1.style.zIndex = '50';
+              this.sliderLine2.style.zIndex = '40';
+            } else {
+              this.sliderLine2.style.zIndex = '50';
+              this.sliderLine1.style.zIndex = '40';
+            }
+
+            e.preventDefault();
+          }
+
+          drag(e) {
+            if (!this.isDragging) return;
+
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const rect = this.container.getBoundingClientRect();
+            const x = clientX - rect.left;
+            const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+
+            if (this.activeSlider === 1) this.slider1Position = percentage;
+            else if (this.activeSlider === 2) this.slider2Position = percentage;
+
+            this.updateSliders();
+          }
+
+          stopDrag() {
+            this.isDragging = false;
+            this.activeSlider = null;
+          }
+
+          updateSliders() {
+            this.sliderLine1.style.left = `${this.slider1Position}%`;
+            this.sliderLine2.style.left = `${this.slider2Position}%`;
+
+            this.beforeImage.style.clipPath = `polygon(0 0, ${this.slider1Position}% 0, ${this.slider1Position}% 100%, 0 100%)`;
+
+            const left = Math.min(this.slider1Position, this.slider2Position);
+            const right = Math.max(this.slider1Position, this.slider2Position);
+            this.afterImage.style.clipPath = `polygon(${left}% 0, ${right}% 0, ${right}% 100%, ${left}% 100%)`;
+          }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+          new ThreeImageSlider('sliderContainer');
+        });
+      </script>
+    </section>
+
+    <section id="reports" class="projects-section">
+      <h1>Reports</h1>
+      <p>Your project reports content goes here.</p>
+    </section>
+  </main>
+
+  <script>
+    // Switch tabs based on URL hash changes
+    function showTab(hash) {
+      document.querySelectorAll('.projects-section').forEach(sec => {
+        sec.style.display = ('#' + sec.id === hash ? 'block' : 'none');
+      });
+      document.querySelectorAll('.projects-subnav a').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === hash);
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // Set default or based on hash
+      const initialHash = (window.location.hash === '#reports') ? '#reports' : '#before-after';
+      showTab(initialHash);
+
+      // Listen to URL hash changes (e.g. back/forward)
+      window.addEventListener('hashchange', () => showTab(window.location.hash));
+
+      // Handle clicks to update hash
+      document.getElementById('tab-before').addEventListener('click', e => {
+        e.preventDefault();
+        window.location.hash = '#before-after';
+      });
+      document.getElementById('tab-reports').addEventListener('click', e => {
+        e.preventDefault();
+        window.location.hash = '#reports';
+      });
+      // Hide all project sections at load
+      // filterSections.forEach(section => {
+      //   section.style.display = 'none';
+      // });
+      // filterButtons.forEach(b => b.classList.remove('active'));
+      filterSections.forEach(section => {
+        section.style.display = (section.dataset.type === "S45") ? "block" : "none";
+      });
+
+      filterButtons.forEach(button => {
+        button.classList.toggle("active", button.dataset.filter === "S45");
+      });
+    });
+
+        // Project filter buttons logic
+    const filterButtons = document.querySelectorAll('.project-filter-btn');
+    const filterSections = document.querySelectorAll('.project-filter-section');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const selected = button.dataset.filter;
+
+        filterButtons.forEach(b => b.classList.remove('active'));
+        button.classList.add('active');
+
+        filterSections.forEach(section => {
+          section.style.display = (section.dataset.type === selected) ? 'block' : 'none';
+        });
+      });
+    });
+
+    
+    // Subnav tabs switch logic
+    const tabs = document.querySelectorAll('.projects-subnav a');
+    const sections = document.querySelectorAll('main > section');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const targetId = tab.getAttribute('href').substring(1);
+
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        sections.forEach(s => {
+          s.style.display = (s.id === targetId) ? 'block' : 'none';
+        });
+      });
+    });
+
+    // Theme dropdown behavior
+    const btn = document.getElementById('theme-btn');
+    const picker = document.getElementById('theme-picker');
+
+    if (btn && picker) {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        picker.classList.toggle('active');
+      });
+
+      document.addEventListener('click', e => {
+        if (!e.target.closest('.dropdown')) {
+          picker.classList.remove('active');
+        }
+      });
+
+      picker.addEventListener('click', e => {
+        const t = e.target.dataset.theme;
+        if (t) {
+          document.documentElement.setAttribute('data-theme', t);
+          localStorage.setItem('theme', t);
+          picker.classList.remove('active');
+        }
+      });
+    }
+
+    // Apply saved theme on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('theme') || 'default';
+      document.documentElement.setAttribute('data-theme', saved);
+    });
+
+    // Placeholder translation logic
+    function translate() {
+      alert('Arabic translation logic goes here.');
+    }
+  </script>
+
+  <!-- Theme & translate scripts omitted for brevity… -->
+ <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>About UOB Landscape</h4>
+        <p>Empowering knowledge on geological safety and Landscape monitoring.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Our Plants</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Map</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Connect</h4>
+        <p>Email: landscape@uob.edu.bh</p>
+        <p>Phone: +973 1743 8181</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 UOB Landscape. All rights reserved.
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="default">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UOB Landscape</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="logo-space" title="Logo">
+    <img src="UOB-new-logo.png" alt="University of Bahrain" />
+  </div>
+  <nav>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="ourPlants.html">Our plants</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="map.html">Map</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="controls">
+      <button class="arabic-btn" onclick="translate()">عربي</button>
+      <div class="dropdown">
+        <button class="theme-btn" id="theme-btn">🎨</button>
+        <div class="theme-picker" id="theme-picker">
+          <div class="theme-option" data-theme="default"></div>
+          <div class="theme-option" data-theme="dark"></div>
+          <div class="theme-option" data-theme="solar"></div>
+          <div class="theme-option" data-theme="highcontrast"></div>
+        </div>
+      </div>
+      <input type="search" placeholder="Search…">
+    </div>
+  </nav>
+ 
+  <script>
+
+    // Theme dropdown behavior
+    const btn = document.getElementById('theme-btn');
+    const picker = document.getElementById('theme-picker');
+
+    if (btn && picker) {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        picker.classList.toggle('active');
+      });
+
+      document.addEventListener('click', e => {
+        if (!e.target.closest('.dropdown')) {
+          picker.classList.remove('active');
+        }
+      });
+
+      picker.addEventListener('click', e => {
+        const t = e.target.dataset.theme;
+        if (t) {
+          document.documentElement.setAttribute('data-theme', t);
+          localStorage.setItem('theme', t);
+          picker.classList.remove('active');
+        }
+      });
+    }
+
+    // Apply saved theme on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('theme') || 'default';
+      document.documentElement.setAttribute('data-theme', saved);
+    });
+
+    // Placeholder translation logic
+    function translate() {
+      alert('Arabic translation logic goes here.');
+    }
+  </script>
+    <main class="grid-section">
+        <div class="search-bar">
+            <div class="search-input-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Search by title..." oninput="filterGrid()" />
+            </div>
+        </div>
+        <div class="filters">
+          <button onclick="location.href='Buildings.html'" class="filter-btn" data-filter="Buildings">Buildings</button>
+          <button onclick="location.href='Gates.html'" class="filter-btn" data-filter="Gates">Gates</button>
+          <button onclick="location.href='Roadside.html'" class="filter-btn" data-filter="Roadside">Roadside</button>
+          <button onclick="location.href='Residential.html'" class="filter-btn" data-filter="Residential">Residential</button>
+          <button onclick="location.href='Infrastructure.html'" class="filter-btn active" data-filter="Infrastructure">Infrastructure</button>
+          <button onclick="location.href='Facilities.html'" class="filter-btn" data-filter="Facilities">Facilities</button>
+          <button onclick="location.href='CarPark.html'" class="filter-btn" data-filter="CarPark">Car Park</button>
+        </div>
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="image1.jpg" alt="Image 1">
+                <h3>Title 1</h3>
+            </div>
+            <div class="grid-item">
+                <img src="image2.jpg" alt="Image 2">
+                <h3>Title 2</h3>
+            </div>
+            <div class="grid-item">
+                <img src="image3.jpg" alt="Image 3">
+                <h3>Title 3</h3>
+            </div>
+            <div class="grid-item">
+                <img src="image4.jpg" alt="Image 4">
+                <h3>Title 4</h3>
+            </div>
+                <div class="grid-item">
+                <img src="image5.jpg" alt="Image 5">
+                <h3>Title 5</h3>
+            </div>
+            <div class="grid-item">
+                <img src="image6.jpg" alt="Image 6">
+                <h3>Title 6</h3>
+            </div>
+        </div>
+    </main>
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>About UOB Landscape</h4>
+        <p>Empowering knowledge on geological safety and Landscape monitoring.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Our Plants</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Map</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Connect</h4>
+        <p>Email: landscape@uob.edu.bh</p>
+        <p>Phone: +973 1743 8181</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 UOB Landscape. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
