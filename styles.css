@@ -760,7 +760,6 @@ box-shadow: 0 8px 15px color-mix(in srgb, var(--accent) 50%, transparent);
   width: 90%;
 } 
 
-
 .project-filter-btn.active .label {
   background: var(--accent);
   opacity: 0.9;
@@ -869,6 +868,43 @@ box-shadow: 0 8px 15px color-mix(in srgb, var(--accent) 50%, transparent);
   margin-bottom: 4px; 
   font-size: 1.1rem; 
   color: var(--accent);
+}
+
+.building-subnav{
+  position: fixed;
+  height: 35px;
+  top: 60px;
+  /* left: 0;
+  right: 0; */
+  font-size: 14px;
+  background: var(--accent);
+  z-index: 80;
+}
+
+.building-subnav ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  list-style: none;
+}
+
+.building-subnav a {
+  display: block;
+  padding-left: 0px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 3px solid transparent;
+}
+
+.building-subnav a:hover {
+  border-bottom: 3px solid rgba(255,255,255,0.7);
+}
+
+.building-subnav a.active {
+  border-bottom: 3px solid #fff;
 }
 
 .map-container{

@@ -34,6 +34,11 @@
   </nav>
  
   <script>
+    //Navifate to building.html
+    function goToPage() {
+    window.location.href = 'building.html';
+    }
+
     // Theme dropdown behavior
     const btn = document.getElementById('theme-btn');
     const picker = document.getElementById('theme-picker');
@@ -88,7 +93,7 @@
           <button onclick="location.href='Facilities.html'" class="filter-btn" data-filter="Facilities">Facilities</button>
           <button onclick="location.href='CarPark.html'" class="filter-btn" data-filter="CarPark">Car Park</button>
         </div>
-      <div class="grid-container">
+      <div class="grid-container" onclick="goToPage()">
           <div class="grid-item">
             <img src="S45.jpg" alt="Image 1">
             <h3>S45 E-Learning Center</h3>
