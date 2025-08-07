@@ -7,7 +7,7 @@
 
 [data-theme="dark"] {
   --bg: #4b4d50;
-  --fg: #373333;
+  --fg: #fdfcfc;
   --accent: #006bb3;
   --font: Georgia, serif;
 }
@@ -24,6 +24,14 @@
   --fg: #1e1e1e;
   --accent: #cb9d65;
   --font: Georgia, serif;
+}
+
+[data-theme="green"] {
+  --bg: #35473d;          
+  --fg: #e8f5e9;         
+  --accent: #3c703f;  
+  --black: #2f4631;   
+  --font: 'Georgia', serif;
 }
 
 body {
@@ -44,6 +52,7 @@ nav {
   display: flex;
   align-items: center;
   z-index: 100;
+  /* border-bottom: 2px solid #ffffff; */
 }
 
 .logo-space {
@@ -81,9 +90,20 @@ nav ul {
 }
 
 nav a {
+  display: block;
+  padding-left: 0px;
   color: #fff;
   text-decoration: none;
   font-weight: bold;
+  border-bottom: 2px solid transparent;
+}
+
+nav a:hover {
+  border-bottom: 2px solid rgba(255,255,255,0.7);
+}
+
+nav a.active {
+  border-bottom: 2px solid #fff;
 }
 
 .controls {
@@ -144,6 +164,9 @@ nav a {
 .theme-option[data-theme="highcontrast"] {
   background: #cb9d65;
 }
+.theme-option[data-theme="green"] {
+  background: #4f9253;
+}
 
 .controls input[type="search"] {
   padding: 5px 10px;
@@ -152,8 +175,9 @@ nav a {
 }
 
 .search-bar {
+  padding-top: 10px;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 
 .search-input-wrapper {
@@ -551,11 +575,12 @@ main p {
  /* Projects-specific sub-navigation with underline effect */
 .projects-subnav {
   position: fixed;
-  height: 35px;
+  height: 37px;
   top: 60px;
   /* left: 0;
   right: 0; */
-  font-size: 14px;
+  /* font-size: 14px;*/
+  padding-bottom: 5px;
   background: var(--accent);
   z-index: 80;
 }
@@ -575,15 +600,15 @@ main p {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
-  border-bottom: 3px solid transparent;
+  border-bottom: 2px solid transparent;
 }
 
 .projects-subnav a:hover {
-  border-bottom: 3px solid rgba(255,255,255,0.7);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.858);
 }
 
 .projects-subnav a.active {
-  border-bottom: 3px solid #fff;
+  border-bottom: 2px solid #fff;
 }
 
 /* Hide both sections by default, shown via JS */
@@ -626,19 +651,18 @@ main p {
 
 .projects-subnav a:hover,
 .projects-subnav a.active {
-  /* background: var(--fg); */
   color: var(--bg);
   border-radius: 4px;
 }
 
 .filters {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   padding-top: 10px;
 }
 
 .filter-btn {
-  background-color: var(--bg);
+  background-color: #fdfdfd;
   color: var(--accent);
   border: 1px solid var(--accent);
   padding: 8px 16px;
@@ -813,7 +837,7 @@ box-shadow: 0 8px 15px color-mix(in srgb, var(--accent) 50%, transparent);
 .project-filter-section p {
   padding-left: 170px;
   padding-bottom: 10px;
-  color: var(--fg);
+  color: var(--black);
   margin-bottom: 15px;
 }
 
@@ -823,16 +847,21 @@ box-shadow: 0 8px 15px color-mix(in srgb, var(--accent) 50%, transparent);
   margin: 0 auto;
 }
 
+.grid-section h1{
+  padding: 0;
+}
+
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* 4 columns */
-  gap: 30px 0px;
   margin: 0 auto;
   justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px; 
 }
 
 .grid-item {
-  background-color: var(--bg);
+  /* background-color: var(--bg); */
+  background-color:#fdfdfd;
   border: 1px solid #ddd;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
@@ -876,7 +905,7 @@ box-shadow: 0 8px 15px color-mix(in srgb, var(--accent) 50%, transparent);
   top: 60px;
   /* left: 0;
   right: 0; */
-  font-size: 14px;
+  /* font-size: 14px; */
   background: var(--accent);
   z-index: 80;
 }
@@ -896,16 +925,25 @@ box-shadow: 0 8px 15px color-mix(in srgb, var(--accent) 50%, transparent);
   color: #fff;
   text-decoration: none;
   font-weight: bold;
-  border-bottom: 3px solid transparent;
+  border-bottom: 2px solid transparent;
 }
 
 .building-subnav a:hover {
-  border-bottom: 3px solid rgba(255,255,255,0.7);
+  border-bottom: 2px solid rgba(255,255,255,0.7);
 }
 
 .building-subnav a.active {
-  border-bottom: 3px solid #fff;
+  border-bottom: 2px solid #fff;
 }
+
+.building-section {
+  display: none;
+  padding: 50px 20px 20px; /* account for fixed nav + subnav */
+}
+
+/* .building-section h1{
+  text-align: center;
+} */
 
 .map-container{
   display: flex;

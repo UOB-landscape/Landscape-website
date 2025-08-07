@@ -27,6 +27,7 @@
           <div class="theme-option" data-theme="dark"></div>
           <div class="theme-option" data-theme="solar"></div>
           <div class="theme-option" data-theme="highcontrast"></div>
+          <div class="theme-option" data-theme="green"></div>
         </div>
       </div>
       <input type="search" placeholder="Search…">
@@ -34,6 +35,30 @@
   </nav>
 
   <script>
+    // Active navigation link handling
+    document.addEventListener('DOMContentLoaded', () => {
+      const navLinks = document.querySelectorAll('nav a');
+      const currentPage = window.location.pathname.split('/').pop() || 'home.html';
+      
+      // Set initial active state based on current page
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPage) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      // Add click handlers to maintain active state
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          // Remove active class from all links
+          navLinks.forEach(l => l.classList.remove('active'));
+          // Add active class to clicked link
+          this.classList.add('active');
+        });
+      });
+    });
     // Theme dropdown behavior
     const btn = document.getElementById('theme-btn');
     const picker = document.getElementById('theme-picker');
@@ -122,6 +147,10 @@
         <div class="grid-item">
             <img src="S45.jpg" alt="Image 6">
             <h3>Title 6</h3>
+        </div>
+        <div class="grid-item">
+            <img src="S45.jpg" alt="Image 7">
+            <h3>Title 7</h3>
         </div>
     </div>
   </main>

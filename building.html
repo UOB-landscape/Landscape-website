@@ -10,14 +10,14 @@
   <div class="logo-space" title="Logo">
     <img src="UOB-new-logo.png" alt="University of Bahrain" />
   </div>
-  <nav>
-    <ul>
-      <li><a href="home.html">Home</a></li>
-      <li><a href="ourPlants.html">Our plants</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="map.html">Map</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="ourPlants.html">Our plants</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="map.html">Map</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
     <div class="controls">
       <button class="arabic-btn" onclick="translate()">عربي</button>
       <div class="dropdown">
@@ -27,6 +27,7 @@
           <div class="theme-option" data-theme="dark"></div>
           <div class="theme-option" data-theme="solar"></div>
           <div class="theme-option" data-theme="highcontrast"></div>
+          <div class="theme-option" data-theme="green"></div>
         </div>
       </div>
       <input type="search" placeholder="Search…">
@@ -35,90 +36,44 @@
 
   <nav class="building-subnav">
     <ul>
-      <li><a href="#Plants" id="Plants">Plants</a></li>
-      <li><a href="#Suggestions" id="Suggestions">Suggestions</a></li>
+      <li><a href="#Plants" id="tab-Plants">Plants</a></li>
+      <li><a href="#Suggestions" id="tab-Suggestions">Suggestions</a></li>
     </ul>
   </nav>
-
-  <main class="grid-section">
-    <div class="search-bar">
-      <div class="search-input-wrapper">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="searchInput" placeholder="Search by title..." oninput="filterGrid()" />
-      </div>
-      
-    </div>
-    <section id="Plants" class="projects-section">
-      <h1>Plants</h1>
-
-        <div class="filters">
-        <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
-            <option value="" disabled selected>Sort by</option>
-            <option value="A-Z">A-Z</option>
-        </select>
-
-        <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
-            <option value="" disabled selected>Filter by Type</option>
-            <option value="trees">Trees</option>
-            <option value=""></option>
-            <option value=""></option>
-        </select>
-
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="indoor">Indoor</button>
-        <button class="filter-btn" data-filter="outdoor">Outdoor</button>
-
-        </div>
-        <div class="grid-container">
-            <div class="grid-item">
-                <img src="Araucaria heterophylla.jpg" alt="Image 1">
-                <h3>Title 1</h3>
-            </div>
-            <div class="grid-item">
-                <img src="before.jpg" alt="Image 2">
-                <h3>Title 2</h3>
-            </div>
-            <div class="grid-item">
-                <img src="building.jpg" alt="Image 3">
-                <h3>Title 3</h3>
-            </div>
-            <div class="grid-item">
-                <img src="gate.jpg" alt="Image 4">
-                <h3>Title 4</h3>
-            </div>
-                <div class="grid-item">
-                <img src="Facilities.jpg" alt="Image 5">
-                <h3>Title 5</h3>
-            </div>
-            <div class="grid-item">
-                <img src="S45.jpg" alt="Image 6">
-                <h3>Title 6</h3>
-            </div>
-        </div>
-    </section>
-
-    <section id="Suggestions" class="projects-section">
-      <h1>Suggestions</h1>
-
-    </section>
-  </main>
 
   <script>
     // Switch tabs based on URL hash changes
     function showTab(hash) {
-    document.querySelectorAll('.project-section').forEach(sec => {
+      document.querySelectorAll('.building-section').forEach(sec => {
         sec.style.display = ('#' + sec.id === hash ? 'block' : 'none');
-    });
-    document.querySelectorAll('.building-subnav a').forEach(link => {
+      });
+      document.querySelectorAll('.building-subnav a').forEach(link => {
         link.classList.toggle('active', link.getAttribute('href') === hash);
-    });
+      });
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-    const initialHash = window.location.hash || '#Plants';
-    showTab(initialHash);
+      // Set default or based on hash
+      const initialHash = (window.location.hash === '#Suggestions') ? '#Suggestions' : '#Plants';
+      showTab(initialHash);
 
-    window.addEventListener('hashchange', () => showTab(window.location.hash));
+      // Listen to URL hash changes (e.g. back/forward)
+      window.addEventListener('hashchange', () => showTab(window.location.hash));
+
+      // Handle clicks to update hash
+      document.getElementById('tab-Plants').addEventListener('click', e => {
+        e.preventDefault();
+        window.location.hash = '#Plants';
+      });
+      document.getElementById('tab-Suggestions').addEventListener('click', e => {
+        e.preventDefault();
+        window.location.hash = '#Suggestions';
+      });
+      // Hide all project sections at load
+      filterSections.forEach(section => {
+        section.style.display = 'none';
+      });
+      filterButtons.forEach(b => b.classList.remove('active'));
     });
 
     // Subnav tabs switch logic
@@ -139,7 +94,6 @@
         });
       });
     });
-
     // Theme dropdown behavior
     const btn = document.getElementById('theme-btn');
     const picker = document.getElementById('theme-picker');
@@ -178,6 +132,68 @@
     }
   </script>
 
+  <main class="grid-section">
+    <section id="Plants" class="building-section">
+        <div class="search-bar">
+            <div class="search-input-wrapper">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Search by title..." oninput="filterGrid()" />
+            </div>
+        
+        </div>
+        <div class="filters">
+        <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
+            <option value="" disabled selected>Sort by</option>
+            <option value="A-Z">A-Z</option>
+        </select>
+
+        <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
+            <option value="" disabled selected>Filter by Type</option>
+            <option value="trees">Trees</option>
+            <option value=""></option>
+            <option value=""></option>
+        </select>
+
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="indoor">Indoor</button>
+        <button class="filter-btn" data-filter="outdoor">Outdoor</button>
+
+        </div>
+        <!-- <h1>Plants</h1> -->
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="Araucaria heterophylla.jpg" alt="Image 1">
+                <h3>Title 1</h3>
+            </div>
+            <div class="grid-item">
+                <img src="before.jpg" alt="Image 2">
+                <h3>Title 2</h3>
+            </div>
+            <div class="grid-item">
+                <img src="building.jpg" alt="Image 3">
+                <h3>Title 3</h3>
+            </div>
+            <div class="grid-item">
+                <img src="gate.jpg" alt="Image 4">
+                <h3>Title 4</h3>
+            </div>
+                <div class="grid-item">
+                <img src="Facilities.jpg" alt="Image 5">
+                <h3>Title 5</h3>
+            </div>
+            <div class="grid-item">
+                <img src="S45.jpg" alt="Image 6">
+                <h3>Title 6</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="Suggestions" class="building-section">
+      <h1>Suggestions</h1>
+
+    </section>
+  </main>
+
   <footer>
     <div class="footer-container">
       <div class="footer-column">
@@ -203,5 +219,6 @@
       &copy; 2025 UOB Landscape. All rights reserved.
     </div>
   </footer>
+
 </body>
 </html>
