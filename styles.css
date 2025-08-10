@@ -2,6 +2,7 @@
   --bg: #fff;
   --fg: #000;
   --accent: #0e447e;
+  --black: #0a0a0a;
   --font: Georgia, serif;
 }
 
@@ -9,6 +10,7 @@
   --bg: #4b4d50;
   --fg: #fdfcfc;
   --accent: #006bb3;
+  --black: #0a0a0a;
   --font: Georgia, serif;
 }
 
@@ -16,6 +18,7 @@
   --bg: #fdf6e3;
   --fg: #657b83;
   --accent: #b58900;
+  --black: #0a0a0a;
   --font: Georgia, serif;
 }
 
@@ -23,6 +26,7 @@
   --bg: #fdf6e3;
   --fg: #1e1e1e;
   --accent: #cb9d65;
+  --black: #0a0a0a;
   --font: Georgia, serif;
 }
 
@@ -30,7 +34,7 @@
   --bg: #35473d;          
   --fg: #e8f5e9;         
   --accent: #3c703f;  
-  --black: #2f4631;   
+  --black: #0d0d0d;
   --font: 'Georgia', serif;
 }
 
@@ -843,7 +847,7 @@ box-shadow: 0 8px 15px color-mix(in srgb, var(--accent) 50%, transparent);
 
 .grid-section {
   padding: 100px 20px;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -861,14 +865,14 @@ box-shadow: 0 8px 15px color-mix(in srgb, var(--accent) 50%, transparent);
 
 .grid-item {
   /* background-color: var(--bg); */
-  background-color:#fdfdfd;
-  border: 1px solid #ddd;
+  background-color: #fdfdfd;
+  border: 1px solid #fdfdfd;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   transition: transform 0.7s ease;
   text-align: center;
-  padding: 8px 8px 15px 8px;
+  padding: 6px 6px 15px 6px;
 
   display: flex;
   flex-direction: column;
@@ -896,7 +900,7 @@ box-shadow: 0 8px 15px color-mix(in srgb, var(--accent) 50%, transparent);
   margin-top: 8px; 
   margin-bottom: 4px; 
   font-size: 1.1rem; 
-  color: var(--accent);
+  color: var(--black);
 }
 
 .building-subnav{
