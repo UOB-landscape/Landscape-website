@@ -599,7 +599,7 @@ main p {
 }
 
 .projects-subnav a {
-  display: block;
+  /* display: block; */
   padding-left: 0px;
   color: #fff;
   text-decoration: none;
@@ -847,7 +847,7 @@ box-shadow: 0 8px 15px color-mix(in srgb, var(--accent) 50%, transparent);
 
 .grid-section {
   padding: 100px 20px;
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
 }
 
