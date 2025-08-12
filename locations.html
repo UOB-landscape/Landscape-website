@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="default">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UOB Landscape</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="logo-space" title="Logo">
+    <img src="UOB-new-logo.png" alt="University of Bahrain" />
+  </div>
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="ourPlants.html">Our plants</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="locations.html">Locations</a></li>
+            <li><a href="map.html">Map</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    <div class="controls">
+      <button class="arabic-btn" onclick="translate()">عربي</button>
+      <div class="dropdown">
+        <button class="theme-btn" id="theme-btn">🎨</button>
+        <div class="theme-picker" id="theme-picker">
+          <div class="theme-option" data-theme="default"></div>
+          <div class="theme-option" data-theme="dark"></div>
+          <div class="theme-option" data-theme="solar"></div>
+          <div class="theme-option" data-theme="highcontrast"></div>
+          <div class="theme-option" data-theme="green"></div>
+        </div>
+      </div>
+      <input type="search" placeholder="Search…">
+    </div>
+  </nav>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.locations-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const link = item.dataset.link;
+                if (link) {
+                    window.location.href = link;
+                }
+            });
+        });
+    });
+
+
+    // Active navigation link handling
+    document.addEventListener('DOMContentLoaded', () => {
+      const navLinks = document.querySelectorAll('nav a');
+      const currentPage = window.location.pathname.split('/').pop() || 'home.html';
+      
+      // Set initial active state based on current page
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPage) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      // Add click handlers to maintain active state
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          // Remove active class from all links
+          navLinks.forEach(l => l.classList.remove('active'));
+          // Add active class to clicked link
+          this.classList.add('active');
+        });
+      });
+    });
+    // Theme dropdown behavior
+    const btn = document.getElementById('theme-btn');
+    const picker = document.getElementById('theme-picker');
+
+    if (btn && picker) {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        picker.classList.toggle('active');
+      });
+
+      document.addEventListener('click', e => {
+        if (!e.target.closest('.dropdown')) {
+          picker.classList.remove('active');
+        }
+      });
+
+      picker.addEventListener('click', e => {
+        const t = e.target.dataset.theme;
+        if (t) {
+          document.documentElement.setAttribute('data-theme', t);
+          localStorage.setItem('theme', t);
+          picker.classList.remove('active');
+        }
+      });
+    }
+
+    // Apply saved theme on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('theme') || 'default';
+      document.documentElement.setAttribute('data-theme', saved);
+    });
+
+    // Placeholder translation logic
+    function translate() {
+      alert('Arabic translation logic goes here.');
+    }
+  </script>
+
+  <main class="locations-section">
+    <h2>Our Landscape Locations</h2>
+
+    <div class="locations-container">
+        <div class="locations-item" data-link="Buildings.html">
+            <img src="S45.jpg" alt="Image 1">
+            <h4 class="locations-title">Buildings</h4>
+        </div>
+        <div class="locations-item" data-link="Gates.html">
+            <img src="before.jpg" alt="Image 2">
+            <h4 class="locations-title">Gates</h4>
+        </div>
+        <div class="locations-item" data-link="Roadside.html">
+            <img src="building.jpg" alt="Image 3">
+            <h4 class="locations-title">Roadside</h4>
+        </div>
+        <div class="locations-item" data-link="Residential.html">
+            <img src="gate.jpg" alt="Image 4">
+            <h4 class="locations-title">Residential</h4>
+        </div>
+            <div class="locations-item" data-link="Infrastructure.html">
+            <img src="Facilities.jpg" alt="Image 5">
+            <h4 class="locations-title">Infrastructure</h4>
+        </div>
+        <div class="locations-item" data-link="Facilities.html">
+            <img src="S45.jpg" alt="Image 6">
+            <h4 class="locations-title">Facilities</h4>
+        </div>
+        <div class="locations-item" data-link="CarPark.html">
+            <img src="S45.jpg" alt="Image 7">
+            <h4 class="locations-title">Car Park</h4>
+        </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>About UOB Landscape</h4>
+        <p>Empowering knowledge on geological safety and Landscape monitoring.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Our Plants</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Map</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Connect</h4>
+        <p>Email: landscape@uob.edu.bh</p>
+        <p>Phone: +973 1743 8181</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 UOB Landscape. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
