@@ -4,6 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>UOB Landscape</title>
+
+  <script>
+    // Get saved theme from localStorage
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme) {
+      // Set theme attribute before CSS is applied
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  </script>
+  
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>

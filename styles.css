@@ -618,11 +618,11 @@ main p {
 }
 
 .projects-subnav a:hover {
-  border-bottom: 2px solid rgba(255, 255, 255, 0.858);
+  /* border-bottom: 2px solid rgba(255, 255, 255, 0.858); */
 }
 
 .projects-subnav a.active {
-  border-bottom: 2px solid #fff;
+  /* border-bottom: 2px solid #fff; */
 }
 
 /* Hide both sections by default, shown via JS */
@@ -634,39 +634,6 @@ main p {
 .projects-section h1{
   margin-top: 50px;
   text-align: center;
-}
-
-/* Projects-specific sub-navigation */
-.projects-subnav {
-  position: fixed;
-  top: 60px;
-  left: 0;
-  right: 0;
-  background: var(--accent);
-  z-index: 90;
-}
-
-.projects-subnav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-}
-
-.projects-subnav a {
-  display: block;
-  padding: 10px 20px;
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.projects-subnav a:hover,
-.projects-subnav a.active {
-  color: var(--bg);
-  border-radius: 4px;
 }
 
 .filters {

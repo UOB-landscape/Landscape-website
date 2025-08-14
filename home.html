@@ -4,7 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>UOB Landscape</title>
-  <link rel="stylesheet" href="styles.css">
+  
+  <script>
+    // Get saved theme from localStorage
+    const savedTheme = localStorage.getItem('theme');
+
+    if (savedTheme) {
+      // Set theme attribute before CSS is applied
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  </script>
+  
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="logo-space" title="Logo">
@@ -140,30 +151,45 @@
   </div>
 
   <script>
-    // Active navigation link handling
     document.addEventListener('DOMContentLoaded', () => {
       const navLinks = document.querySelectorAll('nav a');
       const currentPage = window.location.pathname.split('/').pop() || 'home.html';
-      
-      // Set initial active state based on current page
+
+      // List of pages considered part of the "Locations" section
+      const locationPages = [
+        'CarPark.html',
+        'Buildings.html',
+        'Gates.html',
+        'Roadside.html',
+        'Residential.html',
+        'Infrastructure.html',
+        'Facilities.html',
+        'locations.html'
+      ];
+
       navLinks.forEach(link => {
-        if (link.getAttribute('href') === currentPage) {
+        const href = link.getAttribute('href');
+
+        if (locationPages.includes(currentPage) && href === 'locations.html') {
+          // Highlight Locations nav link if current page is any location page
+          link.classList.add('active');
+        } else if (href === currentPage) {
+          // Highlight the matching nav link for other pages
           link.classList.add('active');
         } else {
           link.classList.remove('active');
         }
       });
 
-      // Add click handlers to maintain active state
+      // Optional: maintain active state on click (if navigation doesn't reload)
       navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
-          // Remove active class from all links
           navLinks.forEach(l => l.classList.remove('active'));
-          // Add active class to clicked link
           this.classList.add('active');
         });
       });
     });
+
     // Generate 20 slides with captions
     const captions = Array.from({ length: 20 }, (_, i) => `Caption ${i + 1}`);
     const hero = document.getElementById('hero');
