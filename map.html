@@ -45,10 +45,70 @@
       <input type="search" placeholder="Search…">
     </div>
   </nav>
- 
+  
   <div class="map-container">
-    <img src="UOB-MAP.jpg" alt="UOB Plants Map" width="900" height="500">
+    <div class="map-wrapper" id="zoom-area">
+      <img src="UOB-MAP.jpg" alt="UOB Plants Map" class="map-img">
+    </div>
   </div>
+
+  <div class="map-controls">
+    <button id="zoomIn">+</button>
+    <button id="zoomOut">−</button>
+    <button id="reset">Reset</button>
+  </div>
+
+  <!-- Panzoom Library -->
+  <script src="https://unpkg.com/@panzoom/panzoom/dist/panzoom.min.js"></script>
+
+  <script>
+    // === Building data ===
+    // x, y are percentages (0–1)
+    const buildings = [
+      { name: "Building A", x: 0.3, y: 0.36, url: "building.html" },
+      // add more buildings as needed
+    ];
+
+    const mapWrapper = document.getElementById("zoom-area");
+
+    function addIcons() {
+      buildings.forEach(b => {
+        const a = document.createElement("a");
+        a.href = b.url;
+        a.target = "_blank"; // open in new tab, optional
+
+        const img = document.createElement("img");
+        img.src = "Building icon.png"; // building icon
+        img.alt = b.name;
+        img.title = b.name;
+        img.classList.add("map-icon");
+
+        img.style.left = (b.x * 100) + "%";
+        img.style.top = (b.y * 100) + "%";
+
+        a.appendChild(img);
+        mapWrapper.appendChild(a);
+      });
+    }
+
+    window.addEventListener("load", addIcons);
+
+    // === Panzoom for zoom & pan ===
+    const panzoom = Panzoom(mapWrapper, {
+      maxScale: 5,
+      minScale: 1,
+      contain: 'outside'
+    });
+
+    // Mouse wheel zoom
+    mapWrapper.parentElement.addEventListener('wheel', panzoom.zoomWithWheel);
+
+    // Buttons
+    document.getElementById('zoomIn').addEventListener('click', () => panzoom.zoomIn());
+    document.getElementById('zoomOut').addEventListener('click', () => panzoom.zoomOut());
+    document.getElementById('reset').addEventListener('click', () => panzoom.reset());
+
+  </script>
 
   <script>
     // Active navigation link handling

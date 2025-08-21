@@ -43,7 +43,7 @@ body {
   font-family: var(--font);
   background: var(--bg);
   color: var(--fg);
-  }
+}
 
 nav {
   position: fixed;
@@ -992,11 +992,46 @@ box-shadow: 0 8px 15px color-mix(in srgb, var(--accent) 50%, transparent);
   text-align: center;
 } */
 
-.map-container{
-  display: flex;
-  justify-content: center; 
-  align-items: center;    
-  padding-top: 150px;
+.map-container {
+  width: 900px;
+  max-width: 95%;
+  border: 2px solid #ccc;
+  overflow: hidden;
+  position: relative;
+  margin: 135px auto 20px auto; /* 40px top, 20px bottom, auto left/right */
+}
+
+.map-wrapper {
+  position: relative;
+  width: 100%;
+  cursor: grab;
+}
+
+.map-wrapper img.map-img {
+  width: 100%;
+  display: block;
+}
+
+.map-icon {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transform: translate(-50%, -100%);
+}
+
+.map-controls {
+  display: flex;          /* make it a flex container */
+  justify-content: center; /* center all buttons horizontally */
+  gap: 10px;              /* space between buttons */
+  margin-top: 10px;
+}
+
+.map-controls button {
+  padding: 6px 12px;
+  margin: 0 5px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .about-layout{
