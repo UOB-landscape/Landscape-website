@@ -24,7 +24,7 @@
     <nav>
         <ul>
             <li><a href="home.html">Home</a></li>
-            <li><a href="ourPlants.html">Our plants</a></li>
+            <li><a href="ourPlants.html" class="active">Our plants </a></li>
             <li><a href="projects.html">Projects</a></li>
             <li><a href="locations.html">Locations</a></li>
             <li><a href="map.html">Map</a></li>
@@ -46,31 +46,67 @@
     </div>
   </nav>
 
-  <script>
-    // Active navigation link handling
-    document.addEventListener('DOMContentLoaded', () => {
-      const navLinks = document.querySelectorAll('nav a');
-      const currentPage = window.location.pathname.split('/').pop() || 'home.html';
-      
-      // Set initial active state based on current page
-      navLinks.forEach(link => {
-        if (link.getAttribute('href') === currentPage) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
-      });
+  <nav class="plants-subnav">
+    <ul>
+      <li><a href="#indoor-plants" id="tab-indoor">Indoor Plants</a></li>
+      <li><a href="#outdoor-plants" id="tab-outdoor">Outdoor Plants</a></li>
+    </ul>
+  </nav>
 
-      // Add click handlers to maintain active state
-      navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          // Remove active class from all links
-          navLinks.forEach(l => l.classList.remove('active'));
-          // Add active class to clicked link
-          this.classList.add('active');
+  <script>
+    // Switch tabs based on URL hash changes
+    function showTab(hash) {
+      document.querySelectorAll('.projects-section').forEach(sec => {
+        sec.style.display = ('#' + sec.id === hash ? 'block' : 'none');
+      });
+      document.querySelectorAll('.plants-subnav a').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === hash);
+      });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // Set default or based on hash
+      const initialHash = (window.location.hash === '#outdoor-plants') ? '#outdoor-plants' : '#indoor-plants';
+      showTab(initialHash);
+
+      // Listen to URL hash changes (e.g. back/forward)
+      window.addEventListener('hashchange', () => showTab(window.location.hash));
+
+      // Handle clicks to update hash
+      document.getElementById('tab-indoor').addEventListener('click', e => {
+        e.preventDefault();
+        window.location.hash = '#indoor-plants';
+      });
+      document.getElementById('tab-outdoor').addEventListener('click', e => {
+        e.preventDefault();
+        window.location.hash = '#outdoor-plants';
+      });
+      // Hide all project sections at load
+      filterSections.forEach(section => {
+        section.style.display = 'none';
+      });
+      filterButtons.forEach(b => b.classList.remove('active'));
+    });
+
+    // Subnav tabs switch logic
+    const tabs = document.querySelectorAll('.plants-subnav a');
+    const sections = document.querySelectorAll('main > section');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        const targetId = tab.getAttribute('href').substring(1);
+
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        sections.forEach(s => {
+          s.style.display = (s.id === targetId) ? 'block' : 'none';
         });
       });
     });
+
     // Theme dropdown behavior
     const btn = document.getElementById('theme-btn');
     const picker = document.getElementById('theme-picker');
@@ -108,64 +144,124 @@
       alert('Arabic translation logic goes here.');
     }
   </script>
-
-  <main class="grid-section">
-    <div class="search-bar">
-      <div class="search-input-wrapper">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="searchInput" placeholder="Search by title..." oninput="filterGrid()" />
+  <main>
+    <section id="indoor-plants" class="projects-section">
+      <h1>Indoor Plants</h1>
+      <div class="search-bar">
+        <div class="search-input-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Search by title..." oninput="filterGrid()" />
+        </div>
       </div>
-      
-    </div>
-    <div class="filters">
-      <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
-        <option value="" disabled selected>Sort by</option>
-        <option value="A-Z">A-Z</option>
-      </select>
+      <div class="filters">
+        <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
+          <option value="" disabled selected>Sort by</option>
+          <option value="A-Z">A-Z</option>
+        </select>
 
-      <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
-        <option value="" disabled selected>Filter by Type</option>
-        <option value="trees">Trees</option>
-        <option value=""></option>
-        <option value=""></option>
-      </select>
+        <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
+          <option value="" disabled selected>Filter by Type</option>
+          <option value="trees">Trees</option>
+          <option value=""></option>
+          <option value=""></option>
+        </select>
 
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="indoor">Indoor</button>
-      <button class="filter-btn" data-filter="outdoor">Outdoor</button>
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="indoor">Indoor</button>
+        <button class="filter-btn" data-filter="outdoor">Outdoor</button>
 
-    </div>
-    <div class="grid-container">
-        <div class="grid-item">
-            <img src="Araucaria heterophylla.jpg" alt="Image 1">
-            <h3>Title 1</h3>
+      </div>
+      <div class="grid-container">
+          <div class="grid-item">
+              <img src="Araucaria heterophylla.jpg" alt="Image 1">
+              <h3>Title 1</h3>
+          </div>
+          <div class="grid-item">
+              <img src="before.jpg" alt="Image 2">
+              <h3>Title 2</h3>
+          </div>
+          <div class="grid-item">
+              <img src="building.jpg" alt="Image 3">
+              <h3>Title 3</h3>
+          </div>
+          <div class="grid-item">
+              <img src="gate.jpg" alt="Image 4">
+              <h3>Title 4</h3>
+          </div>
+              <div class="grid-item">
+              <img src="Facilities.jpg" alt="Image 5">
+              <h3>Title 5</h3>
+          </div>
+          <div class="grid-item">
+              <img src="S45.jpg" alt="Image 6">
+              <h3>Title 6</h3>
+          </div>
+          <div class="grid-item">
+              <img src="S45.jpg" alt="Image 7">
+              <h3>Title 7</h3>
+          </div>
+      </div>
+    </section>
+
+    <section id="outdoor-plants" class="projects-section">
+      <h1>Outdoor Plants</h1>
+      <div class="search-bar">
+        <div class="search-input-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Search by title..." oninput="filterGrid()" />
         </div>
-        <div class="grid-item">
-            <img src="before.jpg" alt="Image 2">
-            <h3>Title 2</h3>
-        </div>
-        <div class="grid-item">
-            <img src="building.jpg" alt="Image 3">
-            <h3>Title 3</h3>
-        </div>
-        <div class="grid-item">
-            <img src="gate.jpg" alt="Image 4">
-            <h3>Title 4</h3>
-        </div>
-            <div class="grid-item">
-            <img src="Facilities.jpg" alt="Image 5">
-            <h3>Title 5</h3>
-        </div>
-        <div class="grid-item">
-            <img src="S45.jpg" alt="Image 6">
-            <h3>Title 6</h3>
-        </div>
-        <div class="grid-item">
-            <img src="S45.jpg" alt="Image 7">
-            <h3>Title 7</h3>
-        </div>
-    </div>
+      </div>
+      <div class="filters">
+        <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
+          <option value="" disabled selected>Sort by</option>
+          <option value="A-Z">A-Z</option>
+        </select>
+
+        <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
+          <option value="" disabled selected>Filter by Type</option>
+          <option value="trees">Trees</option>
+          <option value=""></option>
+          <option value=""></option>
+        </select>
+
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="indoor">Indoor</button>
+        <button class="filter-btn" data-filter="outdoor">Outdoor</button>
+
+      </div>
+      <div class="grid-container">
+          <div class="grid-item">
+              <img src="Araucaria heterophylla.jpg" alt="Image 1">
+              <h3>Title 1</h3>
+          </div>
+          <div class="grid-item">
+              <img src="before.jpg" alt="Image 2">
+              <h3>Title 2</h3>
+          </div>
+          <div class="grid-item">
+              <img src="building.jpg" alt="Image 3">
+              <h3>Title 3</h3>
+          </div>
+          <div class="grid-item">
+              <img src="gate.jpg" alt="Image 4">
+              <h3>Title 4</h3>
+          </div>
+              <div class="grid-item">
+              <img src="Facilities.jpg" alt="Image 5">
+              <h3>Title 5</h3>
+          </div>
+          <div class="grid-item">
+              <img src="S45.jpg" alt="Image 6">
+              <h3>Title 6</h3>
+          </div>
+          <div class="grid-item">
+              <img src="S45.jpg" alt="Image 7">
+              <h3>Title 7</h3>
+          </div>
+      </div>
+    </section>
   </main>
+
 
   <footer>
     <div class="footer-container">

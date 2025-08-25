@@ -586,6 +586,37 @@ main p {
     font-size: 12px;
   }
 }
+
+.plants-subnav {
+  position: fixed;
+  height: 37px;
+  top: 60px;
+  /* left: 0;
+  right: 0; */
+  /* font-size: 14px;*/
+  padding-bottom: 5px;
+  background: var(--accent);
+  z-index: 80;
+}
+
+.plants-subnav ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  list-style: none;
+}
+
+.plants-subnav a {
+  /* display: block; */
+  padding-left: 0px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  border-bottom: 2px solid transparent;
+}
+
  /* Projects-specific sub-navigation with underline effect */
 .projects-subnav {
   position: fixed;
