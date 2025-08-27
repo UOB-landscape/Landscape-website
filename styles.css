@@ -778,7 +778,7 @@ box-shadow: 0 8px 15px color-mix(in srgb, var(--accent) 50%, transparent);
   height: 100%;
   width: 100%;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
 .project-filter-btn:not(.active) .image-area {
@@ -812,7 +812,7 @@ box-shadow: 0 8px 15px color-mix(in srgb, var(--accent) 50%, transparent);
 }
 
 /* Specific background images for each section */
-.project-filter-btn[data-filter="S45"] .image-area {
+.project-filter-btn[data-filter="S46"] .image-area {
   background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop');
 }
 

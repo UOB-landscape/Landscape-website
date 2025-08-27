@@ -60,10 +60,10 @@
       <h1>Before & After Projects</h1>
       <!-- Filter Buttons -->
     <div class="project-filters">
-        <button class="project-filter-btn active" data-filter="S45">
+        <button class="project-filter-btn active" data-filter="S46">
             <div class="image-area">
             </div>
-            <div class="label">S45</div>
+            <div class="label">S46</div>
         </button>
         <button class="project-filter-btn" data-filter="S40">
             <div class="image-area">
@@ -119,8 +119,8 @@
 
       <!-- Filtered Content Sections -->
       <div id="project-contents">
-        <div class="project-filter-section" data-type="S45" style="display: block;">
-          <h3>S45 Project</h3>
+        <div class="project-filter-section" data-type="S46" style="display: block;">
+          <h3>S46 Project</h3>
           <p>To empower organizational performance and academic excellence through innovative quality assurance practices, <br>
             collaborative efforts, ensuring internal and external compliance and improving stakeholder satisfaction.<br>
             To empower organizational performance and academic excellence through innovative quality assurance practices,<br> 
@@ -129,7 +129,7 @@
             <div class="slider-container" id="sliderContainer">
               <div class="instructions">Drag the sliders to compare all three stages</div>
               <div class="image-layer proposal-image">
-                <img src="proposal.png" alt="Proposal">
+                <img src="proposal-2.png" alt="Proposal">
                 <div class="label proposal-label">Proposal</div>
               </div>
               <div class="image-layer after-image" id="afterImage">
@@ -358,11 +358,11 @@
       // });
       // filterButtons.forEach(b => b.classList.remove('active'));
       filterSections.forEach(section => {
-        section.style.display = (section.dataset.type === "S45") ? "block" : "none";
+        section.style.display = (section.dataset.type === "S46") ? "block" : "none";
       });
 
       filterButtons.forEach(button => {
-        button.classList.toggle("active", button.dataset.filter === "S45");
+        button.classList.toggle("active", button.dataset.filter === "S46");
       });
     });
 
