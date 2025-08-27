@@ -1,0 +1,92 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Indoor Plant Details</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="plantDetails"></div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const plantId = params.get("id");
+
+    fetch("http://localhost:3000/api/indoor")
+      .then(res => res.json())
+      .then(plants => {
+        const plant = plants.find(p => p["Plant ID"] === plantId);
+        if (!plant) {
+          document.getElementById("plantDetails").innerHTML = "<p>Plant not found.</p>";
+          return;
+        }
+
+        // ignore Picture field, display all others
+        let detailsHtml = `
+          <h1>${plant["Scientific name"]} (${plant["Common name"]})</h1>
+          <img src="${plant.Image}" alt="${plant['Common name']}">
+          <ul>
+        `;
+
+        Object.keys(plant).forEach(key => {
+          if (key !== "Picture" && key !== "Image") {
+            detailsHtml += `<li><strong>${key}:</strong> ${plant[key]}</li>`;
+          }
+        });
+
+        detailsHtml += "</ul>";
+        document.getElementById("plantDetails").innerHTML = detailsHtml;
+      })
+      .catch(err => console.error("Fetch error:", err));
+  </script>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Indoor Plant Details</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="plant-details-container">
+    <div id="plantDetails" class="plant-details-card"></div>
+  </main>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const plantId = params.get("id");
+
+    fetch("http://localhost:3000/api/indoor")
+      .then(res => res.json())
+      .then(plants => {
+        const plant = plants.find(p => p["Plant ID"] === plantId);
+        if (!plant) {
+          document.getElementById("plantDetails").innerHTML = "<p>Plant not found.</p>";
+          return;
+        }
+
+        let detailsHtml = `
+          <h1>${plant["Scientific name"]} <span>(${plant["Common name"]})</span></h1>
+          <div class="plant-image">
+            <img src="${plant.Image}" alt="${plant['Common name']}">
+          </div>
+          <ul class="plant-info">
+        `;
+
+        Object.keys(plant).forEach(key => {
+          if (key !== "Picture" && key !== "Image") {
+            detailsHtml += `<li><strong>${key}:</strong> ${plant[key]}</li>`;
+          }
+        });
+
+        detailsHtml += "</ul>";
+        document.getElementById("plantDetails").innerHTML = detailsHtml;
+      })
+      .catch(err => console.error("Fetch error:", err));
+  </script>
+</body>
+</html>

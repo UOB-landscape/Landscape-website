@@ -166,36 +166,9 @@
         </select>
 
       </div>
-      <div class="grid-container">
-          <div class="grid-item">
-              <img src="Araucaria heterophylla.jpg" alt="Image 1">
-              <h3>Title 1</h3>
-          </div>
-          <div class="grid-item">
-              <img src="before.jpg" alt="Image 2">
-              <h3>Title 2</h3>
-          </div>
-          <div class="grid-item">
-              <img src="building.jpg" alt="Image 3">
-              <h3>Title 3</h3>
-          </div>
-          <div class="grid-item">
-              <img src="gate.jpg" alt="Image 4">
-              <h3>Title 4</h3>
-          </div>
-              <div class="grid-item">
-              <img src="Facilities.jpg" alt="Image 5">
-              <h3>Title 5</h3>
-          </div>
-          <div class="grid-item">
-              <img src="S45.jpg" alt="Image 6">
-              <h3>Title 6</h3>
-          </div>
-          <div class="grid-item">
-              <img src="S45.jpg" alt="Image 7">
-              <h3>Title 7</h3>
-          </div>
-      </div>
+      
+      <div id="indoorGrid" class="grid-container"></div>
+
     </section>
 
     <section id="outdoor-plants" class="plants-section">
@@ -278,6 +251,94 @@
       &copy; 2025 UOB Landscape. All rights reserved.
     </div>
   </footer>
+
+<!-- <script>
+fetch('http://localhost:3000/api/indoor')
+  .then(res => {
+    console.log('Response status:', res.status);
+    return res.json();
+  })
+  .then(plants => {
+    console.log('Fetched plants:', plants);
+    const grid = document.getElementById('indoorGrid');
+    if (!grid) {
+      console.error('Grid container not found!');
+      return;
+    }
+    plants.forEach(plant => {
+      const card = document.createElement('div');
+      card.className = 'grid-item';
+      card.innerHTML = `
+        <img src="${plant.Image}" alt="${plant['Common name']}">
+        <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
+        <p><strong>Watering:</strong> ${plant.Watering}</p>
+        <p><strong>Light:</strong> ${plant['Light Requirements']}</p>
+        <p><strong>Temperature:</strong> ${plant['Stable temperature']}</p>
+      `;
+      card.addEventListener('click', () => showPlantDetails(plant));
+      grid.appendChild(card);
+    });
+  })
+  .catch(err => {
+    console.error('Fetch error:', err);
+  });
+
+function showPlantDetails(plant) {
+  alert(
+    `${plant['Common name']} (${plant['Scientific name']})\n\n` +
+    `Watering: ${plant.Watering}\n` +
+    `Light: ${plant['Light Requirements']}\n` +
+    `Temperature: ${plant['Stable temperature']}`
+  );
+}
+</script> -->
+
+<script>
+// Fetch indoor plants
+fetch('http://localhost:3000/api/indoor')
+  .then(res => res.json())
+  .then(plants => {
+    const grid = document.getElementById('indoorGrid');
+    plants.forEach(plant => {
+      const card = document.createElement('div');
+      card.className = 'grid-item';
+      card.innerHTML = `
+        <img src="${plant.Image}" alt="${plant['Common name']}">
+        <h3>${plant['Scientific name']} <br><small>(${plant['Common name']})</small></h3>
+      `;
+      // navigate to indoorPlant.html with plant ID
+      card.addEventListener('click', () => {
+        window.location.href = `indoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
+      });
+      grid.appendChild(card);
+    });
+  })
+  .catch(err => console.error('Indoor fetch error:', err));
+
+
+// Fetch outdoor plants
+fetch('http://localhost:3000/api/outdoor')
+  .then(res => res.json())
+  .then(plants => {
+    const grid = document.querySelector('#outdoor-plants .grid-container');
+    plants.forEach(plant => {
+      const card = document.createElement('div');
+      card.className = 'grid-item';
+      card.innerHTML = `
+        <img src="${plant.Image}" alt="${plant['Common name']}">
+        <h3>${plant['Scientific name']} <br><small>(${plant['Common name']})</small></h3>
+      `;
+      // navigate to outdoorPlant.html with plant ID
+      card.addEventListener('click', () => {
+        window.location.href = `outdoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
+      });
+      grid.appendChild(card);
+    });
+  })
+  .catch(err => console.error('Outdoor fetch error:', err));
+</script>
+
+
 
 </body>
 </html>
