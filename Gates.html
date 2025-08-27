@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en" data-theme="default">
 <head>
   <meta charset="UTF-8" />
@@ -192,5 +192,129 @@
     </div>
   </footer>
 
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en" data-theme="default">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>UOB Landscape - Gates</title>
+
+  <script>
+    // Restore theme from localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="logo-space" title="Logo">
+    <img src="UOB-new-logo.png" alt="University of Bahrain" />
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="ourPlants.html">Our plants</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="locations.html" class="active">Locations</a></li>
+      <li><a href="map.html">Map</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+    <div class="controls">
+      <button class="arabic-btn" onclick="translate()">عربي</button>
+      <div class="dropdown">
+        <button class="theme-btn" id="theme-btn">🎨</button>
+        <div class="theme-picker" id="theme-picker">
+          <div class="theme-option" data-theme="default"></div>
+          <div class="theme-option" data-theme="dark"></div>
+          <div class="theme-option" data-theme="solar"></div>
+          <div class="theme-option" data-theme="highcontrast"></div>
+          <div class="theme-option" data-theme="green"></div>
+        </div>
+      </div>
+      <input type="search" placeholder="Search…">
+    </div>
+  </nav>
+
+  <main class="grid-section">
+    <div class="filters">
+      <button onclick="location.href='Buildings.html'" class="filter-btn active">Buildings</button>
+      <button onclick="location.href='Gates.html'" class="filter-btn">Gates</button>
+      <button onclick="location.href='Roadside.html'" class="filter-btn">Roadside</button>
+      <button onclick="location.href='Residential.html'" class="filter-btn">Residential</button>
+      <button onclick="location.href='Infrastructure.html'" class="filter-btn">Infrastructure</button>
+      <button onclick="location.href='Facilities.html'" class="filter-btn">Facilities</button>
+      <button onclick="location.href='CarPark.html'" class="filter-btn">Car Park</button>
+    </div>
+
+    <!-- Where the cards will appear -->
+    <div class="grid-container" id="locationsGrid"></div>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <h4>About UOB Landscape</h4>
+        <p>Empowering knowledge on geological safety and Landscape monitoring.</p>
+      </div>
+      <div class="footer-column">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Our Plants</a></li>
+          <li><a href="#">Projects</a></li>
+          <li><a href="#">Map</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h4>Connect</h4>
+        <p>Email: landscape@uob.edu.bh</p>
+        <p>Phone: +973 1743 8181</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 UOB Landscape. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    async function loadGates() {
+      try {
+        const response = await fetch('http://localhost:3000/api/locations');
+        const data = await response.json();
+
+        const grid = document.getElementById('locationsGrid');
+        grid.innerHTML = '';
+
+        // Filter for only buildings
+        const buildings = data.filter(item => item["Location type"] === "Gate");
+
+        buildings.forEach(location => {
+          const card = document.createElement('div');
+          card.className = 'grid-item';
+          card.innerHTML = `
+            <img src="${location.Picture}" alt="${location['Location name']}">
+            <h3>${location["Location name"]} (${location["Location number"]})</h3>
+          `;
+          grid.appendChild(card);
+        });
+
+      } catch (err) {
+        console.error('Error loading gates:', err);
+      }
+    }
+
+    loadGates();
+
+    function translate() {
+      alert('Arabic translation logic goes here.');
+    }
+  </script>
 </body>
 </html>
