@@ -271,12 +271,60 @@
     </section>
 
     <section id="reports" class="projects-section">
-      <h1>Reports</h1>
-      <p>Your project reports content goes here.</p>
+      <h1></h1>
+      <!-- <h1 lang="ar" dir="rtl">تقرير حول الأعمال الزراعية المنفذة دعمًا للمبادرة الوطنية لتنمية القطاع الزراعي في جامعة البحرين</h1>
+      <p lang="ar" dir="rtl">يهدف هذا التقرير إلى تسليط الضوء على الأعمال الزراعية التي تم تنفيذها في مختلف مرافق جامعة البحرين، في إطار دعم المبادرة الوطنية لتنمية القطاع الزراعي. وقد شملت هذه الأعمال جهودًا متواصلة لتحسين البيئة الزراعية، وتوسيع الرقعة الخضراء، وتأهيل المناطق غير مستصّلحة أو التي تحتوي على نباتات غير مناسبة بيئيًا. كما تمت زراعة أشجار مثمرة تشمل منتجات بحرينية مثل اللوز، والصبار، والكنار، والتوت، والليمون، مما يعزز التنوع البيئي.</p>
+      <p lang="ar" dir="rtl">يركز التقرير على إبراز الإنجازات المحققة، والتي شملت زراعة أشجار للزينة المستدامة، وتحسين المنظر العام للمواقع الجامعية، وإزالة الأشجار التالفة أو الضارة بيئيًا. كما يُبرز المساحات التي تم تطويرها، ويعكس الجهود المبذولة لتعزيز التنوع الحيوي وتهيئة بيئة خضراء جاذبة للطلبة والموظفين والزوار.</p>
+      <p lang="ar" dir="rtl">ضمن رؤيتها المستقبلية، تضع الجامعة خططًا طموحة لعام 2025 تستهدف استكمال مشاريع الزراعة في المساحات المتبقية. وتشمل هذه المشاريع زراعة الأشجار حول المباني التي لم تُشمل سابقًا، وزراعة أشجار فواكه بحرينية، واستبدال النباتات المتدهورة بأنواع جديدة قادرة على مقاومة التغيرات المناخية. تهدف هذه المبادرات إلى تعزيز الاستدامة البيئية وتحقيق رؤية الجامعة في تطوير بيئة جامعية خضراء وشاملة.</p>
+      <p lang="ar" dir="rtl">ويعرض التقرير تفاصيل المواقع التي شملتها الأعمال الزراعية، موضحًا حالتها السابقة والنتائج المحققة، بما يعكس حجم الجهود المبذولة والأثر الإيجابي على البيئة الجامعية.</p> -->
+
+      <div class="iframe-wrapper">
+        <iframe src="reports-2024.html" style="width:90%; border:none; min-height:400px; max-width: 1200px; 
+                .year-container {
+                margin: 40px 0;
+                padding: 20px;
+                border: 2px solid #ccc;
+                background: #c7bfbf;};">
+        </iframe>      
+        <iframe src="reports-2025.html" style="width:90%; border:none; min-height:400px; max-width: 1200px; 
+                .year-container {
+                margin: 40px 0;
+                padding: 20px;
+                border: 2px solid #ccc;
+                background: #f5f5f5;}">
+        </iframe>
+      </div>
     </section>
   </main>
 
   <script>
+    // Fetch the HTML file
+    fetch('reports.html')
+    .then(response => response.text())
+    .then(data => {
+      // Parse the HTML content
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(data, 'text/html');
+      const rows = doc.querySelectorAll('tr');
+
+      // Group rows by year
+      const reportsByYear = {};
+      rows.forEach(row => {
+        const year = row.dataset.year;
+        if (!reportsByYear[year]) reportsByYear[year] = [];
+        reportsByYear[year].push(row.outerHTML);
+      });
+
+      // Create containers for each year
+      const container = document.getElementById('reports-container');
+      Object.keys(reportsByYear).forEach(year => {
+        const yearDiv = document.createElement('div');
+        yearDiv.classList.add('report-year-container');
+        yearDiv.innerHTML = `<h2>${year} Reports</h2><table>${reportsByYear[year].join('')}</table>`;
+        container.appendChild(yearDiv);
+      });
+    });
+
     // Switch tabs based on URL hash changes
     function showTab(hash) {
       document.querySelectorAll('.projects-section').forEach(sec => {
