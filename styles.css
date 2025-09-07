@@ -993,13 +993,25 @@ box-shadow: 0 8px 15px color-mix(in srgb, var(--accent) 50%, transparent);
 .iframe-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center; /* center horizontally */
-  gap: 40px;           /* spacing between iframes */
+  align-items: center;
 }
 
-iframe {
-  border: 1px solid #ccc;
-  border-radius: 8px;
+.iframe-wrapper iframe {
+  width: 100%;
+  border: none;
+  min-height: 400px;
+  max-width: 1200px;
+  margin-bottom: 50px;
+  border-radius: 10px;
+}
+
+.iframe-wrapper h2 {
+  margin-bottom: 30px;
+}
+
+.iframes {
+  display: flex;
+  flex-direction: column;
 }
 
 .locations-section {

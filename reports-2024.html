@@ -1,395 +1,517 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>تقرير الأعمال الزراعية - 2024</title>
-<style>
-  body {
-    font-family: "Tahoma", Arial, sans-serif;
-    line-height: 1.6;
-    padding: 20px;
-    background: #f0eeee;
-  }
-  h2 {
-    text-align: center;
-  }
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-bottom: 40px;
-    background: #fff;
-  }
-  th, td {
-    border: 1px solid #000;
-    padding: 8px;
-    text-align: center;
-    vertical-align: middle;
-  }
-  th {
-    background: #a2c0a8;
-  }
-  .year-container {
-    margin-bottom: 60px;
-  }
-</style>
+    <meta charset="UTF-8">
+    <title>Landscape Projects Report - 2024</title>
+    <style>
+        body {
+        font-family: "Tahoma", Arial, sans-serif;
+        line-height: 1.6;
+        padding: 20px;
+        background: #f0eeee;
+        }
+
+        h2 {
+        text-align: center;
+        }
+
+        table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 40px;
+        background: #fff;
+        }
+
+        th, td {
+        border: 1px solid #000;
+        padding: 8px;
+        text-align: center;
+        vertical-align: middle;
+        }
+
+        th {
+        background: #a2c0a8;
+        }
+
+        .gallery-thumbnail {
+        cursor: pointer;
+        border-radius: 4px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        object-fit: cover;
+        }
+
+        .gallery-thumbnail:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        /* Fullscreen popup */
+        .popup-overlay {
+        display: none; /* Hidden by default */
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: rgba(0,0,0,0.9);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+        }
+
+        .main-image {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+        border-radius: 8px;
+        }
+
+        .nav-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255,255,255,0.2);
+        color: white;
+        border: none;
+        width: 60px; height: 60px;
+        border-radius: 50%;
+        font-size: 24px;
+        cursor: pointer;
+        }
+
+        .nav-arrow:hover {
+        background: rgba(255,255,255,0.3);
+        }
+
+        .nav-arrow.prev {
+        left: 30px;
+        }
+
+        .nav-arrow.next {
+        right: 30px;
+        }
+
+        .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        background: rgba(255,68,68,0.8);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 50px;
+        font-size: 18px;
+        cursor: pointer;
+        }
+
+        .close-btn:hover {
+        background: rgba(255,68,68,1);
+        }
+    </style>
 </head>
 <body>
 
-<h2>تقرير الأعمال الزراعية لعام 2024</h2>
+    <div class="year-container" id="year-2024">
+        <table>
+            <thead>
+                <tr data-year="2024">
+                    <th>No.</th>
+                    <th colspan="2">Images</th>
+                    <th>Location</th>
+                    <th>Action</th>
+                    <th>Total Area</th>
+                    <th>Previous Condition</th>
+                    <th>Current Condition</th>
+                    <th>Green Area</th>
+                    <th>No. of Ornamental Trees</th>
+                    <th>Additional Notes</th>
+                </tr>
+            </thead>
+            <tbody> 
+                <tr data-year="2024">
+                    <td>1</td>
+                    <td colspan="2">
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100">
+                    </td>
+                    <td>Inner Fence</td>
+                    <td>Planting ornamental trees</td>
+                    <td>568 m²</td>
+                    <td>Previously: degraded or uncultivated landscape</td>
+                    <td>Re-landscaped with sustainable ornamental species enhancing ecological and visual value</td>
+                    <td>568 m²</td>
+                    <td>142</td>
+                    <td>Landscape upgraded with aesthetic elements contributing to campus identity</td>
+                </tr>
 
-<div class="year-container" id="year-2024">
-<table>
-    <thead>
-        <tr data-year="2024">
-            <th>الرقم</th>
-            <th colspan="2">صور الموقع</th>
-            <th colspan="2">سنة  الإنجاز</th>
-            <th>الموقع</th>
-            <th>الإجراء</th>
-            <th>المساحة الكلية</th>
-            <th>الحالة سابقًا</th>
-            <th>الحالة حاليًا</th>
-            <th>مساحة المسطحات الخضراء</th>
-            <th>عدد أشجار الزينة</th>
-            <th>ملاحظات إضافية</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr data-year="2024">
-            <td>1</td>
-            <td colspan="2"><img src="Infrastructure2.png" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>السور الداخلي</td>
-            <td>زراعة أشجار الزينة</td>
-            <td>568 م²</td>
-            <td>غير مزروعة</td>
-            <td>تمت زراعة أشجار متنوعة</td>
-            <td>568 م²</td>
-            <td>142</td>
-            <td>تحسين المظهر العام للموقع وإضافة طابع جمالي</td>
-        </tr>
-        <tr data-year="2024">
-            <td>2</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>البوابة الرئيسية</td>
-            <td>زراعة وتطوير مدخل ومخرج البوابة</td>
-            <td></td>
-            <td>وجود أشجار تالفة وعشوائية</td>
-            <td>تم تنظيف الموقع وإعادة زراعة أشجار متنوعة</td>
-            <td></td>
-            <td>322</td>
-            <td>تحسين مدخل البوابة الرئيسية وجعلها أكثر تنظيمًا</td>
-        </tr>
-        <tr data-year="2024">
-            <td>3</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>المساحة الواقعة خلف المسجد</td>
-            <td>زراعة المساحة الواقعة خلف المسجد</td>
-            <td>4505 م²</td>
-            <td>وجود أشجار تالفة وعشوائية</td>
-            <td>تمت زراعة أشجار متنوعة للزينة وأشجار مثمرة</td>
-            <td>500 م²</td>
-            <td>409</td>
-            <td>تم توفير بيئة خضراء للطلاب والموظفين مناسبة تعزز من الراحة البصرية، وزراعة أشجار مثمرة بحرينية</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>2</td>
+                    <td colspan="2">
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100">
+                    <td>Main Gate</td>
+                    <td>Landscape redevelopment of entrance and exit zones</td>
+                    <td>—</td>
+                    <td>Previously: random and unstructured vegetation</td>
+                    <td>Cleared and re-landscaped with structured planting design</td>
+                    <td>—</td>
+                    <td>322</td>
+                    <td>Improved gateway landscape, creating a more formal and organized entrance sequence</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>4</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>الشارع الدائري الداخلي</td>
-            <td>إزالة الأشجار الضارة وغير الصالحة والعشوائية</td>
-            <td>--</td>
-            <td>وجود أشجار ضارة بيئيًا وتالفة</td>
-            <td>تمت زراعة أشجار متنوعة تجمع بين الجمال والأنواع المستدامة التي تساهم في تعزيز البيئة وتحسين المظهر العام</td>
-            <td>897</td>
-            <td>--</td>
-            <td>المساهمة في تحسين البيئة المحلية وتعزيز التنوع البيولوجي</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>3</td>
+                    <td colspan="2">
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100">
+                    <td>Area Behind the Mosque</td>
+                    <td>Landscape planting with ornamental and fruit-bearing species</td>
+                    <td>4,505 m²</td>
+                    <td>Previously: random and unstructured vegetation</td>
+                    <td>Re-landscaped with sustainable ornamental and fruit-bearing trees, including native species (almond, cactus, jujube, mulberry, lemon)</td>
+                    <td>500 m²</td>
+                    <td>409</td>
+                    <td>Created a multifunctional green space that provides shade, biodiversity enrichment, and enhanced visual comfort</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>5</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>منطقة فلل الهيئة الأكاديمية</td>
-            <td>تهيئة الساحة المقابلة للفلل للزراعة</td>
-            <td>4935 م²</td>
-            <td>وجود حشائش ضارة وأشجار عشوائية</td>
-            <td>تمت زراعة أشجار متنوعة للزينة وأشجار مثمرة</td>
-            <td>360 م²</td>
-            <td>370</td>
-            <td>تحسين المظهر الجمالي للمنطقة وجعلها أكثر جذبًا للزوار والموظفين. كما تمت زراعة أشجار متنوعة للزينة وأشجار مثمرة تشمل منتجات بحرينية مثل اللوز، والصبار، والكنار، والتوت، والليمون، مما يعزز التنوع البيئي</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>4</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Internal Ring Road</td>
+                    <td>Removal of invasive and degraded trees; sustainable replanting</td>
+                    <td>—</td>
+                    <td>Previously: degraded and environmentally harmful trees</td>
+                    <td>Re-landscaped with resilient ornamental trees to improve the streetscape and strengthen ecological functions</td>
+                    <td>—</td>
+                    <td>897</td>
+                    <td>Enhanced internal circulation landscape, promoting biodiversity and environmental sustainability</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>6</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>مدخل الطابق السفلي لمبنى الإدارة</td>
-            <td>أعمال الزراعة وتطوير المنطقة الزراعية</td>
-            <td>1349 م²</td>
-            <td>منطقة غير مستخدمة</td>
-            <td>تم زراعتها وتحسين مظهرها</td>
-            <td>1349 م²</td>
-            <td>41</td>
-            <td>تحسين المظهر العام وزيادة المساحات الخضراء</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>5</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Academic Villas Area</td>
+                    <td>Landscape preparation opposite the faculty villas</td>
+                    <td>4,935 m²</td>
+                    <td>Previously: harmful weeds and random trees</td>
+                    <td>Rehabilitated with ornamental and fruit-bearing species</td>
+                    <td>360 m²</td>
+                    <td>370</td>
+                    <td>Enhanced residential landscape with sustainable planting, strengthening visual harmony</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>7</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>منطقة مبنى شؤون الموظفين</td>
-            <td>إزالة الأشجار الضارة وغير الصالحة والعشوائية</td>
-            <td>480 م²</td>
-            <td>وجود أشجار عشوائية وغير منظمة</td>
-            <td>تمت زراعة المنطقة بأشجار زينة وتنظيمها</td>
-            <td>480 م²</td>
-            <td>14</td>
-            <td>تعزيز البيئة المحيطة بالمبنى بما يلبي المتطلبات الجمالية</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>6</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Basement Entrance – Administration Building</td>
+                    <td>Landscape planting and area development</td>
+                    <td>1,349 m²</td>
+                    <td>Previously: unused land</td>
+                    <td>Re-landscaped and improved the visual corridor</td>
+                    <td>1,349 m²</td>
+                    <td>41</td>
+                    <td>Strengthened green identity and improved entry aesthetics</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>8</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>الساحة المقابلة لمبنى S17 ومبنى التعلم الإلكتروني</td>
-            <td>إزالة الأشجار الضارة وغير الصالحة والعشوائية</td>
-            <td>2267 م²</td>
-            <td>وجود أشجار عشوائية وغير منظمة ومساحات غير مستصلحة</td>
-            <td>تمت زراعة أشجار متنوعة تجمع بين الجمال والأنواع المستدامة التي تساهم في تعزيز البيئة وتحسين المظهر العام</td>
-            <td>2267 م²</td>
-            <td>198</td>
-            <td>المساهمة في تحسين المنظر الخارجي للمباني المحيطة</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>7</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Staff Affairs Building Area</td>
+                    <td>Removal of unsuitable random trees</td>
+                    <td>480 m²</td>
+                    <td>Previously: disorganized and random vegetation</td>
+                    <td>Re-landscaped with ornamental planting in structured design</td>
+                    <td>480 m²</td>
+                    <td>14</td>
+                    <td>Enhanced the immediate workplace landscape to meet aesthetic requirements</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>9</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>مواقف الطلبة في مبنى كلية الحقوق</td>
-            <td>تشجير المنطقة</td>
-            <td>4000 م²</td>
-            <td>وجود أشجار عشوائية وغير منظمة ومساحات غير مستصلحة</td>
-            <td>تمت زراعة أشجار متنوعة تجمع بين الجمال والأنواع المستدامة التي تساهم في تعزيز البيئة وتحسين المظهر العام</td>
-            <td>--</td>
-            <td>125</td>
-            <td>تم تعزيز المنطقة تحسين البيئة المحيطة بالمواقف وزيادة التشجير</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>8</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Courtyard opposite S17 &amp; E-Learning Building</td>
+                    <td>Removal of unsuitable random trees</td>
+                    <td>2,267 m²</td>
+                    <td>Previously: unstructured vegetation and neglected land</td>
+                    <td>Re-landscaped with sustainable ornamental species</td>
+                    <td>2,267 m²</td>
+                    <td>198</td>
+                    <td>Improved the external landscape of surrounding buildings</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>10</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>الساحة الخارجية لمبنى كلية الحقوق</td>
-            <td>إزالة الأشجار الضارة وغير الصالحة والعشوائية</td>
-            <td>4000 م²</td>
-            <td>وجود أشجار متهالكة وغير ملائمة</td>
-            <td>تم زراعة أشجار جديدة وزيادة المسطحات الخضراء</td>
-            <td>3030 م²</td>
-            <td>55</td>
-            <td>توفير مساحة زراعية مستدامة تسهم في تعزيز المظهر العام</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>9</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Student Parking – College of Law</td>
+                    <td>Tree planting for parking area</td>
+                    <td>4,000 m²</td>
+                    <td>Previously: unstructured vegetation and neglected land</td>
+                    <td>Re-landscaped with ornamental trees improving parking landscape</td>
+                    <td>—</td>
+                    <td>125</td>
+                    <td>Enhanced parking environment with additional greenery</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>11</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>الساحة الخارجية خلف مبنى القبول والتسجيل</td>
-            <td>إزالة الأشجار الضارة وغير الصالحة والعشوائية</td>
-            <td>980 م²</td>
-            <td>أشجار تالفة وغير ملائمة</td>
-            <td>تم زراعتها بالكامل</td>
-            <td>980 م²</td>
-            <td>--</td>
-            <td>تحسين المساحات المحيطة بالمبنى</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>10</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>External Courtyard – College of Law</td>
+                    <td>Removal of unsuitable trees and replanting</td>
+                    <td>4,000 m²</td>
+                    <td>Previously: unsuitable and deteriorated trees</td>
+                    <td>Re-landscaped with sustainable planting and green surfaces</td>
+                    <td>3,030 m²</td>
+                    <td>55</td>
+                    <td>Created a sustainable landscape enhancing the college’s external environment</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>12</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>الساحة الخارجية خلف مبنى عمادة شؤون الطلبة</td>
-            <td>إزالة الأشجار الضارة وغير الصالحة والعشوائية</td>
-            <td>915 م²</td>
-            <td>أشجار ضارة وغير صالحة</td>
-            <td>تم زراعة 580 م² بمسطحات خضراء</td>
-            <td>580 م²</td>
-            <td>57</td>
-            <td>توفير بيئة خضراء تعزز من جمالية المكان. وتمت زراعة أشجار متنوعة تجمع بين الجمال والأنواع المستدامة التي تساهم في تعزيز البيئة وتحسين المظهر العام</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>11</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Courtyard behind Admissions & Registration</td>
+                    <td>Removal of unsuitable trees</td>
+                    <td>980 m²</td>
+                    <td>Previously: unsuitable and damaged trees</td>
+                    <td>Area fully rehabilitated with green coverage expansion</td>
+                    <td>980 m²</td>
+                    <td>—</td>
+                    <td>Improved surrounding campus landscape</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>13</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>مدخل مبنى كلية إدارة الأعمال</td>
-            <td>أعمال الزراعة وتطوير المنطقة الزراعية</td>
-            <td>86 م²</td>
-            <td>أشجار تالفة وضارة بالبيئة ومساحات غير مستصلحة</td>
-            <td>تمت زراعة الأرض بالكامل وتنفيذ أعمال تنسيق المساحات بما يتناسب مع البيئة والمظهر العام</td>
-            <td>86 م²</td>
-            <td>46</td>
-            <td>تعزيز المظهر العام للمدخل</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>12</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Courtyard behind Student Affairs Deanship</td>
+                    <td>Removal of unsuitable trees; landscape rehabilitation</td>
+                    <td>915 m²</td>
+                    <td>Previously: harmful and unsuitable trees</td>
+                    <td>Re-landscaped with 580 m² of green surfaces and ornamental planting</td>
+                    <td>580 m²</td>
+                    <td>57</td>
+                    <td>Created a green visual buffer enhancing the courtyard landscape</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>14</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>مدخل مبنى كلية الآداب</td>
-            <td>أعمال الزراعة وتطوير المنطقة الزراعية</td>
-            <td>86 م²</td>
-            <td>أشجار تالفة وضارة بالبيئة</td>
-            <td>تمت زراعة الأرض بالكامل وتنفيذ أعمال تنسيق المساحات بما يتناسب مع البيئة والمظهر العام</td>
-            <td>86 م²</td>
-            <td>10</td>
-            <td>توفير مظهر جذاب للطلاب والموظفين</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>13</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Entrance – College of Business Administration</td>
+                    <td>Landscape planting and rehabilitation</td>
+                    <td>86 m²</td>
+                    <td>Previously: unsuitable vegetation and degraded surfaces</td>
+                    <td>Fully re-landscaped and coordinated with sustainable species</td>
+                    <td>86 m²</td>
+                    <td>46</td>
+                    <td>Enhanced the business school’s entrance landscape identity</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>15</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>المدرج الروماني</td>
-            <td>إزالة الأشجار الضارة وغير الصالحة والعشوائية وتطوير المنطقة الزراعية</td>
-            <td>840 م²</td>
-            <td>أرض غير مستصلحة</td>
-            <td>تمت زراعة الأرض بالكامل وتنفيذ أعمال تنسيق المساحات بما يتناسب مع البيئة والمظهر العام</td>
-            <td>840 م²</td>
-            <td>12</td>
-            <td>تطوير المنطقة لتكون أكثر جذبًا للزوار والطلاب والموظفين</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>14</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Entrance – College of Arts</td>
+                    <td>Landscape planting and rehabilitation</td>
+                    <td>86 m²</td>
+                    <td>Previously: unsuitable vegetation</td>
+                    <td>Fully re-landscaped with ornamental trees</td>
+                    <td>86 m²</td>
+                    <td>10</td>
+                    <td>Provided a visually attractive green entrance for students and staff</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>16</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>مدخل البوابة الغربية</td>
-            <td>تشجير المنطقة</td>
-            <td>1800 م²</td>
-            <td>أرض غير مستصلحة</td>
-            <td>تمت زراعة المساحة الزراعية بالكامل</td>
-            <td>--</td>
-            <td>77</td>
-            <td>تحسين مظهر المدخل</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>15</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Roman Amphitheater</td>
+                    <td>Removal of unsuitable vegetation; landscape rehabilitation</td>
+                    <td>840 m²</td>
+                    <td>Previously: degraded and uncultivated land</td>
+                    <td>Fully re-landscaped and designed with ornamental species</td>
+                    <td>840 m²</td>
+                    <td>12</td>
+                    <td>Enhanced the amphitheater’s setting into a more attractive gathering space</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>17</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>مواقف الطلبة جهة البوابة الغربية</td>
-            <td>تشجير المنطقة</td>
-            <td>--</td>
-            <td>أرض غير مستصلحة</td>
-            <td>تمت زراعة المساحة الزراعية بالكامل</td>
-            <td>--</td>
-            <td>130</td>
-            <td>تحسين البيئة المحيطة وزيادة المساحات الخضراء</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>16</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Western Gate Entrance</td>
+                    <td>Tree planting for entry landscape</td>
+                    <td>1,800 m²</td>
+                    <td>Previously: uncultivated land</td>
+                    <td>Re-landscaped and planted with sustainable species</td>
+                    <td>—</td>
+                    <td>77</td>
+                    <td>Enhanced entrance landscape aesthetics</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>18</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>المنطقة التي تقع خلف مجمع المطاعم S51</td>
-            <td>إزالة الأشجار الضارة وغير الصالحة والعشوائية وتطوير المنطقة الزراعية</td>
-            <td>3800 م²</td>
-            <td>أرض غير مستصلحة</td>
-            <td>تمت زراعة الأرض بالكامل وتنفيذ أعمال تنسيق المساحات بما يتناسب مع البيئة والمظهر العام</td>
-            <td>--</td>
-            <td>330</td>
-            <td>تطوير المنطقة الزراعية بما يعزز التنوع البيولوجي</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>17</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Student Parking – Western Gate</td>
+                    <td>Tree planting for parking landscape</td>
+                    <td>—</td>
+                    <td>Previously: uncultivated land</td>
+                    <td>Fully re-landscaped and planted</td>
+                    <td>—</td>
+                    <td>130</td>
+                    <td>Improved parking landscape with green identity</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>19</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>المنطقة التي تقع خلف مبنى قاعة خنجي</td>
-            <td>إزالة الأشجار الضارة وغير الصالحة والعشوائية وتطوير المنطقة الزراعية</td>
-            <td>1650 م²</td>
-            <td>أرض غير مستصلحة</td>
-            <td>تم استصلاح الأرض غير المزروعة وزراعتها بالنباتات المناسبة لتحسين المنظر العام وتعزيز الغطاء الأخضر</td>
-            <td>--</td>
-            <td>307</td>
-            <td>تحسين المظهر العام وإزالة الأشجار الضارة</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>18</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Behind Restaurants Complex S51</td>
+                    <td>Removal of unsuitable trees; rehabilitation of landscape area</td>
+                    <td>3,800 m²</td>
+                    <td>Previously: neglected land</td>
+                    <td>Fully re-landscaped with sustainable planting and structured design</td>
+                    <td>—</td>
+                    <td>330</td>
+                    <td>Developed a biodiverse landscape promoting ecological sustainability</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>20</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>المساحات التي تقع خلف المضمار</td>
-            <td>إزالة الأشجار الضارة وغير الصالحة والعشوائية وتطوير المنطقة الزراعية</td>
-            <td>3000 م²</td>
-            <td>أرض غير مستصلحة</td>
-            <td>تمت زراعة أشجار متنوعة للزينة وأشجار مثمرة تشمل منتجات بحرينية مثل اللوز، والصبار، والكنار، والتوت، والليمون، مما يعزز التنوع البيئي</td>
-            <td>--</td>
-            <td>130</td>
-            <td>تطوير المساحات لتكون أكثر جاذبية وصديقة للبيئة</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>19</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Behind Khanji Hall</td>
+                    <td>Removal of unsuitable trees; rehabilitation of landscape area</td>
+                    <td>1,650 m²</td>
+                    <td>Previously: neglected and degraded</td>
+                    <td>Restored with appropriate planting improving green cover</td>
+                    <td>—</td>
+                    <td>307</td>
+                    <td>Enhanced the hall’s surroundings with a sustainable landscape</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>21</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>مواقف الطلبة جهة البوابة الشرقية</td>
-            <td>إزالة الأشجار الضارة وغير الصالحة والعشوائية وتطوير المنطقة الزراعية</td>
-            <td>2416 م²</td>
-            <td>أرض غير مستصلحة</td>
-            <td>تمت زراعة أشجار متنوعة تجمع بين الجمال والأنواع المستدامة التي تساهم في تعزيز البيئة وتحسين المظهر العام</td>
-            <td>2416 م²</td>
-            <td>55</td>
-            <td>تحسين التشجير لتوفير بيئة مريحة للطلاب</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>20</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Area behind the Track</td>
+                    <td>Removal of unsuitable trees; rehabilitation and planting</td>
+                    <td>3,000 m²</td>
+                    <td>Previously: neglected land</td>
+                    <td>Re-landscaped with ornamental and fruit-bearing trees (almond, cactus, jujube, mulberry, lemon)</td>
+                    <td>—</td>
+                    <td>130</td>
+                    <td>Developed a multifunctional green landscape contributing to biodiversity</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>22</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>قاعة S18</td>
-            <td>أعمال الزراعة وتطوير المنطقة الزراعية</td>
-            <td>276 م²</td>
-            <td>أشجار تالفة وضارة بالبيئة</td>
-            <td>تمت زراعة أشجار متنوعة تجمع بين الجمال والأنواع المستدامة</td>
-            <td>276 م²</td>
-            <td>11</td>
-            <td>إضافة بيئة زراعية مناسبة تعزز من المظهر العام</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>21</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Student Parking – Eastern Gate</td>
+                    <td>Removal of unsuitable trees; rehabilitation and planting</td>
+                    <td>2,416 m²</td>
+                    <td>Previously: uncultivated land</td>
+                    <td>Re-landscaped with sustainable ornamental species</td>
+                    <td>2,416 m²</td>
+                    <td>55</td>
+                    <td>Improved parking landscape and provided comfortable green buffers</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td>23</td>
-            <td colspan="2"><img src="" width="100px" height="100px" style="display: block; margin: 0 auto;"></td>
-            <td colspan="2">2024</td>
-            <td>المنطقة المحيطة لمبنى الإدارة</td>
-            <td>أعمال الزراعة وتطوير المنطقة الزراعية</td>
-            <td>1625 م²</td>
-            <td>--</td>
-            <td>تمت زراعة أشجار متنوعة</td>
-            <td>1625 م²</td>
-            <td>237</td>
-            <td>تحسين المنطقة لتكون بيئة خضراء مريحة</td>
-        </tr>
+                <tr data-year="2024">
+                    <td>22</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Hall S18</td>
+                    <td>Landscape planting and rehabilitation</td>
+                    <td>276 m²</td>
+                    <td>Previously: unsuitable vegetation</td>
+                    <td>Re-landscaped with sustainable ornamental species</td>
+                    <td>276 m²</td>
+                    <td>11</td>
+                    <td>Enhanced the hall’s visual landscape with sustainable green elements</td>
+                </tr>
 
-        <tr data-year="2024">
-            <td></td>
-            <td colspan="2"></td>
-            <td></td>
-            <td colspan="3"><strong>المجموع</strong></td>
-            <td><strong>39578 م²</strong></td>
-            <td></td>
-            <td></td>
-            <td><strong>15443 م²</strong></td>
-            <td><strong>3975</strong></td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
-</div>
+                <tr data-year="2024">
+                    <td>23</td>
+                    <td colspan="2">                
+                        <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"></td>
+                    <td>Administration Building Surroundings</td>
+                    <td>Landscape planting and area rehabilitation</td>
+                    <td>1,625 m²</td>
+                    <td>—</td>
+                    <td>Re-landscaped with ornamental species</td>
+                    <td>1,625 m²</td>
+                    <td>237</td>
+                    <td>Created a sustainable administrative landscape with strong green identity</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+  <!-- Fullscreen popup -->
+  <div id="galleryPopup" class="popup-overlay">
+    <button class="close-btn" onclick="closeGallery()">✕</button>
+    <button class="nav-arrow prev" onclick="previousImage()">‹</button>
+    <img id="mainImage" class="main-image" src="">
+    <button class="nav-arrow next" onclick="nextImage()">›</button>
+  </div>
+
+  <script>
+    const galleries = {
+      row1: ["images/row1-1.jpg","images/row1-2.jpg"],
+      row2: ["images/row2-1.jpg","images/row2-2.jpg"],
+      row3: ["images/row3-1.jpg","images/row3-2.jpg"],
+      row4: ["images/row4-1.jpg","images/row4-2.jpg","images/row4-3.jpg"],
+      row5: ["images/row5-1.jpg","images/row5-2.jpg"]
+    };
+
+    const galleryPopup = document.getElementById('galleryPopup');
+    const mainImage = document.getElementById('mainImage');
+    let currentGallery = [];
+    let currentIndex = 0;
+
+    document.querySelectorAll('.gallery-thumbnail').forEach(img => {
+      img.addEventListener('click', () => {
+        const galleryName = img.dataset.gallery;
+        currentGallery = galleries[galleryName];
+        currentIndex = 0;
+        showImage();
+        galleryPopup.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function showImage() {
+      mainImage.src = currentGallery[currentIndex];
+    }
+
+    function nextImage() {
+      currentIndex = (currentIndex + 1) % currentGallery.length;
+      showImage();
+    }
+
+    function previousImage() {
+      currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+      showImage();
+    }
+
+    function closeGallery() {
+      galleryPopup.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => {
+      if (galleryPopup.style.display === 'flex') {
+          if (e.key === 'Escape') closeGallery();
+          if (e.key === 'ArrowRight') nextImage();
+          if (e.key === 'ArrowLeft') previousImage();
+      }
+    });
+  </script>
 
 </body>
 </html>
