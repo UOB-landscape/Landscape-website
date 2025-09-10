@@ -59,7 +59,7 @@
     <section id="before-after" class="projects-section">
       <h1>Before & After Projects</h1>
       <!-- Filter Buttons -->
-    <div class="project-filters">
+      <div class="project-filters">
         <button class="project-filter-btn active" data-filter="S1A, S1B, S46">
             <div class="image-area">
               <img src="https://i.postimg.cc/0NyqdW8x/S1-A-S1-B-S46.png" alt="S1A, S1B, S46">
@@ -120,7 +120,7 @@
             </div>
             <div class="label">S55</div>
         </button>
-    </div>
+      </div>
 
       <!-- Filtered Content Sections -->
       <div id="project-contents">
@@ -419,193 +419,193 @@
         </div>
       </div>
 
-        <div class="project-filter-section" data-type="S45, S17" style="display: none;">
-            <h3>S45, S17 Project</h3>
-        </div>
+      <div class="project-filter-section" data-type="S45, S17" style="display: none;">
+          <h3>S45, S17 Project</h3>
+      </div>
 
-        <div class="project-filter-section" data-type="S51" style="display: none;">
-            <h3>S51 Project</h3>
-        </div>
+      <div class="project-filter-section" data-type="S51" style="display: none;">
+          <h3>S51 Project</h3>
+      </div>
 
-        <div class="project-filter-section" data-type="CarPark" style="display: none;">
-            <h3>S48 Project (Car Park)</h3>
-        </div>
+      <div class="project-filter-section" data-type="CarPark" style="display: none;">
+          <h3>S48 Project (Car Park)</h3>
+      </div>
     </div>
 
-      <script>
-         class ThreeImageSlider {
-          constructor(containerId) {
-            this.container = document.getElementById(containerId);
-            if (!this.container) return;
-            
-            // Extract the number from containerId (e.g., "sliderContainer1" -> "1")
-            const containerNum = containerId.replace('sliderContainer', '');
-            
-            this.sliderLine1 = document.getElementById(`sliderLine1_${containerNum}`);
-            this.sliderLine2 = document.getElementById(`sliderLine2_${containerNum}`);
-            this.sliderHandle1 = document.getElementById(`sliderHandle1_${containerNum}`);
-            this.sliderHandle2 = document.getElementById(`sliderHandle2_${containerNum}`);
-            this.beforeImage = document.getElementById(`beforeImage${containerNum}`);
-            this.afterImage = document.getElementById(`afterImage${containerNum}`);
-
-            this.isDragging = false;
-            this.activeSlider = null;
-
-            this.slider1Position = 33;
-            this.slider2Position = 66;
-
-            this.init();
-          }
-
-          init() {
-            this.bindEvents();
-            this.updateSliders();
-          }
-
-          bindEvents() {
-            this.sliderHandle1.addEventListener('mousedown', (e) => this.startDrag(e, 1));
-            this.sliderHandle2.addEventListener('mousedown', (e) => this.startDrag(e, 2));
-            document.addEventListener('mousemove', (e) => this.drag(e));
-            document.addEventListener('mouseup', () => this.stopDrag());
-
-            this.sliderHandle1.addEventListener('touchstart', (e) => this.startDrag(e, 1), { passive: false });
-            this.sliderHandle2.addEventListener('touchstart', (e) => this.startDrag(e, 2), { passive: false });
-            document.addEventListener('touchmove', (e) => this.drag(e), { passive: false });
-            document.addEventListener('touchend', () => this.stopDrag());
-          }
-
-          startDrag(e, sliderNumber) {
-            this.isDragging = true;
-            this.activeSlider = sliderNumber;
-
-            if (sliderNumber === 1) {
-              this.sliderLine1.style.zIndex = '50';
-              this.sliderLine2.style.zIndex = '40';
-            } else {
-              this.sliderLine2.style.zIndex = '50';
-              this.sliderLine1.style.zIndex = '40';
-            }
-
-            e.preventDefault();
-          }
-
-          drag(e) {
-            if (!this.isDragging) return;
-
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const rect = this.container.getBoundingClientRect();
-            const x = clientX - rect.left;
-            const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
-
-            if (this.activeSlider === 1) this.slider1Position = percentage;
-            else if (this.activeSlider === 2) this.slider2Position = percentage;
-
-            this.updateSliders();
-          }
-
-          stopDrag() {
-            this.isDragging = false;
-            this.activeSlider = null;
-          }
-
-          updateSliders() {
-            this.sliderLine1.style.left = `${this.slider1Position}%`;
-            this.sliderLine2.style.left = `${this.slider2Position}%`;
-
-            this.beforeImage.style.clipPath = `polygon(0 0, ${this.slider1Position}% 0, ${this.slider1Position}% 100%, 0 100%)`;
-
-            const left = Math.min(this.slider1Position, this.slider2Position);
-            const right = Math.max(this.slider1Position, this.slider2Position);
-            this.afterImage.style.clipPath = `polygon(${left}% 0, ${right}% 0, ${right}% 100%, ${left}% 100%)`;
-          }
-        }
-
-        // Two-Image Slider Class
-        class TwoImageSlider {
-            constructor(containerId) {
-                this.container = document.getElementById(containerId);
-                if (!this.container) return;
-                
-                // Extract the number from containerId (e.g., "twoImageSlider1" -> "1")
-                const containerNum = containerId.replace('twoImageSlider', '');
-                
-                this.sliderLine = document.getElementById(`twoSliderLine${containerNum}`);
-                this.sliderHandle = document.getElementById(`twoSliderHandle${containerNum}`);
-                this.currentImage = document.getElementById(`currentImage${containerNum}`);
-
-                this.isDragging = false;
-                this.sliderPosition = 50; // Start at 50% (middle)
-
-                this.init();
-            }
-
-            init() {
-                this.bindEvents();
-                this.updateSlider();
-            }
-
-            bindEvents() {
-                // Mouse events
-                this.sliderHandle.addEventListener('mousedown', (e) => this.startDrag(e));
-                document.addEventListener('mousemove', (e) => this.drag(e));
-                document.addEventListener('mouseup', () => this.stopDrag());
-
-                // Touch events
-                this.sliderHandle.addEventListener('touchstart', (e) => this.startDrag(e), { passive: false });
-                document.addEventListener('touchmove', (e) => this.drag(e), { passive: false });
-                document.addEventListener('touchend', () => this.stopDrag());
-
-                // Container click for quick jump
-                this.container.addEventListener('click', (e) => {
-                    if (e.target === this.sliderHandle) return;
-                    
-                    const rect = this.container.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    this.sliderPosition = Math.max(0, Math.min(100, (x / rect.width) * 100));
-                    this.updateSlider();
-                });
-            }
-
-            startDrag(e) {
-                this.isDragging = true;
-                this.container.style.cursor = 'grabbing';
-                e.preventDefault();
-            }
-
-            drag(e) {
-                if (!this.isDragging) return;
-
-                const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-                const rect = this.container.getBoundingClientRect();
-                const x = clientX - rect.left;
-                this.sliderPosition = Math.max(0, Math.min(100, (x / rect.width) * 100));
-
-                this.updateSlider();
-            }
-
-            stopDrag() {
-                this.isDragging = false;
-                this.container.style.cursor = 'grab';
-            }
-
-            updateSlider() {
-                this.sliderLine.style.left = `${this.sliderPosition}%`;
-                this.currentImage.style.clipPath = `polygon(0 0, ${this.sliderPosition}% 0, ${this.sliderPosition}% 100%, 0 100%)`;
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-          // Initialize all three-image slider containers
-          for (let i = 1; i <= 50; i++) {
-            new ThreeImageSlider(`sliderContainer${i}`);
-          }
+    <script>
+        class ThreeImageSlider {
+        constructor(containerId) {
+          this.container = document.getElementById(containerId);
+          if (!this.container) return;
           
-          // Initialize all two-image slider containers
-          for (let i = 1; i <= 50; i++) {
-            new TwoImageSlider(`twoImageSlider${i}`);
+          // Extract the number from containerId (e.g., "sliderContainer1" -> "1")
+          const containerNum = containerId.replace('sliderContainer', '');
+          
+          this.sliderLine1 = document.getElementById(`sliderLine1_${containerNum}`);
+          this.sliderLine2 = document.getElementById(`sliderLine2_${containerNum}`);
+          this.sliderHandle1 = document.getElementById(`sliderHandle1_${containerNum}`);
+          this.sliderHandle2 = document.getElementById(`sliderHandle2_${containerNum}`);
+          this.beforeImage = document.getElementById(`beforeImage${containerNum}`);
+          this.afterImage = document.getElementById(`afterImage${containerNum}`);
+
+          this.isDragging = false;
+          this.activeSlider = null;
+
+          this.slider1Position = 33;
+          this.slider2Position = 66;
+
+          this.init();
+        }
+
+        init() {
+          this.bindEvents();
+          this.updateSliders();
+        }
+
+        bindEvents() {
+          this.sliderHandle1.addEventListener('mousedown', (e) => this.startDrag(e, 1));
+          this.sliderHandle2.addEventListener('mousedown', (e) => this.startDrag(e, 2));
+          document.addEventListener('mousemove', (e) => this.drag(e));
+          document.addEventListener('mouseup', () => this.stopDrag());
+
+          this.sliderHandle1.addEventListener('touchstart', (e) => this.startDrag(e, 1), { passive: false });
+          this.sliderHandle2.addEventListener('touchstart', (e) => this.startDrag(e, 2), { passive: false });
+          document.addEventListener('touchmove', (e) => this.drag(e), { passive: false });
+          document.addEventListener('touchend', () => this.stopDrag());
+        }
+
+        startDrag(e, sliderNumber) {
+          this.isDragging = true;
+          this.activeSlider = sliderNumber;
+
+          if (sliderNumber === 1) {
+            this.sliderLine1.style.zIndex = '50';
+            this.sliderLine2.style.zIndex = '40';
+          } else {
+            this.sliderLine2.style.zIndex = '50';
+            this.sliderLine1.style.zIndex = '40';
           }
-        });
-      </script>
+
+          e.preventDefault();
+        }
+
+        drag(e) {
+          if (!this.isDragging) return;
+
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const rect = this.container.getBoundingClientRect();
+          const x = clientX - rect.left;
+          const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+
+          if (this.activeSlider === 1) this.slider1Position = percentage;
+          else if (this.activeSlider === 2) this.slider2Position = percentage;
+
+          this.updateSliders();
+        }
+
+        stopDrag() {
+          this.isDragging = false;
+          this.activeSlider = null;
+        }
+
+        updateSliders() {
+          this.sliderLine1.style.left = `${this.slider1Position}%`;
+          this.sliderLine2.style.left = `${this.slider2Position}%`;
+
+          this.beforeImage.style.clipPath = `polygon(0 0, ${this.slider1Position}% 0, ${this.slider1Position}% 100%, 0 100%)`;
+
+          const left = Math.min(this.slider1Position, this.slider2Position);
+          const right = Math.max(this.slider1Position, this.slider2Position);
+          this.afterImage.style.clipPath = `polygon(${left}% 0, ${right}% 0, ${right}% 100%, ${left}% 100%)`;
+        }
+      }
+
+      // Two-Image Slider Class
+      class TwoImageSlider {
+        constructor(containerId) {
+          this.container = document.getElementById(containerId);
+          if (!this.container) return;
+          
+          // Extract the number from containerId (e.g., "twoImageSlider1" -> "1")
+          const containerNum = containerId.replace('twoImageSlider', '');
+          
+          this.sliderLine = document.getElementById(`twoSliderLine${containerNum}`);
+          this.sliderHandle = document.getElementById(`twoSliderHandle${containerNum}`);
+          this.currentImage = document.getElementById(`currentImage${containerNum}`);
+
+          this.isDragging = false;
+          this.sliderPosition = 50; // Start at 50% (middle)
+
+          this.init();
+        }
+
+        init() {
+          this.bindEvents();
+          this.updateSlider();
+        }
+
+        bindEvents() {
+          // Mouse events
+          this.sliderHandle.addEventListener('mousedown', (e) => this.startDrag(e));
+          document.addEventListener('mousemove', (e) => this.drag(e));
+          document.addEventListener('mouseup', () => this.stopDrag());
+
+          // Touch events
+          this.sliderHandle.addEventListener('touchstart', (e) => this.startDrag(e), { passive: false });
+          document.addEventListener('touchmove', (e) => this.drag(e), { passive: false });
+          document.addEventListener('touchend', () => this.stopDrag());
+
+          // Container click for quick jump
+          this.container.addEventListener('click', (e) => {
+            if (e.target === this.sliderHandle) return;
+            
+            const rect = this.container.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            this.sliderPosition = Math.max(0, Math.min(100, (x / rect.width) * 100));
+            this.updateSlider();
+          });
+        }
+
+        startDrag(e) {
+          this.isDragging = true;
+          this.container.style.cursor = 'grabbing';
+          e.preventDefault();
+        }
+
+        drag(e) {
+          if (!this.isDragging) return;
+
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const rect = this.container.getBoundingClientRect();
+          const x = clientX - rect.left;
+          this.sliderPosition = Math.max(0, Math.min(100, (x / rect.width) * 100));
+
+          this.updateSlider();
+        }
+
+        stopDrag() {
+          this.isDragging = false;
+          this.container.style.cursor = 'grab';
+        }
+
+        updateSlider() {
+          this.sliderLine.style.left = `${this.sliderPosition}%`;
+          this.currentImage.style.clipPath = `polygon(0 0, ${this.sliderPosition}% 0, ${this.sliderPosition}% 100%, 0 100%)`;
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        // Initialize all three-image slider containers
+        for (let i = 1; i <= 50; i++) {
+          new ThreeImageSlider(`sliderContainer${i}`);
+        }
+        
+        // Initialize all two-image slider containers
+        for (let i = 1; i <= 50; i++) {
+          new TwoImageSlider(`twoImageSlider${i}`);
+        }
+      });
+    </script>
     </section>
 
     <section id="reports" class="projects-section">
@@ -678,7 +678,6 @@
         });
       });
     });
-
     
     // Subnav tabs switch logic
     const tabs = document.querySelectorAll('.projects-subnav a');
@@ -737,7 +736,6 @@
     }
   </script>
 
-  <!-- Theme & translate scripts omitted for brevity… -->
  <footer>
     <div class="footer-container">
       <div class="footer-column">

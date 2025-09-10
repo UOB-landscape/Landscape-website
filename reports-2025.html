@@ -221,6 +221,7 @@
     const mainImage = document.getElementById('mainImage');
     let currentGallery = [];
     let currentIndex = 0;
+    let slideshowInterval = null;
 
     document.querySelectorAll('.gallery-thumbnail').forEach(img => {
       img.addEventListener('click', () => {
@@ -230,6 +231,11 @@
         showImage();
         galleryPopup.style.display = 'flex';
         document.body.style.overflow = 'hidden';
+
+        // Start slideshow
+        slideshowInterval = setInterval(() => {
+          nextImage();
+        }, 4000);
       });
     });
 
@@ -250,13 +256,14 @@
     function closeGallery() {
       galleryPopup.style.display = 'none';
       document.body.style.overflow = '';
+      clearInterval(slideshowInterval); // stop slideshow
     }
 
     document.addEventListener('keydown', e => {
       if (galleryPopup.style.display === 'flex') {
-          if (e.key === 'Escape') closeGallery();
-          if (e.key === 'ArrowRight') nextImage();
-          if (e.key === 'ArrowLeft') previousImage();
+        if (e.key === 'Escape') closeGallery();
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft') previousImage();
       }
     });
   </script>

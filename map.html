@@ -62,11 +62,55 @@
   <script src="https://unpkg.com/@panzoom/panzoom/dist/panzoom.min.js"></script>
 
   <script>
-    // === Building data ===
-    // x, y are percentages (0–1)
+
     const buildings = [
-      { name: "Building A", x: 0.3, y: 0.36, url: "building.html" },
-      // add more buildings as needed
+      //Buildings
+      { name: "S1A",   x: 0.579, y: 0.55, url: "building.html" },
+      { name: "S1B",   x: 0.643, y: 0.504, url: "building.html" },
+      { name: "S2",   x: 0.584, y: 0.444, url: "building.html" },
+      { name: "S3 Central Library",   x: 0.537, y: 0.478, url: "building.html" },
+      { name: "S4",   x: 0.471, y: 0.524, url: "building.html" },
+      { name: "S17",   x: 0.712, y: 0.509, url: "building.html" },
+      { name: "S18",   x: 0.795, y: 0.556, url: "building.html" },
+      { name: "S20",   x: 0.635, y: 0.742, url: "building.html" },
+      { name: "S20A",   x: 0.659, y: 0.784, url: "building.html" },
+      { name: "S20B",   x: 0.555, y: 0.707, url: "building.html" },
+      { name: "S20C",   x: 0.552, y: 0.764, url: "building.html" },
+      { name: "S21",   x: 0.495, y: 0.740, url: "building.html" },
+      { name: "S22",   x: 0.574, y: 0.615, url: "building.html" },
+      { name: "S22A",   x: 0.546, y: 0.590, url: "building.html" },
+      { name: "S23",   x: 0.543, y: 0.533, url: "building.html" },
+      { name: "S24",   x: 0.666, y: 0.439, url: "building.html" },
+      { name: "S37",   x: 0.367, y: 0.603, url: "building.html" },
+      { name: "S38",   x: 0.401, y: 0.582, url: "building.html" },
+      { name: "S39",   x: 0.297, y: 0.668, url: "building.html" },
+      { name: "S39A",   x: 0.265, y: 0.693, url: "building.html" },
+      { name: "S40",   x: 0.204, y: 0.471, url: "building.html" },
+      { name: "S41",   x: 0.296, y: 0.364, url: "building.html" },
+      { name: "S42",   x: 0.102, y: 0.390, url: "building.html" },
+      { name: "S43",   x: 0.109, y: 0.450, url: "building.html" },
+      { name: "S44",   x: 0.618, y: 0.599, url: "building.html" },
+      { name: "S45",   x: 0.680, y: 0.548, url: "building.html" },
+      { name: "S46",   x: 0.614, y: 0.476, url: "building.html" },
+      { name: "S47",   x: 0.308, y: 0.437, url: "building.html" },
+      { name: "S48",   x: 0.369, y: 0.320, url: "building.html" },
+      { name: "S49",   x: 0.348, y: 0.313, url: "building.html" },
+      { name: "S50",   x: 0.220, y: 0.423, url: "building.html" },
+      { name: "S51",   x: 0.245, y: 0.397, url: "building.html" },
+      { name: "S52",   x: 0.320, y: 0.293, url: "building.html" },
+      { name: "S54",   x: 0.116, y: 0.369, url: "building.html" },
+      { name: "S56",   x: 0.033, y: 0.412, url: "building.html" },
+      { name: "S57",   x: 0.034, y: 0.375, url: "building.html" },
+      { name: "S6",   x: 0.484, y: 0.442, url: "building.html" },
+
+      //Facilities
+      { name: "S15",   x: 0.072, y: 0.362, url: "Facilities.html" },
+
+      //Gates
+      { name: "Main Gate",   x: 0.617, y: 0.185, url: "Gates.html",  width: 38, height: 10 },
+      { name: "S55",   x: 0.585, y: 0.193, url: "Gates.html" },
+      { name: "Eastern Gate",   x: 0.918, y: 0.493, url: "Gates.html",  width: 38, height: 10 },
+      { name: "Western Gate",   x: 0.091, y: 0.180, url: "Gates.html",  width: 38, height: 10 },      
     ];
 
     const mapWrapper = document.getElementById("zoom-area");
@@ -75,16 +119,19 @@
       buildings.forEach(b => {
         const a = document.createElement("a");
         a.href = b.url;
-        a.target = "_blank"; // open in new tab, optional
 
         const img = document.createElement("img");
-        img.src = "Building icon.png"; // building icon
+        img.src = "Building icon.png";
         img.alt = b.name;
         img.title = b.name;
         img.classList.add("map-icon");
 
         img.style.left = (b.x * 100) + "%";
         img.style.top = (b.y * 100) + "%";
+
+        // Apply custom width/height if specified
+        if (b.width) img.style.width = b.width + "px";
+        if (b.height) img.style.height = b.height + "px";
 
         a.appendChild(img);
         mapWrapper.appendChild(a);

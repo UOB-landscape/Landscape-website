@@ -1206,16 +1206,17 @@ box-shadow: 0 8px 15px color-mix(in srgb, var(--accent) 50%, transparent);
 
 .map-icon {
   position: absolute;
-  width: 32px;
-  height: 32px;
+  width: 10px;
+  height: 10px;
   cursor: pointer;
   transform: translate(-50%, -100%);
+  opacity: 0;
 }
 
-.map-controls {
-  display: flex;          /* make it a flex container */
-  justify-content: center; /* center all buttons horizontally */
-  gap: 10px;              /* space between buttons */
+/* .map-controls {
+  display: flex;          
+  justify-content: center; 
+  gap: 10px;              
   margin-top: 10px;
 }
 
@@ -1224,6 +1225,37 @@ box-shadow: 0 8px 15px color-mix(in srgb, var(--accent) 50%, transparent);
   margin: 0 5px;
   font-size: 16px;
   cursor: pointer;
+}
+ */
+
+.map-controls {
+  position: absolute;      /* make buttons float over the map */
+  bottom: 16px;            /* same as your label bottom */
+  left: 50%;               /* center container */
+  transform: translateX(-50%);
+  display: flex;
+  gap: 12px;               /* space between buttons */
+  z-index: 10;             /* above the map */
+}
+
+.map-controls button {
+  padding: 8px 14px;       /* like your label */
+  border-radius: 20px;     /* match label’s rounded shape */
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+  border: none;
+  background-color: var(--accent);   /* use same accent color */
+  backdrop-filter: blur(6px);        /* frosted glass effect */
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+
+.map-controls button:hover {
+  transform: scale(1.05);
+  background-color: rgba(245, 247, 245, 0.95);
+  color: var(--accent);
 }
 
 .about-layout{
