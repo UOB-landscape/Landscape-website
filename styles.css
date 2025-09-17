@@ -264,9 +264,48 @@ main {
   padding: 20px;
 }
 
-main p {
-  font-size: 18px;
-  padding: 20px;
+.landscape-info {
+  background: white;
+  /* padding: 10px 0; */
+  border-radius: 15px;
+  /* margin: 2rem 0; */
+  text-align: left;
+  /* box-shadow: 0 10px 30px rgba(0,0,0,0.1); */
+}
+
+.info-grid {
+  display: flex;
+  flex-direction: column;
+  /* grid-template-columns: 1fr;*/
+  gap: 1rem; 
+  align-items: flex-start;
+}
+
+.landscape-info .container {
+  padding: 0;
+  margin-left: 3rem;     
+  max-width: none;
+}
+
+.landscape-info .container h1 {
+  color: #2c1810;
+  margin-top: 4rem;
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  text-align: left;
+  justify-self: start;
+
+  display: inline-block;  /* allows width control */
+  width: 500px;           /* make the underline longer */
+}
+
+.landscape-info .container p {
+  font-size: 1.2rem;
+  margin: 0;
+  padding-bottom: 4rem;
+  color: #555;
+  text-align: left;
+  justify-self: start;
 }
 
 @media (max-width: 768px) {
@@ -286,6 +325,7 @@ main p {
   background: var(--bg);
   padding: 20px 0;
   margin-top: 40px;
+  margin-bottom: 60px;
 }
 
 .carousel-wrapper {
@@ -325,7 +365,7 @@ main p {
   height: 290px;
   object-fit: cover;
   border-radius: 12px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  box-shadow: 20px 0px 50px -12px rgba(0, 0, 0, 0.25);
   margin-right: 30px;
   transition: transform 0.7s ease; /* Smooth transition */
 }
@@ -353,14 +393,16 @@ main p {
 
 #hero {
   position: relative; /* Ensure child absolute positions work */
-  height: 615px;       /* or however tall your header is */
+  /*height: 615px;        or however tall your header is */
+  height: 100vh;   /* Full screen height */
+  width: 100%;  
   overflow: hidden;
 }
 
 .slide {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  width: 100%;     /* Full width */
+  height: 100vh;    /* Full height */
   background-size: cover;
   background-position: center;
   opacity: 0;
@@ -1061,8 +1103,8 @@ box-shadow: 0 8px 15px color-mix(in srgb, var(--accent) 50%, transparent);
 }
 
 .locations-item:hover {
-  /* transform: translateY(-7px); */
-   transform: scale(1.1);  /* Zoom in slightly on hover */
+  transform: translateY(-7px);
+  /* transform: scale(1.1);   Zoom in slightly on hover */
 }
 
 .locations-item img {
