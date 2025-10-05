@@ -302,13 +302,18 @@
         const buildings = data.filter(item => item["Location type"] === "Building");
 
         buildings.forEach(location => {
-          const card = document.createElement('div');
-          card.className = 'grid-item';
-          card.innerHTML = `
-            <img src="${location.Picture}" alt="${location['Location name']}">
-            <h3>${location["Location name"]} (${location["Location number"]})</h3>
-          `;
-          grid.appendChild(card);
+         const locNum = location["Location Number"] || location["Location number"];
+         const locName = location["Location name"];
+
+         const card = document.createElement('a');
+         card.className = 'grid-item';
+         card.href = `location.html?id=${encodeURIComponent(locNum)}`;
+         card.innerHTML = `
+         <img src="${location.Picture}" alt="${locName}">
+         <h3>${locName} (${locNum})</h3>
+         `;
+         grid.appendChild(card);
+
         });
 
       } catch (err) {

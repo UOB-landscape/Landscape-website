@@ -46,7 +46,18 @@
     </div>
   </nav>
  
-  <header id="hero"></header>
+  <header id="hero">
+  <video autoplay muted loop playsinline id="bg-video">
+    <source src="IMG_1465.mov" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="overlay-square">
+    <div class="overlay-label">
+      University of Bahrain<br>Landscapes
+    </div>
+  </div>
+</header>
+
   <main>
     <h1>Welcome to UOB Landscape</h1>
     <p>Established in 1986, the University of Bahrain is a public university that makes
@@ -189,37 +200,6 @@
         });
       });
     });
-
-    // Generate 20 slides with captions
-    const captions = Array.from({ length: 20 }, (_, i) => `Caption ${i + 1}`);
-    const hero = document.getElementById('hero');
-
-    captions.forEach((text, i) => {
-      const slide = document.createElement('div');
-      slide.className = 'slide' + (i === 0 ? ' active' : '');
-      slide.style.backgroundImage = `url('img${i + 1}.jpg')`;
-      slide.innerHTML = `<div class="text">${text}</div>`;
-      hero.appendChild(slide);
-    });
-
-    const square = document.createElement('div');
-    square.className = 'overlay-square';
-
-    const label = document.createElement('div');
-    label.className = 'overlay-label';
-    label.innerHTML = 'University of Bahrain<br>Landscapes';
-
-    square.appendChild(label);
-    hero.appendChild(square);
-
-    // Slide animation
-    const slides = document.querySelectorAll('.slide');
-    let idx = 0;
-    setInterval(() => {
-      slides[idx].classList.remove('active');
-      idx = (idx + 1) % slides.length;
-      slides[idx].classList.add('active');
-    }, 5000);
 
     // Theme dropdown behavior
     const btn = document.getElementById('theme-btn');

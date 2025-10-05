@@ -4,24 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>UOB Landscape</title>
-
+  <link rel="stylesheet" href="styles.css" />
   <script>
-  // Get saved theme from localStorage
-  const savedTheme = localStorage.getItem('theme');
-
-  if (savedTheme) {
-    // Set theme attribute before CSS is applied
-    document.documentElement.setAttribute('data-theme', savedTheme);
-  }
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
   </script>
-  
-  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="logo-space" title="Logo">
     <img src="UOB-new-logo.png" alt="University of Bahrain" />
   </div>
-    <nav>
+
+  <nav>
     <ul>
       <li><a href="home.html">Home</a></li>
       <li><a href="ourPlants.html">Our plants</a></li>
@@ -45,77 +41,40 @@
       <input type="search" placeholder="Search…">
     </div>
   </nav>
+
   <main>
     <section class="about-layout">
-      <h2>Mission</h2>
-      <p>To empower organizational performance and academic excellence through innovative quality assurance practices, collaborative efforts, <br>
-        ensuring internal and external compliance and improving stakeholder satisfaction.</p>
-      <h2>Our Work</h2>  
+      <h2 class="centered">About UoB Landscapes</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>University of Bahrain Landscapes is a collaborative initiative that brings together expertise from the College of Science, the College of Engineering, and the College of Information Technology. Developed by software engineers from the College of IT, the platform serves as a centralized repository for data on indoor plant species collected by biologists from the College of Science, alongside project proposals for outdoor and indoor landscaping areas designed by landscape engineers from the College of Engineering. These proposals include detailed plans and 3D models, many of which will come to life in future phases. While the current database includes a substantial number of indoor plant records and landscaping proposals, it does not yet encompass all buildings or plantation zones across the campus. Both the biological surveys and engineering designs are part of an ongoing process, with future expansions planned to cover additional locations and introduce new proposals. This initiative lays the foundation for a continuously evolving landscape strategy, where scientific insight and engineering creativity converge to shape a greener, smarter campus experience.</p>
+        </div>
+        <div class="about-image">
+          <img src="about.jpg" alt="About UOB Landscape" />
+        </div>
+      </div>
+
+      <h2 class="centered">Collaborators</h2>
+
+      <div class="collaborator-section">
+        <h3>🧬 Biologists</h3>
+        <p>(College of Science)</p>
+        <div id="biologists" class="collaborator-grid"></div>
+      </div>
+
+      <div class="collaborator-section">
+        <h3>🌿 Landscape Engineers</h3>
+        <p>(College of Engineering)</p>
+        <div id="engineers" class="collaborator-grid"></div>
+      </div>
+
+      <div class="collaborator-section">
+        <h3>💻 Software Engineers</h3>
+        <p>(College of Information Technology)</p>
+        <div id="software" class="collaborator-grid"></div>
+      </div>
     </section>
-    
   </main>
-  <script>
-    // Active navigation link handling
-    document.addEventListener('DOMContentLoaded', () => {
-      const navLinks = document.querySelectorAll('nav a');
-      const currentPage = window.location.pathname.split('/').pop() || 'home.html';
-      
-      // Set initial active state based on current page
-      navLinks.forEach(link => {
-        if (link.getAttribute('href') === currentPage) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
-      });
-
-      // Add click handlers to maintain active state
-      navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          // Remove active class from all links
-          navLinks.forEach(l => l.classList.remove('active'));
-          // Add active class to clicked link
-          this.classList.add('active');
-        });
-      });
-    });
-    // Theme dropdown behavior
-    const btn = document.getElementById('theme-btn');
-    const picker = document.getElementById('theme-picker');
-
-    if (btn && picker) {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        picker.classList.toggle('active');
-      });
-
-      document.addEventListener('click', e => {
-        if (!e.target.closest('.dropdown')) {
-          picker.classList.remove('active');
-        }
-      });
-
-      picker.addEventListener('click', e => {
-        const t = e.target.dataset.theme;
-        if (t) {
-          document.documentElement.setAttribute('data-theme', t);
-          localStorage.setItem('theme', t);
-          picker.classList.remove('active');
-        }
-      });
-    }
-
-    // Apply saved theme on load
-    window.addEventListener('DOMContentLoaded', () => {
-      const saved = localStorage.getItem('theme') || 'default';
-      document.documentElement.setAttribute('data-theme', saved);
-    });
-
-    // Placeholder translation logic
-    function translate() {
-      alert('Arabic translation logic goes here.');
-    }
-  </script>
 
   <footer>
     <div class="footer-container">
@@ -143,5 +102,78 @@
     </div>
   </footer>
 
+  <script>
+    // Load collaborators from API
+    async function loadCollaborators() {
+      try {
+        const [bioRes, engRes, softRes] = await Promise.all([
+          fetch("http://localhost:3000/api/creators/biologists"),
+          fetch("http://localhost:3000/api/creators/landscape-engineers"),
+          fetch("http://localhost:3000/api/creators/software-engineers")
+        ]);
+
+        const biologists = await bioRes.json();
+        const engineers = await engRes.json();
+        const software = await softRes.json();
+
+        const renderGrid = (data, containerId) => {
+          const container = document.getElementById(containerId);
+          container.innerHTML = "";
+          data.forEach(person => {
+            const div = document.createElement("div");
+            div.textContent = person.Name;
+            container.appendChild(div);
+          });
+        };
+
+        renderGrid(biologists, "biologists");
+        renderGrid(engineers, "engineers");
+        renderGrid(software, "software");
+      } catch (err) {
+        console.error("Error loading collaborators:", err);
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      loadCollaborators();
+
+      // Theme dropdown behavior
+      const btn = document.getElementById('theme-btn');
+      const picker = document.getElementById('theme-picker');
+
+      if (btn && picker) {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          picker.classList.toggle('active');
+        });
+
+        document.addEventListener('click', e => {
+          if (!e.target.closest('.dropdown')) {
+            picker.classList.remove('active');
+          }
+        });
+
+        picker.addEventListener('click', e => {
+          const t = e.target.dataset.theme;
+          if (t) {
+            document.documentElement.setAttribute('data-theme', t);
+            localStorage.setItem('theme', t);
+            picker.classList.remove('active');
+          }
+        });
+      }
+
+      // Active nav link
+      const navLinks = document.querySelectorAll('nav a');
+      const currentPage = window.location.pathname.split('/').pop() || 'home.html';
+      navLinks.forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === currentPage);
+      });
+    });
+
+    function translate() {
+      alert('Arabic translation logic goes here.');
+    }
+  </script>
 </body>
 </html>

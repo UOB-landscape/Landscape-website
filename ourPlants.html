@@ -193,34 +193,6 @@
 
       </div>
       <div class="grid-container">
-          <div class="grid-item">
-              <img src="Araucaria heterophylla.jpg" alt="Image 1">
-              <h3>Title 1</h3>
-          </div>
-          <div class="grid-item">
-              <img src="before.jpg" alt="Image 2">
-              <h3>Title 2</h3>
-          </div>
-          <div class="grid-item">
-              <img src="building.jpg" alt="Image 3">
-              <h3>Title 3</h3>
-          </div>
-          <div class="grid-item">
-              <img src="gate.jpg" alt="Image 4">
-              <h3>Title 4</h3>
-          </div>
-              <div class="grid-item">
-              <img src="Facilities.jpg" alt="Image 5">
-              <h3>Title 5</h3>
-          </div>
-          <div class="grid-item">
-              <img src="S45.jpg" alt="Image 6">
-              <h3>Title 6</h3>
-          </div>
-          <div class="grid-item">
-              <img src="S45.jpg" alt="Image 7">
-              <h3>Title 7</h3>
-          </div>
       </div>
     </section>
   </main>
@@ -295,7 +267,7 @@ function showPlantDetails(plant) {
 
 <script>
 // Fetch indoor plants
-fetch('http://localhost:3000/api/indoor')
+fetch('http://localhost:3000/api/indoor-plants')
   .then(res => res.json())
   .then(plants => {
     const grid = document.getElementById('indoorGrid');
@@ -303,8 +275,8 @@ fetch('http://localhost:3000/api/indoor')
       const card = document.createElement('div');
       card.className = 'grid-item';
       card.innerHTML = `
-        <img src="${plant.Image}" alt="${plant['Common name']}">
-        <h3>${plant['Scientific name']} <br><small>(${plant['Common name']})</small></h3>
+        <img src="${plant.Image}" alt="${plant['Scientific name']}">
+        <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
       `;
       // navigate to indoorPlant.html with plant ID
       card.addEventListener('click', () => {
@@ -317,7 +289,7 @@ fetch('http://localhost:3000/api/indoor')
 
 
 // Fetch outdoor plants
-fetch('http://localhost:3000/api/outdoor')
+fetch('http://localhost:3000/api/outdoor-plants')
   .then(res => res.json())
   .then(plants => {
     const grid = document.querySelector('#outdoor-plants .grid-container');
@@ -325,8 +297,8 @@ fetch('http://localhost:3000/api/outdoor')
       const card = document.createElement('div');
       card.className = 'grid-item';
       card.innerHTML = `
-        <img src="${plant.Image}" alt="${plant['Common name']}">
-        <h3>${plant['Scientific name']} <br><small>(${plant['Common name']})</small></h3>
+        <img src="${plant.Image}" alt="${plant['Scientific name']}">
+        <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
       `;
       // navigate to outdoorPlant.html with plant ID
       card.addEventListener('click', () => {
