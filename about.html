@@ -1,10 +1,320 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="default">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>UOB Landscape</title>
+  <title>About - UOB Landscape</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .about-layout {
+      margin-top: 60px;
+      padding: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    /* Page Header */
+    .page-header {
+      max-width: 1400px;
+      /* margin: 60px auto 40px; */
+      padding: 0 40px;
+    }
+
+    .page-title {
+      color: #2c1810;
+      margin-top: 5.5rem;
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 0.5rem;
+      text-align: left;
+      justify-self: start;
+      font-size: 2em;
+
+      display: inline-block;
+      width: 380px;
+    }
+
+    /* Feature Image Section */
+    .feature-section {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 0.7fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .feature-image-wrapper {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 12px 12px 25px rgba(0, 0, 0, 0.35); 
+      /* box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15); */
+      order: 2;
+    }
+
+    .feature-image-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(14, 68, 126, 0.3), transparent);
+      z-index: 1;
+    }
+
+    .feature-image {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .feature-text {
+      padding: 20px;
+      order: 1;
+    }
+
+    .feature-text p {
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: #444;
+      margin-bottom: 20px;
+    }
+
+    /* Mission Statement */
+    .mission-section {
+      background: var(--accent);
+      color: white;
+      padding: 80px 40px;
+      margin: 80px 0 80px 0;
+      position: relative;
+      overflow: hidden;
+      margin-left: calc(-50vw + 50%);
+      margin-right: calc(-50vw + 50%);
+    }
+
+    .mission-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -10%;
+      width: 500px;
+      height: 500px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+    }
+
+    .mission-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mission-content h2 {
+      font-size: 2.8rem;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    .mission-content p {
+      font-size: 1.3rem;
+      line-height: 1.8;
+      opacity: 0.95;
+    }
+
+    /* Content Blocks */
+    .content-blocks {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 40px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    .content-block {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.06);
+      border-top: 4px solid var(--accent);
+      transition: all 0.3s ease;
+    }
+
+    .content-block:hover {
+      box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+    }
+
+    .content-block h3 {
+      font-size: 1.5rem;
+      color: #1a1a1a;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    .content-block p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #555;
+    }
+
+    /* Team Section */
+    .team-section {
+      background: #fafbfc;
+      padding: 0px 90px 10px;
+    }
+
+    .team-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .team-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .team-header h2 {
+      color: #2c1810;
+      margin-top: 5.5rem;
+      border-bottom: 3px solid var(--accent);
+      padding-bottom: 0.5rem;
+      text-align: center;
+      justify-self: start;
+      font-size: 2em;
+      display: inline-block;
+      width: 300px;
+    }
+
+    /* Team Cards */
+    .team-category {
+      margin-bottom: 70px;
+    }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 35px;
+      padding-bottom: 20px;
+      border-bottom: 3px solid #e0e0e0;
+    }
+
+    .category-icon {
+      font-size: 3rem;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .biologists-category .category-icon {
+      background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    }
+
+    .engineers-category .category-icon {
+      background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+    }
+
+    .software-category .category-icon {
+      background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+    }
+
+    .category-info h3 {
+      font-size: 1.5rem;
+      color: #1a1a1a;
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .category-info p {
+      font-size: 1rem;
+      color: #666;
+      margin: 5px 0 0;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+
+    .team-member {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #333;
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .team-member::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .team-member:hover::after {
+      transform: scaleX(1);
+    }
+
+    .team-member:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .biologists-category .team-member:hover::after {
+      background: #0e447e;
+    }
+
+    .engineers-category .team-member:hover::after {
+      background: #467159;
+    }
+
+    .software-category .team-member:hover::after {
+      background: #402a72;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .feature-section {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-image-wrapper {
+        order: 1;
+      }
+
+      .feature-text {
+        order: 2;
+      }
+
+      .content-blocks {
+        grid-template-columns: 1fr;
+      }
+    }
+
+  </style>
   <script>
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
@@ -12,6 +322,7 @@
     }
   </script>
 </head>
+
 <body>
   <div class="logo-space" title="Logo">
     <img src="UOB-new-logo.png" alt="University of Bahrain" />
@@ -23,7 +334,6 @@
       <li><a href="ourPlants.html">Our plants</a></li>
       <li><a href="projects.html">Projects</a></li>
       <li><a href="locations.html">Locations</a></li>
-      <li><a href="map.html">Map</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
     <div class="controls">
@@ -44,35 +354,102 @@
 
   <main>
     <section class="about-layout">
-      <div class="about-content">
-        <div class="about-text">
-          <h2 class="centered">About UoB Landscapes</h2>
-          <p>University of Bahrain Landscapes is a collaborative initiative that brings together expertise from the College of Science, the College of Engineering, and the College of Information Technology. Developed by software engineers from the College of IT, the platform serves as a centralized repository for data on indoor plant species collected by biologists from the College of Science, alongside project proposals for outdoor and indoor landscaping areas designed by landscape engineers from the College of Engineering.<br><br>
-             These proposals include detailed plans and 3D models, many of which will come to life in future phases. While the current database includes a substantial number of indoor plant records and landscaping proposals, it does not yet encompass all buildings or plantation zones across the campus. Both the biological surveys and engineering designs are part of an ongoing process, with future expansions planned to cover additional locations and introduce new proposals. This initiative lays the foundation for a continuously evolving landscape strategy, where scientific insight and engineering creativity converge to shape a greener, smarter campus experience.</p>
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title">About UOB Landscapes</h1>
+      </div>
+
+      <!-- Feature Section -->
+      <div class="feature-section">
+        <div class="feature-text">
+          <p>The University of Bahrain Landscapes initiative envisions a collaborative platform where science,
+            engineering, and technology unite to create a sustainable and data-driven campus environment.
+            By integrating biological research, landscape design, and digital innovation, the project aims to
+            cultivate a living repository of plant data and design proposals that evolve with time. This ongoing
+            collaboration lays the groundwork for a greener, smarter, and more connected university landscape
+            that reflects the harmony between nature, knowledge, and technology.</p>
         </div>
-        <div class="about-image">
-          <img src="about.jpg" alt="About UOB Landscape" />
+        <div class="feature-image-wrapper">
+          <img src="about.jpg" alt="UOB Campus" class="feature-image" />
         </div>
       </div>
 
-      <h2 style="text-align: center;">Collaborators</h2>
-
-      <div class="collaborator-section biologists-section">
-        <h3>🧬 Biologists</h3>
-        <p>(College of Science)</p>
-        <div id="biologists" class="collaborator-grid"></div>
+      <!-- Mission Statement -->
+      <div class="mission-section">
+        <div class="mission-content">
+          <h2>Where Science Meets Design</h2>
+          <p>This initiative lays the foundation for a continuously evolving landscape strategy, where scientific
+            insight and engineering creativity converge to shape a greener, smarter campus experience.</p>
+        </div>
       </div>
 
-      <div class="collaborator-section engineers-section">
-        <h3>🌿 Landscape Engineers</h3>
-        <p>(College of Engineering)</p>
-        <div id="engineers" class="collaborator-grid"></div>
+      <!-- Content Blocks -->
+      <div class="content-blocks">
+        <div class="content-block">
+          <h3>🔬 Scientific Research</h3>
+          <p>Biologists from the College of Science meticulously document indoor plant species, creating a comprehensive
+            database that serves as a valuable resource for botanical research and education.</p>
+        </div>
+        <div class="content-block">
+          <h3>🏗️ Engineering Excellence</h3>
+          <p>Landscape engineers from the College of Engineering design innovative outdoor and indoor landscaping
+            proposals with detailed plans and 3D models that bring visions to life.</p>
+        </div>
+        <div class="content-block">
+          <h3>💻 Digital Innovation</h3>
+          <p>Software engineers from the College of IT develop and maintain the platform, ensuring seamless data
+            integration and user-friendly access to all landscape information.</p>
+        </div>
+        <div class="content-block">
+          <h3>🌱 Future Growth</h3>
+          <p>Both biological surveys and engineering designs are part of an ongoing process, with future expansions
+            planned to cover additional locations and introduce new proposals across campus.</p>
+        </div>
       </div>
 
-      <div class="collaborator-section software-section">
-        <h3>💻 Software Engineers</h3>
-        <p>(College of Information Technology)</p>
-        <div id="software" class="collaborator-grid"></div>
+      <!-- Team Section -->
+      <div class="team-section">
+        <div class="team-container">
+          <div class="team-header">
+            <h2>Meet Our Team</h2>
+          </div>
+
+          <!-- Biologists -->
+          <div class="team-category biologists-category">
+            <div class="category-header">
+              <div class="category-icon">🧬</div>
+              <div class="category-info">
+                <h3>Biologists</h3>
+                <p>College of Science</p>
+              </div>
+            </div>
+            <div id="biologists" class="team-grid"></div>
+          </div>
+
+          <!-- Engineers -->
+          <div class="team-category engineers-category">
+            <div class="category-header">
+              <div class="category-icon">🌿</div>
+              <div class="category-info">
+                <h3>Landscape Engineers</h3>
+                <p>College of Engineering</p>
+              </div>
+            </div>
+            <div id="engineers" class="team-grid"></div>
+          </div>
+
+          <!-- Software Engineers -->
+          <div class="team-category software-category">
+            <div class="category-header">
+              <div class="category-icon">💻</div>
+              <div class="category-info">
+                <h3>Software Engineers</h3>
+                <p>College of Information Technology</p>
+              </div>
+            </div>
+            <div id="software" class="team-grid"></div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -104,7 +481,6 @@
   </footer>
 
   <script>
-    // Load collaborators from API
     async function loadCollaborators() {
       try {
         const [bioRes, engRes, softRes] = await Promise.all([
@@ -122,6 +498,7 @@
           container.innerHTML = "";
           data.forEach(person => {
             const div = document.createElement("div");
+            div.className = "team-member";
             div.textContent = person.Name;
             container.appendChild(div);
           });
@@ -138,7 +515,6 @@
     window.addEventListener("DOMContentLoaded", () => {
       loadCollaborators();
 
-      // Theme dropdown behavior
       const btn = document.getElementById('theme-btn');
       const picker = document.getElementById('theme-picker');
 
@@ -158,13 +534,11 @@
           const t = e.target.dataset.theme;
           if (t) {
             document.documentElement.setAttribute('data-theme', t);
-            localStorage.setItem('theme', t);
             picker.classList.remove('active');
           }
         });
       }
 
-      // Active nav link
       const navLinks = document.querySelectorAll('nav a');
       const currentPage = window.location.pathname.split('/').pop() || 'home.html';
       navLinks.forEach(link => {
@@ -177,4 +551,5 @@
     }
   </script>
 </body>
+
 </html>
