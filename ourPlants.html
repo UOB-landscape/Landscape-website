@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="default">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>UOB Landscape</title>
-  
+
   <script>
     // Get saved theme from localStorage
     const savedTheme = localStorage.getItem('theme');
@@ -14,21 +15,22 @@
       document.documentElement.setAttribute('data-theme', savedTheme);
     }
   </script>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <div class="logo-space" title="Logo">
     <img src="UOB-new-logo.png" alt="University of Bahrain" />
   </div>
-    <nav>
-        <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="ourPlants.html" class="active">Our plants </a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="locations.html">Locations</a></li>
-            <li><a href="about.html">About</a></li>
-        </ul>
+  <nav>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="ourPlants.html" class="active">Our plants </a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="locations.html">Locations</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
     <div class="controls">
       <button class="arabic-btn" onclick="translate()">عربي</button>
       <div class="dropdown">
@@ -145,85 +147,110 @@
   </script>
   <main class="grid-section">
     <section id="indoor-plants" class="plants-section">
-      <div class="search-bar">
-        <div class="search-input-wrapper">
+      <div class="search-filters-container">
+        <div class="search-bar">
+          <div class="search-input-wrapper">
             <span class="search-icon">🔍</span>
             <input type="text" id="searchInput" placeholder="Search by title..." oninput="filterGrid()" />
+          </div>
+        </div>
+        <div class="filters">
+          <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
+            <option value="" disabled selected>Sort by</option>
+            <option value="A-Z">A-Z</option>
+          </select>
+
+          <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
+            <option value="" disabled selected>Filter by Type</option>
+            <option value="trees">Trees</option>
+            <option value=""></option>
+            <option value=""></option>
+          </select>
+
         </div>
       </div>
-      <div class="filters">
-        <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
-          <option value="" disabled selected>Sort by</option>
-          <option value="A-Z">A-Z</option>
-        </select>
-
-        <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
-          <option value="" disabled selected>Filter by Type</option>
-          <option value="trees">Trees</option>
-          <option value=""></option>
-          <option value=""></option>
-        </select>
-
-      </div>
-      
       <div id="indoorGrid" class="grid-container"></div>
 
     </section>
 
     <section id="outdoor-plants" class="plants-section">
-      <div class="search-bar">
-        <div class="search-input-wrapper">
+      <div class="search-filters-container">
+        <div class="search-bar">
+          <div class="search-input-wrapper">
             <span class="search-icon">🔍</span>
             <input type="text" id="searchInput" placeholder="Search by title..." oninput="filterGrid()" />
+          </div>
         </div>
-      </div>
-      <div class="filters">
-        <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
-          <option value="" disabled selected>Sort by</option>
-          <option value="A-Z">A-Z</option>
-        </select>
+        <div class="filters">
+          <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
+            <option value="" disabled selected>Sort by</option>
+            <option value="A-Z">A-Z</option>
+          </select>
 
-        <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
-          <option value="" disabled selected>Filter by Type</option>
-          <option value="trees">Trees</option>
-          <option value=""></option>
-          <option value=""></option>
-        </select>
+          <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
+            <option value="" disabled selected>Filter by Type</option>
+            <option value="trees">Trees</option>
+            <option value=""></option>
+            <option value=""></option>
+          </select>
 
+        </div>
       </div>
       <div class="grid-container">
       </div>
     </section>
   </main>
 
-
   <footer>
     <div class="footer-container">
       <div class="footer-column">
-        <h4>About UOB Landscape</h4>
-        <p>Empowering knowledge on geological safety and Landscape monitoring.</p>
+        <h4>About</h4>
+        <p>UOB Landscape documents and showcases the diverse flora across our campus, providing detailed information
+          about plants, their locations, and ecological significance.</p>
       </div>
+
       <div class="footer-column">
-        <h4>Quick Links</h4>
+        <h4>Navigation</h4>
         <ul>
-          <li><a href="#">Our Plants</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">Map</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="ourPlants.html">Our Plants</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="locations.html">Locations</a></li>
+          <li><a href="about.html">About</a></li>
         </ul>
       </div>
+
       <div class="footer-column">
-        <h4>Connect</h4>
-        <p>Email: landscape@uob.edu.bh</p>
-        <p>Phone: +973 1743 8181</p>
+        <h4>External Links</h4>
+        <ul>
+          <li><a href="https://www.uob.edu.bh/" target="_blank" rel="noopener noreferrer">University of Bahrain</a></li>
+          <li><a href="https://www.mun.gov.bh/newportal/ar" target="_blank" rel="noopener noreferrer">Municipality of
+              Bahrain</a></li>
+          <li><a href="https://www.bahrain.bh/wps/portal/en/BNP/ExploreBahrain/SustainableDevelopment/" target="_blank"
+              rel="noopener noreferrer">Sustainable Development</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Contact</h4>
+        <p><strong>Email:</strong> <a href="mailto:landscape@uob.edu.bh">landscape@uob.edu.bh</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+97317438181">+973 1743 8181</a></p>
+        <div class="social-links">
+          <a href="https://www.youtube.com/channel/UCM5UfujAklBwqFCAYDWXMMA" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <span>Follow us on YouTube</span>
+          </a>
+        </div>
       </div>
     </div>
+
     <div class="footer-bottom">
-      &copy; 2025 UOB Landscape. All rights reserved.
+      <p>&copy; 2025 University of Bahrain. All rights reserved.</p>
     </div>
   </footer>
 
-<!-- <script>
+  <!-- <script>
 fetch('http://localhost:3000/api/indoor')
   .then(res => {
     console.log('Response status:', res.status);
@@ -264,52 +291,53 @@ function showPlantDetails(plant) {
 }
 </script> -->
 
-<script>
-// Fetch indoor plants
-fetch('http://localhost:3000/api/indoor-plants')
-  .then(res => res.json())
-  .then(plants => {
-    const grid = document.getElementById('indoorGrid');
-    plants.forEach(plant => {
-      const card = document.createElement('div');
-      card.className = 'grid-item';
-      card.innerHTML = `
+  <script>
+    // Fetch indoor plants
+    fetch('http://localhost:3000/api/indoor-plants')
+      .then(res => res.json())
+      .then(plants => {
+        const grid = document.getElementById('indoorGrid');
+        plants.forEach(plant => {
+          const card = document.createElement('div');
+          card.className = 'grid-item';
+          card.innerHTML = `
         <img src="${plant.Image}" alt="${plant['Scientific name']}">
         <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
       `;
-      // navigate to indoorPlant.html with plant ID
-      card.addEventListener('click', () => {
-        window.location.href = `indoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
-      });
-      grid.appendChild(card);
-    });
-  })
-  .catch(err => console.error('Indoor fetch error:', err));
+          // navigate to indoorPlant.html with plant ID
+          card.addEventListener('click', () => {
+            window.location.href = `indoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
+          });
+          grid.appendChild(card);
+        });
+      })
+      .catch(err => console.error('Indoor fetch error:', err));
 
 
-// Fetch outdoor plants
-fetch('http://localhost:3000/api/outdoor-plants')
-  .then(res => res.json())
-  .then(plants => {
-    const grid = document.querySelector('#outdoor-plants .grid-container');
-    plants.forEach(plant => {
-      const card = document.createElement('div');
-      card.className = 'grid-item';
-      card.innerHTML = `
+    // Fetch outdoor plants
+    fetch('http://localhost:3000/api/outdoor-plants')
+      .then(res => res.json())
+      .then(plants => {
+        const grid = document.querySelector('#outdoor-plants .grid-container');
+        plants.forEach(plant => {
+          const card = document.createElement('div');
+          card.className = 'grid-item';
+          card.innerHTML = `
         <img src="${plant.Image}" alt="${plant['Scientific name']}">
         <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
       `;
-      // navigate to outdoorPlant.html with plant ID
-      card.addEventListener('click', () => {
-        window.location.href = `outdoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
-      });
-      grid.appendChild(card);
-    });
-  })
-  .catch(err => console.error('Outdoor fetch error:', err));
-</script>
+          // navigate to outdoorPlant.html with plant ID
+          card.addEventListener('click', () => {
+            window.location.href = `outdoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
+          });
+          grid.appendChild(card);
+        });
+      })
+      .catch(err => console.error('Outdoor fetch error:', err));
+  </script>
 
 
 
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="default">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -14,21 +15,22 @@
       document.documentElement.setAttribute('data-theme', savedTheme);
     }
   </script>
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <div class="logo-space" title="Logo">
     <img src="UOB-new-logo.png" alt="University of Bahrain" />
   </div>
-    <nav>
-        <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="ourPlants.html">Our plants</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="locations.html">Locations</a></li>
-            <li><a href="about.html">About</a></li>
-        </ul>
+  <nav>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="ourPlants.html">Our plants</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="locations.html">Locations</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
     <div class="controls">
       <button class="arabic-btn" onclick="translate()">عربي</button>
       <div class="dropdown">
@@ -145,76 +147,73 @@
 
   <main class="grid-section">
     <section id="Plants" class="building-section">
+      <div class="search-filters-container">
         <div class="search-bar">
-            <div class="search-input-wrapper">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="searchInput" placeholder="Search by title..." oninput="filterGrid()" />
-            </div>
-        
+          <div class="search-input-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Search by title..." oninput="filterGrid()" />
+          </div>
+
         </div>
         <div class="filters">
-        <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
+          <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
             <option value="" disabled selected>Sort by</option>
             <option value="A-Z">A-Z</option>
-        </select>
+          </select>
 
-        <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
+          <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
             <option value="" disabled selected>Filter by Type</option>
             <option value="trees">Trees</option>
             <option value=""></option>
             <option value=""></option>
-        </select>
+          </select>
 
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="indoor">Indoor</button>
-        <button class="filter-btn" data-filter="outdoor">Outdoor</button>
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="indoor">Indoor</button>
+          <button class="filter-btn" data-filter="outdoor">Outdoor</button>
+        </div>
+      </div>
+      <div class="grid-container">
+        <div class="grid-item">
+          <img src="Araucaria heterophylla.jpg" alt="Image 1">
+          <h3>Title 1</h3>
+        </div>
+        <div class="grid-item">
+          <img src="before.jpg" alt="Image 2">
+          <h3>Title 2</h3>
+        </div>
+        <div class="grid-item">
+          <img src="building.jpg" alt="Image 3">
+          <h3>Title 3</h3>
+        </div>
+        <div class="grid-item">
+          <img src="gate.jpg" alt="Image 4">
+          <h3>Title 4</h3>
+        </div>
+        <div class="grid-item">
+          <img src="Facilities.jpg" alt="Image 5">
+          <h3>Title 5</h3>
+        </div>
+        <div class="grid-item">
+          <img src="S45.jpg" alt="Image 6">
+          <h3>Title 6</h3>
+        </div>
+      </div>
 
-        </div>
-        <div class="grid-container">
-            <div class="grid-item">
-                <img src="Araucaria heterophylla.jpg" alt="Image 1">
-                <h3>Title 1</h3>
-            </div>
-            <div class="grid-item">
-                <img src="before.jpg" alt="Image 2">
-                <h3>Title 2</h3>
-            </div>
-            <div class="grid-item">
-                <img src="building.jpg" alt="Image 3">
-                <h3>Title 3</h3>
-            </div>
-            <div class="grid-item">
-                <img src="gate.jpg" alt="Image 4">
-                <h3>Title 4</h3>
-            </div>
-                <div class="grid-item">
-                <img src="Facilities.jpg" alt="Image 5">
-                <h3>Title 5</h3>
-            </div>
-            <div class="grid-item">
-                <img src="S45.jpg" alt="Image 6">
-                <h3>Title 6</h3>
-            </div>
-        </div>
     </section>
 
     <section id="Suggestions" class="building-section">
       <h1>Suggestions</h1>
-      <iframe width="640" height="360"
-        src="https://www.youtube.com/embed/Yrwp9737DZs"
-        frameborder="0"
+      <iframe width="640" height="360" src="https://www.youtube.com/embed/Yrwp9737DZs" frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
-      </iframe>      
+      </iframe>
 
       <a href="https://www.youtube.com/watch?v=IPq6kbMZeA8" target="_blank">
-        <img src="https://img.youtube.com/vi/IPq6kbMZeA8/0.jpg" 
-            alt="Video Thumbnail" width="640" height="360">
+        <img src="https://img.youtube.com/vi/IPq6kbMZeA8/0.jpg" alt="Video Thumbnail" width="640" height="360">
       </a>
 
-      <iframe width="640" height="360"
-        src="https://www.youtube.com/embed/M3hbEad82cM"
-        frameborder="0"
+      <iframe width="640" height="360" src="https://www.youtube.com/embed/M3hbEad82cM" frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen>
       </iframe>
@@ -225,67 +224,92 @@
   <footer>
     <div class="footer-container">
       <div class="footer-column">
-        <h4>About UOB Landscape</h4>
-        <p>Empowering knowledge on geological safety and Landscape monitoring.</p>
+        <h4>About</h4>
+        <p>UOB Landscape documents and showcases the diverse flora across our campus, providing detailed information
+          about plants, their locations, and ecological significance.</p>
       </div>
+
       <div class="footer-column">
-        <h4>Quick Links</h4>
+        <h4>Navigation</h4>
         <ul>
-          <li><a href="#">Our Plants</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">Map</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="ourPlants.html">Our Plants</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="locations.html">Locations</a></li>
+          <li><a href="about.html">About</a></li>
         </ul>
       </div>
+
       <div class="footer-column">
-        <h4>Connect</h4>
-        <p>Email: landscape@uob.edu.bh</p>
-        <p>Phone: +973 1743 8181</p>
+        <h4>External Links</h4>
+        <ul>
+          <li><a href="https://www.uob.edu.bh/" target="_blank" rel="noopener noreferrer">University of Bahrain</a></li>
+          <li><a href="https://www.mun.gov.bh/newportal/ar" target="_blank" rel="noopener noreferrer">Municipality of
+              Bahrain</a></li>
+          <li><a href="https://www.bahrain.bh/wps/portal/en/BNP/ExploreBahrain/SustainableDevelopment/" target="_blank"
+              rel="noopener noreferrer">Sustainable Development</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Contact</h4>
+        <p><strong>Email:</strong> <a href="mailto:landscape@uob.edu.bh">landscape@uob.edu.bh</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+97317438181">+973 1743 8181</a></p>
+        <div class="social-links">
+          <a href="https://www.youtube.com/channel/UCM5UfujAklBwqFCAYDWXMMA" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <span>Follow us on YouTube</span>
+          </a>
+        </div>
       </div>
     </div>
+
     <div class="footer-bottom">
-      &copy; 2025 UOB Landscape. All rights reserved.
+      <p>&copy; 2025 University of Bahrain. All rights reserved.</p>
     </div>
   </footer>
+
   <script>
-  async function loadIndoorPlantsForLocation() {
-    const params = new URLSearchParams(window.location.search);
-    const locationId = params.get("id");
-    if (!locationId) return;
+    async function loadIndoorPlantsForLocation() {
+      const params = new URLSearchParams(window.location.search);
+      const locationId = params.get("id");
+      if (!locationId) return;
 
-    const endpoint = `http://localhost:3000/api/locations/${locationId}/indoor-plants`;
+      const endpoint = `http://localhost:3000/api/locations/${locationId}/indoor-plants`;
 
-    try {
-      const response = await fetch(endpoint);
-      const plants = await response.json();
+      try {
+        const response = await fetch(endpoint);
+        const plants = await response.json();
 
-      const grid = document.querySelector("#Plants .grid-container");
-      grid.innerHTML = "";
+        const grid = document.querySelector("#Plants .grid-container");
+        grid.innerHTML = "";
 
-      if (!plants.length) {
-        grid.innerHTML = `<p>No information collected about plants at location ${locationId} yet.</p>`;
-        return;
-      }
+        if (!plants.length) {
+          grid.innerHTML = `<p>No information collected about plants at location ${locationId} yet.</p>`;
+          return;
+        }
 
-      plants.forEach(plant => {
-      const card = document.createElement("a");
-card.className = "grid-item";
-card.href = `indoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
-card.innerHTML = `
+        plants.forEach(plant => {
+          const card = document.createElement("a");
+          card.className = "grid-item";
+          card.href = `indoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
+          card.innerHTML = `
   <img src="${plant.Image}" alt="${plant['Common name']}">
   <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
 `;
-grid.appendChild(card);
+          grid.appendChild(card);
 
-      });
-    } catch (err) {
-      console.error("Error loading indoor plants:", err);
+        });
+      } catch (err) {
+        console.error("Error loading indoor plants:", err);
+      }
     }
-  }
 
-  window.addEventListener("DOMContentLoaded", loadIndoorPlantsForLocation);
-</script>
+    window.addEventListener("DOMContentLoaded", loadIndoorPlantsForLocation);
+  </script>
 
 
 </body>
+
 </html>

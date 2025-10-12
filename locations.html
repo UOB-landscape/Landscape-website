@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="default">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>UOB Landscape</title>
-  
+
   <script>
     // Get saved theme from localStorage
     const savedTheme = localStorage.getItem('theme');
 
     if (savedTheme) {
-    // Set theme attribute before CSS is applied
-    document.documentElement.setAttribute('data-theme', savedTheme);
+      // Set theme attribute before CSS is applied
+      document.documentElement.setAttribute('data-theme', savedTheme);
     }
   </script>
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
   <div class="logo-space" title="Logo">
     <img src="UOB-new-logo.png" alt="University of Bahrain" />
   </div>
-    <nav>
-        <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="ourPlants.html">Our plants</a></li>
-            <li><a href="projects.html">Projects</a></li>
-            <li><a href="locations.html">Locations</a></li>
-            <li><a href="about.html">About</a></li>
-        </ul>
+  <nav>
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="ourPlants.html">Our plants</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="locations.html">Locations</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
     <div class="controls">
       <button class="arabic-btn" onclick="translate()">عربي</button>
       <div class="dropdown">
@@ -47,14 +49,14 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.locations-item').forEach(item => {
-            item.addEventListener('click', () => {
-                const link = item.dataset.link;
-                if (link) {
-                  window.location.href = link;
-                }
-            });
+      document.querySelectorAll('.locations-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const link = item.dataset.link;
+          if (link) {
+            window.location.href = link;
+          }
         });
+      });
     });
 
 
@@ -62,7 +64,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       const navLinks = document.querySelectorAll('nav a');
       const currentPage = window.location.pathname.split('/').pop() || 'home.html';
-      
+
       // Set initial active state based on current page
       navLinks.forEach(link => {
         if (link.getAttribute('href') === currentPage) {
@@ -74,7 +76,7 @@
 
       // Add click handlers to maintain active state
       navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', function (e) {
           // Remove active class from all links
           navLinks.forEach(l => l.classList.remove('active'));
           // Add active class to clicked link
@@ -124,62 +126,82 @@
     <h2>Our Landscape Locations</h2>
 
     <div class="locations-container">
-        <div class="locations-item" data-link="Buildings.html">
-            <img src="Buildings 2.png" alt="Image 1">
-            <h4 class="locations-title">Buildings</h4>
-        </div>
-        <div class="locations-item" data-link="Gates.html">
-            <img src="gate.jpg" alt="Image 2">
-            <h4 class="locations-title">Gates</h4>
-        </div>
-        <div class="locations-item" data-link="Roadside.html">
-            <img src="Roadside.jpeg" alt="Image 3">
-            <h4 class="locations-title">Roadsides</h4>
-        </div>
-        <div class="locations-item" data-link="Residential.html">
-            <img src="gate.jpg" alt="Image 4">
-            <h4 class="locations-title">Residential</h4>
-        </div>
-            <div class="locations-item" data-link="Infrastructure.html">
-            <img src="Infrastructure2.png" alt="Image 5">
-            <h4 class="locations-title">Infrastructures</h4>
-        </div>
-        <div class="locations-item" data-link="Facilities.html">
-            <img src="Facilities.jpeg" alt="Image 6">
-            <h4 class="locations-title">Facilities</h4>
-        </div>
-        <div class="locations-item" data-link="CarPark.html">
-            <img src="car park.jpg" alt="Image 7">
-            <h4 class="locations-title">Car Parks</h4>
-        </div>
+      <div class="locations-item" data-link="Buildings.html">
+        <img src="Buildings 2.png" alt="Image 1">
+        <h4 class="locations-title">Buildings</h4>
+      </div>
+      <div class="locations-item" data-link="Gates.html">
+        <img src="gate.jpg" alt="Image 2">
+        <h4 class="locations-title">Gates</h4>
+      </div>
+      <div class="locations-item" data-link="Roadside.html">
+        <img src="Roadside.jpeg" alt="Image 3">
+        <h4 class="locations-title">Roadsides</h4>
+      </div>
+      <div class="locations-item" data-link="Infrastructure.html">
+        <img src="Infrastructure2.png" alt="Image 5">
+        <h4 class="locations-title">Infrastructures</h4>
+      </div>
+      <div class="locations-item" data-link="Facilities.html">
+        <img src="Facilities.jpeg" alt="Image 6">
+        <h4 class="locations-title">Facilities</h4>
+      </div>
+      <div class="locations-item" data-link="CarPark.html">
+        <img src="car park.jpg" alt="Image 7">
+        <h4 class="locations-title">Car Parks</h4>
+      </div>
     </div>
   </main>
 
   <footer>
     <div class="footer-container">
       <div class="footer-column">
-        <h4>About UOB Landscape</h4>
-        <p>Empowering knowledge on geological safety and Landscape monitoring.</p>
+        <h4>About</h4>
+        <p>UOB Landscape documents and showcases the diverse flora across our campus, providing detailed information
+          about plants, their locations, and ecological significance.</p>
       </div>
+
       <div class="footer-column">
-        <h4>Quick Links</h4>
+        <h4>Navigation</h4>
         <ul>
-          <li><a href="#">Our Plants</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">Map</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="ourPlants.html">Our Plants</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="locations.html">Locations</a></li>
+          <li><a href="about.html">About</a></li>
         </ul>
       </div>
+
       <div class="footer-column">
-        <h4>Connect</h4>
-        <p>Email: landscape@uob.edu.bh</p>
-        <p>Phone: +973 1743 8181</p>
+        <h4>External Links</h4>
+        <ul>
+          <li><a href="https://www.uob.edu.bh/" target="_blank" rel="noopener noreferrer">University of Bahrain</a></li>
+          <li><a href="https://www.mun.gov.bh/newportal/ar" target="_blank" rel="noopener noreferrer">Municipality of
+              Bahrain</a></li>
+          <li><a href="https://www.bahrain.bh/wps/portal/en/BNP/ExploreBahrain/SustainableDevelopment/" target="_blank"
+              rel="noopener noreferrer">Sustainable Development</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-column">
+        <h4>Contact</h4>
+        <p><strong>Email:</strong> <a href="mailto:landscape@uob.edu.bh">landscape@uob.edu.bh</a></p>
+        <p><strong>Phone:</strong> <a href="tel:+97317438181">+973 1743 8181</a></p>
+        <div class="social-links">
+          <a href="https://www.youtube.com/channel/UCM5UfujAklBwqFCAYDWXMMA" target="_blank" rel="noopener noreferrer">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <span>Follow us on YouTube</span>
+          </a>
+        </div>
       </div>
     </div>
+
     <div class="footer-bottom">
-      &copy; 2025 UOB Landscape. All rights reserved.
+      <p>&copy; 2025 University of Bahrain. All rights reserved.</p>
     </div>
   </footer>
 
 </body>
+
 </html>
