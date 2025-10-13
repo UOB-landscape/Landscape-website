@@ -144,7 +144,29 @@
     function translate() {
       alert('Arabic translation logic goes here.');
     }
+
+    // Floating button logic
+    document.addEventListener('DOMContentLoaded', () => {
+      const floatingBtn = document.querySelector('.floating-btn');
+      if (floatingBtn) {
+        window.addEventListener('scroll', () => {
+          if (window.pageYOffset > 300) {
+            floatingBtn.classList.add('show');
+          } else {
+            floatingBtn.classList.remove('show');
+          }
+        });
+
+        floatingBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      } else {
+        console.error('Floating button not found');
+      }
+    });
   </script>
+
   <main class="grid-section">
     <section id="indoor-plants" class="plants-section">
       <div class="search-filters-container">
@@ -200,6 +222,10 @@
       </div>
     </section>
   </main>
+
+  <button class="floating-btn" title="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
   <footer>
     <div class="footer-container">
@@ -335,8 +361,6 @@ function showPlantDetails(plant) {
       })
       .catch(err => console.error('Outdoor fetch error:', err));
   </script>
-
-
 
 </body>
 

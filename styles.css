@@ -46,7 +46,7 @@ body {
 }
 
 nav {
-  position: fixed;
+  position: relative;
   height: 60px;
   top: 0;
   left: 0;
@@ -60,7 +60,7 @@ nav {
 }
 
 .logo-space {
-  position: fixed;
+  position: absolute;
   top: -29px;
   left: 200px;
   width: 100px;
@@ -361,7 +361,7 @@ h2 {
   height: 500px;
   background: var(--bg);
   background: linear-gradient(135deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.05));
-  padding: 20px 0;
+  padding: 50px 0;
   margin-top: 40px;
   margin-bottom: 50px;
   border-top: 2px solid var(--border-color, #e0e0e0);
@@ -398,7 +398,7 @@ h2 {
   font-size: 1rem;
   font-weight: 600;
   margin-bottom: 8px;
-  padding: 8px;
+  padding: 15px;
   text-align: center;
   color: var(--fg);
   /* or any color like #333 */
@@ -814,7 +814,7 @@ h2 {
 }
 
 .plants-subnav {
-  position: fixed;
+  position: absolute;
   height: 37px;
   top: 60px;
   /* left: 0;
@@ -843,9 +843,52 @@ h2 {
   border-bottom: 2px solid transparent;
 }
 
+.floating-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: white;
+  color: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  z-index: 50;
+  opacity: 0;
+  visibility: hidden;
+  border: none;
+  cursor: pointer;
+}
+
+.floating-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.floating-btn.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 768px) {
+  .floating-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+  }
+}
+
 /* Projects-specific sub-navigation with underline effect */
 .projects-subnav {
-  position: fixed;
+  position: absolute;
   height: 37px;
   top: 60px;
   /* left: 0;
@@ -884,13 +927,18 @@ h2 {
 
 .projects-section {
   display: none;
-  padding: 80px 20px 20px;
+  padding: 50px 20px 20px;
   /* account for fixed nav + subnav */
 }
 
 .projects-section h1 {
-  margin-top: 50px;
+  margin-top: 10px;
   text-align: center;
+}
+
+.SDG{
+  width: 50px;
+  height: 50px;
 }
 
 .plants-section {
@@ -936,7 +984,7 @@ h2 {
   gap: 50px;
   padding: 20px;
   margin-bottom: 30px;
-  margin-top: 10px;
+  margin-top: 0;
 }
 
 .project-filters {
@@ -1106,9 +1154,9 @@ h2 {
 .project-filter-section p {
   padding-left: 0;
   text-align: left;
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
   color: var(--black);
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 .report-year-container {
@@ -1125,10 +1173,10 @@ h2 {
 }
 
 .iframe-wrapper iframe {
-  width: 100%;
+  width: 90%;
   border: none;
-  min-height: 400px;
-  max-width: 1200px;
+  min-height: 500px;
+  max-width: 1800px;
   margin-bottom: 50px;
   border-radius: 10px;
 }
@@ -1143,7 +1191,7 @@ h2 {
 }
 
 .locations-section {
-  padding: 100px 0px;
+  /* padding: 100px 0px; */
   max-width: 1000px;
   margin: 0 auto;
 }
@@ -1158,6 +1206,7 @@ h2 {
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 auto;
+  margin-bottom: 80px;
   max-width: calc(4 * 250px + 3 * 10px);
   /* Adjust 250px based on your item width */
   gap: 40px 40px;
@@ -1217,7 +1266,7 @@ h2 {
 }
 
 .grid-section {
-  padding: 100px 20px;
+  /* padding: 100px 20px; */
   max-width: 1100px;
   margin: 0 auto;
 }
@@ -1276,7 +1325,7 @@ h2 {
 }
 
 .building-subnav {
-  position: fixed;
+  position: absolute;
   height: 35px;
   top: 60px;
   /* left: 0;
@@ -1328,7 +1377,7 @@ h2 {
   border: 2px solid #ccc;
   overflow: hidden;
   position: relative;
-  margin: 135px auto 20px auto;
+  margin: 135px auto 70px auto;
   /* 40px top, 20px bottom, auto left/right */
 }
 
@@ -1354,7 +1403,7 @@ h2 {
 
 .map-controls {
   position: absolute;
-  bottom: 530px;
+  bottom: 60px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -1408,39 +1457,34 @@ h2 {
 }
 
 /* About page */
-
 .about-layout {
-  margin-top: 60px;
+  margin-top: 0;
   padding: 0;
-  max-width: 100%;
   overflow-x: hidden;
 }
 
-/* Page Header */
 .about-header {
   max-width: 1400px;
-  /* margin: 60px auto 40px; */
-  padding: 0 40px;
+  margin: 0 auto;
+  padding: 0 100px;
 }
 
 .about-title {
   color: #2c1810;
-  margin-top: 4rem;
+  /* margin-top: 5.5rem; */
   border-bottom: 3px solid var(--accent);
   padding-bottom: 0.5rem;
   text-align: left;
-  justify-self: start;
   font-size: 2em;
-
   display: inline-block;
-  width: 380px;
+  width: 400px;
 }
 
 /* Feature Image Section */
 .feature-section {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 60px 0 40px;
+  padding: 0 120px 0 100px;
   display: grid;
   grid-template-columns: 1fr 0.6fr;
   gap: 50px;
@@ -1531,7 +1575,7 @@ h2 {
 /* About Page Content Blocks */
 .content-blocks {
   max-width: 900px;
-  margin: 20px auto;
+  margin: 40px auto;
   padding: 0 40px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -1567,13 +1611,13 @@ h2 {
 
 /* Team Section */
 .team-section {
-  background: #fafbfc;
-  padding: 0px 90px 10px;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.05));
+  padding: 0px 10px 30px;
 }
 
 .team-container {
-  max-width: 1400px;
-  margin: 0 auto;
+  /* min-width: 900px; */
+  margin: 0 110px;
 }
 
 .team-header {
@@ -1648,6 +1692,7 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
+  padding: 0 40px;
 }
 
 .team-member {
@@ -1753,8 +1798,8 @@ h2 {
 footer {
   background: var(--accent);
   color: #fff;
-  padding: 50px 20px 0;
-  margin-top: 80px;
+  padding: 50px 70px 0;
+  /* margin-top: 80px; */
   font-size: 0.95rem;
 }
 
@@ -1804,7 +1849,7 @@ footer {
 }
 
 .social-links {
-  display: flex;
+  /* display: flex; */
   gap: 15px;
   margin-top: 15px;
 }
@@ -1874,7 +1919,7 @@ footer {
   }
 }
 
-body {
+/* body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background-size: cover;
@@ -1897,7 +1942,7 @@ body::before {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-}
+} */
 
 .back-button {
   position: fixed;
@@ -2022,8 +2067,8 @@ body::before {
 .about-layout {
   margin-top: 100px;
   margin-left: 0;
-  padding: 0 3rem 4rem;
-  max-width: 1400px;
+  /* padding: 0 3rem 4rem; */
+  /* max-width: 1400px; */
   margin-left: auto;
   margin-right: auto;
 }
