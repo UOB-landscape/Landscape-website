@@ -1,112 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Landscape Projects Report - 2024</title>
+    <link rel="stylesheet" href="styles.css" />
     <style>
         body {
-        font-family: "Tahoma", Arial, sans-serif;
-        line-height: 1.6;
-        padding: 20px;
-        background: #f0eeee;
+            font-family: "Tahoma", Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            background: #f0eeee;
         }
 
         h2 {
-        text-align: center;
+            text-align: center;
         }
 
         table {
-        border-collapse: collapse;
-        width: 100%;
-        margin-bottom: 40px;
-        background: #fff;
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 40px;
+            background: #fff;
         }
 
-        th, td {
-        border: 1px solid #000;
-        padding: 8px;
-        text-align: center;
-        vertical-align: middle;
+        th,
+        td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: center;
+            vertical-align: middle;
         }
 
         th {
-        background: #a2c0a8;
+            background: var(--accent-light);
         }
 
         .gallery-thumbnail {
-        cursor: pointer;
-        border-radius: 4px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        object-fit: cover;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            object-fit: cover;
         }
 
         .gallery-thumbnail:hover {
-        transform: scale(1.05);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         /* Fullscreen popup */
         .popup-overlay {
-        display: none; /* Hidden by default */
-        position: fixed;
-        top: 0; left: 0;
-        width: 100vw; height: 100vh;
-        background: rgba(0,0,0,0.9);
-        z-index: 10000;
-        justify-content: center;
-        align-items: center;
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
         }
 
         .main-image {
-        max-width: 90%;
-        max-height: 90%;
-        object-fit: contain;
-        border-radius: 8px;
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 8px;
         }
 
         .nav-arrow {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(255,255,255,0.2);
-        color: white;
-        border: none;
-        width: 60px; height: 60px;
-        border-radius: 50%;
-        font-size: 24px;
-        cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
         }
 
         .nav-arrow:hover {
-        background: rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.3);
         }
 
         .nav-arrow.prev {
-        left: 30px;
+            left: 30px;
         }
 
         .nav-arrow.next {
-        right: 30px;
+            right: 30px;
         }
 
         .close-btn {
-        position: absolute;
-        top: 20px;
-        right: 30px;
-        background: rgba(255,68,68,0.8);
-        color: white;
-        border: none;
-        padding: 12px 20px;
-        border-radius: 50px;
-        font-size: 18px;
-        cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background: rgba(255, 68, 68, 0.8);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 18px;
+            cursor: pointer;
         }
 
         .close-btn:hover {
-        background: rgba(255,68,68,1);
+            background: rgba(255, 68, 68, 1);
         }
     </style>
+    <script>
+        // Listen for theme changes from parent
+        window.addEventListener('message', (event) => {
+            if (event.data.type === 'theme-change') {
+                document.documentElement.setAttribute('data-theme', event.data.theme);
+                localStorage.setItem('theme', event.data.theme);
+            }
+        });
+
+        // Request theme on load
+        window.addEventListener('DOMContentLoaded', () => {
+            window.parent.postMessage({ type: 'request-theme' }, '*');
+        });
+    </script>
 </head>
+
 <body>
 
     <div class="year-container" id="year-2024">
@@ -125,11 +147,12 @@
                     <th>Additional Notes</th>
                 </tr>
             </thead>
-            <tbody> 
+            <tbody>
                 <tr data-year="2024">
                     <td>1</td>
                     <td colspan="2">
-                        <img src="https://i.postimg.cc/L5Sh4dL2/fence6.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100">
+                        <img src="https://i.postimg.cc/L5Sh4dL2/fence6.jpg" class="gallery-thumbnail"
+                            data-gallery="row1" width="100" height="100">
                     </td>
                     <td>Inner Fence</td>
                     <td>Planting ornamental trees</td>
@@ -144,7 +167,8 @@
                 <tr data-year="2024">
                     <td>2</td>
                     <td colspan="2">
-                        <img src="https://i.postimg.cc/qqmt1bh3/main-gate-entrance-2.jpg" class="gallery-thumbnail" data-gallery="row2" width="100" height="100">
+                        <img src="https://i.postimg.cc/qqmt1bh3/main-gate-entrance-2.jpg" class="gallery-thumbnail"
+                            data-gallery="row2" width="100" height="100">
                     <td>Main Gate</td>
                     <td>Landscape redevelopment of entrance and exit zones</td>
                     <td>—</td>
@@ -163,30 +187,36 @@
                     <td>Landscape planting with ornamental and fruit-bearing species</td>
                     <td>4,505 m²</td>
                     <td>Previously: random and unstructured vegetation</td>
-                    <td>Re-landscaped with sustainable ornamental and fruit-bearing trees, including native species (almond, cactus, jujube, mulberry, lemon)</td>
+                    <td>Re-landscaped with sustainable ornamental and fruit-bearing trees, including native species
+                        (almond, cactus, jujube, mulberry, lemon)</td>
                     <td>500 m²</td>
                     <td>409</td>
-                    <td>Created a multifunctional green space that provides shade, biodiversity enrichment, and enhanced visual comfort</td>
+                    <td>Created a multifunctional green space that provides shade, biodiversity enrichment, and enhanced
+                        visual comfort</td>
                 </tr>
 
                 <tr data-year="2024">
                     <td>4</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row4" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row4" width="100" height="100">
+                    </td>
                     <td>Internal Ring Road</td>
                     <td>Removal of invasive and degraded trees; sustainable replanting</td>
                     <td>—</td>
                     <td>Previously: degraded and environmentally harmful trees</td>
-                    <td>Re-landscaped with resilient ornamental trees to improve the streetscape and strengthen ecological functions</td>
+                    <td>Re-landscaped with resilient ornamental trees to improve the streetscape and strengthen
+                        ecological functions</td>
                     <td>—</td>
                     <td>897</td>
-                    <td>Enhanced internal circulation landscape, promoting biodiversity and environmental sustainability</td>
+                    <td>Enhanced internal circulation landscape, promoting biodiversity and environmental sustainability
+                    </td>
                 </tr>
 
                 <tr data-year="2024">
                     <td>5</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row5" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row5" width="100" height="100">
+                    </td>
                     <td>Academic Villas Area</td>
                     <td>Landscape preparation opposite the faculty villas</td>
                     <td>4,935 m²</td>
@@ -199,8 +229,9 @@
 
                 <tr data-year="2024">
                     <td>6</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row6" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row6" width="100" height="100">
+                    </td>
                     <td>Basement Entrance – Administration Building</td>
                     <td>Landscape planting and area development</td>
                     <td>1,349 m²</td>
@@ -213,8 +244,9 @@
 
                 <tr data-year="2024">
                     <td>7</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row7" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row7" width="100" height="100">
+                    </td>
                     <td>Staff Affairs Building Area</td>
                     <td>Removal of unsuitable random trees</td>
                     <td>480 m²</td>
@@ -227,8 +259,9 @@
 
                 <tr data-year="2024">
                     <td>8</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row8" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row8" width="100" height="100">
+                    </td>
                     <td>Courtyard opposite S17 &amp; E-Learning Building</td>
                     <td>Removal of unsuitable random trees</td>
                     <td>2,267 m²</td>
@@ -241,8 +274,9 @@
 
                 <tr data-year="2024">
                     <td>9</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row9" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row9" width="100" height="100">
+                    </td>
                     <td>Student Parking – College of Law</td>
                     <td>Tree planting for parking area</td>
                     <td>4,000 m²</td>
@@ -255,8 +289,9 @@
 
                 <tr data-year="2024">
                     <td>10</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row10" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row10" width="100" height="100">
+                    </td>
                     <td>External Courtyard – College of Law</td>
                     <td>Removal of unsuitable trees and replanting</td>
                     <td>4,000 m²</td>
@@ -269,8 +304,9 @@
 
                 <tr data-year="2024">
                     <td>11</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row11" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row11" width="100" height="100">
+                    </td>
                     <td>Courtyard behind Admissions & Registration</td>
                     <td>Removal of unsuitable trees</td>
                     <td>980 m²</td>
@@ -283,8 +319,9 @@
 
                 <tr data-year="2024">
                     <td>12</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row12" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row12" width="100" height="100">
+                    </td>
                     <td>Courtyard behind Student Affairs Deanship</td>
                     <td>Removal of unsuitable trees; landscape rehabilitation</td>
                     <td>915 m²</td>
@@ -297,8 +334,9 @@
 
                 <tr data-year="2024">
                     <td>13</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row13" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row13" width="100" height="100">
+                    </td>
                     <td>Entrance – College of Business Administration</td>
                     <td>Landscape planting and rehabilitation</td>
                     <td>86 m²</td>
@@ -311,8 +349,9 @@
 
                 <tr data-year="2024">
                     <td>14</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row14" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row14" width="100" height="100">
+                    </td>
                     <td>Entrance – College of Arts</td>
                     <td>Landscape planting and rehabilitation</td>
                     <td>86 m²</td>
@@ -325,8 +364,9 @@
 
                 <tr data-year="2024">
                     <td>15</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row15" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row15" width="100" height="100">
+                    </td>
                     <td>Roman Amphitheater</td>
                     <td>Removal of unsuitable vegetation; landscape rehabilitation</td>
                     <td>840 m²</td>
@@ -339,8 +379,9 @@
 
                 <tr data-year="2024">
                     <td>16</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row16" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row16" width="100" height="100">
+                    </td>
                     <td>Western Gate Entrance</td>
                     <td>Tree planting for entry landscape</td>
                     <td>1,800 m²</td>
@@ -353,8 +394,9 @@
 
                 <tr data-year="2024">
                     <td>17</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row17" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row17" width="100" height="100">
+                    </td>
                     <td>Student Parking – Western Gate</td>
                     <td>Tree planting for parking landscape</td>
                     <td>—</td>
@@ -367,8 +409,9 @@
 
                 <tr data-year="2024">
                     <td>18</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row18" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row18" width="100" height="100">
+                    </td>
                     <td>Behind Restaurants Complex S51</td>
                     <td>Removal of unsuitable trees; rehabilitation of landscape area</td>
                     <td>3,800 m²</td>
@@ -381,8 +424,9 @@
 
                 <tr data-year="2024">
                     <td>19</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row19" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row19" width="100" height="100">
+                    </td>
                     <td>Behind Khanji Hall</td>
                     <td>Removal of unsuitable trees; rehabilitation of landscape area</td>
                     <td>1,650 m²</td>
@@ -395,13 +439,15 @@
 
                 <tr data-year="2024">
                     <td>20</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row20" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row20" width="100" height="100">
+                    </td>
                     <td>Area behind the Track</td>
                     <td>Removal of unsuitable trees; rehabilitation and planting</td>
                     <td>3,000 m²</td>
                     <td>Previously: neglected land</td>
-                    <td>Re-landscaped with ornamental and fruit-bearing trees (almond, cactus, jujube, mulberry, lemon)</td>
+                    <td>Re-landscaped with ornamental and fruit-bearing trees (almond, cactus, jujube, mulberry, lemon)
+                    </td>
                     <td>—</td>
                     <td>130</td>
                     <td>Developed a multifunctional green landscape contributing to biodiversity</td>
@@ -409,8 +455,9 @@
 
                 <tr data-year="2024">
                     <td>21</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row21" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row21" width="100" height="100">
+                    </td>
                     <td>Student Parking – Eastern Gate</td>
                     <td>Removal of unsuitable trees; rehabilitation and planting</td>
                     <td>2,416 m²</td>
@@ -423,8 +470,9 @@
 
                 <tr data-year="2024">
                     <td>22</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row22" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row22" width="100" height="100">
+                    </td>
                     <td>Hall S18</td>
                     <td>Landscape planting and rehabilitation</td>
                     <td>276 m²</td>
@@ -437,8 +485,9 @@
 
                 <tr data-year="2024">
                     <td>23</td>
-                    <td colspan="2">                
-                        <img src="" class="gallery-thumbnail" data-gallery="row23" width="100" height="100"></td>
+                    <td colspan="2">
+                        <img src="" class="gallery-thumbnail" data-gallery="row23" width="100" height="100">
+                    </td>
                     <td>Administration Building Surroundings</td>
                     <td>Landscape planting and area rehabilitation</td>
                     <td>1,625 m²</td>
@@ -452,81 +501,82 @@
         </table>
     </div>
 
-  <!-- Fullscreen popup -->
-  <div id="galleryPopup" class="popup-overlay">
-    <button class="close-btn" onclick="closeGallery()">✕</button>
-    <button class="nav-arrow prev" onclick="previousImage()">‹</button>
-    <img id="mainImage" class="main-image" src="">
-    <button class="nav-arrow next" onclick="nextImage()">›</button>
-  </div>
+    <!-- Fullscreen popup -->
+    <div id="galleryPopup" class="popup-overlay">
+        <button class="close-btn" onclick="closeGallery()">✕</button>
+        <button class="nav-arrow prev" onclick="previousImage()">‹</button>
+        <img id="mainImage" class="main-image" src="">
+        <button class="nav-arrow next" onclick="nextImage()">›</button>
+    </div>
 
-  <script>
-    const galleries = {
-      row1: ['https://i.postimg.cc/vTvTcPLj/fence2.jpg','https://i.postimg.cc/x8QqjrHp/fence3.jpg','https://i.postimg.cc/L5Sh4dL2/fence6.jpg','https://i.postimg.cc/wMz3xKLp/fence7.jpg'],
-      row2: ['https://i.postimg.cc/qqmt1bh3/main-gate-entrance-2.jpg','https://i.postimg.cc/x8sk6xJH/main-gate-entrance-3.jpg','https://i.postimg.cc/90x4L8Rd/main-gate-entrance-7.jpg','https://i.postimg.cc/1XWgvCnF/main-gate-exit.jpg',],
-      row3: ["images/row3-1.jpg","images/row3-2.jpg"],
-      row4: ["images/row4-1.jpg","images/row4-2.jpg","images/row4-3.jpg"],
-      row5: ["images/row5-1.jpg","images/row5-2.jpg"],
-      row6: ["images/row6-1.jpg","images/row6-2.jpg"],
-      row7: ["images/row7-1.jpg","images/row7-2.jpg"],
-      row8: ["images/row8-1.jpg","images/row8-2.jpg"],
-      row9: ["images/row9-1.jpg","images/row9-2.jpg"],
-      row10: ["images/row10-1.jpg","images/row10-2.jpg"],
-      row11: ["images/row11-1.jpg","images/row11-2.jpg"],
-      row12: ["images/row12-1.jpg","images/row12-2.jpg"],
-      row13: ["images/row13-1.jpg","images/row13-2.jpg"],
-    };
+    <script>
+        const galleries = {
+            row1: ['https://i.postimg.cc/vTvTcPLj/fence2.jpg', 'https://i.postimg.cc/x8QqjrHp/fence3.jpg', 'https://i.postimg.cc/L5Sh4dL2/fence6.jpg', 'https://i.postimg.cc/wMz3xKLp/fence7.jpg'],
+            row2: ['https://i.postimg.cc/qqmt1bh3/main-gate-entrance-2.jpg', 'https://i.postimg.cc/x8sk6xJH/main-gate-entrance-3.jpg', 'https://i.postimg.cc/90x4L8Rd/main-gate-entrance-7.jpg', 'https://i.postimg.cc/1XWgvCnF/main-gate-exit.jpg',],
+            row3: ["images/row3-1.jpg", "images/row3-2.jpg"],
+            row4: ["images/row4-1.jpg", "images/row4-2.jpg", "images/row4-3.jpg"],
+            row5: ["images/row5-1.jpg", "images/row5-2.jpg"],
+            row6: ["images/row6-1.jpg", "images/row6-2.jpg"],
+            row7: ["images/row7-1.jpg", "images/row7-2.jpg"],
+            row8: ["images/row8-1.jpg", "images/row8-2.jpg"],
+            row9: ["images/row9-1.jpg", "images/row9-2.jpg"],
+            row10: ["images/row10-1.jpg", "images/row10-2.jpg"],
+            row11: ["images/row11-1.jpg", "images/row11-2.jpg"],
+            row12: ["images/row12-1.jpg", "images/row12-2.jpg"],
+            row13: ["images/row13-1.jpg", "images/row13-2.jpg"],
+        };
 
-    const galleryPopup = document.getElementById('galleryPopup');
-    const mainImage = document.getElementById('mainImage');
-    let currentGallery = [];
-    let currentIndex = 0;
-    let slideshowInterval = null;
+        const galleryPopup = document.getElementById('galleryPopup');
+        const mainImage = document.getElementById('mainImage');
+        let currentGallery = [];
+        let currentIndex = 0;
+        let slideshowInterval = null;
 
-    document.querySelectorAll('.gallery-thumbnail').forEach(img => {
-      img.addEventListener('click', () => {
-        const galleryName = img.dataset.gallery;
-        currentGallery = galleries[galleryName];
-        currentIndex = 0;
-        showImage();
-        galleryPopup.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    
-        // Start slideshow
-        slideshowInterval = setInterval(() => {
-          nextImage();
-        }, 4000);
-      });
-    });
+        document.querySelectorAll('.gallery-thumbnail').forEach(img => {
+            img.addEventListener('click', () => {
+                const galleryName = img.dataset.gallery;
+                currentGallery = galleries[galleryName];
+                currentIndex = 0;
+                showImage();
+                galleryPopup.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
 
-    function showImage() {
-      mainImage.src = currentGallery[currentIndex];
-    }
+                // Start slideshow
+                slideshowInterval = setInterval(() => {
+                    nextImage();
+                }, 4000);
+            });
+        });
 
-    function nextImage() {
-      currentIndex = (currentIndex + 1) % currentGallery.length;
-      showImage();
-    }
+        function showImage() {
+            mainImage.src = currentGallery[currentIndex];
+        }
 
-    function previousImage() {
-      currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-      showImage();
-    }
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % currentGallery.length;
+            showImage();
+        }
 
-    function closeGallery() {
-      galleryPopup.style.display = 'none';
-      document.body.style.overflow = '';
-      clearInterval(slideshowInterval); // stop slideshow
-    }
+        function previousImage() {
+            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
+            showImage();
+        }
 
-    document.addEventListener('keydown', e => {
-      if (galleryPopup.style.display === 'flex') {
-          if (e.key === 'Escape') closeGallery();
-          if (e.key === 'ArrowRight') nextImage();
-          if (e.key === 'ArrowLeft') previousImage();
-      }
-    });
-  </script>
+        function closeGallery() {
+            galleryPopup.style.display = 'none';
+            document.body.style.overflow = '';
+            clearInterval(slideshowInterval); // stop slideshow
+        }
+
+        document.addEventListener('keydown', e => {
+            if (galleryPopup.style.display === 'flex') {
+                if (e.key === 'Escape') closeGallery();
+                if (e.key === 'ArrowRight') nextImage();
+                if (e.key === 'ArrowLeft') previousImage();
+            }
+        });
+    </script>
 
 </body>
+
 </html>

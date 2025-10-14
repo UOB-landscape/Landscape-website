@@ -2,6 +2,7 @@
   --bg: #fff;
   --fg: #000;
   --accent: #0e447e;
+  --accent-light: #6391c4;
   --black: #0a0a0a;
   --font: Georgia, serif;
 }
@@ -34,6 +35,7 @@
   --bg: white;
   --fg: #0d0d0d;
   --accent: #467159;
+  --accent-light: #a2c0a8;
   --black: #0d0d0d;
   --font: 'Georgia', serif;
 }
@@ -1812,7 +1814,7 @@ footer {
 }
 
 .footer-column h4 {
-  margin: 0 0 15px 0;
+  margin: 0 0 25px 0;
   font-size: 1rem;
   font-weight: 600;
   color: #fff;
@@ -1822,7 +1824,7 @@ footer {
 
 .footer-column p {
   margin: 0 0 12px 0;
-  line-height: 1.6;
+  line-height: 1.7;
   color: rgba(255, 255, 255, 0.9);
   font-size: 0.9rem;
 }
@@ -1834,7 +1836,7 @@ footer {
 }
 
 .footer-column ul li {
-  margin-bottom: 8px;
+  margin-bottom: 15px;
 }
 
 .footer-column a {
@@ -1851,7 +1853,7 @@ footer {
 .social-links {
   /* display: flex; */
   gap: 15px;
-  margin-top: 15px;
+  margin-top: 5px;
 }
 
 .social-links a {
