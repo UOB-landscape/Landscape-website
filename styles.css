@@ -40,15 +40,58 @@
   --font: 'Georgia', serif;
 }
 
+html,
 body {
+  padding: 40px 0 0 0;
+  overflow-x: hidden;
+  width: 100%;
   margin: 0;
   font-family: var(--font);
   background: var(--bg);
   color: var(--fg);
 }
 
+.hide-on-scroll {
+  transform: translateY(-100%);
+  transition: transform 0.5s ease;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: var(--accent);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  z-index: 100;
+}
+
+.nav-left {
+  flex: 0.5;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-center {
+  flex: 2.5;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 nav {
-  position: relative;
+  position: fixed;
   height: 60px;
   top: 0;
   left: 0;
@@ -62,9 +105,9 @@ nav {
 }
 
 .logo-space {
-  position: absolute;
+  position: fixed;
   top: -29px;
-  left: 200px;
+  left: 10%;
   width: 100px;
   /* Slightly wider than image */
   height: 150px;
@@ -92,7 +135,7 @@ nav ul {
   flex: 1;
   display: flex;
   justify-content: center;
-  gap: 30px;
+  gap: 50px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -123,9 +166,13 @@ nav a.active {
 
 .dropdown {
   position: relative;
+  display: inline-block;
+  z-index: 10001;
+  /* ensures it's above nav */
 }
 
 .arabic-btn {
+  display: flex;
   background: none;
   border: none;
   color: #fff;
@@ -147,16 +194,16 @@ nav a.active {
 .theme-picker {
   display: none;
   position: absolute;
-  top: 100%;
+  top: 120%;
   left: 50%;
   transform: translateX(-50%);
   background: #fff;
-  padding: 5px;
+  padding: 5px 10px;
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   gap: 10px;
   white-space: nowrap;
-  z-index: 9999;
+  z-index: 10001;
 }
 
 .theme-picker.active {
@@ -214,6 +261,8 @@ nav a.active {
 .search-icon {
   position: absolute;
   left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 1.1rem;
   color: #888;
   pointer-events: none;
@@ -229,8 +278,19 @@ nav a.active {
   outline: none;
 }
 
+/* Hamburger Menu - Hidden by default */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 5px;
+  z-index: 101;
+}
+
 header {
-  position: relative;
+  position: fixed;
   height: 90vh;
   overflow: hidden;
 }
@@ -292,22 +352,22 @@ h2 {
 
 .info-grid {
   display: flex;
-  flex-direction: row;
-  /* grid-template-columns: 1fr;*/
-  gap: 2rem;
-  align-items: center;
   flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .landscape-info .container {
-  padding: 0;
-  margin-left: 3rem;
-  max-width: none;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }
 
 .landscape-info .container h1 {
   color: #2c1810;
-  margin-top: 4rem;
+  margin-top: 5rem;
   border-bottom: 3px solid var(--accent);
   padding-bottom: 0.5rem;
   text-align: left;
@@ -322,6 +382,7 @@ h2 {
 .landscape-info .container p {
   font-size: 1.2rem;
   margin: 0;
+  padding-top: 2rem;
   padding-bottom: 4rem;
   color: #555;
   text-align: left;
@@ -331,10 +392,8 @@ h2 {
 .home-info-image {
   flex: 1 1 350px;
   max-width: 470px;
+  margin: 40px auto 0;
   position: relative;
-  top: 70px;
-  /* Move down 20px */
-  left: 50px;
 }
 
 .home-info-image img {
@@ -345,7 +404,7 @@ h2 {
   bottom: 200px;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   nav ul {
     gap: 20px;
     flex-wrap: wrap;
@@ -354,7 +413,7 @@ h2 {
   .slide .text {
     font-size: 1.5rem;
   }
-}
+} */
 
 /* Carousel styles */
 .carousel-container {
@@ -368,11 +427,6 @@ h2 {
   margin-bottom: 50px;
   border-top: 2px solid var(--border-color, #e0e0e0);
 }
-
-/* .carousel-container h2{
-  font-size: 1.7em;
-  font-weight: 600;
-} */
 
 .carousel-wrapper {
   display: flex;
@@ -441,16 +495,6 @@ h2 {
   }
 }
 
-#hero {
-  position: relative;
-  /* Ensure child absolute positions work */
-  /*height: 615px;        or however tall your header is */
-  height: 100vh;
-  /* Full screen height */
-  width: 100%;
-  overflow: hidden;
-}
-
 .slide {
   position: absolute;
   width: 100%;
@@ -489,7 +533,6 @@ h2 {
   align-items: center;
   pointer-events: none;
   /* so it doesn’t block interactions */
-
 }
 
 .overlay-label {
@@ -816,9 +859,9 @@ h2 {
 }
 
 .plants-subnav {
-  position: absolute;
+  position: sticky;
   height: 37px;
-  top: 60px;
+  top: 30px;
   /* left: 0;
   right: 0; */
   /* font-size: 14px;*/
@@ -847,8 +890,8 @@ h2 {
 
 .floating-btn {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: 40px;
+  right: 40px;
   width: 50px;
   height: 50px;
   background: white;
@@ -890,7 +933,7 @@ h2 {
 
 /* Projects-specific sub-navigation with underline effect */
 .projects-subnav {
-  position: absolute;
+  position: fixed;
   height: 37px;
   top: 60px;
   /* left: 0;
@@ -938,7 +981,7 @@ h2 {
   text-align: center;
 }
 
-.SDG{
+.SDG {
   width: 50px;
   height: 50px;
 }
@@ -1327,7 +1370,7 @@ h2 {
 }
 
 .building-subnav {
-  position: absolute;
+  position: fixed;
   height: 35px;
   top: 60px;
   /* left: 0;
@@ -1743,60 +1786,6 @@ h2 {
   background: #402a72;
 }
 
-/* footer {
-  background: var(--accent);
-  color: #fff;
-  padding: 30px 20px 10px;
-  margin-top: 50px;
-  font-size: 0.95rem;
-}
-
-.footer-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 20px;
-  max-width: 1200px;
-  margin: auto;
-}
-
-.footer-column {
-  flex: 1 1 200px;
-}
-
-.footer-column h4 {
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-  color: #fff;
-}
-
-.footer-column ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.footer-column ul li {
-  margin-bottom: 6px;
-}
-
-.footer-column ul li a {
-  color: #e0e0e0;
-  text-decoration: none;
-}
-
-.footer-column ul li a:hover {
-  text-decoration: underline;
-}
-
-.footer-bottom {
-  text-align: center;
-  margin-top: 20px;
-  border-top: 1px solid #ffffff33;
-  padding-top: 10px;
-  color: #ccc;
-} */
-
 footer {
   background: var(--accent);
   color: #fff;
@@ -2032,8 +2021,6 @@ body::before {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-
-
 #hero {
   position: relative;
   width: 100%;
@@ -2049,22 +2036,10 @@ body::before {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* makes video cover background */
-  z-index: -1;
-  /* behind overlays */
+  z-index: 1;
+  pointer-events: none;
+  /* prevents accidental interaction */
 }
-
-/* .overlay-square {
-  position: absolute;
-  bottom: 20%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0, 0, 0, 0.5);
-  padding: 20px 30px;
-  border-radius: 10px;
-  text-align: center;
-  color: white;
-} */
 
 .about-layout {
   margin-top: 100px;
@@ -2333,4 +2308,204 @@ body::before {
   font-weight: bold;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   text-align: center;
+}
+
+/* Mobile Styles */
+@media (max-width: 990px) {
+  nav {
+    height: auto;
+    min-height: 60px;
+    justify-content: space-between;
+  }
+
+  .logo-space {
+    left: 10%;
+    width: 80px;
+    height: 120px;
+  }
+
+  .logo-space img {
+    bottom: 15px;
+  }
+
+  /* Show hamburger on mobile */
+  .hamburger {
+    display: flex;
+    position: absolute;
+    right: 20px;
+    color: white;
+    font-size: x-large;
+  }
+
+  /* Hide desktop controls */
+  .controls {
+    display: none;
+  }
+
+  /* Hide desktop navigation */
+  nav ul {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background: var(--accent);
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  nav ul.active {
+    max-height: 500px;
+    display: flex;
+    top: 90px;
+  }
+
+  nav ul li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  nav ul li:last-child {
+    border-bottom: none;
+  }
+
+  nav a {
+    padding: 15px 20px;
+    width: 100%;
+    text-align: left;
+  }
+
+  /* Mobile search bar inside menu */
+  .mobile-search {
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .mobile-search .search-input-wrapper {
+    width: 100%;
+  }
+
+  .mobile-search input[type="text"] {
+    width: 100%;
+  }
+
+  /* Mobile controls in menu */
+  .mobile-controls {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Hide desktop search */
+  .search-bar {
+    display: none;
+  }
+
+  .overlay-square {
+    position: absolute;
+    top: 50%;
+    /* center vertically */
+    left: -59%;
+    /* center horizontally */
+    width: 135vw;
+    height: 210px;
+    background-color: var(--accent);
+    opacity: 0.7;
+    border-radius: 30px;
+    /*transform: translate(20%, -50%);  shift right from center */
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+  }
+
+  h2 {
+    font-size: 1.3em;
+  }
+
+  .landscape-info .container h1 {
+    width: 100%;
+    font-size: 1.5em;
+    margin-top: 2rem;
+  }
+
+  .landscape-info .container p {
+    font-size: 1rem;
+    padding-bottom: 2rem;
+  }
+
+  .info-grid {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .home-info-image {
+    flex: 1 1 100%;
+    max-width: 70%;
+    margin: 20px auto 0;
+  }
+
+  .home-info-image img {
+    box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.25);
+    bottom: 0;
+  }
+
+  .carousel-item {
+    width: 160px;
+    margin-right: 20px;
+  }
+
+  .carousel-item img {
+    width: 160px;
+    height: 200px;
+    box-shadow: 12px 0px 30px -10px rgba(0, 0, 0, 0.2);
+    margin-right: 20px;
+  }
+
+  .carousel-title {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .carousel-container {
+    height: auto;
+    padding: 30px 0;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  .map-controls {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+  }
+
+  .map-container {
+    width: 80%;
+    max-width: 95%;
+    border: 2px solid #ccc;
+    overflow: hidden;
+    position: relative;
+    margin: 135px auto 70px auto;
+    /* 40px top, 20px bottom, auto left/right */
+  }
+}
+
+/* Desktop: hide mobile-specific elements */
+@media (min-width: 769px) {
+
+  .mobile-search,
+  .mobile-controls {
+    display: none !important;
+  }
 }

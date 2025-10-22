@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>UOB Landscape</title>
+  <title>UoB Landscape</title>
 
   <script>
     // Get saved theme from localStorage
@@ -19,31 +19,40 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
-  <div class="logo-space" title="Logo">
-    <img src="UOB-new-logo.png" alt="University of Bahrain" />
-  </div>
-  <nav>
-    <ul>
-      <li><a href="home.html" class="active">Home</a></li>
-      <li><a href="ourPlants.html">Our plants</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="locations.html">Locations</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-    <div class="controls">
-      <button class="arabic-btn" onclick="translate()">عربي</button>
-      <div class="dropdown">
-        <button class="theme-btn" id="theme-btn">🎨</button>
-        <div class="theme-picker" id="theme-picker">
-          <div class="theme-option" data-theme="default"></div>
-          <div class="theme-option" data-theme="dark"></div>
-          <div class="theme-option" data-theme="solar"></div>
-          <div class="theme-option" data-theme="highcontrast"></div>
-          <div class="theme-option" data-theme="green"></div>
-        </div>
+<body style="padding: 0;">
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="logo-space" title="Logo">
+        <img src="UOB-new-logo.png" alt="University of Bahrain" />
       </div>
-      <input type="search" placeholder="Search…">
+      <button class="hamburger" id="hamburger">&#9776;</button>
+    </div>
+
+    <div class="nav-center">
+      <ul>
+        <li><a href="home.html" class="active">Home</a></li>
+        <li><a href="ourPlants.html">Our plants</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="locations.html">Locations</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </div>
+
+    <div class="nav-right">
+      <div class="controls">
+        <button class="arabic-btn" onclick="translate()">عربي</button>
+        <div class="dropdown">
+          <button class="theme-btn" id="theme-btn">🎨</button>
+          <div class="theme-picker" id="theme-picker">
+            <div class="theme-option" data-theme="default"></div>
+            <div class="theme-option" data-theme="dark"></div>
+            <div class="theme-option" data-theme="solar"></div>
+            <div class="theme-option" data-theme="highcontrast"></div>
+            <div class="theme-option" data-theme="green"></div>
+          </div>
+        </div>
+        <input type="search" placeholder="Search…" />
+      </div>
     </div>
   </nav>
 
@@ -63,7 +72,7 @@
     <div class="container">
       <div class="info-grid">
         <div class="text-content">
-          <h1>Welcome to UOB Landscape</h1>
+          <h1>Welcome to UoB Landscape</h1>
           <p>This website showcases the diverse flora across our campus, providing detailed <br>
             information about each plant, its location, and its unique characteristics. It was <br>
             created collaboratively by IT students along with landscaping and biology students,<br>
@@ -74,7 +83,7 @@
           </p>
         </div>
         <div class="home-info-image">
-          <img src="https://i.postimg.cc/1XWgvCnF/main-gate-exit.jpg" alt="UOB Landscape" />
+          <img src="https://i.postimg.cc/1XWgvCnF/main-gate-exit.jpg" alt="UoB Landscape" />
         </div>
       </div>
     </div>
@@ -173,7 +182,7 @@
 
   <div class="map-container">
     <div class="map-wrapper" id="zoom-area">
-      <img src="UOB-MAP.jpg" alt="UOB Plants Map" class="map-img">
+      <img src="UOB-MAP.jpg" alt="UoB Plants Map" class="map-img">
     </div>
     <div class="map-controls">
       <button id="zoomIn">+</button>
@@ -344,6 +353,16 @@
           picker.classList.remove('active');
         }
       });
+
+      // Close picker on scroll
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > lastScrollY) {
+          picker.classList.remove('active');
+        }
+        lastScrollY = window.scrollY;
+      });
+
     }
 
     // Apply saved theme on load
@@ -356,13 +375,48 @@
     function translate() {
       alert('Arabic translation logic goes here.');
     }
+
+    let lastScrollY = window.scrollY;
+    const nav = document.querySelector('nav');
+    const logo = document.querySelector('.logo-space');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > lastScrollY) {
+        // Scrolling down
+        nav.classList.add('hide-on-scroll');
+        logo.classList.add('hide-on-scroll');
+      } else {
+        // Scrolling up
+        nav.classList.remove('hide-on-scroll');
+        logo.classList.remove('hide-on-scroll');
+      }
+      lastScrollY = window.scrollY;
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const navList = document.querySelector('nav ul');
+
+    hamburger.addEventListener('click', () => {
+      navList.classList.toggle('active');
+    });
+
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav ul').classList.remove('active');
+      themePicker.classList.remove('active');
+    });
+
+    document.querySelectorAll('nav ul li a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('nav ul').classList.remove('active');
+      });
+    });
   </script>
 
   <footer>
     <div class="footer-container">
       <div class="footer-column">
         <h4>About</h4>
-        <p>UOB Landscape documents and showcases the diverse flora across our campus, providing detailed information
+        <p>UoB Landscape documents and showcases the diverse flora across our campus, providing detailed information
           about plants, their locations, and ecological significance.</p>
       </div>
 
