@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Report Images Viewer</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f0eeee;
+      --panel: #ffffff;
+      --accent: #2b7cff;
+      --text: #111;
+      --muted: #666;
+    }
+    html,body { height:100%; margin:0; font-family: "Tahoma", Arial, sans-serif; background:var(--bg); color:var(--text); }
+    header {
+      background:var(--panel);
+      border-bottom:1px solid rgba(0,0,0,0.06);
+      padding:12px 16px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+    header h2 { margin:0; font-size:18px; font-weight:600; }
+    .controls { margin-left:auto; display:flex; gap:8px; align-items:center; }
+    .btn { border:0; padding:8px 12px; border-radius:6px; cursor:pointer; font-size:14px; }
+    .btn-close { background:#ff4444; color:#fff; }
+    .btn-back { background:#efefef; color:#111; }
+    main.viewer {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      min-height: calc(100vh - 160px);
+      position:relative;
+    }
+    .frame {
+      background:var(--panel);
+      padding:12px;
+      border-radius:8px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.12);
+      max-width:90%;
+      max-height:80vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .frame img { max-width:100%; max-height:72vh; object-fit:contain; border-radius:6px; display:block; }
+    .nav-arrow {
+      position:absolute; top:50%; transform:translateY(-50%); width:56px; height:56px; border-radius:50%;
+      border:none; background:rgba(0,0,0,0.35); color:#fff; font-size:28px; display:flex; align-items:center;
+      justify-content:center; cursor:pointer;
+    }
+    .nav-arrow:hover { background:rgba(0,0,0,0.5); }
+    .nav-prev { left:28px; }
+    .nav-next { right:28px; }
+    .meta {
+      margin:18px auto; max-width:1100px; width:calc(100% - 48px); display:flex; justify-content:space-between;
+      gap:12px; background:var(--panel); padding:12px 16px; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.06);
+      align-items:center; flex-wrap:wrap;
+    }
+    .meta .info { display:flex; gap:14px; align-items:center; color:var(--muted); }
+    .thumbs { display:flex; gap:10px; overflow-x:auto; padding:8px 4px; align-items:center; }
+    .thumbs img { width:70px; height:70px; object-fit:cover; border-radius:6px; cursor:pointer; border:2px solid transparent; display:block; }
+    .thumbs img.active { border-color:var(--accent); }
+    .fallback { max-width:900px; margin:28px auto; padding:18px; text-align:center; color:var(--muted); background:var(--panel); border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.06); }
+    @media (max-width:640px) {
+      .nav-arrow { width:44px; height:44px; font-size:22px; left:12px; right:12px; }
+      .frame img { max-height:56vh; }
+      .meta { padding:10px; gap:8px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2 id="title">Report Images</h2>
+    <div class="controls">
+      <button id="backBtn" class="btn btn-back" title="Back to report">Back</button>
+      <button id="closeBtn" class="btn btn-close" title="Close viewer">Close</button>
+    </div>
+  </header>
+
+  <main class="viewer" id="viewer">
+    <button id="prevBtn" class="nav-arrow nav-prev" aria-label="Previous image">‹</button>
+    <div class="frame" id="frame">
+      <img id="mainImg" src="" alt="Report image" />
+    </div>
+    <button id="nextBtn" class="nav-arrow nav-next" aria-label="Next image">›</button>
+  </main>
+
+  <section class="meta" id="metaPanel">
+    <div class="info">
+      <div><strong>Year:</strong> <span id="metaYear">-</span></div>
+      <div><strong>Record:</strong> <span id="metaRecord">-</span></div>
+      <div><strong>Location:</strong> <span id="metaLocation">-</span></div>
+    </div>
+    <div class="thumbs" id="thumbs" aria-label="Image thumbnails"></div>
+  </section>
+
+  <div id="fallback" class="fallback" style="display:none;">No images available for this record.</div>
+
+  <script>
+    (function () {
+      const API_ENDPOINT = 'http://localhost:3000/api/reportImages';
+      const qs = new URLSearchParams(location.search);
+      const yearParam = qs.get('year');
+      const recordParam = qs.get('record');
+
+      const titleEl = document.getElementById('title');
+      const metaYear = document.getElementById('metaYear');
+      const metaRecord = document.getElementById('metaRecord');
+      const metaLocation = document.getElementById('metaLocation');
+      const mainImg = document.getElementById('mainImg');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const thumbs = document.getElementById('thumbs');
+      const fallback = document.getElementById('fallback');
+      const metaPanel = document.getElementById('metaPanel');
+      const backBtn = document.getElementById('backBtn');
+      const closeBtn = document.getElementById('closeBtn');
+
+      let images = [];
+      let index = 0;
+
+      closeBtn.addEventListener('click', () => {
+        try { window.close(); } catch (e) { history.back(); }
+      });
+
+      backBtn.addEventListener('click', () => {
+        if (document.referrer && document.referrer.indexOf('reports-2025') !== -1) history.back();
+        else location.href = 'reports-2025.html';
+      });
+
+      function setNoImages(locationText) {
+        metaPanel.style.display = 'none';
+        document.getElementById('viewer').style.display = 'none';
+        fallback.style.display = 'block';
+        fallback.textContent = 'No images available for this record' + (locationText ? ': ' + locationText : '.');
+      }
+
+      function render() {
+        if (!images.length) return;
+        mainImg.src = images[index];
+        const thumbImgs = Array.from(thumbs.querySelectorAll('img'));
+        thumbImgs.forEach((t, i) => t.classList.toggle('active', i === index));
+      }
+
+      prevBtn.addEventListener('click', () => {
+        if (images.length <= 1) return;
+        index = (index - 1 + images.length) % images.length;
+        render();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (images.length <= 1) return;
+        index = (index + 1) % images.length;
+        render();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (fallback.style.display === 'block') {
+          if (e.key === 'Escape') backBtn.click();
+          return;
+        }
+        if (e.key === 'ArrowRight') nextBtn.click();
+        if (e.key === 'ArrowLeft') prevBtn.click();
+        if (e.key === 'Escape') backBtn.click();
+      });
+
+      function extractImagesFromRecord(rec) {
+        const list = [];
+        for (let i = 1; i <= 20; i++) {
+          const k = 'Image ' + i;
+          if (rec[k] && typeof rec[k] === 'string' && rec[k].trim()) list.push(rec[k].trim());
+        }
+        return list;
+      }
+
+      async function load() {
+        const year = yearParam ? Number(yearParam) : null;
+        const record = recordParam ? Number(recordParam) : null;
+
+        if (!year || !record) {
+          titleEl.textContent = 'Invalid parameters';
+          setNoImages();
+          return;
+        }
+
+        metaYear.textContent = year;
+        metaRecord.textContent = record;
+
+        let data;
+        try {
+          const res = await fetch(API_ENDPOINT);
+          if (!res.ok) throw new Error('API fetch failed');
+          data = await res.json();
+        } catch (err) {
+          console.error('Failed to fetch API', err);
+          setNoImages();
+          return;
+        }
+
+        const rec = Array.isArray(data) ? data.find(r => Number(r.Year) === year && Number(r['Record Number']) === record) : null;
+        if (!rec) {
+          titleEl.textContent = 'Record not found';
+          setNoImages();
+          return;
+        }
+
+        metaLocation.textContent = rec.Row || '-';
+        images = extractImagesFromRecord(rec);
+
+        if (!images.length) {
+          setNoImages(rec.Row);
+          return;
+        }
+
+        thumbs.innerHTML = '';
+        images.forEach((src, i) => {
+          const t = document.createElement('img');
+          t.src = src;
+          t.alt = 'Image ' + (i + 1);
+          t.addEventListener('click', () => {
+            index = i;
+            render();
+          });
+          thumbs.appendChild(t);
+        });
+
+        index = 0;
+        render();
+
+        if (images.length <= 1) {
+          prevBtn.style.display = 'none';
+          nextBtn.style.display = 'none';
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', load);
+    })();
+  </script>
+</body>
+</html>

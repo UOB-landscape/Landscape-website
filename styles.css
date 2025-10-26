@@ -1934,7 +1934,6 @@ body::before {
   background-size: cover;
   background-position: center;
 } */
-
 .back-button {
   position: fixed;
   top: 1rem;
@@ -1945,7 +1944,7 @@ body::before {
   font-size: 1rem;
   border-radius: 6px;
   cursor: pointer;
-  z-index: 10;
+  z-index: 1001;
 }
 
 .plant-details-container {
@@ -1958,41 +1957,58 @@ body::before {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 16px;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
-  max-width: 800px;
+  max-width: 900px;
   width: 100%;
   padding: 2rem;
   line-height: 1.6;
   backdrop-filter: blur(4px);
 }
 
+/* Names moved outside header so header becomes image-only */
+.plant-names {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.plant-names h1 {
+  font-size: 1.6rem;
+  margin: 0;
+}
+
+.plant-names h1 span {
+  font-weight: normal;
+  font-size: 1rem;
+  color: #555;
+  display: block;
+  margin-top: 0.25rem;
+}
+
 .plant-header {
   text-align: center;
+  margin-top: 0.5rem;
 }
 
-.plant-header h1 {
-  font-size: 2rem;
-  margin: 1rem 0;
-}
-
-.plant-header h1 span {
-  font-weight: normal;
-  font-size: 1.2rem;
-  color: #555;
-}
-
-.plant-thumbnail {
+.plant-header img {
   width: 160px;
   height: 160px;
   object-fit: cover;
   object-position: center;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  cursor: zoom-in;
+  transition: transform 180ms ease;
+}
+
+.plant-header img:focus,
+.plant-header img:hover {
+  transform: scale(1.03);
+  outline: none;
 }
 
 .plant-info {
   list-style: none;
   padding: 0;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
 
 .plant-info li {
@@ -2020,6 +2036,115 @@ body::before {
   padding: 1rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
+
+/* PDF section: center the controls and remove download styling dependency */
+.pdf-section {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.pdf-controls {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center; /* center the View PDF button */
+}
+
+.pdf-viewer {
+  width: 100%;
+  height: 560px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.pdf-viewer iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.pdf-button {
+  background: #0078d4;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+/* Modal for larger image */
+.image-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(20, 20, 20, 0.6);
+  z-index: 10000;
+  padding: 2rem;
+}
+
+.image-modal.open {
+  display: flex;
+}
+
+.image-modal .modal-content {
+  max-width: 95%;
+  max-height: 95%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+.image-modal img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 90vh;
+  object-fit: contain;
+  background: #000;
+}
+
+.image-modal .close-modal {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  z-index: 2;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  .plant-header img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .pdf-viewer {
+    height: 360px;
+  }
+}
+
+
 
 #hero {
   position: relative;

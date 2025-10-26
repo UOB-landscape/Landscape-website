@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title>Landscape Projects Report - 2025</title>
   <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
     body {
       font-family: "Tahoma", Arial, sans-serif;
@@ -34,7 +35,6 @@
 
     th {
       background: var(--accent-light);
-      /* background: #bebebd; */
     }
 
     .gallery-thumbnail {
@@ -49,83 +49,19 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    /* Fullscreen popup */
-    .popup-overlay {
-      display: none;
-      /* Hidden by default */
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.9);
-      z-index: 10000;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .main-image {
-      max-width: 90%;
-      max-height: 90%;
-      object-fit: contain;
-      border-radius: 8px;
-    }
-
-    .nav-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      border: none;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      font-size: 24px;
-      cursor: pointer;
-    }
-
-    .nav-arrow:hover {
-      background: rgba(255, 255, 255, 0.3);
-    }
-
-    .nav-arrow.prev {
-      left: 30px;
-    }
-
-    .nav-arrow.next {
-      right: 30px;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      background: rgba(255, 68, 68, 0.8);
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 50px;
-      font-size: 18px;
-      cursor: pointer;
-    }
-
-    .close-btn:hover {
-      background: rgba(255, 68, 68, 1);
+    /* Keep thumbnail sizing consistent */
+    .thumb-cell img {
+      width: 100px;
+      height: 100px;
+      display: block;
+      object-fit: cover;
     }
   </style>
-  <script>
-    // Listen for theme changes from parent
-    window.addEventListener('message', (event) => {
-      if (event.data.type === 'theme-change') {
-        document.documentElement.setAttribute('data-theme', event.data.theme);
-        localStorage.setItem('theme', event.data.theme);
-      }
-    });
 
-    // Request theme on load
+  <script>
+    // If the page is embedded and parent may supply theme, request it (harmless if not)
     window.addEventListener('DOMContentLoaded', () => {
-      window.parent.postMessage({ type: 'request-theme' }, '*');
+      try { window.parent.postMessage({ type: 'request-theme' }, '*'); } catch (e) {}
     });
   </script>
 </head>
@@ -151,8 +87,8 @@
       <tbody>
         <tr>
           <td>1</td>
-          <td colspan="2">
-            <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100">
+          <td colspan="2" class="thumb-cell">
+            <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100" alt="Buildings S40 S41 S50 S51 thumbnail">
           </td>
           <td>Buildings S40, S41, S50, S51</td>
           <td>Maintenance and replanting of landscape basins</td>
@@ -166,8 +102,8 @@
 
         <tr>
           <td>2</td>
-          <td colspan="2">
-            <img src="images/row2-1.jpg" class="gallery-thumbnail" data-gallery="row2" width="100" height="100">
+          <td colspan="2" class="thumb-cell">
+            <img src="images/row2-1.jpg" class="gallery-thumbnail" data-gallery="row2" width="100" height="100" alt="Behind University Swimming Pool thumbnail">
           </td>
           <td>Behind University Swimming Pool (S38)</td>
           <td>Rehabilitation of neglected landscape area</td>
@@ -181,8 +117,8 @@
 
         <tr>
           <td>3</td>
-          <td colspan="2">
-            <img src="images/row3-1.jpg" class="gallery-thumbnail" data-gallery="row3" width="100" height="100">
+          <td colspan="2" class="thumb-cell">
+            <img src="images/row3-1.jpg" class="gallery-thumbnail" data-gallery="row3" width="100" height="100" alt="In front of Building S45 thumbnail">
           </td>
           <td>In front of Building S45</td>
           <td>Landscape redevelopment and rehabilitation</td>
@@ -196,8 +132,8 @@
 
         <tr>
           <td>4</td>
-          <td colspan="2">
-            <img src="images/row4-1.jpg" class="gallery-thumbnail" data-gallery="row4" width="100" height="100">
+          <td colspan="2" class="thumb-cell">
+            <img src="images/row4-1.jpg" class="gallery-thumbnail" data-gallery="row4" width="100" height="100" alt="From behind College of Arts to Deanship thumbnail">
           </td>
           <td>From behind College of Arts to Deanship of Student Affairs</td>
           <td>Large-scale landscape rehabilitation</td>
@@ -211,8 +147,8 @@
 
         <tr>
           <td>5</td>
-          <td colspan="2">
-            <img src="images/row5-1.jpg" class="gallery-thumbnail" data-gallery="row5" width="100" height="100">
+          <td colspan="2" class="thumb-cell">
+            <img src="images/row5-1.jpg" class="gallery-thumbnail" data-gallery="row5" width="100" height="100" alt="Hill Area thumbnail">
           </td>
           <td>Hill Area behind Main Road</td>
           <td>Rehabilitation and replanting of hillside landscape</td>
@@ -226,8 +162,8 @@
 
         <tr>
           <td>6</td>
-          <td colspan="2">
-            <img src="images/row6-1.jpg" class="gallery-thumbnail" data-gallery="row6" width="100" height="100">
+          <td colspan="2" class="thumb-cell">
+            <img src="images/row6-1.jpg" class="gallery-thumbnail" data-gallery="row6" width="100" height="100" alt="Main fence area thumbnail">
           </td>
           <td>Main fence area near the main entrance gate</td>
           <td>Tree planting for fence area</td>
@@ -236,14 +172,13 @@
           <td>Sustainable ornamental trees were planted</td>
           <td>—</td>
           <td>50</td>
-          <td>Enhanced the overall appearance of the site and added an aesthetic character; rehabilitated an area of
-            approximately 160 RM and planted 50 ornamental trees.</td>
+          <td>Enhanced the overall appearance of the site and added an aesthetic character; rehabilitated an area of approximately 160 RM and planted 50 ornamental trees.</td>
         </tr>
 
         <tr>
           <td>7</td>
-          <td colspan="2">
-            <img src="images/row7-1.jpg" class="gallery-thumbnail" data-gallery="row7" width="100" height="100">
+          <td colspan="2" class="thumb-cell">
+            <img src="images/row7-1.jpg" class="gallery-thumbnail" data-gallery="row7" width="100" height="100" alt="Open courtyard behind the main mosque thumbnail">
           </td>
           <td>Open courtyard behind the main mosque</td>
           <td>Tree planting for the area</td>
@@ -252,15 +187,13 @@
           <td>1,000 sustainable ornamental trees were planted</td>
           <td>—</td>
           <td>1000</td>
-          <td>Rehabilitated an area of approximately 10,800 m², including the removal of weeds, waste, and old soil,
-            replacement with new agricultural sand, installation of an irrigation network, and planting of sustainable
-            trees with landscape design.</td>
+          <td>Rehabilitated an area of approximately 10,800 m², including the removal of weeds, waste, and old soil, replacement with new agricultural sand, installation of an irrigation network, and planting of sustainable trees with landscape design.</td>
         </tr>
 
         <tr>
           <td>8</td>
-          <td colspan="2">
-            <img src="images/row8-1.jpg" class="gallery-thumbnail" data-gallery="row8" width="100" height="100">
+          <td colspan="2" class="thumb-cell">
+            <img src="images/row8-1.jpg" class="gallery-thumbnail" data-gallery="row8" width="100" height="100" alt="Student rest areas thumbnail">
           </td>
           <td>Student rest areas of the College of Science and the College of Information Technology</td>
           <td>Removal of harmful and random trees and redevelopment of the agricultural area</td>
@@ -269,22 +202,19 @@
           <td>The area was rehabilitated with sustainable ornamental trees, various plants, and seasonal flowers.</td>
           <td>—</td>
           <td>104</td>
-          <td>The project includes removing harmful trees, preparing basins and soil, and implementing landscape
-            designs. The second phase includes planting more than 100 sustainable shade trees and increasing plant cover
-            with new species.</td>
+          <td>The project includes removing harmful trees, preparing basins and soil, and implementing landscape designs. The second phase includes planting more than 100 sustainable shade trees and increasing plant cover with new species.</td>
         </tr>
 
         <tr>
           <td>9</td>
-          <td colspan="2">
-            <img src="images/row9-1.jpg" class="gallery-thumbnail" data-gallery="row9" width="100" height="100">
+          <td colspan="2" class="thumb-cell">
+            <img src="images/row9-1.jpg" class="gallery-thumbnail" data-gallery="row9" width="100" height="100" alt="Roman Amphitheater thumbnail">
           </td>
           <td>Roman Amphitheater</td>
           <td>Area development with sustainable plants and seasonal flowers</td>
           <td>840 m²</td>
           <td>Previously: degraded and uncultivated land</td>
-          <td>The entire area was planted and landscaped to match the environment and the general aesthetic appearance.
-          </td>
+          <td>The entire area was planted and landscaped to match the environment and the general aesthetic appearance.</td>
           <td>840 m²</td>
           <td>12</td>
           <td>Developed the area to make it more attractive for visitors, students, and staff.</td>
@@ -292,110 +222,107 @@
 
         <tr>
           <td>10</td>
-          <td colspan="2">
-            <img src="images/row10-1.jpg" class="gallery-thumbnail" data-gallery="row10" width="100" height="100">
+          <td colspan="2" class="thumb-cell">
+            <img src="images/row10-1.jpg" class="gallery-thumbnail" data-gallery="row10" width="100" height="100" alt="Area behind the swimming pool thumbnail">
           </td>
           <td>Area behind the swimming pool (S38)</td>
           <td>Afforestation with Bahraini almond trees — a local shade and fruit-bearing species</td>
           <td>1,100 m²</td>
-          <td>Previously: presence of harmful and random trees negatively affecting the environment and infrastructure
-          </td>
+          <td>Previously: presence of harmful and random trees negatively affecting the environment and infrastructure</td>
           <td>100 Bahraini almond trees were planted</td>
           <td>—</td>
           <td>100</td>
-          <td>Rehabilitation of a 1,100 m² area is in progress. The space will be afforested with 100 Bahraini almond
-            trees in collaboration with the College of Health Sciences, the College of Physical Education, and a group
-            of students participating in the tree planting.</td>
+          <td>Rehabilitation of a 1,100 m² area is in progress. The space will be afforested with 100 Bahraini almond trees in collaboration with the College of Health Sciences, the College of Physical Education, and a group of students participating in the tree planting.</td>
         </tr>
 
         <tr>
           <td>11</td>
-          <td colspan="2">
-            <img src="images/row11-1.jpg" class="gallery-thumbnail" data-gallery="row11" width="100" height="100">
+          <td colspan="2" class="thumb-cell">
+            <img src="images/row11-1.jpg" class="gallery-thumbnail" data-gallery="row11" width="100" height="100" alt="S20 Building thumbnail">
           </td>
           <td>S20 Building</td>
           <td>Removal of harmful and random trees and redevelopment of the agricultural area</td>
           <td>960 m²</td>
-          <td>Previously: presence of harmful and random trees negatively affecting the environment and infrastructure
-          </td>
-          <td>The area will be replanted with sustainable shade trees, ornamental plants, and seasonal flowers, adding
-            distinctive landscaping that enhances visual appeal and promotes vegetation sustainability.</td>
+          <td>Previously: presence of harmful and random trees negatively affecting the environment and infrastructure</td>
+          <td>The area will be replanted with sustainable shade trees, ornamental plants, and seasonal flowers, adding distinctive landscaping that enhances visual appeal and promotes vegetation sustainability.</td>
           <td>—</td>
           <td>—</td>
-          <td>Ongoing project for removing harmful trees, preparing basins and soil, and implementing landscape design
-            works.</td>
+          <td>Ongoing project for removing harmful trees, preparing basins and soil, and implementing landscape design works.</td>
         </tr>
-
       </tbody>
     </table>
   </div>
 
-  <!-- Fullscreen popup -->
-  <div id="galleryPopup" class="popup-overlay">
-    <button class="close-btn" onclick="closeGallery()">✕</button>
-    <button class="nav-arrow prev" onclick="previousImage()">‹</button>
-    <img id="mainImage" class="main-image" src="">
-    <button class="nav-arrow next" onclick="nextImage()">›</button>
-  </div>
+  <!-- NOTE: Inline popup removed. Thumbnails open reportImages.html with query params. -->
 
   <script>
-    const galleries = {
-      row1: [],
-      row2: ["images/row2-1.jpg", "images/row2-2.jpg"],
-      row3: ["images/row3-1.jpg", "images/row3-2.jpg"],
-      row4: ["images/row4-1.jpg", "images/row4-2.jpg", "images/row4-3.jpg"],
-      row5: ["images/row5-1.jpg", "images/row5-2.jpg"]
-    };
+    /* Replace the old inline gallery behavior:
+       - fetch API
+       - for Year === 2025, match Record Number to row number (data-gallery="rowX")
+       - set thumbnail src to the record's first Image N if present
+       - clicking the thumbnail navigates to reportImages.html?year=2025&record=X
+       - leaves table text/content unchanged
+    */
+    (function () {
+      const API_ENDPOINT = 'http://localhost:3000/api/reportImages';
+      const TARGET_YEAR = 2025;
 
-    const galleryPopup = document.getElementById('galleryPopup');
-    const mainImage = document.getElementById('mainImage');
-    let currentGallery = [];
-    let currentIndex = 0;
-    let slideshowInterval = null;
-
-    document.querySelectorAll('.gallery-thumbnail').forEach(img => {
-      img.addEventListener('click', () => {
-        const galleryName = img.dataset.gallery;
-        currentGallery = galleries[galleryName];
-        currentIndex = 0;
-        showImage();
-        galleryPopup.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-
-        // Start slideshow
-        slideshowInterval = setInterval(() => {
-          nextImage();
-        }, 4000);
-      });
-    });
-
-    function showImage() {
-      mainImage.src = currentGallery[currentIndex];
-    }
-
-    function nextImage() {
-      currentIndex = (currentIndex + 1) % currentGallery.length;
-      showImage();
-    }
-
-    function previousImage() {
-      currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-      showImage();
-    }
-
-    function closeGallery() {
-      galleryPopup.style.display = 'none';
-      document.body.style.overflow = '';
-      clearInterval(slideshowInterval); // stop slideshow
-    }
-
-    document.addEventListener('keydown', e => {
-      if (galleryPopup.style.display === 'flex') {
-        if (e.key === 'Escape') closeGallery();
-        if (e.key === 'ArrowRight') nextImage();
-        if (e.key === 'ArrowLeft') previousImage();
+      function getFirstImage(rec) {
+        for (let i = 1; i <= 20; i++) {
+          const key = 'Image ' + i;
+          if (rec[key] && typeof rec[key] === 'string' && rec[key].trim()) return rec[key].trim();
+        }
+        return '';
       }
-    });
+
+      async function initThumbnails() {
+        let data;
+        try {
+          const res = await fetch(API_ENDPOINT);
+          if (!res.ok) throw new Error('Network response not ok');
+          data = await res.json();
+        } catch (err) {
+          console.error('Failed to fetch reportImages API', err);
+          return;
+        }
+
+        const map = {};
+        if (Array.isArray(data)) {
+          data.forEach(rec => {
+            if (Number(rec.Year) === TARGET_YEAR && rec['Record Number'] != null) {
+              map[String(Number(rec['Record Number']))] = rec;
+            }
+          });
+        }
+
+        document.querySelectorAll('.gallery-thumbnail').forEach(img => {
+          const gallery = img.dataset.gallery; // e.g. "row4"
+          if (!gallery) return;
+          const m = gallery.match(/row(\d+)/i);
+          if (!m) return;
+          const recordNum = String(Number(m[1]));
+          const rec = map[recordNum];
+          const first = rec ? getFirstImage(rec) : '';
+
+          if (first) {
+            img.src = first;
+          } // otherwise keep existing hardcoded src
+
+          img.style.cursor = 'pointer';
+          // Replace node to remove old listeners, then attach new listener
+          const newImg = img.cloneNode(true);
+          img.parentNode.replaceChild(newImg, img);
+
+          newImg.addEventListener('click', (e) => {
+            e.preventDefault();
+            const params = new URLSearchParams({ year: String(TARGET_YEAR), record: recordNum });
+            window.location.href = 'reportImages.html?' + params.toString();
+          });
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', initThumbnails);
+    })();
   </script>
 
 </body>

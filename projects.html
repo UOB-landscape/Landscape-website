@@ -7,11 +7,9 @@
   <title>UOB Landscape – Projects</title>
 
   <script>
-    // Get saved theme from localStorage
+    // Apply saved theme early to avoid flash
     const savedTheme = localStorage.getItem('theme');
-
     if (savedTheme) {
-      // Set theme attribute before CSS is applied
       document.documentElement.setAttribute('data-theme', savedTheme);
     }
   </script>
@@ -35,8 +33,8 @@
     <div class="controls">
       <button class="arabic-btn" onclick="translate()">عربي</button>
       <div class="dropdown">
-        <button class="theme-btn" id="theme-btn">🎨</button>
-        <div class="theme-picker" id="theme-picker">
+        <button class="theme-btn" id="theme-btn" aria-haspopup="true" aria-expanded="false">🎨</button>
+        <div class="theme-picker" id="theme-picker" role="menu" aria-hidden="true">
           <div class="theme-option" data-theme="default"></div>
           <div class="theme-option" data-theme="dark"></div>
           <div class="theme-option" data-theme="solar"></div>
@@ -59,561 +57,15 @@
   <main>
     <section id="before-after" class="projects-section">
       <h1>Before & After Projects</h1>
-      <!-- Filter Buttons -->
-      <div class="project-filters">
-        <button class="project-filter-btn active" data-filter="S1A, S1B, S46">
-          <div class="image-area">
-            <img src="https://i.postimg.cc/0NyqdW8x/S1-A-S1-B-S46.png" alt="S1A, S1B, S46">
-          </div>
-          <div class="label">S1A, S1B, S46</div>
-        </button>
-        <button class="project-filter-btn" data-filter="S4">
-          <div class="image-area">
-            <img src="https://i.postimg.cc/xdCWbXR1/Fountain-area.png" alt="S1A, S1B, S46">
-          </div>
-          <div class="label">S4</div>
-        </button>
-        <button class="project-filter-btn" data-filter="S2">
-          <div class="image-area">
-            <img src="https://i.postimg.cc/DzN1Pw9g/Parking-entrance.jpg" alt="S1A, S1B, S46">
-          </div>
-          <div class="label">S2</div>
-        </button>
-        <button class="project-filter-btn" data-filter="S1A">
-          <div class="image-area">
-            <img src="https://i.postimg.cc/j54nnMxP/Native-trees.png">
-          </div>
-          <div class="label">S1A</div>
-        </button>
-        <button class="project-filter-btn" data-filter="S45, S17">
-          <div class="image-area">
-            <img src="https://i.postimg.cc/TY4LbL67/S45-S17.png">
-          </div>
-          <div class="label">S45, S17</div>
-        </button>
-        <button class="project-filter-btn" data-filter="S51">
-          <div class="image-area">
-          </div>
-          <div class="label">S51</div>
-        </button>
-        <button class="project-filter-btn" data-filter="CarPark">
-          <div class="image-area">
-          </div>
-          <div class="label">Car Park</div>
-        </button>
-        <button class="project-filter-btn" data-filter="S52">
-          <div class="image-area">
-          </div>
-          <div class="label">S52</div>
-        </button>
-        <button class="project-filter-btn" data-filter="S53">
-          <div class="image-area">
-          </div>
-          <div class="label">S53</div>
-        </button>
-        <button class="project-filter-btn" data-filter="S54">
-          <div class="image-area">
-          </div>
-          <div class="label">S54</div>
-        </button>
-        <button class="project-filter-btn" data-filter="S55">
-          <div class="image-area">
-          </div>
-          <div class="label">S55</div>
-        </button>
-      </div>
 
-      <!-- Filtered Content Sections -->
-      <div id="project-contents">
-        <div class="project-filter-section" data-type="S1A, S1B, S46" style="display: block;">
-          <h3>S1A, S1B, S46 Project</h3>
-          <!-- First Two-Image Slider Container -->
-          <p>This section presents a comparison between the existing conditions and the proposed project for areas
-            S1A,S1B, and S46. It highlights the planned enhancements in landscaping, spatial organization, and
-            decorative elements designed to improve the visual quality and functionality of these spaces. The
-            comparison illustrates how the proposal transforms the current environment into a more cohesive,
-            welcoming, and aesthetically appealing setting for students, faculty, and visitors.</p>
-          <img src="SDG/E-WEB-Goal-03.png" alt="SDG-03" class="SDG">
-          <img src="SDG/E-WEB-Goal-06.png" alt="SDG-06" class="SDG">
-          <img src="SDG/E-WEB-Goal-11.png" alt="SDG-11" class="SDG">
-          <img src="SDG/E-WEB-Goal-13.png" alt="SDG-13" class="SDG">
-          <img src="SDG/E-WEB-Goal-15.png" alt="SDG-15" class="SDG">
+      <!-- Filters placeholder (rendered from API) -->
+      <div class="project-filters" id="projectFilters"></div>
 
-          <div class="container">
-            <div class="two-image-slider-container" id="twoImageSlider1">
-              <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
-              <div class="two-image-layer proposal-image">
-                <img src="https://i.postimg.cc/SKdr8Kkc/SA-01-A.png" alt="Proposal">
-                <div class="two-image-label proposal-label">Proposal</div>
-              </div>
-              <div class="two-image-layer current-image" id="currentImage1">
-                <img src="https://i.postimg.cc/qR6zJM6N/SA-01-B.jpg" alt="Current">
-                <div class="two-image-label current-label">Current</div>
-              </div>
-              <div class="two-slider-line" id="twoSliderLine1" style="left: 50%;">
-                <div class="two-slider-handle" id="twoSliderHandle1"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Second Two-Image Slider Container -->
-          <div class="container">
-            <div class="two-image-slider-container" id="twoImageSlider2">
-              <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
-              <div class="two-image-layer proposal-image">
-                <img src="https://i.postimg.cc/pdWS34dY/SA-05-A.png" alt="Proposal">
-                <div class="two-image-label proposal-label">Proposal</div>
-              </div>
-              <div class="two-image-layer current-image" id="currentImage2">
-                <img src="https://i.postimg.cc/5NzDz8Gv/SA-05-B.jpg" alt="Current">
-                <div class="two-image-label current-label">Current</div>
-              </div>
-              <div class="two-slider-line" id="twoSliderLine2" style="left: 50%;">
-                <div class="two-slider-handle" id="twoSliderHandle2"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Third Two-Image Slider Container -->
-          <div class="container">
-            <div class="two-image-slider-container" id="twoImageSlider3">
-              <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
-              <div class="two-image-layer proposal-image">
-                <img src="https://i.postimg.cc/jj3Mmjmt/SA-09-A.png" alt="Proposal">
-                <div class="two-image-label proposal-label">Proposal</div>
-              </div>
-              <div class="two-image-layer current-image" id="currentImage3">
-                <img src="https://i.postimg.cc/pdhFTBgV/SA-09-B.jpg" alt="Current">
-                <div class="two-image-label current-label">Current</div>
-              </div>
-              <div class="two-slider-line" id="twoSliderLine3" style="left: 50%;">
-                <div class="two-slider-handle" id="twoSliderHandle3"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Fourth Slider Container -->
-          <div class="container">
-            <div class="slider-container" id="sliderContainer2">
-              <div class="instructions">Drag the sliders to compare all three stages</div>
-              <div class="image-layer proposal-image">
-                <img src="proposal-2.png" alt="Proposal">
-                <div class="label proposal-label">Proposal</div>
-              </div>
-              <div class="image-layer after-image" id="afterImage2">
-                <img src="after.jpg" alt="After">
-                <div class="label after-label">After</div>
-              </div>
-              <div class="image-layer before-image" id="beforeImage2">
-                <img src="before.jpg" alt="Before">
-                <div class="label before-label">Before</div>
-              </div>
-              <div class="slider-line slider-line-1" id="sliderLine1_2" style="left: 33%;">
-                <div class="slider-handle slider-handle-1" id="sliderHandle1_2"></div>
-              </div>
-              <div class="slider-line slider-line-2" id="sliderLine2_2" style="left: 66%;">
-                <div class="slider-handle slider-handle-2" id="sliderHandle2_2"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Fifth Two-Image Slider Container -->
-          <div class="container">
-            <div class="two-image-slider-container" id="twoImageSlider4">
-              <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
-              <div class="two-image-layer proposal-image">
-                <img src="https://i.postimg.cc/FKzZy4Rq/SA-14-A.png" alt="Proposal">
-                <div class="two-image-label proposal-label">Proposal</div>
-              </div>
-              <div class="two-image-layer current-image" id="currentImage4">
-                <img src="https://i.postimg.cc/dtR4v6pW/SA-14-B.jpg" alt="Current">
-                <div class="two-image-label current-label">Current</div>
-              </div>
-              <div class="two-slider-line" id="twoSliderLine4" style="left: 50%;">
-                <div class="two-slider-handle" id="twoSliderHandle4"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-filter-section" data-type="S4" style="display: none;">
-          <h3>Fountain Area Project</h3>
-          <!-- First Two-Image Slider Container for S4 -->
-          <p>This section compares the current state of the fountain area with the proposed design, showcasing the
-            transformation
-            envisioned through improved landscaping, seating arrangements, and lighting features. The proposal
-            introduces a central
-            focal point that enhances the overall aesthetic appeal and provides a relaxing gathering space for students
-            and visitors.
-            The upgraded design aims to create a vibrant and refreshing atmosphere that integrates seamlessly with the
-            surrounding
-            campus environment.</p>
-          <img src="SDG/E-WEB-Goal-03.png" alt="SDG-03" class="SDG">
-          <img src="SDG/E-WEB-Goal-06.png" alt="SDG-06" class="SDG">
-          <img src="SDG/E-WEB-Goal-11.png" alt="SDG-11" class="SDG">
-          <img src="SDG/E-WEB-Goal-13.png" alt="SDG-13" class="SDG">
-          <img src="SDG/E-WEB-Goal-15.png" alt="SDG-15" class="SDG">
-
-          <div class="container">
-            <div class="two-image-slider-container" id="twoImageSlider5">
-              <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
-              <div class="two-image-layer proposal-image">
-                <img src="https://i.postimg.cc/h49G0b0g/2-after-fountain-area.jpg" alt="Proposal">
-                <div class="two-image-label proposal-label">Proposal</div>
-              </div>
-              <div class="two-image-layer current-image" id="currentImage5">
-                <img src="https://i.postimg.cc/G2DmVkwF/2-before-fountain-area.jpg" alt="Current">
-                <div class="two-image-label current-label">Current</div>
-              </div>
-              <div class="two-slider-line" id="twoSliderLine5" style="left: 50%;">
-                <div class="two-slider-handle" id="twoSliderHandle5"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Second Two-Image Slider Container for S4 -->
-          <div class="container">
-            <div class="two-image-slider-container" id="twoImageSlider6">
-              <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
-              <div class="two-image-layer proposal-image">
-                <img src="https://i.postimg.cc/zvSXX8f3/4-after-fountain-area.jpg" alt="Proposal">
-                <div class="two-image-label proposal-label">Proposal</div>
-              </div>
-              <div class="two-image-layer current-image" id="currentImage6">
-                <img src="https://i.postimg.cc/CL7L3htQ/4-before-fountain-area.jpg" alt="Current">
-                <div class="two-image-label current-label">Current</div>
-              </div>
-              <div class="two-slider-line" id="twoSliderLine6" style="left: 50%;">
-                <div class="two-slider-handle" id="twoSliderHandle6"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Third Two-Image Slider Container for S4 -->
-          <div class="container">
-            <div class="two-image-slider-container" id="twoImageSlider7">
-              <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
-              <div class="two-image-layer proposal-image">
-                <img src="https://i.postimg.cc/Z5qK4kzK/5-after-fountain-area.jpg" alt="Proposal">
-                <div class="two-image-label proposal-label">Proposal</div>
-              </div>
-              <div class="two-image-layer current-image" id="currentImage7">
-                <img src="https://i.postimg.cc/R040rL4b/5-before-fountain-area.jpg" alt="Current">
-                <div class="two-image-label current-label">Current</div>
-              </div>
-              <div class="two-slider-line" id="twoSliderLine7" style="left: 50%;">
-                <div class="two-slider-handle" id="twoSliderHandle7"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Fourth Two-Image Slider Container for S4 -->
-          <div class="container">
-            <div class="two-image-slider-container" id="twoImageSlider8">
-              <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
-              <div class="two-image-layer proposal-image">
-                <img src="https://i.postimg.cc/GmS3pMbP/6-after-fountain-area.jpg" alt="Proposal">
-                <div class="two-image-label proposal-label">Proposal</div>
-              </div>
-              <div class="two-image-layer current-image" id="currentImage8">
-                <img src="https://i.postimg.cc/MH7Wrng8/6-before-fountain-area.jpg" alt="Current">
-                <div class="two-image-label current-label">Current</div>
-              </div>
-              <div class="two-slider-line" id="twoSliderLine8" style="left: 50%;">
-                <div class="two-slider-handle" id="twoSliderHandle8"></div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="project-filter-section" data-type="S2" style="display: none;">
-          <h3>S2 Parking Entrance Project</h3>
-          <p>This section presents a comparison between the current condition and the proposed design for the entrance
-            to the
-            S2 Parking Area of the Administration Building. The project emphasizes aesthetic and structural improvements
-            at the
-            entry point through upgraded paving, defined borders, and enhanced landscaping. The proposed design
-            highlights the
-            entrance as a more visually appealing and well-integrated access point that complements the architecture and
-            surroundings
-            of the Administration Building.</p>
-          <!-- First Two-Image Slider Container for S2 -->
-          <div class="container">
-            <div class="two-image-slider-container" id="twoImageSlider9">
-              <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
-              <div class="two-image-layer proposal-image">
-                <img src="https://i.postimg.cc/jjfTdGTV/2-after-parking-entrance.jpg" alt="Proposal">
-                <div class="two-image-label proposal-label">Proposal</div>
-              </div>
-              <div class="two-image-layer current-image" id="currentImage9">
-                <img src="https://i.postimg.cc/9MtjyZzJ/2-before-parking-entrance.jpg" alt="Current">
-                <div class="two-image-label current-label">Current</div>
-              </div>
-              <div class="two-slider-line" id="twoSliderLine9" style="left: 50%;">
-                <div class="two-slider-handle" id="twoSliderHandle9"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Second Two-Image Slider Container for S2 -->
-          <div class="container">
-            <div class="two-image-slider-container" id="twoImageSlider10">
-              <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
-              <div class="two-image-layer proposal-image">
-                <img src="https://i.postimg.cc/mgJR4T0N/3-after-parking-entrance.jpg" alt="Proposal">
-                <div class="two-image-label proposal-label">Proposal</div>
-              </div>
-              <div class="two-image-layer current-image" id="currentImage10">
-                <img src="https://i.postimg.cc/PJSsRHWD/3-before-parking-entrance.jpg" alt="Current">
-                <div class="two-image-label current-label">Current</div>
-              </div>
-              <div class="two-slider-line" id="twoSliderLine10" style="left: 50%;">
-                <div class="two-slider-handle" id="twoSliderHandle10"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Third Two-Image Slider Container for S2 -->
-          <div class="container">
-            <div class="two-image-slider-container" id="twoImageSlider11">
-              <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
-              <div class="two-image-layer proposal-image">
-                <img src="https://i.postimg.cc/QC8ZmCTs/4-after-parking-entrance.jpg" alt="Proposal">
-                <div class="two-image-label proposal-label">Proposal</div>
-              </div>
-              <div class="two-image-layer current-image" id="currentImage11">
-                <img src="https://i.postimg.cc/xj52Cvwd/4-before-parking-entrance.jpg" alt="Current">
-                <div class="two-image-label current-label">Current</div>
-              </div>
-              <div class="two-slider-line" id="twoSliderLine11" style="left: 50%;">
-                <div class="two-slider-handle" id="twoSliderHandle11"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-filter-section" data-type="S1A" style="display: none;">
-          <h3>Native Trees Project</h3>
-          <p>This section presents a comparison between the current condition and the proposed design for the area
-            located behind the
-            College of Art. The project incorporates native trees such as mango, almond, and mulberry to enhance
-            biodiversity and
-            provide natural shading throughout the space. Alongside these plantings, the proposal introduces improved
-            landscaping,
-            seating areas, and artistic elements to create a welcoming and inspiring outdoor environment that supports
-            relaxation,
-            interaction, and creative activities for students and faculty.</p>
-          <!-- First Two-Image Slider Container for S1A -->
-          <div class="container">
-            <div class="two-image-slider-container" id="twoImageSlider12">
-              <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
-              <div class="two-image-layer proposal-image">
-                <img src="" alt="Proposal">
-                <div class="two-image-label proposal-label">Proposal</div>
-              </div>
-              <div class="two-image-layer current-image" id="currentImage12">
-                <img src="" alt="Current">
-                <div class="two-image-label current-label">Current</div>
-              </div>
-              <div class="two-slider-line" id="twoSliderLine12" style="left: 50%;">
-                <div class="two-slider-handle" id="twoSliderHandle12"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="project-filter-section" data-type="S45, S17" style="display: none;">
-        <h3>S45, S17 Project</h3>
-      </div>
-
-      <div class="project-filter-section" data-type="S51" style="display: none;">
-        <h3>S51 Project</h3>
-      </div>
-
-      <div class="project-filter-section" data-type="CarPark" style="display: none;">
-        <h3>S48 Project (Car Park)</h3>
-      </div>
-      </div>
-
-      <script>
-        class ThreeImageSlider {
-          constructor(containerId) {
-            this.container = document.getElementById(containerId);
-            if (!this.container) return;
-
-            // Extract the number from containerId (e.g., "sliderContainer1" -> "1")
-            const containerNum = containerId.replace('sliderContainer', '');
-
-            this.sliderLine1 = document.getElementById(`sliderLine1_${containerNum}`);
-            this.sliderLine2 = document.getElementById(`sliderLine2_${containerNum}`);
-            this.sliderHandle1 = document.getElementById(`sliderHandle1_${containerNum}`);
-            this.sliderHandle2 = document.getElementById(`sliderHandle2_${containerNum}`);
-            this.beforeImage = document.getElementById(`beforeImage${containerNum}`);
-            this.afterImage = document.getElementById(`afterImage${containerNum}`);
-
-            this.isDragging = false;
-            this.activeSlider = null;
-
-            this.slider1Position = 33;
-            this.slider2Position = 66;
-
-            this.init();
-          }
-
-          init() {
-            this.bindEvents();
-            this.updateSliders();
-          }
-
-          bindEvents() {
-            this.sliderHandle1.addEventListener('mousedown', (e) => this.startDrag(e, 1));
-            this.sliderHandle2.addEventListener('mousedown', (e) => this.startDrag(e, 2));
-            document.addEventListener('mousemove', (e) => this.drag(e));
-            document.addEventListener('mouseup', () => this.stopDrag());
-
-            this.sliderHandle1.addEventListener('touchstart', (e) => this.startDrag(e, 1), { passive: false });
-            this.sliderHandle2.addEventListener('touchstart', (e) => this.startDrag(e, 2), { passive: false });
-            document.addEventListener('touchmove', (e) => this.drag(e), { passive: false });
-            document.addEventListener('touchend', () => this.stopDrag());
-          }
-
-          startDrag(e, sliderNumber) {
-            this.isDragging = true;
-            this.activeSlider = sliderNumber;
-
-            if (sliderNumber === 1) {
-              this.sliderLine1.style.zIndex = '50';
-              this.sliderLine2.style.zIndex = '40';
-            } else {
-              this.sliderLine2.style.zIndex = '50';
-              this.sliderLine1.style.zIndex = '40';
-            }
-
-            e.preventDefault();
-          }
-
-          drag(e) {
-            if (!this.isDragging) return;
-
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const rect = this.container.getBoundingClientRect();
-            const x = clientX - rect.left;
-            const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
-
-            if (this.activeSlider === 1) this.slider1Position = percentage;
-            else if (this.activeSlider === 2) this.slider2Position = percentage;
-
-            this.updateSliders();
-          }
-
-          stopDrag() {
-            this.isDragging = false;
-            this.activeSlider = null;
-          }
-
-          updateSliders() {
-            this.sliderLine1.style.left = `${this.slider1Position}%`;
-            this.sliderLine2.style.left = `${this.slider2Position}%`;
-
-            this.beforeImage.style.clipPath = `polygon(0 0, ${this.slider1Position}% 0, ${this.slider1Position}% 100%, 0 100%)`;
-
-            const left = Math.min(this.slider1Position, this.slider2Position);
-            const right = Math.max(this.slider1Position, this.slider2Position);
-            this.afterImage.style.clipPath = `polygon(${left}% 0, ${right}% 0, ${right}% 100%, ${left}% 100%)`;
-          }
-        }
-
-        // Two-Image Slider Class
-        class TwoImageSlider {
-          constructor(containerId) {
-            this.container = document.getElementById(containerId);
-            if (!this.container) return;
-
-            // Extract the number from containerId (e.g., "twoImageSlider1" -> "1")
-            const containerNum = containerId.replace('twoImageSlider', '');
-
-            this.sliderLine = document.getElementById(`twoSliderLine${containerNum}`);
-            this.sliderHandle = document.getElementById(`twoSliderHandle${containerNum}`);
-            this.currentImage = document.getElementById(`currentImage${containerNum}`);
-
-            this.isDragging = false;
-            this.sliderPosition = 50; // Start at 50% (middle)
-
-            this.init();
-          }
-
-          init() {
-            this.bindEvents();
-            this.updateSlider();
-          }
-
-          bindEvents() {
-            // Mouse events
-            this.sliderHandle.addEventListener('mousedown', (e) => this.startDrag(e));
-            document.addEventListener('mousemove', (e) => this.drag(e));
-            document.addEventListener('mouseup', () => this.stopDrag());
-
-            // Touch events
-            this.sliderHandle.addEventListener('touchstart', (e) => this.startDrag(e), { passive: false });
-            document.addEventListener('touchmove', (e) => this.drag(e), { passive: false });
-            document.addEventListener('touchend', () => this.stopDrag());
-
-            // Container click for quick jump
-            this.container.addEventListener('click', (e) => {
-              if (e.target === this.sliderHandle) return;
-
-              const rect = this.container.getBoundingClientRect();
-              const x = e.clientX - rect.left;
-              this.sliderPosition = Math.max(0, Math.min(100, (x / rect.width) * 100));
-              this.updateSlider();
-            });
-          }
-
-          startDrag(e) {
-            this.isDragging = true;
-            this.container.style.cursor = 'grabbing';
-            e.preventDefault();
-          }
-
-          drag(e) {
-            if (!this.isDragging) return;
-
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const rect = this.container.getBoundingClientRect();
-            const x = clientX - rect.left;
-            this.sliderPosition = Math.max(0, Math.min(100, (x / rect.width) * 100));
-
-            this.updateSlider();
-          }
-
-          stopDrag() {
-            this.isDragging = false;
-            this.container.style.cursor = 'grab';
-          }
-
-          updateSlider() {
-            this.sliderLine.style.left = `${this.sliderPosition}%`;
-            this.currentImage.style.clipPath = `polygon(0 0, ${this.sliderPosition}% 0, ${this.sliderPosition}% 100%, 0 100%)`;
-          }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-          // Initialize all three-image slider containers
-          for (let i = 1; i <= 50; i++) {
-            new ThreeImageSlider(`sliderContainer${i}`);
-          }
-
-          // Initialize all two-image slider containers
-          for (let i = 1; i <= 50; i++) {
-            new TwoImageSlider(`twoImageSlider${i}`);
-          }
-        });
-      </script>
+      <!-- Project contents placeholder (rendered from API) -->
+      <div id="project-contents"></div>
     </section>
 
-    <section id="reports" class="projects-section">
+    <section id="reports" class="projects-section" style="display:none;">
       <h1></h1>
       <div class="iframe-wrapper">
         <h2 style="text-align: center;">🌳 Landscape Projects and Achievements in 2024</h2>
@@ -626,168 +78,429 @@
   </main>
 
   <script>
-    // Switch tabs based on URL hash changes
-    function showTab(hash) {
-      document.querySelectorAll('.projects-section').forEach(sec => {
-        sec.style.display = ('#' + sec.id === hash ? 'block' : 'none');
-      });
-      document.querySelectorAll('.projects-subnav a').forEach(link => {
-        link.classList.toggle('active', link.getAttribute('href') === hash);
-      });
+    /*
+      Preserves original class and tag names.
+      Fetches records from the API and renders:
+        - one filter button per Location Number (using the record that has "Filter Image")
+        - for a selected filter, all project records associated with that Location Number
+        - uses the same structure and class names so styles apply unchanged
+    */
+
+    // --- Slider classes (defensive, same DOM shape expected by your CSS) ---
+
+    class ThreeImageSlider {
+      constructor(containerId) {
+        this.container = document.getElementById(containerId);
+        if (!this.container) return;
+
+        this.sliderLine1 = this.container.querySelector('.slider-line-1') || this.container.querySelector('.slider-line.slider-line-1');
+        this.sliderLine2 = this.container.querySelector('.slider-line-2') || this.container.querySelector('.slider-line.slider-line-2');
+        this.sliderHandle1 = this.container.querySelector('.slider-handle-1') || this.container.querySelector('.slider-handle.slider-handle-1');
+        this.sliderHandle2 = this.container.querySelector('.slider-handle-2') || this.container.querySelector('.slider-handle.slider-handle-2');
+        this.beforeImage = this.container.querySelector('.before-image') || this.container.querySelector('.image-layer.before-image');
+        this.afterImage = this.container.querySelector('.after-image') || this.container.querySelector('.image-layer.after-image');
+
+        if (!this.sliderLine1 || !this.sliderLine2 || !this.sliderHandle1 || !this.sliderHandle2 || !this.beforeImage || !this.afterImage) {
+          console.warn('ThreeImageSlider missing elements for', containerId);
+          return;
+        }
+
+        this.isDragging = false;
+        this.activeSlider = null;
+        this.slider1Position = 33;
+        this.slider2Position = 66;
+
+        this.init();
+      }
+
+      init() {
+        this.bindEvents();
+        this.updateSliders();
+      }
+
+      bindEvents() {
+        this.sliderHandle1.addEventListener('mousedown', (e) => this.startDrag(e, 1));
+        this.sliderHandle2.addEventListener('mousedown', (e) => this.startDrag(e, 2));
+        document.addEventListener('mousemove', (e) => this.drag(e));
+        document.addEventListener('mouseup', () => this.stopDrag());
+
+        this.sliderHandle1.addEventListener('touchstart', (e) => this.startDrag(e, 1), { passive: false });
+        this.sliderHandle2.addEventListener('touchstart', (e) => this.startDrag(e, 2), { passive: false });
+        document.addEventListener('touchmove', (e) => this.drag(e), { passive: false });
+        document.addEventListener('touchend', () => this.stopDrag());
+      }
+
+      startDrag(e, sliderNumber) {
+        this.isDragging = true;
+        this.activeSlider = sliderNumber;
+        e.preventDefault();
+      }
+
+      drag(e) {
+        if (!this.isDragging) return;
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const rect = this.container.getBoundingClientRect();
+        const x = clientX - rect.left;
+        const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+        if (this.activeSlider === 1) this.slider1Position = percentage;
+        else if (this.activeSlider === 2) this.slider2Position = percentage;
+        this.updateSliders();
+      }
+
+      stopDrag() {
+        this.isDragging = false;
+        this.activeSlider = null;
+      }
+
+      updateSliders() {
+        this.sliderLine1.style.left = `${this.slider1Position}%`;
+        this.sliderLine2.style.left = `${this.slider2Position}%`;
+        this.beforeImage.style.clipPath = `polygon(0 0, ${this.slider1Position}% 0, ${this.slider1Position}% 100%, 0 100%)`;
+        const left = Math.min(this.slider1Position, this.slider2Position);
+        const right = Math.max(this.slider1Position, this.slider2Position);
+        this.afterImage.style.clipPath = `polygon(${left}% 0, ${right}% 0, ${right}% 100%, ${left}% 100%)`;
+      }
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      // Set default or based on hash
+    class TwoImageSlider {
+      constructor(containerId) {
+        this.container = document.getElementById(containerId);
+        if (!this.container) return;
+
+        this.sliderLine = this.container.querySelector('.two-slider-line') || this.container.querySelector('.two-slider-line');
+        this.sliderHandle = this.container.querySelector('.two-slider-handle') || this.container.querySelector('.two-slider-handle');
+        this.currentImage = this.container.querySelector('.current-image') || this.container.querySelector('.two-image-layer.current-image');
+
+        if (!this.sliderLine || !this.sliderHandle || !this.currentImage) {
+          console.warn('TwoImageSlider missing elements for', containerId);
+          return;
+        }
+
+        this.isDragging = false;
+        this.sliderPosition = 50;
+        this.init();
+      }
+
+      init() {
+        this.bindEvents();
+        this.updateSlider();
+      }
+
+      bindEvents() {
+        this.sliderHandle.addEventListener('mousedown', (e) => this.startDrag(e));
+        document.addEventListener('mousemove', (e) => this.drag(e));
+        document.addEventListener('mouseup', () => this.stopDrag());
+
+        this.sliderHandle.addEventListener('touchstart', (e) => this.startDrag(e), { passive: false });
+        document.addEventListener('touchmove', (e) => this.drag(e), { passive: false });
+        document.addEventListener('touchend', () => this.stopDrag());
+
+        this.container.addEventListener('click', (e) => {
+          if (e.target === this.sliderHandle) return;
+          const rect = this.container.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          this.sliderPosition = Math.max(0, Math.min(100, (x / rect.width) * 100));
+          this.updateSlider();
+        });
+      }
+
+      startDrag(e) {
+        this.isDragging = true;
+        this.container.style.cursor = 'grabbing';
+        e.preventDefault();
+      }
+
+      drag(e) {
+        if (!this.isDragging) return;
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const rect = this.container.getBoundingClientRect();
+        const x = clientX - rect.left;
+        this.sliderPosition = Math.max(0, Math.min(100, (x / rect.width) * 100));
+        this.updateSlider();
+      }
+
+      stopDrag() {
+        this.isDragging = false;
+        this.container.style.cursor = 'grab';
+      }
+
+      updateSlider() {
+        this.sliderLine.style.left = `${this.sliderPosition}%`;
+        this.currentImage.style.clipPath = `polygon(0 0, ${this.sliderPosition}% 0, ${this.sliderPosition}% 100%, 0 100%)`;
+      }
+    }
+
+    // --- DOM initialization and API-driven rendering ---
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const API_URL = 'http://localhost:3000/api/before-after';
+      const filtersRoot = document.getElementById('projectFilters');
+      const contentsRoot = document.getElementById('project-contents');
+      const tabBefore = document.getElementById('tab-before');
+      const tabReports = document.getElementById('tab-reports');
+      const btn = document.getElementById('theme-btn');
+      const picker = document.getElementById('theme-picker');
+
+      // Post theme to iframes (used when theme changes and when reports tab shown)
+      function postThemeToIframes(theme) {
+        document.querySelectorAll('iframe').forEach(iframe => {
+          try { iframe.contentWindow.postMessage({ type: 'theme-change', theme }, '*'); } catch (err) {}
+        });
+      }
+
+      // Keep tabs behavior (single implementation)
+      function showTab(hash) {
+        const target = hash || '#before-after';
+        document.querySelectorAll('.projects-section').forEach(sec => {
+          sec.style.display = ('#' + sec.id === target) ? 'block' : 'none';
+        });
+        document.querySelectorAll('.projects-subnav a').forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === target);
+        });
+        if (target === '#reports') {
+          postThemeToIframes(localStorage.getItem('theme') || 'default');
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
       const initialHash = (window.location.hash === '#reports') ? '#reports' : '#before-after';
       showTab(initialHash);
 
-      // Listen to URL hash changes (e.g. back/forward)
+      tabBefore.addEventListener('click', e => { e.preventDefault(); window.location.hash = '#before-after'; });
+      tabReports.addEventListener('click', e => { e.preventDefault(); window.location.hash = '#reports'; });
       window.addEventListener('hashchange', () => showTab(window.location.hash));
 
-      // Handle clicks to update hash
-      document.getElementById('tab-before').addEventListener('click', e => {
-        e.preventDefault();
-        window.location.hash = '#before-after';
-      });
-      document.getElementById('tab-reports').addEventListener('click', e => {
-        e.preventDefault();
-        window.location.hash = '#reports';
-      });
-      // Hide all project sections at load
-      // filterSections.forEach(section => {
-      //   section.style.display = 'none';
-      // });
-      // filterButtons.forEach(b => b.classList.remove('active'));
-      filterSections.forEach(section => {
-        section.style.display = (section.dataset.type === "S1A, S1B, S46") ? "block" : "none";
-      });
-
-      filterButtons.forEach(button => {
-        button.classList.toggle("active", button.dataset.filter === "S1A, S1B, S46");
-      });
-    });
-
-    // Project filter buttons logic
-    const filterButtons = document.querySelectorAll('.project-filter-btn');
-    const filterSections = document.querySelectorAll('.project-filter-section');
-
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const selected = button.dataset.filter;
-
-        filterButtons.forEach(b => b.classList.remove('active'));
-        button.classList.add('active');
-
-        filterSections.forEach(section => {
-          section.style.display = (section.dataset.type === selected) ? 'block' : 'none';
+      // Theme picker (guarded)
+      if (btn && picker) {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          picker.classList.toggle('active');
+          btn.setAttribute('aria-expanded', picker.classList.contains('active'));
+          picker.setAttribute('aria-hidden', !picker.classList.contains('active'));
         });
-      });
-    });
 
-    // Subnav tabs switch logic
-    const tabs = document.querySelectorAll('.projects-subnav a');
-    const sections = document.querySelectorAll('main > section');
+        document.addEventListener('click', e => {
+          if (!e.target.closest('.dropdown')) {
+            picker.classList.remove('active');
+            btn.setAttribute('aria-expanded', 'false');
+            picker.setAttribute('aria-hidden', 'true');
+          }
+        });
 
-    // tabs.forEach(tab => {
-    //   tab.addEventListener('click', (e) => {
-    //     e.preventDefault();
+        picker.addEventListener('click', e => {
+          const t = e.target.dataset.theme;
+          if (t) {
+            document.documentElement.setAttribute('data-theme', t);
+            localStorage.setItem('theme', t);
+            picker.classList.remove('active');
+            btn.setAttribute('aria-expanded', 'false');
+            picker.setAttribute('aria-hidden', 'true');
+            postThemeToIframes(t);
+          }
+        });
 
-    //     const targetId = tab.getAttribute('href').substring(1);
+        const saved = localStorage.getItem('theme') || 'default';
+        document.documentElement.setAttribute('data-theme', saved);
+      }
 
-    //     tabs.forEach(t => t.classList.remove('active'));
-    //     tab.classList.add('active');
+      // Send initial theme to iframes when page loads (best-effort)
+      postThemeToIframes(localStorage.getItem('theme') || 'default');
 
-    //     sections.forEach(s => {
-    //       s.style.display = (s.id === targetId) ? 'block' : 'none';
-    //     });
-    //   });
-    // });
-
-    function showTab(hash) {
-      document.querySelectorAll('.projects-section').forEach(sec => {
-        sec.style.display = ('#' + sec.id === hash ? 'block' : 'none');
-      });
-      document.querySelectorAll('.projects-subnav a').forEach(link => {
-        link.classList.toggle('active', link.getAttribute('href') === hash);
-      });
-
-      // Scroll to top when tab changes
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // Theme dropdown behavior
-    const btn = document.getElementById('theme-btn');
-    const picker = document.getElementById('theme-picker');
-
-    if (btn && picker) {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        picker.classList.toggle('active');
-      });
-
-      document.addEventListener('click', e => {
-        if (!e.target.closest('.dropdown')) {
-          picker.classList.remove('active');
+      // Fetch API and render UI preserving original class names
+      (async function fetchAndRender() {
+        let records = [];
+        try {
+          const res = await fetch(API_URL, { cache: 'no-store' });
+          if (!res.ok) throw new Error('Fetch failed: ' + res.status);
+          records = await res.json();
+        } catch (err) {
+          console.error('Projects fetch error', err);
+          contentsRoot.innerHTML = '<p class="error">Could not load projects.</p>';
+          return;
         }
-      });
 
-      picker.addEventListener('click', e => {
-        const t = e.target.dataset.theme;
-        if (t) {
-          document.documentElement.setAttribute('data-theme', t);
-          localStorage.setItem('theme', t);
-          picker.classList.remove('active');
+        // Normalize API keys with spaces into short keys we use
+        function get(r, key) { return (r && Object.prototype.hasOwnProperty.call(r, key)) ? r[key] : null; }
+
+        // Group by Project Name then by Location Number
+        const projects = new Map();
+        records.forEach(r => {
+          const projectName = get(r, 'Project Name') || 'Unnamed Project';
+          const locNumber = get(r, 'Location Number') || 'Unknown';
+          if (!projects.has(projectName)) projects.set(projectName, { name: projectName, description: null, locMap: new Map() });
+          const proj = projects.get(projectName);
+          if (!proj.description && get(r, 'Project DEscription')) proj.description = get(r, 'Project DEscription');
+          if (!proj.locMap.has(locNumber)) proj.locMap.set(locNumber, []);
+          proj.locMap.get(locNumber).push(r);
+        });
+
+        // Build location -> items index (one filter per Location Number)
+        const locationIndex = new Map();
+        projects.forEach((proj, projectName) => {
+          proj.locMap.forEach((recordsForLoc, locNumber) => {
+            if (!locationIndex.has(locNumber)) locationIndex.set(locNumber, { filterImage: null, items: [] });
+            const locEntry = locationIndex.get(locNumber);
+            const filterRec = recordsForLoc.find(rr => get(rr, 'Filter Image'));
+            if (!locEntry.filterImage && filterRec) locEntry.filterImage = get(filterRec, 'Filter Image');
+            locEntry.items.push({
+              projectName: proj.name,
+              description: proj.description,
+              records: recordsForLoc.slice()
+            });
+          });
+        });
+
+        const locations = Array.from(locationIndex.entries()).map(([locNumber, data]) => ({
+          locationNumber: locNumber,
+          filterImage: data.filterImage,
+          items: data.items
+        }));
+
+        // Render filter buttons (use same classes)
+        filtersRoot.innerHTML = locations.map((loc, idx) => {
+          const imgHtml = loc.filterImage ? `<img src="${loc.filterImage}" alt="${loc.locationNumber}" loading="lazy">` : '';
+          return `
+            <button class="project-filter-btn ${idx===0 ? 'active' : ''}" data-filter="${loc.locationNumber}" data-loc-index="${idx}">
+              <div class="image-area">${imgHtml}</div>
+              <div class="label">${loc.locationNumber}</div>
+            </button>
+          `;
+        }).join('');
+
+        // Render function: builds nodes using exact class names
+        function renderLocation(index) {
+          const loc = locations[index];
+          if (!loc) return;
+          contentsRoot.innerHTML = '';
+          loc.items.forEach((projItem) => {
+            // If project has a description, insert it once using same wrapper class
+            if (projItem.description) {
+              const p = document.createElement('div');
+              p.className = 'project-filter-section';
+              p.dataset.type = loc.locationNumber;
+              p.innerHTML = `<h3>${projItem.projectName}</h3><p>${projItem.description}</p>`;
+              contentsRoot.appendChild(p);
+            }
+
+            projItem.records.forEach((rec, recIdx) => {
+              const before = get(rec, 'Before Image');
+              const after = get(rec, 'After Image');
+              const proposal = get(rec, 'Proposal Image');
+              const current = get(rec, 'Current Image');
+
+              const isThree = !!before && !!after && !!proposal;
+              const section = document.createElement('div');
+              section.className = 'project-filter-section';
+              section.dataset.type = loc.locationNumber;
+              section.innerHTML = `<h3>${projItem.projectName}</h3>`;
+
+              if (isThree) {
+                const uniqueBase = 'three_' + loc.locationNumber + '_' + projItem.projectName.replace(/\s+/g, '_') + '_' + recIdx;
+                const sliderId = `sliderContainer_${uniqueBase}`;
+                section.innerHTML += `
+                  <div class="container">
+                    <div class="slider-container" id="${sliderId}">
+                      <div class="instructions">Drag the sliders to compare all three stages</div>
+                      <div class="image-layer proposal-image">
+                        <img src="${proposal}" alt="Proposal" loading="lazy">
+                        <div class="label proposal-label">Proposal</div>
+                      </div>
+                      <div class="image-layer after-image" id="${sliderId}_after">
+                        <img src="${after}" alt="After" loading="lazy">
+                        <div class="label after-label">After</div>
+                      </div>
+                      <div class="image-layer before-image" id="${sliderId}_before">
+                        <img src="${before}" alt="Before" loading="lazy">
+                        <div class="label before-label">Before</div>
+                      </div>
+                      <div class="slider-line slider-line-1" style="left: 33%;">
+                        <div class="slider-handle slider-handle-1"></div>
+                      </div>
+                      <div class="slider-line slider-line-2" style="left: 66%;">
+                        <div class="slider-handle slider-handle-2"></div>
+                      </div>
+                    </div>
+                  </div>
+                `;
+              } else {
+                const leftSrc = current || before || '';
+                const rightSrc = proposal || after || '';
+                const leftLabel = current ? 'Current' : 'Before';
+                const rightLabel = proposal ? 'Proposal' : 'After';
+                const uniqueBase = 'two_' + loc.locationNumber + '_' + projItem.projectName.replace(/\s+/g, '_') + '_' + recIdx;
+                const twoId = `twoImageSlider_${uniqueBase}`;
+                section.innerHTML += `
+                  <div class="container">
+                    <div class="two-image-slider-container" id="${twoId}">
+                      <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
+                      <div class="two-image-layer proposal-image">
+                        <img src="${rightSrc}" alt="${rightLabel}" loading="lazy">
+                        <div class="two-image-label proposal-label">${rightLabel}</div>
+                      </div>
+                      <div class="two-image-layer current-image" id="${twoId}_current">
+                        <img src="${leftSrc}" alt="${leftLabel}" loading="lazy">
+                        <div class="two-image-label current-label">${leftLabel}</div>
+                      </div>
+                      <div class="two-slider-line" style="left: 50%;">
+                        <div class="two-slider-handle"></div>
+                      </div>
+                    </div>
+                  </div>
+                `;
+              }
+
+              contentsRoot.appendChild(section);
+            });
+          });
+          initSlidersIn(contentsRoot);
         }
-      });
-    }
 
-    // Apply saved theme on load
-    window.addEventListener('DOMContentLoaded', () => {
-      const saved = localStorage.getItem('theme') || 'default';
-      document.documentElement.setAttribute('data-theme', saved);
+        // Initialize first location by default
+        renderLocation(0);
+
+        // Filter button interactions (delegated)
+        filtersRoot.addEventListener('click', (e) => {
+          const btn = e.target.closest('.project-filter-btn');
+          if (!btn) return;
+          const filter = btn.dataset.filter;
+          const idx = locations.findIndex(l => l.locationNumber === filter);
+          if (idx === -1) return;
+          filtersRoot.querySelectorAll('.project-filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderLocation(idx);
+          // ensure before-after tab is visible when selecting a filter
+          window.location.hash = '#before-after';
+        });
+
+        // Utility: initialize sliders within a container
+        function initSlidersIn(rootEl) {
+          // Two-image sliders
+          rootEl.querySelectorAll('.two-image-slider-container').forEach(container => {
+            if (!container.id) {
+              container.id = 'twoImageSlider_auto_' + Math.random().toString(36).slice(2, 9);
+            }
+            const line = container.querySelector('.two-slider-line');
+            if (line && !line.id) line.id = 'twoSliderLine_' + container.id;
+            const handle = container.querySelector('.two-slider-handle');
+            if (handle && !handle.id) handle.id = 'twoSliderHandle_' + container.id;
+            try { new TwoImageSlider(container.id); } catch (err) { console.warn('TwoImageSlider init failed', err); }
+          });
+
+          // Three-image sliders
+          rootEl.querySelectorAll('.slider-container').forEach(container => {
+            if (!container.id) container.id = 'sliderContainer_auto_' + Math.random().toString(36).slice(2, 9);
+            try { new ThreeImageSlider(container.id); } catch (err) { console.warn('ThreeImageSlider init failed', err); }
+          });
+        }
+
+      })(); // end fetchAndRender
     });
+    // --- end DOMContentLoaded initializer ---
 
-    // Placeholder translation logic
+    // placeholder translation function to match original
     function translate() {
       alert('Arabic translation logic goes here.');
     }
-
-
-    // Modify the theme picker click event to send messages to iframes
-    picker.addEventListener('click', e => {
-      const t = e.target.dataset.theme;
-      if (t) {
-        document.documentElement.setAttribute('data-theme', t);
-        localStorage.setItem('theme', t);
-        picker.classList.remove('active');
-
-        // Send theme to all iframes
-        const iframes = document.querySelectorAll('iframe');
-        iframes.forEach(iframe => {
-          iframe.contentWindow.postMessage({
-            type: 'theme-change',
-            theme: t
-          }, '*');
-        });
-      }
-    });
-
-    // Send initial theme to iframes when they load
-    window.addEventListener('DOMContentLoaded', () => {
-      const saved = localStorage.getItem('theme') || 'default';
-      document.documentElement.setAttribute('data-theme', saved);
-
-      // Wait for iframes to load before sending theme
-      const iframes = document.querySelectorAll('iframe');
-      iframes.forEach(iframe => {
-        iframe.addEventListener('load', () => {
-          iframe.contentWindow.postMessage({
-            type: 'theme-change',
-            theme: saved
-          }, '*');
-        });
-      });
-    });
   </script>
 
   <footer>

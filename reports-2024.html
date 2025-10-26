@@ -48,83 +48,26 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        /* Fullscreen popup */
-        .popup-overlay {
-            display: none;
-            /* Hidden by default */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .main-image {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-
-        .nav-arrow {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .nav-arrow:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .nav-arrow.prev {
-            left: 30px;
-        }
-
-        .nav-arrow.next {
-            right: 30px;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            background: rgba(255, 68, 68, 0.8);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 50px;
-            font-size: 18px;
-            cursor: pointer;
-        }
-
-        .close-btn:hover {
-            background: rgba(255, 68, 68, 1);
+        /* thumbnail sizing kept consistent */
+        .thumb-cell img {
+            width: 100px;
+            height: 100px;
+            display: block;
+            object-fit: cover;
         }
     </style>
     <script>
-        // Listen for theme changes from parent
+        // Listen for theme messages from parent (optional)
         window.addEventListener('message', (event) => {
-            if (event.data.type === 'theme-change') {
+            if (event.data && event.data.type === 'theme-change') {
                 document.documentElement.setAttribute('data-theme', event.data.theme);
                 localStorage.setItem('theme', event.data.theme);
             }
         });
 
-        // Request theme on load
+        // Request parent theme if embedded
         window.addEventListener('DOMContentLoaded', () => {
-            window.parent.postMessage({ type: 'request-theme' }, '*');
+            try { window.parent.postMessage({ type: 'request-theme' }, '*'); } catch (e) { /* ignore */ }
         });
     </script>
 </head>
@@ -150,9 +93,9 @@
             <tbody>
                 <tr data-year="2024">
                     <td>1</td>
-                    <td colspan="2">
-                        <img src="https://i.postimg.cc/L5Sh4dL2/fence6.jpg" class="gallery-thumbnail"
-                            data-gallery="row1" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="https://i.postimg.cc/L5Sh4dL2/fence6.jpg" class="gallery-thumbnail" data-gallery="row1"
+                            width="100" height="100" alt="Inner Fence thumbnail">
                     </td>
                     <td>Inner Fence</td>
                     <td>Planting ornamental trees</td>
@@ -166,9 +109,10 @@
 
                 <tr data-year="2024">
                     <td>2</td>
-                    <td colspan="2">
-                        <img src="https://i.postimg.cc/qqmt1bh3/main-gate-entrance-2.jpg" class="gallery-thumbnail"
-                            data-gallery="row2" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="https://i.postimg.cc/qqmt1bh3/main-gate-entrance-2.jpg" class="gallery-thumbnail" data-gallery="row2"
+                            width="100" height="100" alt="Main Gate thumbnail">
+                    </td>
                     <td>Main Gate</td>
                     <td>Landscape redevelopment of entrance and exit zones</td>
                     <td>—</td>
@@ -181,8 +125,10 @@
 
                 <tr data-year="2024">
                     <td>3</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row3" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row3" width="100" height="100"
+                            alt="Area Behind the Mosque thumbnail">
+                    </td>
                     <td>Area Behind the Mosque</td>
                     <td>Landscape planting with ornamental and fruit-bearing species</td>
                     <td>4,505 m²</td>
@@ -197,8 +143,9 @@
 
                 <tr data-year="2024">
                     <td>4</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row4" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row4" width="100" height="100"
+                            alt="Internal Ring Road thumbnail">
                     </td>
                     <td>Internal Ring Road</td>
                     <td>Removal of invasive and degraded trees; sustainable replanting</td>
@@ -214,8 +161,9 @@
 
                 <tr data-year="2024">
                     <td>5</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row5" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row5" width="100" height="100"
+                            alt="Academic Villas Area thumbnail">
                     </td>
                     <td>Academic Villas Area</td>
                     <td>Landscape preparation opposite the faculty villas</td>
@@ -229,8 +177,9 @@
 
                 <tr data-year="2024">
                     <td>6</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row6" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row6" width="100" height="100"
+                            alt="Basement Entrance thumbnail">
                     </td>
                     <td>Basement Entrance – Administration Building</td>
                     <td>Landscape planting and area development</td>
@@ -244,8 +193,9 @@
 
                 <tr data-year="2024">
                     <td>7</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row7" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row7" width="100" height="100"
+                            alt="Staff Affairs Building Area thumbnail">
                     </td>
                     <td>Staff Affairs Building Area</td>
                     <td>Removal of unsuitable random trees</td>
@@ -259,8 +209,9 @@
 
                 <tr data-year="2024">
                     <td>8</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row8" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row8" width="100" height="100"
+                            alt="Courtyard opposite S17 thumbnail">
                     </td>
                     <td>Courtyard opposite S17 &amp; E-Learning Building</td>
                     <td>Removal of unsuitable random trees</td>
@@ -274,8 +225,9 @@
 
                 <tr data-year="2024">
                     <td>9</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row9" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row9" width="100" height="100"
+                            alt="Student Parking – College of Law thumbnail">
                     </td>
                     <td>Student Parking – College of Law</td>
                     <td>Tree planting for parking area</td>
@@ -289,8 +241,9 @@
 
                 <tr data-year="2024">
                     <td>10</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row10" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row10" width="100" height="100"
+                            alt="External Courtyard – College of Law thumbnail">
                     </td>
                     <td>External Courtyard – College of Law</td>
                     <td>Removal of unsuitable trees and replanting</td>
@@ -304,8 +257,9 @@
 
                 <tr data-year="2024">
                     <td>11</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row11" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row11" width="100" height="100"
+                            alt="Courtyard behind Admissions & Registration thumbnail">
                     </td>
                     <td>Courtyard behind Admissions & Registration</td>
                     <td>Removal of unsuitable trees</td>
@@ -319,8 +273,9 @@
 
                 <tr data-year="2024">
                     <td>12</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row12" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row12" width="100" height="100"
+                            alt="Courtyard behind Student Affairs Deanship thumbnail">
                     </td>
                     <td>Courtyard behind Student Affairs Deanship</td>
                     <td>Removal of unsuitable trees; landscape rehabilitation</td>
@@ -334,8 +289,9 @@
 
                 <tr data-year="2024">
                     <td>13</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row13" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row13" width="100" height="100"
+                            alt="Entrance – College of Business Administration thumbnail">
                     </td>
                     <td>Entrance – College of Business Administration</td>
                     <td>Landscape planting and rehabilitation</td>
@@ -349,8 +305,9 @@
 
                 <tr data-year="2024">
                     <td>14</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row14" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row14" width="100" height="100"
+                            alt="Entrance – College of Arts thumbnail">
                     </td>
                     <td>Entrance – College of Arts</td>
                     <td>Landscape planting and rehabilitation</td>
@@ -364,8 +321,9 @@
 
                 <tr data-year="2024">
                     <td>15</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row15" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row15" width="100" height="100"
+                            alt="Roman Amphitheater thumbnail">
                     </td>
                     <td>Roman Amphitheater</td>
                     <td>Removal of unsuitable vegetation; landscape rehabilitation</td>
@@ -379,8 +337,9 @@
 
                 <tr data-year="2024">
                     <td>16</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row16" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row16" width="100" height="100"
+                            alt="Western Gate Entrance thumbnail">
                     </td>
                     <td>Western Gate Entrance</td>
                     <td>Tree planting for entry landscape</td>
@@ -394,8 +353,9 @@
 
                 <tr data-year="2024">
                     <td>17</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row17" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row17" width="100" height="100"
+                            alt="Student Parking – Western Gate thumbnail">
                     </td>
                     <td>Student Parking – Western Gate</td>
                     <td>Tree planting for parking landscape</td>
@@ -409,8 +369,9 @@
 
                 <tr data-year="2024">
                     <td>18</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row18" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row18" width="100" height="100"
+                            alt="Behind Restaurants Complex S51 thumbnail">
                     </td>
                     <td>Behind Restaurants Complex S51</td>
                     <td>Removal of unsuitable trees; rehabilitation of landscape area</td>
@@ -424,8 +385,9 @@
 
                 <tr data-year="2024">
                     <td>19</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row19" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row19" width="100" height="100"
+                            alt="Behind Khanji Hall thumbnail">
                     </td>
                     <td>Behind Khanji Hall</td>
                     <td>Removal of unsuitable trees; rehabilitation of landscape area</td>
@@ -439,8 +401,9 @@
 
                 <tr data-year="2024">
                     <td>20</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row20" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row20" width="100" height="100"
+                            alt="Area behind the Track thumbnail">
                     </td>
                     <td>Area behind the Track</td>
                     <td>Removal of unsuitable trees; rehabilitation and planting</td>
@@ -455,8 +418,9 @@
 
                 <tr data-year="2024">
                     <td>21</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row21" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row21" width="100" height="100"
+                            alt="Student Parking – Eastern Gate thumbnail">
                     </td>
                     <td>Student Parking – Eastern Gate</td>
                     <td>Removal of unsuitable trees; rehabilitation and planting</td>
@@ -470,8 +434,9 @@
 
                 <tr data-year="2024">
                     <td>22</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row22" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row22" width="100" height="100"
+                            alt="Hall S18 thumbnail">
                     </td>
                     <td>Hall S18</td>
                     <td>Landscape planting and rehabilitation</td>
@@ -485,8 +450,9 @@
 
                 <tr data-year="2024">
                     <td>23</td>
-                    <td colspan="2">
-                        <img src="" class="gallery-thumbnail" data-gallery="row23" width="100" height="100">
+                    <td colspan="2" class="thumb-cell">
+                        <img src="" class="gallery-thumbnail" data-gallery="row23" width="100" height="100"
+                            alt="Administration Building Surroundings thumbnail">
                     </td>
                     <td>Administration Building Surroundings</td>
                     <td>Landscape planting and area rehabilitation</td>
@@ -501,80 +467,68 @@
         </table>
     </div>
 
-    <!-- Fullscreen popup -->
-    <div id="galleryPopup" class="popup-overlay">
-        <button class="close-btn" onclick="closeGallery()">✕</button>
-        <button class="nav-arrow prev" onclick="previousImage()">‹</button>
-        <img id="mainImage" class="main-image" src="">
-        <button class="nav-arrow next" onclick="nextImage()">›</button>
-    </div>
-
     <script>
-        const galleries = {
-            row1: ['https://i.postimg.cc/vTvTcPLj/fence2.jpg', 'https://i.postimg.cc/x8QqjrHp/fence3.jpg', 'https://i.postimg.cc/L5Sh4dL2/fence6.jpg', 'https://i.postimg.cc/wMz3xKLp/fence7.jpg'],
-            row2: ['https://i.postimg.cc/qqmt1bh3/main-gate-entrance-2.jpg', 'https://i.postimg.cc/x8sk6xJH/main-gate-entrance-3.jpg', 'https://i.postimg.cc/90x4L8Rd/main-gate-entrance-7.jpg', 'https://i.postimg.cc/1XWgvCnF/main-gate-exit.jpg',],
-            row3: ["images/row3-1.jpg", "images/row3-2.jpg"],
-            row4: ["images/row4-1.jpg", "images/row4-2.jpg", "images/row4-3.jpg"],
-            row5: ["images/row5-1.jpg", "images/row5-2.jpg"],
-            row6: ["images/row6-1.jpg", "images/row6-2.jpg"],
-            row7: ["images/row7-1.jpg", "images/row7-2.jpg"],
-            row8: ["images/row8-1.jpg", "images/row8-2.jpg"],
-            row9: ["images/row9-1.jpg", "images/row9-2.jpg"],
-            row10: ["images/row10-1.jpg", "images/row10-2.jpg"],
-            row11: ["images/row11-1.jpg", "images/row11-2.jpg"],
-            row12: ["images/row12-1.jpg", "images/row12-2.jpg"],
-            row13: ["images/row13-1.jpg", "images/row13-2.jpg"],
-        };
+        /* Loads only first image for each table row from the API where Year === 2024 and Record Number matches the row number.
+           Leaves all table content untouched. Clicking a thumbnail opens reportImages.html?year=2024&record=X
+        */
+        (function () {
+            const API_ENDPOINT = 'http://localhost:3000/api/reportImages';
+            const TARGET_YEAR = 2024;
 
-        const galleryPopup = document.getElementById('galleryPopup');
-        const mainImage = document.getElementById('mainImage');
-        let currentGallery = [];
-        let currentIndex = 0;
-        let slideshowInterval = null;
-
-        document.querySelectorAll('.gallery-thumbnail').forEach(img => {
-            img.addEventListener('click', () => {
-                const galleryName = img.dataset.gallery;
-                currentGallery = galleries[galleryName];
-                currentIndex = 0;
-                showImage();
-                galleryPopup.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-
-                // Start slideshow
-                slideshowInterval = setInterval(() => {
-                    nextImage();
-                }, 4000);
-            });
-        });
-
-        function showImage() {
-            mainImage.src = currentGallery[currentIndex];
-        }
-
-        function nextImage() {
-            currentIndex = (currentIndex + 1) % currentGallery.length;
-            showImage();
-        }
-
-        function previousImage() {
-            currentIndex = (currentIndex - 1 + currentGallery.length) % currentGallery.length;
-            showImage();
-        }
-
-        function closeGallery() {
-            galleryPopup.style.display = 'none';
-            document.body.style.overflow = '';
-            clearInterval(slideshowInterval); // stop slideshow
-        }
-
-        document.addEventListener('keydown', e => {
-            if (galleryPopup.style.display === 'flex') {
-                if (e.key === 'Escape') closeGallery();
-                if (e.key === 'ArrowRight') nextImage();
-                if (e.key === 'ArrowLeft') previousImage();
+            function getFirstImage(rec) {
+                for (let i = 1; i <= 20; i++) {
+                    const k = 'Image ' + i;
+                    if (rec[k] && typeof rec[k] === 'string' && rec[k].trim()) return rec[k].trim();
+                }
+                return '';
             }
-        });
+
+            async function initThumbnails() {
+                let data;
+                try {
+                    const res = await fetch(API_ENDPOINT);
+                    if (!res.ok) throw new Error('Network response not ok');
+                    data = await res.json();
+                } catch (e) {
+                    console.error('Failed to fetch API', e);
+                    return;
+                }
+
+                const map = {};
+                if (Array.isArray(data)) {
+                    data.forEach(rec => {
+                        if (Number(rec.Year) === TARGET_YEAR && rec['Record Number'] != null) {
+                            map[String(Number(rec['Record Number']))] = rec;
+                        }
+                    });
+                }
+
+                document.querySelectorAll('.gallery-thumbnail').forEach(img => {
+                    const gallery = img.dataset.gallery; // expects data-gallery="rowX"
+                    if (!gallery) return;
+                    const m = gallery.match(/row(\d+)/i);
+                    if (!m) return;
+                    const recordNum = String(Number(m[1]));
+                    const rec = map[recordNum];
+                    const first = rec ? getFirstImage(rec) : '';
+
+                    if (first) img.src = first; // replace only the image src
+
+                    img.style.cursor = 'pointer';
+                    // remove existing listeners defensively by cloning node
+                    const newImg = img.cloneNode(true);
+                    img.parentNode.replaceChild(newImg, img);
+
+                    newImg.addEventListener('click', (ev) => {
+                        ev.preventDefault();
+                        const params = new URLSearchParams({ year: String(TARGET_YEAR), record: recordNum });
+                        window.location.href = 'reportImages.html?' + params.toString();
+                    });
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', initThumbnails);
+        })();
     </script>
 
 </body>

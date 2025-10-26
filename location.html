@@ -82,11 +82,16 @@
         e.preventDefault();
         window.location.hash = '#Suggestions';
       });
-      // Hide all project sections at load
-      filterSections.forEach(section => {
-        section.style.display = 'none';
-      });
-      filterButtons.forEach(b => b.classList.remove('active'));
+
+      // defensive: if filterSections/filterButtons undefined, skip
+      try {
+        filterSections.forEach(section => {
+          section.style.display = 'none';
+        });
+        filterButtons.forEach(b => b.classList.remove('active'));
+      } catch (err) {
+        // ignore if those variables don't exist
+      }
     });
 
     // Subnav tabs switch logic
@@ -153,7 +158,6 @@
             <span class="search-icon">🔍</span>
             <input type="text" id="searchInput" placeholder="Search by title..." oninput="filterGrid()" />
           </div>
-
         </div>
         <div class="filters">
           <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
@@ -161,7 +165,7 @@
             <option value="A-Z">A-Z</option>
           </select>
 
-          <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
+          <select class="filter-btn" id="plant-filter-type" onchange="filterPlants(this.value)">
             <option value="" disabled selected>Filter by Type</option>
             <option value="trees">Trees</option>
             <option value=""></option>
@@ -204,19 +208,10 @@
 
     <section id="Suggestions" class="building-section">
       <h1>Suggestions</h1>
-      <iframe width="640" height="360" src="https://www.youtube.com/embed/Yrwp9737DZs" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
 
-      <a href="https://www.youtube.com/watch?v=IPq6kbMZeA8" target="_blank">
-        <img src="https://img.youtube.com/vi/IPq6kbMZeA8/0.jpg" alt="Video Thumbnail" width="640" height="360">
-      </a>
-
-      <iframe width="640" height="360" src="https://www.youtube.com/embed/M3hbEad82cM" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen>
-      </iframe>
+      <div id="proposals-container" class="proposals-container">
+        <!-- Proposal videos for this location will be injected here -->
+      </div>
 
     </section>
   </main>
@@ -292,9 +287,14 @@
 
       try {
         const response = await fetch(endpoint);
+        if (!response.ok) {
+          console.error('Failed to load indoor plants:', response.status);
+          return;
+        }
         const plants = await response.json();
 
         const grid = document.querySelector("#Plants .grid-container");
+        if (!grid) return;
         grid.innerHTML = "";
 
         if (!plants.length) {
@@ -306,19 +306,109 @@
           const card = document.createElement("a");
           card.className = "grid-item";
           card.href = `indoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
+          const img = plant.Image || 'placeholder.jpg';
+          const common = plant['Common name'] || 'Unknown';
+          const scientific = plant['Scientific name'] || '';
           card.innerHTML = `
-  <img src="${plant.Image}" alt="${plant['Common name']}">
-  <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
+  <img src="${img}" alt="${common}">
+  <h3>${common} <br><small>(${scientific})</small></h3>
 `;
           grid.appendChild(card);
-
         });
       } catch (err) {
         console.error("Error loading indoor plants:", err);
       }
     }
 
-    window.addEventListener("DOMContentLoaded", loadIndoorPlantsForLocation);
+    // Load proposal videos for the Suggestions tab based on Location number
+    async function loadProposalsForLocation() {
+      const params = new URLSearchParams(window.location.search);
+      const locationId = params.get("id"); // expecting location number like S1A or S2
+      const proposalsContainer = document.getElementById('proposals-container');
+
+      // Clear container first
+      if (!proposalsContainer) return;
+      proposalsContainer.innerHTML = '';
+
+      if (!locationId) {
+        proposalsContainer.innerHTML = `<p class="no-proposals">No Location number provided in URL.</p>`;
+        return;
+      }
+
+      const endpoint = 'http://localhost:3000/api/proposals';
+
+      try {
+        const res = await fetch(endpoint);
+        if (!res.ok) {
+          console.error('Failed to fetch proposals:', res.status);
+          proposalsContainer.innerHTML = `<p class="no-proposals">Unable to load proposals for ${locationId}.</p>`;
+          return;
+        }
+        const data = await res.json();
+
+        // Normalize and match by Location number (exact match)
+        const matched = data.filter(item => {
+          const itemLoc = (item['Location number'] || item['Location Number'] || '').trim();
+          return itemLoc === locationId;
+        });
+
+        if (!matched.length) {
+          proposalsContainer.innerHTML = `<p class="no-proposals">No proposals for ${locationId}.</p>`;
+          return;
+        }
+
+        // Create video cards preserving existing class names and structure
+        matched.forEach((p, idx) => {
+          const wrapper = document.createElement('div');
+          wrapper.className = 'proposal-item';
+
+          const videoUrl = (p['Proposal Video'] || p['proposal video'] || '').trim();
+          let embedSrc = videoUrl;
+          try {
+            if (videoUrl && !videoUrl.includes('/embed/')) {
+              const ytMatch = videoUrl.match(/(?:v=|\/watch\?v=|youtu\.be\/|\/v\/|\/embed\/)([A-Za-z0-9_-]{6,})/);
+              if (ytMatch && ytMatch[1]) {
+                embedSrc = `https://www.youtube.com/embed/${ytMatch[1]}`;
+              }
+            }
+          } catch (e) {
+            // leave embedSrc as videoUrl
+          }
+
+          if (!embedSrc) return;
+
+          const iframe = document.createElement('iframe');
+          iframe.width = '640';
+          iframe.height = '360';
+          iframe.src = embedSrc;
+          iframe.frameBorder = '0';
+          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+          iframe.allowFullscreen = true;
+          iframe.referrerPolicy = 'no-referrer';
+
+          const caption = document.createElement('div');
+          caption.className = 'proposal-caption';
+          const locName = p['Location name'] || p['Location Name'] || '';
+          const projectName = p['Project name'] || p['Project Name'] || '';
+          caption.innerHTML = `<h3>${locName || locationId} <small>${locationId}</small></h3><p>${projectName || ''}</p>`;
+
+          wrapper.appendChild(iframe);
+          wrapper.appendChild(caption);
+
+          proposalsContainer.appendChild(wrapper);
+        });
+
+      } catch (err) {
+        console.error('Error fetching proposals:', err);
+        proposalsContainer.innerHTML = `<p class="no-proposals">Unable to load proposals for ${locationId}.</p>`;
+      }
+    }
+
+    // Initialize both loaders when DOM is ready
+    window.addEventListener('DOMContentLoaded', () => {
+      loadIndoorPlantsForLocation();
+      loadProposalsForLocation();
+    });
   </script>
 
 

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <title>Outdoor Plant Details</title>
@@ -32,63 +31,122 @@
     }
   </style>
 </head>
-
 <body>
   <button class="back-button" onclick="history.back()">← Back</button>
+
   <div id="plantDetails" class="plant-details-container"></div>
 
+  <!-- Image modal -->
+  <div id="imageModal" class="image-modal" aria-hidden="true" role="dialog" aria-label="Enlarged image">
+    <div class="modal-content" role="document">
+      <button class="close-modal" id="closeModal" aria-label="Close enlarged image">✕</button>
+      <img id="modalImage" alt="" />
+    </div>
+  </div>
+
   <script>
-    const params = new URLSearchParams(window.location.search);
-    const plantId = params.get("id");
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const plantId = params.get("id");
+      const plantDetails = document.getElementById("plantDetails");
+      const imageModal = document.getElementById("imageModal");
+      const modalImage = document.getElementById("modalImage");
+      const closeModal = document.getElementById("closeModal");
 
-    fetch("http://localhost:3000/api/outdoor-plants")
-      .then(res => res.json())
-      .then(plants => {
-        const plant = plants.find(p => p["Plant ID"] === plantId);
-        if (!plant) {
-          document.getElementById("plantDetails").innerHTML = "<p>Plant not found.</p>";
-          return;
-        }
+      function openModal(src, alt) {
+        modalImage.src = src || '';
+        modalImage.alt = alt || '';
+        imageModal.classList.add('open');
+        imageModal.setAttribute('aria-hidden', 'false');
+        closeModal.focus();
+        document.body.style.overflow = 'hidden';
+      }
 
-        const bgImage = plant.Image || '';
-        document.body.style.backgroundImage = `url('${bgImage}')`;
+      function closeImageModal() {
+        imageModal.classList.remove('open');
+        imageModal.setAttribute('aria-hidden', 'true');
+        modalImage.src = '';
+        document.body.style.overflow = '';
+      }
 
-        let detailsHtml = `
-          <div class="plant-details-card">
-            <div class="plant-header">
-              <img src="${bgImage}" alt="${plant['Common name']}" class="plant-thumbnail" />
-              <h1>${plant["Scientific name"]} <span>(${plant["Common name"]})</span></h1>
-            </div>
-            <ul class="plant-info">
-        `;
+      imageModal.addEventListener('click', (e) => {
+        if (e.target === imageModal) closeImageModal();
+      });
+      closeModal.addEventListener('click', closeImageModal);
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && imageModal.classList.contains('open')) closeImageModal();
+      });
 
-        const excludedKeys = ["Plant ID", "Picture", "Image", "Locations"];
-        const iconMap = {
-          "Scientific name": "🔬",
-          "Common name": "🌿",
-          "Light Requirements": "☀️",
-          "Stable temperature": "🌡️",
-          "Watering": "💧",
-          "Quantity": "🔢",
-          "Height": "📏",
-          "Category": "📂",
-          "Location Type": "📍",
-          "Location Number": "🔢",
-          "Notes": "📝"
-        };
-
-        Object.keys(plant).forEach(key => {
-          if (!excludedKeys.includes(key)) {
-            const icon = iconMap[key] || "📄";
-            detailsHtml += `<li><span>${icon}</span><strong>${key}:</strong> ${plant[key]}</li>`;
+      fetch("http://localhost:3000/api/outdoor-plants")
+        .then(res => res.json())
+        .then(plants => {
+          const plant = plants.find(p => p["Plant ID"] === plantId);
+          if (!plant) {
+            plantDetails.innerHTML = "<p>Plant not found.</p>";
+            return;
           }
-        });
 
-        detailsHtml += `</ul></div>`;
-        document.getElementById("plantDetails").innerHTML = detailsHtml;
-      })
-      .catch(err => console.error("Fetch error:", err));
+          const bgImage = plant.Image || '';
+          document.body.style.backgroundImage = `url('${bgImage}')`;
+
+          let detailsHtml = `
+            <div class="plant-details-card">
+              <div class="plant-header">
+                <img src="${bgImage}" alt="${plant['Common name'] || ''}" class="plant-thumbnail" id="mainThumb" tabindex="0" />
+                <h1>${plant["Scientific name"] || ''} <span>(${plant["Common name"] || ''})</span></h1>
+              </div>
+              <ul class="plant-info">
+          `;
+
+          const excludedKeys = ["Plant ID", "Picture", "Image", "Locations", "PDF link"];
+          const iconMap = {
+            "Scientific name": "🔬",
+            "Common name": "🌿",
+            "Category": "📂",
+            "life cycle": "🔁",
+            "Water requirement": "💧",
+            "Sun requirement": "☀️",
+            "Height (m)": "📏",
+            "Spread (m)": "📐",
+            "Shade": "🌤️",
+            "Root type": "🌱",
+            "Drought tolerance": "🔥",
+            "Heat tolerance": "🔥",
+            "Continuous bloom": "🌼",
+            "Environmental impact": "♻️",
+            "Oxygen gas production (g/year)": "O₂",
+            "Carbon dioxide gas absorption (g/year)": "CO₂",
+            "waste": "🗑️",
+            "Evaporation mitigation": "💨"
+          };
+
+          Object.keys(plant).forEach(key => {
+            if (!excludedKeys.includes(key)) {
+              const value = plant[key];
+              const icon = iconMap[key] || "📄";
+              detailsHtml += `<li><span>${icon}</span><strong>${key}:</strong> ${value}</li>`;
+            }
+          });
+
+          detailsHtml += `</ul></div>`; // close plant-info and card
+          plantDetails.innerHTML = detailsHtml;
+
+          const thumb = document.getElementById('mainThumb');
+          if (thumb) {
+            thumb.addEventListener('click', () => openModal(bgImage, plant['Common name'] || ''));
+            thumb.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openModal(bgImage, plant['Common name'] || '');
+              }
+            });
+          }
+        })
+        .catch(err => {
+          console.error("Fetch error:", err);
+          plantDetails.innerHTML = "<p>Unable to load plant data.</p>";
+        });
+    })();
   </script>
 </body>
-
 </html>
