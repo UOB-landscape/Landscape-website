@@ -35,6 +35,21 @@
         <li><a href="projects.html">Projects</a></li>
         <li><a href="locations.html">Locations</a></li>
         <li><a href="about.html">About</a></li>
+
+        <!-- Mobile controls section - uses same class names as desktop -->
+        <li class="mobile-controls">
+          <div class="dropdown">
+            <button class="theme-btn" id="mobile-theme-btn">🎨</button>
+            <div class="theme-picker" id="mobile-theme-picker">
+              <div class="theme-option" data-theme="default"></div>
+              <div class="theme-option" data-theme="dark"></div>
+              <div class="theme-option" data-theme="solar"></div>
+              <div class="theme-option" data-theme="highcontrast"></div>
+              <div class="theme-option" data-theme="green"></div>
+            </div>
+          </div>
+          <button class="arabic-btn" onclick="translate()">عربي</button>
+        </li>
       </ul>
     </div>
 
@@ -191,227 +206,6 @@
     </div>
   </div>
 
-
-
-  <!-- Panzoom Library -->
-  <script src="https://unpkg.com/@panzoom/panzoom/dist/panzoom.min.js"></script>
-
-  <script>
-
-    const buildings = [
-      //Buildings
-      { name: "S1A College of Arts", x: 0.579, y: 0.55, url: "location.html?id=S1A" },
-      { name: "S1B College of Business Administration", x: 0.643, y: 0.504, url: "location.html?id=S1B" },
-      { name: "S2 Administration Building", x: 0.584, y: 0.444, url: "location.html?id=S2" },
-      { name: "S3 Central Library", x: 0.537, y: 0.478, url: "location.html?id=S3" },
-      { name: "S4 Deanship of Students' Affairs", x: 0.471, y: 0.524, url: "location.html?id=S4" },
-      { name: "S17 Dept. of Architecture & Interior Design", x: 0.712, y: 0.509, url: "location.html?id=S17" },
-      { name: "S18 Multi-service base", x: 0.795, y: 0.556, url: "location.html?id=S18" },
-      { name: "S20 English Language Center ", x: 0.635, y: 0.742, url: "location.html?id=S20" },
-      { name: "S20A Department of Physical Education", x: 0.659, y: 0.784, url: "location.html?id=S20A" },
-      { name: "S20B College of Applied Studies", x: 0.555, y: 0.707, url: "location.html?id=S20B" },
-      { name: "S20C College of Applied Studies", x: 0.552, y: 0.764, url: "location.html?id=S20C" },
-      { name: "S21 University Health Center", x: 0.495, y: 0.740, url: "location.html?id=S21" },
-      { name: "S22 Bahrain Teachers College", x: 0.574, y: 0.615, url: "location.html?id=S22" },
-      { name: "S22A Guidance and Counseling Department", x: 0.546, y: 0.590, url: "location.html?id=S22A" },
-      { name: "S23 Bookshop", x: 0.543, y: 0.533, url: "location.html?id=S23" },
-      { name: "S24 Buildings and Maintenance Department", x: 0.666, y: 0.439, url: "location.html?id=S24" },
-      { name: "S37 Deanship of Admission & Registration", x: 0.367, y: 0.603, url: "location.html?id=S37" },
-      { name: "S38 Health Club & Swimming Pool", x: 0.401, y: 0.582, url: "location.html?id=S38" },
-      { name: "S39 College of Law ", x: 0.297, y: 0.668, url: "location.html?id=S39" },
-      { name: "S39A Legal Clinic Office", x: 0.265, y: 0.693, url: "location.html?id=S39A" },
-      { name: "S40 College of IT", x: 0.204, y: 0.471, url: "location.html?id=S40" },
-      { name: "S41 College of Science", x: 0.296, y: 0.364, url: "location.html?id=S41" },
-      { name: "S42 Transportation Building", x: 0.102, y: 0.390, url: "location.html?id=S42" },
-      { name: "S43 University Press Department", x: 0.109, y: 0.450, url: "location.html?id=S43" },
-      { name: "S44 Media Center", x: 0.618, y: 0.599, url: "location.html?id=S44" },
-      { name: "S45 E-Learning Center", x: 0.680, y: 0.548, url: "location.html?id=S45" },
-      { name: "S46 Personnel Affairs Department", x: 0.614, y: 0.476, url: "location.html?id=S46" },
-      { name: "S47 Science & IT Library", x: 0.308, y: 0.437, url: "location.html?id=S47" },
-      { name: "S48 Classrooms", x: 0.369, y: 0.320, url: "location.html?id=S48" },
-      { name: "S49 College of Science Laboratories", x: 0.348, y: 0.313, url: "location.html?id=S49" },
-      { name: "S50 Al-Haj Hasan Khonji Hall", x: 0.220, y: 0.423, url: "location.html?id=S50" },
-      { name: "S51 College of Science and Information Technology Food Outlet", x: 0.245, y: 0.397, url: "location.html?id=S51" },
-      { name: "S52 College of Science Laboratories", x: 0.320, y: 0.293, url: "location.html?id=S52" },
-      { name: "S54 Assets Department", x: 0.116, y: 0.369, url: "location.html?id=S54" },
-      { name: "S56 Trade Workshop", x: 0.033, y: 0.412, url: "location.html?id=S56" },
-      { name: "S57 Business Incubator Center", x: 0.034, y: 0.375, url: "location.html?id=S57" },
-      { name: "S6 Mosque", x: 0.484, y: 0.442, url: "location.html?id=S6" },
-
-      //Facilities
-      { name: "S15 Arboretum", x: 0.072, y: 0.362, url: "Facilities.html" },
-
-      //Gates
-      { name: "Main Gate", x: 0.617, y: 0.185, url: "Gates.html", width: 38, height: 10 },
-      { name: "S55 Main Gate", x: 0.585, y: 0.193, url: "Gates.html" },
-      { name: "Eastern Gate", x: 0.918, y: 0.493, url: "Gates.html", width: 38, height: 10 },
-      { name: "Western Gate", x: 0.091, y: 0.180, url: "Gates.html", width: 38, height: 10 },
-    ];
-
-    const mapWrapper = document.getElementById("zoom-area");
-
-    function addIcons() {
-      buildings.forEach(b => {
-        const a = document.createElement("a");
-        a.href = b.url;
-
-        const img = document.createElement("img");
-        img.src = "Building icon.png";
-        img.alt = b.name;
-        img.title = b.name;
-        img.classList.add("map-icon");
-
-        img.style.left = (b.x * 100) + "%";
-        img.style.top = (b.y * 100) + "%";
-
-        // Apply custom width/height if specified
-        if (b.width) img.style.width = b.width + "px";
-        if (b.height) img.style.height = b.height + "px";
-
-        a.appendChild(img);
-        mapWrapper.appendChild(a);
-      });
-    }
-
-    window.addEventListener("load", addIcons);
-
-    // === Panzoom for zoom & pan ===
-    const panzoom = Panzoom(mapWrapper, {
-      maxScale: 5,
-      minScale: 1,
-      contain: 'outside'
-    });
-
-    // Mouse wheel zoom
-    mapWrapper.parentElement.addEventListener('wheel', panzoom.zoomWithWheel);
-
-    // Buttons
-    document.getElementById('zoomIn').addEventListener('click', () => panzoom.zoomIn());
-    document.getElementById('zoomOut').addEventListener('click', () => panzoom.zoomOut());
-    document.getElementById('reset').addEventListener('click', () => panzoom.reset());
-
-
-    document.addEventListener('DOMContentLoaded', () => {
-      const navLinks = document.querySelectorAll('nav a');
-      const currentPage = window.location.pathname.split('/').pop() || 'home.html';
-
-      // List of pages considered part of the "Locations" section
-      const locationPages = [
-        'CarPark.html',
-        'Buildings.html',
-        'Gates.html',
-        'Roadside.html',
-        'Infrastructure.html',
-        'Facilities.html',
-        'locations.html'
-      ];
-
-      navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-
-        if (locationPages.includes(currentPage) && href === 'locations.html') {
-          // Highlight Locations nav link if current page is any location page
-          link.classList.add('active');
-        } else if (href === currentPage) {
-          // Highlight the matching nav link for other pages
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
-      });
-
-      // Optional: maintain active state on click (if navigation doesn't reload)
-      navLinks.forEach(link => {
-        link.addEventListener('click', function (e) {
-          navLinks.forEach(l => l.classList.remove('active'));
-          this.classList.add('active');
-        });
-      });
-    });
-
-    // Theme dropdown behavior
-    const btn = document.getElementById('theme-btn');
-    const picker = document.getElementById('theme-picker');
-
-    if (btn && picker) {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        picker.classList.toggle('active');
-      });
-
-      document.addEventListener('click', e => {
-        if (!e.target.closest('.dropdown')) {
-          picker.classList.remove('active');
-        }
-      });
-
-      picker.addEventListener('click', e => {
-        const t = e.target.dataset.theme;
-        if (t) {
-          document.documentElement.setAttribute('data-theme', t);
-          localStorage.setItem('theme', t);
-          picker.classList.remove('active');
-        }
-      });
-
-      // Close picker on scroll
-      let lastScrollY = window.scrollY;
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > lastScrollY) {
-          picker.classList.remove('active');
-        }
-        lastScrollY = window.scrollY;
-      });
-
-    }
-
-    // Apply saved theme on load
-    window.addEventListener('DOMContentLoaded', () => {
-      const saved = localStorage.getItem('theme') || 'default';
-      document.documentElement.setAttribute('data-theme', saved);
-    });
-
-    // Placeholder translation logic
-    function translate() {
-      alert('Arabic translation logic goes here.');
-    }
-
-    let lastScrollY = window.scrollY;
-    const nav = document.querySelector('nav');
-    const logo = document.querySelector('.logo-space');
-
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > lastScrollY) {
-        // Scrolling down
-        nav.classList.add('hide-on-scroll');
-        logo.classList.add('hide-on-scroll');
-      } else {
-        // Scrolling up
-        nav.classList.remove('hide-on-scroll');
-        logo.classList.remove('hide-on-scroll');
-      }
-      lastScrollY = window.scrollY;
-    });
-
-    const hamburger = document.getElementById('hamburger');
-    const navList = document.querySelector('nav ul');
-
-    hamburger.addEventListener('click', () => {
-      navList.classList.toggle('active');
-    });
-
-    window.addEventListener('scroll', () => {
-      document.querySelector('nav ul').classList.remove('active');
-      themePicker.classList.remove('active');
-    });
-
-    document.querySelectorAll('nav ul li a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.querySelector('nav ul').classList.remove('active');
-      });
-    });
-  </script>
-
   <footer>
     <div class="footer-container">
       <div class="footer-column">
@@ -473,6 +267,252 @@
     </div>
   </footer>
 
+
+  <!-- Panzoom Library -->
+  <script src="https://unpkg.com/@panzoom/panzoom/dist/panzoom.min.js"></script>
+
+  <script>
+
+    const buildings = [
+      //Buildings
+      { name: "S1A College of Arts", x: 0.579, y: 0.55, url: "location.html?id=S1A" },
+      { name: "S1B College of Business Administration", x: 0.643, y: 0.504, url: "location.html?id=S1B" },
+      { name: "S2 Administration Building", x: 0.584, y: 0.444, url: "location.html?id=S2" },
+      { name: "S3 Central Library", x: 0.537, y: 0.478, url: "location.html?id=S3" },
+      { name: "S4 Deanship of Students' Affairs", x: 0.471, y: 0.524, url: "location.html?id=S4" },
+      { name: "S17 Dept. of Architecture & Interior Design", x: 0.712, y: 0.509, url: "location.html?id=S17" },
+      { name: "S18 Multi-service base", x: 0.795, y: 0.556, url: "location.html?id=S18" },
+      { name: "S20 English Language Center ", x: 0.635, y: 0.742, url: "location.html?id=S20" },
+      { name: "S20A Department of Physical Education", x: 0.659, y: 0.784, url: "location.html?id=S20A" },
+      { name: "S20B College of Applied Studies", x: 0.555, y: 0.707, url: "location.html?id=S20B" },
+      { name: "S20C College of Applied Studies", x: 0.552, y: 0.764, url: "location.html?id=S20C" },
+      { name: "S21 University Health Center", x: 0.495, y: 0.740, url: "location.html?id=S21" },
+      { name: "S22 Bahrain Teachers College", x: 0.574, y: 0.615, url: "location.html?id=S22" },
+      { name: "S22A Guidance and Counseling Department", x: 0.546, y: 0.590, url: "location.html?id=S22A" },
+      { name: "S23 Bookshop", x: 0.543, y: 0.533, url: "location.html?id=S23" },
+      { name: "S24 Buildings and Maintenance Department", x: 0.666, y: 0.439, url: "location.html?id=S24" },
+      { name: "S30 College of Law", x: 0.707, y: 0.436, url: "location.html?id=S30" },
+      { name: "S31 Financial Affairs", x: 0.741, y: 0.453, url: "location.html?id=S31" },
+      { name: "S32 Deanship of Graduate Studies and Scientific Research", x: 0.678, y: 0.357, url: "location.html?id=S32" },
+      { name: "S33 College of Science", x: 0.574, y: 0.347, url: "location.html?id=S33" },
+      { name: "S34 College of Engineering", x: 0.503, y: 0.391, url: "location.html?id=S34" },
+      { name: "S35 College of Information Technology", x: 0.449, y: 0.405, url: "location.html?id=S35" },
+      { name: "S40 Conference Center", x: 0.432, y: 0.352, url: "location.html?id=S40" },
+      { name: "S40A University Theater", x: 0.361, y: 0.398, url: "location.html?id=S40A" },
+      { name: "S41 Staff Club", x: 0.303, y: 0.440, url: "location.html?id=S41" },
+      { name: "S46 Security and Safety Department", x: 0.404, y: 0.667, url: "location.html?id=S46" },
+      { name: "S47 Indoor Sports Hall", x: 0.359, y: 0.619, url: "location.html?id=S47" },
+      { name: "S50 Medical Simulation Center", x: 0.785, y: 0.295, url: "location.html?id=S50" },
+      { name: "S51 Pharmacy Unit", x: 0.831, y: 0.299, url: "location.html?id=S51" },
+      { name: "S51B Marine Science Research Center", x: 0.743, y: 0.220, url: "location.html?id=S51B" },
+    ];
+
+    function addIcons() {
+      const mapWrapper = document.getElementById('zoom-area');
+      buildings.forEach(b => {
+        const a = document.createElement("a");
+        a.href = b.url;
+
+        const img = document.createElement("img");
+        img.src = "Building icon.png";
+        img.alt = b.name;
+        img.title = b.name;
+        img.classList.add("map-icon");
+
+        img.style.left = (b.x * 100) + "%";
+        img.style.top = (b.y * 100) + "%";
+
+        // Apply custom width/height if specified
+        if (b.width) img.style.width = b.width + "px";
+        if (b.height) img.style.height = b.height + "px";
+
+        a.appendChild(img);
+        mapWrapper.appendChild(a);
+      });
+    }
+
+    window.addEventListener("load", addIcons);
+
+    // === Panzoom for zoom & pan ===
+    const panzoom = Panzoom(document.getElementById('zoom-area'), {
+      maxScale: 5,
+      minScale: 1,
+      contain: 'outside'
+    });
+
+    // Mouse wheel zoom
+    document.getElementById('zoom-area').parentElement.addEventListener('wheel', panzoom.zoomWithWheel);
+
+    // Buttons
+    document.getElementById('zoomIn').addEventListener('click', () => panzoom.zoomIn());
+    document.getElementById('zoomOut').addEventListener('click', () => panzoom.zoomOut());
+    document.getElementById('reset').addEventListener('click', () => panzoom.reset());
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const navLinks = document.querySelectorAll('nav a');
+      const currentPage = window.location.pathname.split('/').pop() || 'home.html';
+
+      // List of pages considered part of the "Locations" section
+      const locationPages = [
+        'CarPark.html',
+        'Buildings.html',
+        'Gates.html',
+        'Roadside.html',
+        'Infrastructure.html',
+        'Facilities.html',
+        'locations.html'
+      ];
+
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+
+        if (locationPages.includes(currentPage) && href === 'locations.html') {
+          // Highlight Locations nav link if current page is any location page
+          link.classList.add('active');
+        } else if (href === currentPage) {
+          // Highlight the matching nav link for other pages
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      // Optional: maintain active state on click (if navigation doesn't reload)
+      navLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+    });
+
+    // Theme dropdown behavior for desktop
+    const btn = document.getElementById('theme-btn');
+    const picker = document.getElementById('theme-picker');
+
+    if (btn && picker) {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        picker.classList.toggle('active');
+      });
+
+      document.addEventListener('click', e => {
+        if (!e.target.closest('.dropdown')) {
+          picker.classList.remove('active');
+        }
+      });
+
+      picker.addEventListener('click', e => {
+        const t = e.target.dataset.theme;
+        if (t) {
+          document.documentElement.setAttribute('data-theme', t);
+          localStorage.setItem('theme', t);
+          picker.classList.remove('active');
+          updateActiveTheme(t);
+        }
+      });
+
+      // Close picker on scroll
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > lastScrollY) {
+          picker.classList.remove('active');
+        }
+        lastScrollY = window.scrollY;
+      });
+
+    }
+
+    // Mobile theme picker functionality
+    const mobileThemeBtn = document.getElementById('mobile-theme-btn');
+    const mobileThemePicker = document.getElementById('mobile-theme-picker');
+
+    if (mobileThemeBtn && mobileThemePicker) {
+      // Toggle mobile theme picker
+      mobileThemeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        mobileThemePicker.classList.toggle('active');
+      });
+
+      // Close mobile theme picker when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.mobile-controls .dropdown')) {
+          mobileThemePicker.classList.remove('active');
+        }
+      });
+
+      // Handle mobile theme selection
+      mobileThemePicker.addEventListener('click', (e) => {
+        const theme = e.target.dataset.theme;
+        if (theme) {
+          document.documentElement.setAttribute('data-theme', theme);
+          localStorage.setItem('theme', theme);
+          mobileThemePicker.classList.remove('active');
+          updateActiveTheme(theme);
+        }
+      });
+    }
+
+    // Update active state for all theme options (both desktop and mobile)
+    function updateActiveTheme(theme) {
+      document.querySelectorAll('.theme-option').forEach(opt => {
+        opt.classList.toggle('active', opt.dataset.theme === theme);
+      });
+    }
+
+    // Apply saved theme on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('theme') || 'default';
+      document.documentElement.setAttribute('data-theme', saved);
+      updateActiveTheme(saved);
+    });
+
+    // Placeholder translation logic
+    function translate() {
+      alert('Arabic translation logic goes here.');
+    }
+
+    let lastScrollY = window.scrollY;
+    const nav = document.querySelector('nav');
+    const logo = document.querySelector('.logo-space');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > lastScrollY) {
+        // Scrolling down
+        nav.classList.add('hide-on-scroll');
+        logo.classList.add('hide-on-scroll');
+      } else {
+        // Scrolling up
+        nav.classList.remove('hide-on-scroll');
+        logo.classList.remove('hide-on-scroll');
+      }
+      lastScrollY = window.scrollY;
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const navList = document.querySelector('nav ul');
+
+    hamburger.addEventListener('click', () => {
+      navList.classList.toggle('active');
+    });
+
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav ul').classList.remove('active');
+      if (picker) picker.classList.remove('active');
+      // Close all dropdowns on scroll
+      document.querySelectorAll('.has-dropdown').forEach(item => {
+        item.classList.remove('dropdown-open');
+      });
+      if (mobileThemePicker) mobileThemePicker.classList.remove('active');
+    });
+
+    document.querySelectorAll('nav ul li a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.querySelector('nav ul').classList.remove('active');
+      });
+    });
+  </script>
 </body>
 
 </html>

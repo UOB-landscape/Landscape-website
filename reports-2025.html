@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="styles.css" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
+    html {
+      padding: 0 !important;
+    }
+
     body {
       font-family: "Tahoma", Arial, sans-serif;
       line-height: 1.6;
@@ -61,7 +65,7 @@
   <script>
     // If the page is embedded and parent may supply theme, request it (harmless if not)
     window.addEventListener('DOMContentLoaded', () => {
-      try { window.parent.postMessage({ type: 'request-theme' }, '*'); } catch (e) {}
+      try { window.parent.postMessage({ type: 'request-theme' }, '*'); } catch (e) { }
     });
   </script>
 </head>
@@ -88,7 +92,8 @@
         <tr>
           <td>1</td>
           <td colspan="2" class="thumb-cell">
-            <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100" alt="Buildings S40 S41 S50 S51 thumbnail">
+            <img src="images/row1-1.jpg" class="gallery-thumbnail" data-gallery="row1" width="100" height="100"
+              alt="Buildings S40 S41 S50 S51 thumbnail">
           </td>
           <td>Buildings S40, S41, S50, S51</td>
           <td>Maintenance and replanting of landscape basins</td>
@@ -103,7 +108,8 @@
         <tr>
           <td>2</td>
           <td colspan="2" class="thumb-cell">
-            <img src="images/row2-1.jpg" class="gallery-thumbnail" data-gallery="row2" width="100" height="100" alt="Behind University Swimming Pool thumbnail">
+            <img src="images/row2-1.jpg" class="gallery-thumbnail" data-gallery="row2" width="100" height="100"
+              alt="Behind University Swimming Pool thumbnail">
           </td>
           <td>Behind University Swimming Pool (S38)</td>
           <td>Rehabilitation of neglected landscape area</td>
@@ -118,7 +124,8 @@
         <tr>
           <td>3</td>
           <td colspan="2" class="thumb-cell">
-            <img src="images/row3-1.jpg" class="gallery-thumbnail" data-gallery="row3" width="100" height="100" alt="In front of Building S45 thumbnail">
+            <img src="images/row3-1.jpg" class="gallery-thumbnail" data-gallery="row3" width="100" height="100"
+              alt="In front of Building S45 thumbnail">
           </td>
           <td>In front of Building S45</td>
           <td>Landscape redevelopment and rehabilitation</td>
@@ -133,7 +140,8 @@
         <tr>
           <td>4</td>
           <td colspan="2" class="thumb-cell">
-            <img src="images/row4-1.jpg" class="gallery-thumbnail" data-gallery="row4" width="100" height="100" alt="From behind College of Arts to Deanship thumbnail">
+            <img src="images/row4-1.jpg" class="gallery-thumbnail" data-gallery="row4" width="100" height="100"
+              alt="From behind College of Arts to Deanship thumbnail">
           </td>
           <td>From behind College of Arts to Deanship of Student Affairs</td>
           <td>Large-scale landscape rehabilitation</td>
@@ -148,7 +156,8 @@
         <tr>
           <td>5</td>
           <td colspan="2" class="thumb-cell">
-            <img src="images/row5-1.jpg" class="gallery-thumbnail" data-gallery="row5" width="100" height="100" alt="Hill Area thumbnail">
+            <img src="images/row5-1.jpg" class="gallery-thumbnail" data-gallery="row5" width="100" height="100"
+              alt="Hill Area thumbnail">
           </td>
           <td>Hill Area behind Main Road</td>
           <td>Rehabilitation and replanting of hillside landscape</td>
@@ -163,7 +172,8 @@
         <tr>
           <td>6</td>
           <td colspan="2" class="thumb-cell">
-            <img src="images/row6-1.jpg" class="gallery-thumbnail" data-gallery="row6" width="100" height="100" alt="Main fence area thumbnail">
+            <img src="images/row6-1.jpg" class="gallery-thumbnail" data-gallery="row6" width="100" height="100"
+              alt="Main fence area thumbnail">
           </td>
           <td>Main fence area near the main entrance gate</td>
           <td>Tree planting for fence area</td>
@@ -172,13 +182,15 @@
           <td>Sustainable ornamental trees were planted</td>
           <td>—</td>
           <td>50</td>
-          <td>Enhanced the overall appearance of the site and added an aesthetic character; rehabilitated an area of approximately 160 RM and planted 50 ornamental trees.</td>
+          <td>Enhanced the overall appearance of the site and added an aesthetic character; rehabilitated an area of
+            approximately 160 RM and planted 50 ornamental trees.</td>
         </tr>
 
         <tr>
           <td>7</td>
           <td colspan="2" class="thumb-cell">
-            <img src="images/row7-1.jpg" class="gallery-thumbnail" data-gallery="row7" width="100" height="100" alt="Open courtyard behind the main mosque thumbnail">
+            <img src="images/row7-1.jpg" class="gallery-thumbnail" data-gallery="row7" width="100" height="100"
+              alt="Open courtyard behind the main mosque thumbnail">
           </td>
           <td>Open courtyard behind the main mosque</td>
           <td>Tree planting for the area</td>
@@ -187,13 +199,16 @@
           <td>1,000 sustainable ornamental trees were planted</td>
           <td>—</td>
           <td>1000</td>
-          <td>Rehabilitated an area of approximately 10,800 m², including the removal of weeds, waste, and old soil, replacement with new agricultural sand, installation of an irrigation network, and planting of sustainable trees with landscape design.</td>
+          <td>Rehabilitated an area of approximately 10,800 m², including the removal of weeds, waste, and old soil,
+            replacement with new agricultural sand, installation of an irrigation network, and planting of sustainable
+            trees with landscape design.</td>
         </tr>
 
         <tr>
           <td>8</td>
           <td colspan="2" class="thumb-cell">
-            <img src="images/row8-1.jpg" class="gallery-thumbnail" data-gallery="row8" width="100" height="100" alt="Student rest areas thumbnail">
+            <img src="images/row8-1.jpg" class="gallery-thumbnail" data-gallery="row8" width="100" height="100"
+              alt="Student rest areas thumbnail">
           </td>
           <td>Student rest areas of the College of Science and the College of Information Technology</td>
           <td>Removal of harmful and random trees and redevelopment of the agricultural area</td>
@@ -202,19 +217,23 @@
           <td>The area was rehabilitated with sustainable ornamental trees, various plants, and seasonal flowers.</td>
           <td>—</td>
           <td>104</td>
-          <td>The project includes removing harmful trees, preparing basins and soil, and implementing landscape designs. The second phase includes planting more than 100 sustainable shade trees and increasing plant cover with new species.</td>
+          <td>The project includes removing harmful trees, preparing basins and soil, and implementing landscape
+            designs. The second phase includes planting more than 100 sustainable shade trees and increasing plant cover
+            with new species.</td>
         </tr>
 
         <tr>
           <td>9</td>
           <td colspan="2" class="thumb-cell">
-            <img src="images/row9-1.jpg" class="gallery-thumbnail" data-gallery="row9" width="100" height="100" alt="Roman Amphitheater thumbnail">
+            <img src="images/row9-1.jpg" class="gallery-thumbnail" data-gallery="row9" width="100" height="100"
+              alt="Roman Amphitheater thumbnail">
           </td>
           <td>Roman Amphitheater</td>
           <td>Area development with sustainable plants and seasonal flowers</td>
           <td>840 m²</td>
           <td>Previously: degraded and uncultivated land</td>
-          <td>The entire area was planted and landscaped to match the environment and the general aesthetic appearance.</td>
+          <td>The entire area was planted and landscaped to match the environment and the general aesthetic appearance.
+          </td>
           <td>840 m²</td>
           <td>12</td>
           <td>Developed the area to make it more attractive for visitors, students, and staff.</td>
@@ -223,31 +242,39 @@
         <tr>
           <td>10</td>
           <td colspan="2" class="thumb-cell">
-            <img src="images/row10-1.jpg" class="gallery-thumbnail" data-gallery="row10" width="100" height="100" alt="Area behind the swimming pool thumbnail">
+            <img src="images/row10-1.jpg" class="gallery-thumbnail" data-gallery="row10" width="100" height="100"
+              alt="Area behind the swimming pool thumbnail">
           </td>
           <td>Area behind the swimming pool (S38)</td>
           <td>Afforestation with Bahraini almond trees — a local shade and fruit-bearing species</td>
           <td>1,100 m²</td>
-          <td>Previously: presence of harmful and random trees negatively affecting the environment and infrastructure</td>
+          <td>Previously: presence of harmful and random trees negatively affecting the environment and infrastructure
+          </td>
           <td>100 Bahraini almond trees were planted</td>
           <td>—</td>
           <td>100</td>
-          <td>Rehabilitation of a 1,100 m² area is in progress. The space will be afforested with 100 Bahraini almond trees in collaboration with the College of Health Sciences, the College of Physical Education, and a group of students participating in the tree planting.</td>
+          <td>Rehabilitation of a 1,100 m² area is in progress. The space will be afforested with 100 Bahraini almond
+            trees in collaboration with the College of Health Sciences, the College of Physical Education, and a group
+            of students participating in the tree planting.</td>
         </tr>
 
         <tr>
           <td>11</td>
           <td colspan="2" class="thumb-cell">
-            <img src="images/row11-1.jpg" class="gallery-thumbnail" data-gallery="row11" width="100" height="100" alt="S20 Building thumbnail">
+            <img src="images/row11-1.jpg" class="gallery-thumbnail" data-gallery="row11" width="100" height="100"
+              alt="S20 Building thumbnail">
           </td>
           <td>S20 Building</td>
           <td>Removal of harmful and random trees and redevelopment of the agricultural area</td>
           <td>960 m²</td>
-          <td>Previously: presence of harmful and random trees negatively affecting the environment and infrastructure</td>
-          <td>The area will be replanted with sustainable shade trees, ornamental plants, and seasonal flowers, adding distinctive landscaping that enhances visual appeal and promotes vegetation sustainability.</td>
+          <td>Previously: presence of harmful and random trees negatively affecting the environment and infrastructure
+          </td>
+          <td>The area will be replanted with sustainable shade trees, ornamental plants, and seasonal flowers, adding
+            distinctive landscaping that enhances visual appeal and promotes vegetation sustainability.</td>
           <td>—</td>
           <td>—</td>
-          <td>Ongoing project for removing harmful trees, preparing basins and soil, and implementing landscape design works.</td>
+          <td>Ongoing project for removing harmful trees, preparing basins and soil, and implementing landscape design
+            works.</td>
         </tr>
       </tbody>
     </table>

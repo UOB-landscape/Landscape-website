@@ -31,10 +31,32 @@
     <div class="nav-center">
       <ul>
         <li><a href="home.html">Home</a></li>
-        <li><a href="ourPlants.html" class="active">Our plants</a></li>
+        <li class="has-dropdown">
+          <a href="ourPlants.html" class="active">Our plants</a>
+          <ul class="subnav-mobile">
+            <li><a href="#indoor-plants" class="mobile-tab-link">Indoor Plants</a></li>
+            <li><a href="#outdoor-plants" class="mobile-tab-link">Outdoor Plants</a></li>
+          </ul>
+        </li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="locations.html">Locations</a></li>
         <li><a href="about.html">About</a></li>
+
+
+        <!-- Mobile controls section - uses same class names as desktop -->
+        <li class="mobile-controls">
+          <div class="dropdown">
+            <button class="theme-btn" id="mobile-theme-btn">🎨</button>
+            <div class="theme-picker" id="mobile-theme-picker">
+              <div class="theme-option" data-theme="default"></div>
+              <div class="theme-option" data-theme="dark"></div>
+              <div class="theme-option" data-theme="solar"></div>
+              <div class="theme-option" data-theme="highcontrast"></div>
+              <div class="theme-option" data-theme="green"></div>
+            </div>
+          </div>
+          <button class="arabic-btn" onclick="translate()">عربي</button>
+        </li>
       </ul>
     </div>
 
@@ -72,6 +94,10 @@
       document.querySelectorAll('.plants-subnav a').forEach(link => {
         link.classList.toggle('active', link.getAttribute('href') === hash);
       });
+      // Also update mobile subnav links
+      document.querySelectorAll('.mobile-tab-link').forEach(link => {
+        link.classList.toggle('active', link.getAttribute('href') === hash);
+      });
     }
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -83,19 +109,40 @@
       window.addEventListener('hashchange', () => showTab(window.location.hash));
 
       // Handle clicks to update hash
-      document.getElementById('tab-indoor').addEventListener('click', e => {
-        e.preventDefault();
-        window.location.hash = '#indoor-plants';
+      const tabIndoor = document.getElementById('tab-indoor');
+      const tabOutdoor = document.getElementById('tab-outdoor');
+
+      if (tabIndoor) {
+        tabIndoor.addEventListener('click', e => {
+          e.preventDefault();
+          window.location.hash = '#indoor-plants';
+        });
+      }
+
+      if (tabOutdoor) {
+        tabOutdoor.addEventListener('click', e => {
+          e.preventDefault();
+          window.location.hash = '#outdoor-plants';
+        });
+      }
+
+      // Handle clicks on mobile subnav links
+      document.querySelectorAll('.mobile-tab-link').forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const hash = link.getAttribute('href');
+          window.location.hash = hash;
+          // Close hamburger menu after clicking
+          const navList = document.querySelector('.nav-center ul');
+          if (navList) {
+            navList.classList.remove('active');
+          }
+          // Close the dropdown
+          document.querySelectorAll('.has-dropdown').forEach(item => {
+            item.classList.remove('dropdown-open');
+          });
+        });
       });
-      document.getElementById('tab-outdoor').addEventListener('click', e => {
-        e.preventDefault();
-        window.location.hash = '#outdoor-plants';
-      });
-      // Hide all project sections at load
-      filterSections.forEach(section => {
-        section.style.display = 'none';
-      });
-      filterButtons.forEach(b => b.classList.remove('active'));
     });
 
     // Subnav tabs switch logic
@@ -152,10 +199,48 @@
       });
     }
 
+    // Mobile theme picker functionality
+    const mobileThemeBtn = document.getElementById('mobile-theme-btn');
+    const mobileThemePicker = document.getElementById('mobile-theme-picker');
+
+    if (mobileThemeBtn && mobileThemePicker) {
+      // Toggle mobile theme picker
+      mobileThemeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        mobileThemePicker.classList.toggle('active');
+      });
+
+      // Close mobile theme picker when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.mobile-controls .dropdown')) {
+          mobileThemePicker.classList.remove('active');
+        }
+      });
+
+      // Handle mobile theme selection
+      mobileThemePicker.addEventListener('click', (e) => {
+        const theme = e.target.dataset.theme;
+        if (theme) {
+          document.documentElement.setAttribute('data-theme', theme);
+          localStorage.setItem('theme', theme);
+          mobileThemePicker.classList.remove('active');
+          updateActiveTheme(theme);
+        }
+      });
+    }
+
+    // Update active state for all theme options (both desktop and mobile)
+    function updateActiveTheme(theme) {
+      document.querySelectorAll('.theme-option').forEach(opt => {
+        opt.classList.toggle('active', opt.dataset.theme === theme);
+      });
+    }
+
     // Apply saved theme on load
     window.addEventListener('DOMContentLoaded', () => {
       const saved = localStorage.getItem('theme') || 'default';
       document.documentElement.setAttribute('data-theme', saved);
+      if (mobileThemePicker) mobileThemePicker.classList.remove('active');
     });
 
     // Placeholder translation logic
@@ -185,42 +270,89 @@
     });
 
     let lastScrollY = window.scrollY;
-    const nav = document.querySelector('nav');
-    const logo = document.querySelector('.logo-space');
+    const nav = document.querySelector('nav.navbar');
     const subnav = document.querySelector('.plants-subnav');
+    const logo = document.querySelector('.logo-space');
 
     window.addEventListener('scroll', () => {
-      if (window.scrollY > lastScrollY) {
-        // Scrolling down
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY) {
+        // Scrolling down - hide both
         nav.classList.add('hide-on-scroll');
         logo.classList.add('hide-on-scroll');
         subnav.classList.add('hide-on-scroll');
       } else {
-        // Scrolling up
+        // Scrolling up - show both
         nav.classList.remove('hide-on-scroll');
         logo.classList.remove('hide-on-scroll');
         subnav.classList.remove('hide-on-scroll');
       }
-      lastScrollY = window.scrollY;
+
+      lastScrollY = currentScrollY;
     });
 
     const hamburger = document.getElementById('hamburger');
     const navList = document.querySelector('nav ul');
-    const themePicker = document.getElementById('themePicker');
 
     hamburger.addEventListener('click', () => {
       navList.classList.toggle('active');
     });
 
+    // Toggle dropdown in hamburger menu
+    document.querySelectorAll('.has-dropdown > a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        // Only prevent default and toggle on mobile (when hamburger menu is active)
+        if (navList.classList.contains('active')) {
+          e.preventDefault();
+          const parentLi = link.parentElement;
+          parentLi.classList.toggle('dropdown-open');
+        }
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const hamburger = document.getElementById("hamburger");
+      const navCenter = document.querySelector(".nav-center");
+      const dropdownParents = document.querySelectorAll(".has-dropdown");
+
+      // Toggle main nav on hamburger click
+      hamburger.addEventListener("click", () => {
+        navCenter.classList.toggle("active");
+      });
+
+      // Toggle subnav on parent click (mobile only)
+      dropdownParents.forEach(parent => {
+        const parentLink = parent.querySelector("a");
+
+        parentLink.addEventListener("click", function (e) {
+          const isMobile = window.innerWidth <= 768;
+
+          if (isMobile) {
+            e.preventDefault(); // block navigation on mobile
+            parent.classList.toggle("open"); // toggle subnav
+          }
+          // On desktop, allow normal navigation
+        });
+      });
+    });
+
     window.addEventListener('scroll', () => {
       document.querySelector('nav ul').classList.remove('active');
-      themePicker.classList.remove('active');
+      // Close all dropdowns on scroll
+      document.querySelectorAll('.has-dropdown').forEach(item => {
+        item.classList.remove('dropdown-open');
+      });
+      if (mobileThemePicker) mobileThemePicker.classList.remove('active');
     });
 
     document.querySelectorAll('nav ul li a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.querySelector('nav ul').classList.remove('active');
-      });
+      // Don't close menu when clicking parent dropdown links
+      if (!link.parentElement.classList.contains('has-dropdown')) {
+        link.addEventListener('click', () => {
+          document.querySelector('nav ul').classList.remove('active');
+        });
+      }
     });
   </script>
 
