@@ -9,6 +9,8 @@
   <style>
     html {
       padding: 0 !important;
+      overflow-x: hidden;
+      /* Prevent horizontal scroll on html */
     }
 
     body {
@@ -16,17 +18,35 @@
       line-height: 1.6;
       padding: 20px;
       background: #f0eeee;
+      margin: 0;
+      overflow-x: hidden;
+      /* Prevent horizontal scroll on body */
+      max-width: 100%;
+      box-sizing: border-box;
     }
 
     h2 {
       text-align: center;
     }
 
+    /* Make table container scrollable horizontally if needed */
+    .year-container {
+      width: 100%;
+      overflow-x: auto;
+      /* Allow horizontal scroll within container */
+      -webkit-overflow-scrolling: touch;
+      /* Smooth scrolling on iOS */
+    }
+
     table {
       border-collapse: collapse;
       width: 100%;
-      margin-bottom: 40px;
+      min-width: 1000px;
+      /* Minimum width for readability */
+      /* margin-bottom: 40px; */
       background: #fff;
+      table-layout: auto;
+      /* Allow columns to size naturally */
     }
 
     th,
@@ -35,10 +55,48 @@
       padding: 8px;
       text-align: center;
       vertical-align: middle;
+      word-wrap: break-word;
+      /* Allow text to wrap */
+      overflow-wrap: break-word;
     }
 
     th {
       background: var(--accent-light);
+      font-size: 0.9em;
+      /* Slightly smaller header text */
+    }
+
+    /* Make specific columns narrower */
+    td:nth-child(1) {
+      /* No. column */
+      width: 40px;
+      min-width: 40px;
+    }
+
+    td:nth-child(2) {
+      /* Images column */
+      width: 120px;
+      min-width: 120px;
+    }
+
+    td:nth-child(4) {
+      /* Location column */
+      min-width: 150px;
+    }
+
+    td:nth-child(6) {
+      /* Total Area column */
+      min-width: 80px;
+    }
+
+    td:nth-child(9) {
+      /* Green Area column */
+      min-width: 80px;
+    }
+
+    td:nth-child(10) {
+      /* No. of Trees column */
+      min-width: 60px;
     }
 
     .gallery-thumbnail {
@@ -53,19 +111,66 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
 
-    /* Keep thumbnail sizing consistent */
+    /* Thumbnail sizing */
     .thumb-cell img {
       width: 100px;
       height: 100px;
       display: block;
       object-fit: cover;
+      margin: 0 auto;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+      body {
+        padding: 10px;
+      }
+
+      th,
+      td {
+        padding: 6px;
+        font-size: 0.9em;
+      }
+
+      .thumb-cell img {
+        width: 80px;
+        height: 80px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 5px;
+      }
+
+      th,
+      td {
+        padding: 4px;
+        font-size: 0.85em;
+      }
+
+      .thumb-cell img {
+        width: 60px;
+        height: 60px;
+      }
+
+      h2 {
+        font-size: 1.2em;
+      }
     }
   </style>
-
   <script>
-    // If the page is embedded and parent may supply theme, request it (harmless if not)
+    // Listen for theme messages from parent (optional)
+    window.addEventListener('message', (event) => {
+      if (event.data && event.data.type === 'theme-change') {
+        document.documentElement.setAttribute('data-theme', event.data.theme);
+        localStorage.setItem('theme', event.data.theme);
+      }
+    });
+
+    // Request parent theme if embedded
     window.addEventListener('DOMContentLoaded', () => {
-      try { window.parent.postMessage({ type: 'request-theme' }, '*'); } catch (e) { }
+      try { window.parent.postMessage({ type: 'request-theme' }, '*'); } catch (e) { /* ignore */ }
     });
   </script>
 </head>

@@ -27,12 +27,26 @@
     </div>
 
     <div class="nav-center">
-      <ul>
+      <ul id="mobile-menu">
         <li><a href="home.html">Home</a></li>
         <li><a href="ourPlants.html">Our plants</a></li>
         <li><a href="projects.html" class="active">Projects</a></li>
         <li><a href="locations.html">Locations</a></li>
         <li><a href="about.html">About</a></li>
+
+        <li class="mobile-controls">
+          <div class="dropdown">
+            <button class="theme-btn" id="mobile-theme-btn">🎨</button>
+            <div class="theme-picker" id="mobile-theme-picker">
+              <div class="theme-option" data-theme="default"></div>
+              <div class="theme-option" data-theme="dark"></div>
+              <div class="theme-option" data-theme="solar"></div>
+              <div class="theme-option" data-theme="highcontrast"></div>
+              <div class="theme-option" data-theme="green"></div>
+            </div>
+          </div>
+          <button class="arabic-btn" onclick="translate()">عربي</button>
+        </li>
       </ul>
     </div>
 
@@ -64,7 +78,7 @@
 
   <main>
     <section id="before-after" class="projects-section">
-      <h1>Before & After Projects</h1>
+      <h2 style="text-align: center;">Before & After Projects</h2>
 
       <!-- Filters placeholder (rendered from API) -->
       <div class="project-filters" id="projectFilters"></div>
@@ -74,11 +88,10 @@
     </section>
 
     <section id="reports" class="projects-section" style="display:none;">
-      <h1></h1>
       <div class="iframe-wrapper">
         <h2 style="text-align: center;">🌳 Landscape Projects and Achievements in 2024</h2>
         <iframe src="reports-2024.html"></iframe>
-
+        <br><br>
         <h2 style="text-align: center;">🌿 Landscape Projects and Achievements in 2025</h2>
         <iframe src="reports-2025.html"></iframe>
       </div>
@@ -86,16 +99,7 @@
   </main>
 
   <script>
-    /*
-      Preserves original class and tag names.
-      Fetches records from the API and renders:
-        - one filter button per Location Number (using the record that has "Filter Image")
-        - for a selected filter, all project records associated with that Location Number
-        - uses the same structure and class names so styles apply unchanged
-    */
-
-    // --- Slider classes (defensive, same DOM shape expected by your CSS) ---
-
+    // --- Slider classes ---
     class ThreeImageSlider {
       constructor(containerId) {
         this.container = document.getElementById(containerId);
@@ -175,8 +179,8 @@
         this.container = document.getElementById(containerId);
         if (!this.container) return;
 
-        this.sliderLine = this.container.querySelector('.two-slider-line') || this.container.querySelector('.two-slider-line');
-        this.sliderHandle = this.container.querySelector('.two-slider-handle') || this.container.querySelector('.two-slider-handle');
+        this.sliderLine = this.container.querySelector('.two-slider-line');
+        this.sliderHandle = this.container.querySelector('.two-slider-handle');
         this.currentImage = this.container.querySelector('.current-image') || this.container.querySelector('.two-image-layer.current-image');
 
         if (!this.sliderLine || !this.sliderHandle || !this.currentImage) {
@@ -239,7 +243,6 @@
     }
 
     // --- DOM initialization and API-driven rendering ---
-
     document.addEventListener('DOMContentLoaded', () => {
       const API_URL = 'http://localhost:3000/api/before-after';
       const filtersRoot = document.getElementById('projectFilters');
@@ -249,14 +252,14 @@
       const btn = document.getElementById('theme-btn');
       const picker = document.getElementById('theme-picker');
 
-      // Post theme to iframes (used when theme changes and when reports tab shown)
+      // Post theme to iframes
       function postThemeToIframes(theme) {
         document.querySelectorAll('iframe').forEach(iframe => {
           try { iframe.contentWindow.postMessage({ type: 'theme-change', theme }, '*'); } catch (err) { }
         });
       }
 
-      // Keep tabs behavior (single implementation)
+      // Tab switching
       function showTab(hash) {
         const target = hash || '#before-after';
         document.querySelectorAll('.projects-section').forEach(sec => {
@@ -278,20 +281,16 @@
       tabReports.addEventListener('click', e => { e.preventDefault(); window.location.hash = '#reports'; });
       window.addEventListener('hashchange', () => showTab(window.location.hash));
 
-      // Theme picker (guarded)
+      // Desktop theme picker
       if (btn && picker) {
         btn.addEventListener('click', e => {
           e.stopPropagation();
           picker.classList.toggle('active');
-          btn.setAttribute('aria-expanded', picker.classList.contains('active'));
-          picker.setAttribute('aria-hidden', !picker.classList.contains('active'));
         });
 
         document.addEventListener('click', e => {
           if (!e.target.closest('.dropdown')) {
             picker.classList.remove('active');
-            btn.setAttribute('aria-expanded', 'false');
-            picker.setAttribute('aria-hidden', 'true');
           }
         });
 
@@ -301,8 +300,6 @@
             document.documentElement.setAttribute('data-theme', t);
             localStorage.setItem('theme', t);
             picker.classList.remove('active');
-            btn.setAttribute('aria-expanded', 'false');
-            picker.setAttribute('aria-hidden', 'true');
             postThemeToIframes(t);
           }
         });
@@ -311,19 +308,66 @@
         document.documentElement.setAttribute('data-theme', saved);
 
         // Close picker on scroll
-        let lastScrollY = window.scrollY;
+        let lastScrollYPicker = window.scrollY;
         window.addEventListener('scroll', () => {
-          if (window.scrollY > lastScrollY) {
+          if (window.scrollY > lastScrollYPicker) {
             picker.classList.remove('active');
           }
-          lastScrollY = window.scrollY;
+          lastScrollYPicker = window.scrollY;
         });
       }
 
-      // Send initial theme to iframes when page loads (best-effort)
+      // Mobile theme picker - Pop-up style
+      const mobileThemeBtn = document.getElementById('mobile-theme-btn');
+      const mobileThemePicker = document.getElementById('mobile-theme-picker');
+
+      if (mobileThemeBtn && mobileThemePicker) {
+        // Open theme picker
+        mobileThemeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          mobileThemePicker.classList.toggle('active');
+        });
+
+        // Close theme picker when clicking
+        mobileThemePicker.addEventListener('click', (e) => {
+          // Close if clicking on the backdrop
+          if (e.target === mobileThemePicker) {
+            mobileThemePicker.classList.remove('active');
+            return;
+          }
+
+          // Close if clicking near the close button (top-right area)
+          const rect = mobileThemePicker.getBoundingClientRect();
+          const clickX = e.clientX - rect.left;
+          const clickY = e.clientY - rect.top;
+          
+          if (clickX > rect.width - 50 && clickY < 50) {
+            mobileThemePicker.classList.remove('active');
+            return;
+          }
+
+          // Handle theme selection
+          const theme = e.target.dataset.theme;
+          if (theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            mobileThemePicker.classList.remove('active');
+            postThemeToIframes(theme);
+          }
+        });
+
+        // Close theme picker when escape key is pressed
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && mobileThemePicker.classList.contains('active')) {
+            mobileThemePicker.classList.remove('active');
+          }
+        });
+      }
+
+      // Send initial theme to iframes
       postThemeToIframes(localStorage.getItem('theme') || 'default');
 
-      // Fetch API and render UI preserving original class names
+      // Fetch API and render
       (async function fetchAndRender() {
         let records = [];
         try {
@@ -336,7 +380,6 @@
           return;
         }
 
-        // Normalize API keys with spaces into short keys we use
         function get(r, key) { return (r && Object.prototype.hasOwnProperty.call(r, key)) ? r[key] : null; }
 
         // Group by Project Name then by Location Number
@@ -351,7 +394,7 @@
           proj.locMap.get(locNumber).push(r);
         });
 
-        // Build location -> items index (one filter per Location Number)
+        // Build location index
         const locationIndex = new Map();
         projects.forEach((proj, projectName) => {
           proj.locMap.forEach((recordsForLoc, locNumber) => {
@@ -373,24 +416,23 @@
           items: data.items
         }));
 
-        // Render filter buttons (use same classes)
+        // Render filter buttons
         filtersRoot.innerHTML = locations.map((loc, idx) => {
           const imgHtml = loc.filterImage ? `<img src="${loc.filterImage}" alt="${loc.locationNumber}" loading="lazy">` : '';
           return `
-            <button class="project-filter-btn ${idx === 0 ? 'active' : ''}" data-filter="${loc.locationNumber}" data-loc-index="${idx}">
+            <button class="project-filter-btn ${idx === 0 ? 'active' : ''}" data-filter="${loc.locationNumber}">
               <div class="image-area">${imgHtml}</div>
               <div class="label">${loc.locationNumber}</div>
             </button>
           `;
         }).join('');
 
-        // Render function: builds nodes using exact class names
+        // Render location
         function renderLocation(index) {
           const loc = locations[index];
           if (!loc) return;
           contentsRoot.innerHTML = '';
           loc.items.forEach((projItem) => {
-            // If project has a description, insert it once using same wrapper class
             if (projItem.description) {
               const p = document.createElement('div');
               p.className = 'project-filter-section';
@@ -422,11 +464,11 @@
                         <img src="${proposal}" alt="Proposal" loading="lazy">
                         <div class="label proposal-label">Proposal</div>
                       </div>
-                      <div class="image-layer after-image" id="${sliderId}_after">
+                      <div class="image-layer after-image">
                         <img src="${after}" alt="After" loading="lazy">
                         <div class="label after-label">After</div>
                       </div>
-                      <div class="image-layer before-image" id="${sliderId}_before">
+                      <div class="image-layer before-image">
                         <img src="${before}" alt="Before" loading="lazy">
                         <div class="label before-label">Before</div>
                       </div>
@@ -454,7 +496,7 @@
                         <img src="${rightSrc}" alt="${rightLabel}" loading="lazy">
                         <div class="two-image-label proposal-label">${rightLabel}</div>
                       </div>
-                      <div class="two-image-layer current-image" id="${twoId}_current">
+                      <div class="two-image-layer current-image">
                         <img src="${leftSrc}" alt="${leftLabel}" loading="lazy">
                         <div class="two-image-label current-label">${leftLabel}</div>
                       </div>
@@ -472,10 +514,10 @@
           initSlidersIn(contentsRoot);
         }
 
-        // Initialize first location by default
+        // Initialize first location
         renderLocation(0);
 
-        // Filter button interactions (delegated)
+        // Filter button interactions
         filtersRoot.addEventListener('click', (e) => {
           const btn = e.target.closest('.project-filter-btn');
           if (!btn) return;
@@ -485,76 +527,95 @@
           filtersRoot.querySelectorAll('.project-filter-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           renderLocation(idx);
-          // ensure before-after tab is visible when selecting a filter
           window.location.hash = '#before-after';
         });
 
-        // Utility: initialize sliders within a container
+        // Initialize sliders
         function initSlidersIn(rootEl) {
-          // Two-image sliders
           rootEl.querySelectorAll('.two-image-slider-container').forEach(container => {
             if (!container.id) {
               container.id = 'twoImageSlider_auto_' + Math.random().toString(36).slice(2, 9);
             }
-            const line = container.querySelector('.two-slider-line');
-            if (line && !line.id) line.id = 'twoSliderLine_' + container.id;
-            const handle = container.querySelector('.two-slider-handle');
-            if (handle && !handle.id) handle.id = 'twoSliderHandle_' + container.id;
             try { new TwoImageSlider(container.id); } catch (err) { console.warn('TwoImageSlider init failed', err); }
           });
 
-          // Three-image sliders
           rootEl.querySelectorAll('.slider-container').forEach(container => {
             if (!container.id) container.id = 'sliderContainer_auto_' + Math.random().toString(36).slice(2, 9);
             try { new ThreeImageSlider(container.id); } catch (err) { console.warn('ThreeImageSlider init failed', err); }
           });
         }
 
-      })(); // end fetchAndRender
+      })();
     });
-    // --- end DOMContentLoaded initializer ---
 
-    // placeholder translation function to match original
     function translate() {
       alert('Arabic translation logic goes here.');
     }
 
-    let lastScrollY = window.scrollY;
-    const nav = document.querySelector('nav');
+    // Navbar hide on scroll
+    let lastScrollY2 = window.scrollY;
+    let scrollThreshold = 100; // Threshold in pixels
+    let accumulatedScroll = 0; // Track accumulated scroll
+
+    const nav = document.querySelector('nav.navbar');
+    const subnav = document.querySelector('.plants-subnav') || document.querySelector('.building-subnav') || document.querySelector('.projects-subnav');
     const logo = document.querySelector('.logo-space');
-    const subnav = document.querySelector('.projects-subnav');
 
     window.addEventListener('scroll', () => {
-      if (window.scrollY > lastScrollY) {
+      const currentScrollY = window.scrollY;
+      const scrollDifference = currentScrollY - lastScrollY2;
+
+      // Update accumulated scroll
+      if (scrollDifference > 0) {
         // Scrolling down
-        nav.classList.add('hide-on-scroll');
-        logo.classList.add('hide-on-scroll');
-        subnav.classList.add('hide-on-scroll');
+        accumulatedScroll += scrollDifference;
+
+        // Hide navbar and subnav only if scrolled down more than threshold
+        if (accumulatedScroll >= scrollThreshold) {
+          if (nav) nav.classList.add('hide-on-scroll');
+          if (logo) logo.classList.add('hide-on-scroll');
+          if (subnav) subnav.classList.add('hide-on-scroll');
+        }
       } else {
-        // Scrolling up
-        nav.classList.remove('hide-on-scroll');
-        logo.classList.remove('hide-on-scroll');
-        subnav.classList.remove('hide-on-scroll');
+        // Scrolling up - reset accumulated scroll and show nav immediately
+        accumulatedScroll = 0;
+        if (nav) nav.classList.remove('hide-on-scroll');
+        if (logo) logo.classList.remove('hide-on-scroll');
+        if (subnav) subnav.classList.remove('hide-on-scroll');
       }
-      lastScrollY = window.scrollY;
+
+      lastScrollY2 = currentScrollY;
     });
 
-    const hamburger = document.getElementById('hamburger');
-    const navList = document.querySelector('nav ul');
-    const themePicker = document.getElementById('themePicker');
+    // Hamburger menu
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileThemePicker = document.getElementById('mobile-theme-picker');
 
-    hamburger.addEventListener('click', () => {
-      navList.classList.toggle('active');
-    });
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', () => {
+          mobileMenu.classList.toggle('active');
+        });
+      }
 
-    window.addEventListener('scroll', () => {
-      document.querySelector('nav ul').classList.remove('active');
-      themePicker.classList.remove('active');
-    });
+      // Close menu on scroll
+      window.addEventListener('scroll', () => {
+        if (mobileMenu) {
+          mobileMenu.classList.remove('active');
+        }
+        if (mobileThemePicker) {
+          mobileThemePicker.classList.remove('active');
+        }
+      });
 
-    document.querySelectorAll('nav ul li a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.querySelector('nav ul').classList.remove('active');
+      // Close menu when clicking links
+      document.querySelectorAll('#mobile-menu > li > a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (mobileMenu) {
+            mobileMenu.classList.remove('active');
+          }
+        });
       });
     });
   </script>

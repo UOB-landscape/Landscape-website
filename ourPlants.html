@@ -4,14 +4,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>UOB Landscape</title>
-
+  <title>UOB Landscape - Our Plants</title>
   <script>
-    // Get saved theme from localStorage
+    // Prevent hash from scrolling on page load
+    if (window.location.hash) {
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 1);
+    }
+    
     const savedTheme = localStorage.getItem('theme');
-
     if (savedTheme) {
-      // Set theme attribute before CSS is applied
       document.documentElement.setAttribute('data-theme', savedTheme);
     }
   </script>
@@ -19,7 +22,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 
-<body style="padding: 0;">
+<body class="our-plants-page">
   <nav class="navbar">
     <div class="nav-left">
       <div class="logo-space" title="Logo">
@@ -29,21 +32,13 @@
     </div>
 
     <div class="nav-center">
-      <ul>
+      <ul id="mobile-menu">
         <li><a href="home.html">Home</a></li>
-        <li class="has-dropdown">
-          <a href="ourPlants.html" class="active">Our plants</a>
-          <ul class="subnav-mobile">
-            <li><a href="#indoor-plants" class="mobile-tab-link">Indoor Plants</a></li>
-            <li><a href="#outdoor-plants" class="mobile-tab-link">Outdoor Plants</a></li>
-          </ul>
-        </li>
+        <li><a href="ourPlants.html" class="active">Our plants</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="locations.html">Locations</a></li>
         <li><a href="about.html">About</a></li>
 
-
-        <!-- Mobile controls section - uses same class names as desktop -->
         <li class="mobile-controls">
           <div class="dropdown">
             <button class="theme-btn" id="mobile-theme-btn">🎨</button>
@@ -78,6 +73,7 @@
     </div>
   </nav>
 
+  <!-- PLANTS SUBNAV -->
   <nav class="plants-subnav">
     <ul>
       <li><a href="#indoor-plants" id="tab-indoor">Indoor Plants</a></li>
@@ -86,7 +82,7 @@
   </nav>
 
   <script>
-    // Switch tabs based on URL hash changes
+    // Tab switching
     function showTab(hash) {
       document.querySelectorAll('.plants-section').forEach(sec => {
         sec.style.display = ('#' + sec.id === hash ? 'block' : 'none');
@@ -94,21 +90,25 @@
       document.querySelectorAll('.plants-subnav a').forEach(link => {
         link.classList.toggle('active', link.getAttribute('href') === hash);
       });
-      // Also update mobile subnav links
-      document.querySelectorAll('.mobile-tab-link').forEach(link => {
-        link.classList.toggle('active', link.getAttribute('href') === hash);
-      });
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      // Set default or based on hash
       const initialHash = (window.location.hash === '#outdoor-plants') ? '#outdoor-plants' : '#indoor-plants';
       showTab(initialHash);
 
-      // Listen to URL hash changes (e.g. back/forward)
+      if (!window.location.hash) {
+        window.location.hash = '#indoor-plants';
+      }
+
+      showTab(window.location.hash || '#indoor-plants');
+
+      // Force scroll to top after a short delay to override hash behavior
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 0);
+
       window.addEventListener('hashchange', () => showTab(window.location.hash));
 
-      // Handle clicks to update hash
       const tabIndoor = document.getElementById('tab-indoor');
       const tabOutdoor = document.getElementById('tab-outdoor');
 
@@ -116,6 +116,7 @@
         tabIndoor.addEventListener('click', e => {
           e.preventDefault();
           window.location.hash = '#indoor-plants';
+          window.scrollTo(0, 0);
         });
       }
 
@@ -123,48 +124,12 @@
         tabOutdoor.addEventListener('click', e => {
           e.preventDefault();
           window.location.hash = '#outdoor-plants';
+          window.scrollTo(0, 0);
         });
       }
-
-      // Handle clicks on mobile subnav links
-      document.querySelectorAll('.mobile-tab-link').forEach(link => {
-        link.addEventListener('click', e => {
-          e.preventDefault();
-          const hash = link.getAttribute('href');
-          window.location.hash = hash;
-          // Close hamburger menu after clicking
-          const navList = document.querySelector('.nav-center ul');
-          if (navList) {
-            navList.classList.remove('active');
-          }
-          // Close the dropdown
-          document.querySelectorAll('.has-dropdown').forEach(item => {
-            item.classList.remove('dropdown-open');
-          });
-        });
-      });
     });
 
-    // Subnav tabs switch logic
-    const tabs = document.querySelectorAll('.plants-subnav a');
-    const sections = document.querySelectorAll('main > section');
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', (e) => {
-        e.preventDefault();
-
-        const targetId = tab.getAttribute('href').substring(1);
-
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-
-        sections.forEach(s => {
-          s.style.display = (s.id === targetId) ? 'block' : 'none';
-        });
-      });
-    });
-
-    // Theme dropdown behavior
+    // Desktop theme picker
     const btn = document.getElementById('theme-btn');
     const picker = document.getElementById('theme-picker');
 
@@ -188,171 +153,117 @@
           picker.classList.remove('active');
         }
       });
-
-      // Close picker on scroll
-      let lastScrollY = window.scrollY;
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > lastScrollY) {
-          picker.classList.remove('active');
-        }
-        lastScrollY = window.scrollY;
-      });
     }
 
-    // Mobile theme picker functionality
+    // Mobile theme picker
     const mobileThemeBtn = document.getElementById('mobile-theme-btn');
     const mobileThemePicker = document.getElementById('mobile-theme-picker');
 
     if (mobileThemeBtn && mobileThemePicker) {
-      // Toggle mobile theme picker
       mobileThemeBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         mobileThemePicker.classList.toggle('active');
       });
 
-      // Close mobile theme picker when clicking outside
       document.addEventListener('click', (e) => {
         if (!e.target.closest('.mobile-controls .dropdown')) {
           mobileThemePicker.classList.remove('active');
         }
       });
 
-      // Handle mobile theme selection
       mobileThemePicker.addEventListener('click', (e) => {
         const theme = e.target.dataset.theme;
         if (theme) {
           document.documentElement.setAttribute('data-theme', theme);
           localStorage.setItem('theme', theme);
           mobileThemePicker.classList.remove('active');
-          updateActiveTheme(theme);
         }
       });
     }
 
-    // Update active state for all theme options (both desktop and mobile)
-    function updateActiveTheme(theme) {
-      document.querySelectorAll('.theme-option').forEach(opt => {
-        opt.classList.toggle('active', opt.dataset.theme === theme);
-      });
-    }
-
-    // Apply saved theme on load
-    window.addEventListener('DOMContentLoaded', () => {
-      const saved = localStorage.getItem('theme') || 'default';
-      document.documentElement.setAttribute('data-theme', saved);
-      if (mobileThemePicker) mobileThemePicker.classList.remove('active');
-    });
-
-    // Placeholder translation logic
     function translate() {
       alert('Arabic translation logic goes here.');
     }
 
-    // Floating button logic
+    // Floating button
     document.addEventListener('DOMContentLoaded', () => {
       const floatingBtn = document.querySelector('.floating-btn');
       if (floatingBtn) {
         window.addEventListener('scroll', () => {
-          if (window.pageYOffset > 300) {
-            floatingBtn.classList.add('show');
-          } else {
-            floatingBtn.classList.remove('show');
-          }
+          floatingBtn.classList.toggle('show', window.pageYOffset > 300);
         });
 
         floatingBtn.addEventListener('click', (e) => {
           e.preventDefault();
           window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-      } else {
-        console.error('Floating button not found');
       }
     });
 
-    let lastScrollY = window.scrollY;
+    // Navbar hide on scroll
+    let lastScrollY2 = window.scrollY;
+    let scrollThreshold = 100; // Threshold in pixels
+    let accumulatedScroll = 0; // Track accumulated scroll
+
     const nav = document.querySelector('nav.navbar');
-    const subnav = document.querySelector('.plants-subnav');
+    const subnav = document.querySelector('.plants-subnav') || document.querySelector('.building-subnav') || document.querySelector('.projects-subnav');
     const logo = document.querySelector('.logo-space');
 
     window.addEventListener('scroll', () => {
       const currentScrollY = window.scrollY;
+      const scrollDifference = currentScrollY - lastScrollY2;
 
-      if (currentScrollY > lastScrollY) {
-        // Scrolling down - hide both
-        nav.classList.add('hide-on-scroll');
-        logo.classList.add('hide-on-scroll');
-        subnav.classList.add('hide-on-scroll');
+      // Update accumulated scroll
+      if (scrollDifference > 0) {
+        // Scrolling down
+        accumulatedScroll += scrollDifference;
+
+        // Hide navbar and subnav only if scrolled down more than threshold
+        if (accumulatedScroll >= scrollThreshold) {
+          if (nav) nav.classList.add('hide-on-scroll');
+          if (logo) logo.classList.add('hide-on-scroll');
+          if (subnav) subnav.classList.add('hide-on-scroll');
+        }
       } else {
-        // Scrolling up - show both
-        nav.classList.remove('hide-on-scroll');
-        logo.classList.remove('hide-on-scroll');
-        subnav.classList.remove('hide-on-scroll');
+        // Scrolling up - reset accumulated scroll and show nav immediately
+        accumulatedScroll = 0;
+        if (nav) nav.classList.remove('hide-on-scroll');
+        if (logo) logo.classList.remove('hide-on-scroll');
+        if (subnav) subnav.classList.remove('hide-on-scroll');
       }
 
-      lastScrollY = currentScrollY;
+      lastScrollY2 = currentScrollY;
     });
 
-    const hamburger = document.getElementById('hamburger');
-    const navList = document.querySelector('nav ul');
+    // Hamburger menu
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
 
-    hamburger.addEventListener('click', () => {
-      navList.classList.toggle('active');
-    });
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', () => {
+          mobileMenu.classList.toggle('active');
+        });
+      }
 
-    // Toggle dropdown in hamburger menu
-    document.querySelectorAll('.has-dropdown > a').forEach(link => {
-      link.addEventListener('click', (e) => {
-        // Only prevent default and toggle on mobile (when hamburger menu is active)
-        if (navList.classList.contains('active')) {
-          e.preventDefault();
-          const parentLi = link.parentElement;
-          parentLi.classList.toggle('dropdown-open');
+      // Close menu on scroll
+      window.addEventListener('scroll', () => {
+        if (mobileMenu) {
+          mobileMenu.classList.remove('active');
+        }
+        if (mobileThemePicker) {
+          mobileThemePicker.classList.remove('active');
         }
       });
-    });
 
-    document.addEventListener("DOMContentLoaded", function () {
-      const hamburger = document.getElementById("hamburger");
-      const navCenter = document.querySelector(".nav-center");
-      const dropdownParents = document.querySelectorAll(".has-dropdown");
-
-      // Toggle main nav on hamburger click
-      hamburger.addEventListener("click", () => {
-        navCenter.classList.toggle("active");
-      });
-
-      // Toggle subnav on parent click (mobile only)
-      dropdownParents.forEach(parent => {
-        const parentLink = parent.querySelector("a");
-
-        parentLink.addEventListener("click", function (e) {
-          const isMobile = window.innerWidth <= 768;
-
-          if (isMobile) {
-            e.preventDefault(); // block navigation on mobile
-            parent.classList.toggle("open"); // toggle subnav
-          }
-          // On desktop, allow normal navigation
-        });
-      });
-    });
-
-    window.addEventListener('scroll', () => {
-      document.querySelector('nav ul').classList.remove('active');
-      // Close all dropdowns on scroll
-      document.querySelectorAll('.has-dropdown').forEach(item => {
-        item.classList.remove('dropdown-open');
-      });
-      if (mobileThemePicker) mobileThemePicker.classList.remove('active');
-    });
-
-    document.querySelectorAll('nav ul li a').forEach(link => {
-      // Don't close menu when clicking parent dropdown links
-      if (!link.parentElement.classList.contains('has-dropdown')) {
+      // Close menu when clicking links
+      document.querySelectorAll('#mobile-menu > li > a').forEach(link => {
         link.addEventListener('click', () => {
-          document.querySelector('nav ul').classList.remove('active');
+          if (mobileMenu) {
+            mobileMenu.classList.remove('active');
+          }
         });
-      }
+      });
     });
   </script>
 
@@ -362,26 +273,21 @@
         <div class="search-bar">
           <div class="search-input-wrapper">
             <span class="search-icon">🔍</span>
-            <input type="text" id="searchInput" placeholder="Search by title..." oninput="filterGrid()" />
+            <input type="text" id="searchInput" placeholder="Search by title..." />
           </div>
         </div>
         <div class="filters">
-          <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
+          <select class="filter-btn">
             <option value="" disabled selected>Sort by</option>
             <option value="A-Z">A-Z</option>
           </select>
-
-          <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
+          <select class="filter-btn">
             <option value="" disabled selected>Filter by Type</option>
             <option value="trees">Trees</option>
-            <option value=""></option>
-            <option value=""></option>
           </select>
-
         </div>
       </div>
       <div id="indoorGrid" class="grid-container"></div>
-
     </section>
 
     <section id="outdoor-plants" class="plants-section">
@@ -389,26 +295,21 @@
         <div class="search-bar">
           <div class="search-input-wrapper">
             <span class="search-icon">🔍</span>
-            <input type="text" id="searchInput" placeholder="Search by title..." oninput="filterGrid()" />
+            <input type="text" id="searchInput2" placeholder="Search by title..." />
           </div>
         </div>
         <div class="filters">
-          <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
+          <select class="filter-btn">
             <option value="" disabled selected>Sort by</option>
             <option value="A-Z">A-Z</option>
           </select>
-
-          <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
+          <select class="filter-btn">
             <option value="" disabled selected>Filter by Type</option>
             <option value="trees">Trees</option>
-            <option value=""></option>
-            <option value=""></option>
           </select>
-
         </div>
       </div>
-      <div class="grid-container">
-      </div>
+      <div class="grid-container"></div>
     </section>
   </main>
 
@@ -420,10 +321,8 @@
     <div class="footer-container">
       <div class="footer-column">
         <h4>About</h4>
-        <p>UOB Landscape documents and showcases the diverse flora across our campus, providing detailed information
-          about plants, their locations, and ecological significance.</p>
+        <p>UOB Landscape documents and showcases the diverse flora across our campus.</p>
       </div>
-
       <div class="footer-column">
         <h4>Navigation</h4>
         <ul>
@@ -434,92 +333,39 @@
           <li><a href="about.html">About</a></li>
         </ul>
       </div>
-
       <div class="footer-column">
         <h4>External Links</h4>
         <ul>
-          <li><a href="https://www.uob.edu.bh/" target="_blank" rel="noopener noreferrer">University of Bahrain</a></li>
-          <li><a href="https://www.mun.gov.bh/newportal/ar" target="_blank" rel="noopener noreferrer">Municipality of
-              Bahrain</a></li>
-          <li><a href="https://www.bahrain.bh/wps/portal/en/BNP/ExploreBahrain/SustainableDevelopment/" target="_blank"
-              rel="noopener noreferrer">Sustainable Development</a></li>
+          <li><a href="https://www.uob.edu.bh/" target="_blank">University of Bahrain</a></li>
+          <li><a href="https://www.mun.gov.bh/newportal/ar" target="_blank">Municipality of Bahrain</a></li>
+          <li><a href="https://www.bahrain.bh/wps/portal/en/BNP/ExploreBahrain/SustainableDevelopment/"
+              target="_blank">Sustainable Development</a></li>
         </ul>
       </div>
-
       <div class="footer-column">
         <h4>Contact</h4>
-
         <div class="social-links">
-          <a target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-envelope"></i>
-          </a>
+          <i class="fa-solid fa-envelope"></i>
           <span>landscape@uob.edu.bh</span>
         </div>
-
         <div class="social-links">
-          <a target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-phone"></i>
-          </a>
+          <i class="fa-solid fa-phone"></i>
           <span>+973 1743 8181</span>
         </div>
-
         <div class="social-links">
-          <a href="https://www.youtube.com/channel/UCM5UfujAklBwqFCAYDWXMMA" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.youtube.com/channel/UCM5UfujAklBwqFCAYDWXMMA" target="_blank">
             <i class="fab fa-youtube"></i>
           </a>
           <span>Follow us on YouTube</span>
         </div>
       </div>
     </div>
-
     <div class="footer-bottom">
       <p>&copy; 2025 University of Bahrain. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- <script>
-fetch('http://localhost:3000/api/indoor')
-  .then(res => {
-    console.log('Response status:', res.status);
-    return res.json();
-  })
-  .then(plants => {
-    console.log('Fetched plants:', plants);
-    const grid = document.getElementById('indoorGrid');
-    if (!grid) {
-      console.error('Grid container not found!');
-      return;
-    }
-    plants.forEach(plant => {
-      const card = document.createElement('div');
-      card.className = 'grid-item';
-      card.innerHTML = `
-        <img src="${plant.Image}" alt="${plant['Common name']}">
-        <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
-        <p><strong>Watering:</strong> ${plant.Watering}</p>
-        <p><strong>Light:</strong> ${plant['Light Requirements']}</p>
-        <p><strong>Temperature:</strong> ${plant['Stable temperature']}</p>
-      `;
-      card.addEventListener('click', () => showPlantDetails(plant));
-      grid.appendChild(card);
-    });
-  })
-  .catch(err => {
-    console.error('Fetch error:', err);
-  });
-
-function showPlantDetails(plant) {
-  alert(
-    `${plant['Common name']} (${plant['Scientific name']})\n\n` +
-    `Watering: ${plant.Watering}\n` +
-    `Light: ${plant['Light Requirements']}\n` +
-    `Temperature: ${plant['Stable temperature']}`
-  );
-}
-</script> -->
-
   <script>
-    // Fetch indoor plants
     fetch('http://localhost:3000/api/indoor-plants')
       .then(res => res.json())
       .then(plants => {
@@ -528,10 +374,9 @@ function showPlantDetails(plant) {
           const card = document.createElement('div');
           card.className = 'grid-item';
           card.innerHTML = `
-        <img src="${plant.Image}" alt="${plant['Scientific name']}">
-        <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
-      `;
-          // navigate to indoorPlant.html with plant ID
+            <img src="${plant.Image}" alt="${plant['Scientific name']}">
+            <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
+          `;
           card.addEventListener('click', () => {
             window.location.href = `indoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
           });
@@ -540,8 +385,6 @@ function showPlantDetails(plant) {
       })
       .catch(err => console.error('Indoor fetch error:', err));
 
-
-    // Fetch outdoor plants
     fetch('http://localhost:3000/api/outdoor-plants')
       .then(res => res.json())
       .then(plants => {
@@ -550,10 +393,9 @@ function showPlantDetails(plant) {
           const card = document.createElement('div');
           card.className = 'grid-item';
           card.innerHTML = `
-        <img src="${plant.Image}" alt="${plant['Scientific name']}">
-        <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
-      `;
-          // navigate to outdoorPlant.html with plant ID
+            <img src="${plant.Image}" alt="${plant['Scientific name']}">
+            <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
+          `;
           card.addEventListener('click', () => {
             window.location.href = `outdoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
           });
@@ -562,7 +404,6 @@ function showPlantDetails(plant) {
       })
       .catch(err => console.error('Outdoor fetch error:', err));
   </script>
-
 </body>
 
 </html>

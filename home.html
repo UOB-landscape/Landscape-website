@@ -29,14 +29,13 @@
     </div>
 
     <div class="nav-center">
-      <ul>
+      <ul id="mobile-menu">
         <li><a href="home.html" class="active">Home</a></li>
         <li><a href="ourPlants.html">Our plants</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="locations.html">Locations</a></li>
         <li><a href="about.html">About</a></li>
 
-        <!-- Mobile controls section - uses same class names as desktop -->
         <li class="mobile-controls">
           <div class="dropdown">
             <button class="theme-btn" id="mobile-theme-btn">🎨</button>
@@ -473,43 +472,67 @@
       alert('Arabic translation logic goes here.');
     }
 
-    let lastScrollY = window.scrollY;
-    const nav = document.querySelector('nav');
+    let lastScrollY2 = window.scrollY;
+    let scrollThreshold = 100; // Threshold in pixels
+    let accumulatedScroll = 0; // Track accumulated scroll
+
+    const nav = document.querySelector('nav.navbar');
+    const subnav = document.querySelector('.plants-subnav') || document.querySelector('.building-subnav') || document.querySelector('.projects-subnav');
     const logo = document.querySelector('.logo-space');
 
     window.addEventListener('scroll', () => {
-      if (window.scrollY > lastScrollY) {
+      const currentScrollY = window.scrollY;
+      const scrollDifference = currentScrollY - lastScrollY2;
+
+      // Update accumulated scroll
+      if (scrollDifference > 0) {
         // Scrolling down
-        nav.classList.add('hide-on-scroll');
-        logo.classList.add('hide-on-scroll');
+        accumulatedScroll += scrollDifference;
+
+        // Hide navbar and subnav only if scrolled down more than threshold
+        if (accumulatedScroll >= scrollThreshold) {
+          if (nav) nav.classList.add('hide-on-scroll');
+          if (logo) logo.classList.add('hide-on-scroll');
+          if (subnav) subnav.classList.add('hide-on-scroll');
+        }
       } else {
-        // Scrolling up
-        nav.classList.remove('hide-on-scroll');
-        logo.classList.remove('hide-on-scroll');
+        // Scrolling up - reset accumulated scroll and show nav immediately
+        accumulatedScroll = 0;
+        if (nav) nav.classList.remove('hide-on-scroll');
+        if (logo) logo.classList.remove('hide-on-scroll');
+        if (subnav) subnav.classList.remove('hide-on-scroll');
       }
-      lastScrollY = window.scrollY;
+
+      lastScrollY2 = currentScrollY;
     });
 
-    const hamburger = document.getElementById('hamburger');
-    const navList = document.querySelector('nav ul');
+    // Hamburger menu functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
 
-    hamburger.addEventListener('click', () => {
-      navList.classList.toggle('active');
-    });
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', () => {
+          mobileMenu.classList.toggle('active');
+        });
+      }
 
-    window.addEventListener('scroll', () => {
-      document.querySelector('nav ul').classList.remove('active');
-      if (picker) picker.classList.remove('active');
-      // Close all dropdowns on scroll
-      document.querySelectorAll('.has-dropdown').forEach(item => {
-        item.classList.remove('dropdown-open');
+      // Close menu on scroll
+      window.addEventListener('scroll', () => {
+        if (mobileMenu) {
+          mobileMenu.classList.remove('active');
+        }
+        if (picker) picker.classList.remove('active');
+        if (mobileThemePicker) mobileThemePicker.classList.remove('active');
       });
-      if (mobileThemePicker) mobileThemePicker.classList.remove('active');
-    });
 
-    document.querySelectorAll('nav ul li a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.querySelector('nav ul').classList.remove('active');
+      // Close menu when clicking links
+      document.querySelectorAll('#mobile-menu > li > a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (mobileMenu) {
+            mobileMenu.classList.remove('active');
+          }
+        });
       });
     });
   </script>

@@ -25,12 +25,26 @@
     </div>
 
     <div class="nav-center">
-      <ul>
+      <ul id="mobile-menu">
         <li><a href="home.html">Home</a></li>
         <li><a href="ourPlants.html">Our plants</a></li>
         <li><a href="projects.html">Projects</a></li>
         <li><a href="locations.html">Locations</a></li>
         <li><a href="about.html" class="active">About</a></li>
+
+        <li class="mobile-controls">
+          <div class="dropdown">
+            <button class="theme-btn" id="mobile-theme-btn">🎨</button>
+            <div class="theme-picker" id="mobile-theme-picker">
+              <div class="theme-option" data-theme="default"></div>
+              <div class="theme-option" data-theme="dark"></div>
+              <div class="theme-option" data-theme="solar"></div>
+              <div class="theme-option" data-theme="highcontrast"></div>
+              <div class="theme-option" data-theme="green"></div>
+            </div>
+          </div>
+          <button class="arabic-btn" onclick="translate()">عربي</button>
+        </li>
       </ul>
     </div>
 
@@ -250,6 +264,7 @@
     window.addEventListener("DOMContentLoaded", () => {
       loadCollaborators();
 
+      // Desktop theme picker
       const btn = document.getElementById('theme-btn');
       const picker = document.getElementById('theme-picker');
 
@@ -267,14 +282,12 @@
 
         picker.addEventListener('click', e => {
           const t = e.target.dataset.theme;
-          picker.addEventListener('click', e => {
-            const t = e.target.dataset.theme;
-            if (t) {
-              document.documentElement.setAttribute('data-theme', t);
-              localStorage.setItem('theme', t);  // Add this line
-              picker.classList.remove('active');
-            }
-          });
+          if (t) {
+            document.documentElement.setAttribute('data-theme', t);
+            localStorage.setItem('theme', t);
+            picker.classList.remove('active');
+            updateActiveTheme(t);
+          }
         });
 
         // Close picker on scroll
@@ -287,6 +300,49 @@
         });
       }
 
+      // Mobile theme picker functionality
+      const mobileThemeBtn = document.getElementById('mobile-theme-btn');
+      const mobileThemePicker = document.getElementById('mobile-theme-picker');
+
+      if (mobileThemeBtn && mobileThemePicker) {
+        // Toggle mobile theme picker
+        mobileThemeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          mobileThemePicker.classList.toggle('active');
+        });
+
+        // Close mobile theme picker when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.mobile-controls .dropdown')) {
+            mobileThemePicker.classList.remove('active');
+          }
+        });
+
+        // Handle mobile theme selection
+        mobileThemePicker.addEventListener('click', (e) => {
+          const theme = e.target.dataset.theme;
+          if (theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            mobileThemePicker.classList.remove('active');
+            updateActiveTheme(theme);
+          }
+        });
+      }
+
+      // Update active state for all theme options (both desktop and mobile)
+      function updateActiveTheme(theme) {
+        document.querySelectorAll('.theme-option').forEach(opt => {
+          opt.classList.toggle('active', opt.dataset.theme === theme);
+        });
+      }
+
+      // Apply saved theme on load
+      const saved = localStorage.getItem('theme') || 'default';
+      document.documentElement.setAttribute('data-theme', saved);
+      updateActiveTheme(saved);
+
+      // Active navigation link handling
       const navLinks = document.querySelectorAll('nav a');
       const currentPage = window.location.pathname.split('/').pop() || 'home.html';
       navLinks.forEach(link => {
@@ -298,38 +354,69 @@
       alert('Arabic translation logic goes here.');
     }
 
-    let lastScrollY = window.scrollY;
-    const nav = document.querySelector('nav');
+    let lastScrollY2 = window.scrollY;
+    let scrollThreshold = 100; // Threshold in pixels
+    let accumulatedScroll = 0; // Track accumulated scroll
+
+    const nav = document.querySelector('nav.navbar');
+    const subnav = document.querySelector('.plants-subnav') || document.querySelector('.building-subnav') || document.querySelector('.projects-subnav');
     const logo = document.querySelector('.logo-space');
 
     window.addEventListener('scroll', () => {
-      if (window.scrollY > lastScrollY) {
+      const currentScrollY = window.scrollY;
+      const scrollDifference = currentScrollY - lastScrollY2;
+
+      // Update accumulated scroll
+      if (scrollDifference > 0) {
         // Scrolling down
-        nav.classList.add('hide-on-scroll');
-        logo.classList.add('hide-on-scroll');
+        accumulatedScroll += scrollDifference;
+
+        // Hide navbar and subnav only if scrolled down more than threshold
+        if (accumulatedScroll >= scrollThreshold) {
+          if (nav) nav.classList.add('hide-on-scroll');
+          if (logo) logo.classList.add('hide-on-scroll');
+          if (subnav) subnav.classList.add('hide-on-scroll');
+        }
       } else {
-        // Scrolling up
-        nav.classList.remove('hide-on-scroll');
-        logo.classList.remove('hide-on-scroll');
+        // Scrolling up - reset accumulated scroll and show nav immediately
+        accumulatedScroll = 0;
+        if (nav) nav.classList.remove('hide-on-scroll');
+        if (logo) logo.classList.remove('hide-on-scroll');
+        if (subnav) subnav.classList.remove('hide-on-scroll');
       }
-      lastScrollY = window.scrollY;
+
+      lastScrollY2 = currentScrollY;
     });
 
-    const hamburger = document.getElementById('hamburger');
-    const navList = document.querySelector('nav ul');
+    // Hamburger menu functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
 
-    hamburger.addEventListener('click', () => {
-      navList.classList.toggle('active');
-    });
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', () => {
+          mobileMenu.classList.toggle('active');
+        });
+      }
 
-    window.addEventListener('scroll', () => {
-      document.querySelector('nav ul').classList.remove('active');
-      themePicker.classList.remove('active');
-    });
+      // Close menu on scroll
+      window.addEventListener('scroll', () => {
+        if (mobileMenu) {
+          mobileMenu.classList.remove('active');
+        }
+        const picker = document.getElementById('theme-picker');
+        const mobileThemePicker = document.getElementById('mobile-theme-picker');
+        if (picker) picker.classList.remove('active');
+        if (mobileThemePicker) mobileThemePicker.classList.remove('active');
+      });
 
-    document.querySelectorAll('nav ul li a').forEach(link => {
-      link.addEventListener('click', () => {
-        document.querySelector('nav ul').classList.remove('active');
+      // Close menu when clicking links
+      document.querySelectorAll('#mobile-menu > li > a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (mobileMenu) {
+            mobileMenu.classList.remove('active');
+          }
+        });
       });
     });
   </script>

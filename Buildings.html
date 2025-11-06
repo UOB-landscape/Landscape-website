@@ -221,37 +221,66 @@
 </head>
 
 <body>
-  <div class="logo-space" title="Logo">
-    <img src="UOB-new-logo.png" alt="University of Bahrain" />
-  </div>
-
-  <nav>
-    <ul>
-      <li><a href="home.html">Home</a></li>
-      <li><a href="ourPlants.html">Our plants</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="locations.html" class="active">Locations</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-    <div class="controls">
-      <button class="arabic-btn" onclick="translate()">عربي</button>
-      <div class="dropdown">
-        <button class="theme-btn" id="theme-btn">🎨</button>
-        <div class="theme-picker" id="theme-picker">
-          <div class="theme-option" data-theme="default"></div>
-          <div class="theme-option" data-theme="dark"></div>
-          <div class="theme-option" data-theme="solar"></div>
-          <div class="theme-option" data-theme="highcontrast"></div>
-          <div class="theme-option" data-theme="green"></div>
-        </div>
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="logo-space" title="Logo">
+        <img src="UOB-new-logo.png" alt="University of Bahrain" />
       </div>
-      <input type="search" placeholder="Search…">
+      <button class="hamburger" id="hamburger">&#9776;</button>
+    </div>
+
+    <div class="nav-center">
+      <ul id="mobile-menu">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="ourPlants.html">Our plants</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="locations.html" class="active">Locations</a></li>
+        <li><a href="about.html">About</a></li>
+
+        <li class="mobile-controls">
+          <div class="dropdown">
+            <button class="theme-btn" id="mobile-theme-btn">🎨</button>
+            <div class="theme-picker" id="mobile-theme-picker">
+              <div class="theme-option" data-theme="default"></div>
+              <div class="theme-option" data-theme="dark"></div>
+              <div class="theme-option" data-theme="solar"></div>
+              <div class="theme-option" data-theme="highcontrast"></div>
+              <div class="theme-option" data-theme="green"></div>
+            </div>
+          </div>
+          <button class="arabic-btn" onclick="translate()">عربي</button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="nav-right">
+      <div class="controls">
+        <button class="arabic-btn" onclick="translate()">عربي</button>
+        <div class="dropdown">
+          <button class="theme-btn" id="theme-btn">🎨</button>
+          <div class="theme-picker" id="theme-picker">
+            <div class="theme-option" data-theme="default"></div>
+            <div class="theme-option" data-theme="dark"></div>
+            <div class="theme-option" data-theme="solar"></div>
+            <div class="theme-option" data-theme="highcontrast"></div>
+            <div class="theme-option" data-theme="green"></div>
+          </div>
+        </div>
+        <input type="search" placeholder="Search…" />
+      </div>
     </div>
   </nav>
 
   <main class="grid-section">
 
-    <div class="filters" style="  display: flex; justify-content: center; padding: 20px; margin-bottom: 30px;">
+    <div class="search-bar">
+      <div class="search-input-wrapper">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Search by name..." oninput="filterGrid()" />
+      </div>
+    </div>
+
+    <div class="filters">
       <button onclick="location.href='Buildings.html'" class="filter-btn active">Buildings</button>
       <button onclick="location.href='Gates.html'" class="filter-btn">Gates</button>
       <button onclick="location.href='Roadside.html'" class="filter-btn">Roadside</button>
@@ -264,6 +293,10 @@
     <div class="grid-container" id="locationsGrid"></div>
   </main>
 
+  <button class="floating-btn" title="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+  
   <footer>
     <div class="footer-container">
       <div class="footer-column">
@@ -359,9 +392,206 @@
 
     loadBuildings();
 
+    document.addEventListener('DOMContentLoaded', () => {
+      const navLinks = document.querySelectorAll('nav a');
+      const currentPage = window.location.pathname.split('/').pop() || 'home.html';
+
+      // List of pages considered part of the "Locations" section
+      const locationPages = [
+        'CarPark.html',
+        'Buildings.html',
+        'Gates.html',
+        'Roadside.html',
+        'Infrastructure.html',
+        'Facilities.html',
+        'locations.html'
+      ];
+
+      navLinks.forEach(link => {
+        const href = link.getAttribute('href');
+
+        if (locationPages.includes(currentPage) && href === 'locations.html') {
+          // Highlight Locations nav link if current page is any location page
+          link.classList.add('active');
+        } else if (href === currentPage) {
+          // Highlight the matching nav link for other pages
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      // Optional: maintain active state on click (if navigation doesn't reload)
+      navLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+          navLinks.forEach(l => l.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+    });
+
+    // Desktop theme picker
+    const btn = document.getElementById('theme-btn');
+    const picker = document.getElementById('theme-picker');
+
+    if (btn && picker) {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        picker.classList.toggle('active');
+      });
+
+      document.addEventListener('click', e => {
+        if (!e.target.closest('.dropdown')) {
+          picker.classList.remove('active');
+        }
+      });
+
+      picker.addEventListener('click', e => {
+        const t = e.target.dataset.theme;
+        if (t) {
+          document.documentElement.setAttribute('data-theme', t);
+          localStorage.setItem('theme', t);
+          picker.classList.remove('active');
+          updateActiveTheme(t);
+        }
+      });
+
+      // Close picker on scroll
+      let lastScrollY = window.scrollY;
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > lastScrollY) {
+          picker.classList.remove('active');
+        }
+        lastScrollY = window.scrollY;
+      });
+    }
+
+    // Mobile theme picker functionality
+    const mobileThemeBtn = document.getElementById('mobile-theme-btn');
+    const mobileThemePicker = document.getElementById('mobile-theme-picker');
+
+    if (mobileThemeBtn && mobileThemePicker) {
+      // Toggle mobile theme picker
+      mobileThemeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        mobileThemePicker.classList.toggle('active');
+      });
+
+      // Close mobile theme picker when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.mobile-controls .dropdown')) {
+          mobileThemePicker.classList.remove('active');
+        }
+      });
+
+      // Handle mobile theme selection
+      mobileThemePicker.addEventListener('click', (e) => {
+        const theme = e.target.dataset.theme;
+        if (theme) {
+          document.documentElement.setAttribute('data-theme', theme);
+          localStorage.setItem('theme', theme);
+          mobileThemePicker.classList.remove('active');
+          updateActiveTheme(theme);
+        }
+      });
+    }
+
+    // Update active state for all theme options (both desktop and mobile)
+    function updateActiveTheme(theme) {
+      document.querySelectorAll('.theme-option').forEach(opt => {
+        opt.classList.toggle('active', opt.dataset.theme === theme);
+      });
+    }
+
+    // Apply saved theme on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = localStorage.getItem('theme') || 'default';
+      document.documentElement.setAttribute('data-theme', saved);
+      updateActiveTheme(saved);
+    });
+
     function translate() {
       alert('Arabic translation logic goes here.');
     }
+
+    // Floating button
+    document.addEventListener('DOMContentLoaded', () => {
+      const floatingBtn = document.querySelector('.floating-btn');
+      if (floatingBtn) {
+        window.addEventListener('scroll', () => {
+          floatingBtn.classList.toggle('show', window.pageYOffset > 300);
+        });
+
+        floatingBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+    });
+
+    let lastScrollY2 = window.scrollY;
+    let scrollThreshold = 100; // Threshold in pixels
+    let accumulatedScroll = 0; // Track accumulated scroll
+
+    const nav = document.querySelector('nav.navbar');
+    const subnav = document.querySelector('.plants-subnav') || document.querySelector('.building-subnav') || document.querySelector('.projects-subnav');
+    const logo = document.querySelector('.logo-space');
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+      const scrollDifference = currentScrollY - lastScrollY2;
+
+      // Update accumulated scroll
+      if (scrollDifference > 0) {
+        // Scrolling down
+        accumulatedScroll += scrollDifference;
+
+        // Hide navbar and subnav only if scrolled down more than threshold
+        if (accumulatedScroll >= scrollThreshold) {
+          if (nav) nav.classList.add('hide-on-scroll');
+          if (logo) logo.classList.add('hide-on-scroll');
+          if (subnav) subnav.classList.add('hide-on-scroll');
+        }
+      } else {
+        // Scrolling up - reset accumulated scroll and show nav immediately
+        accumulatedScroll = 0;
+        if (nav) nav.classList.remove('hide-on-scroll');
+        if (logo) logo.classList.remove('hide-on-scroll');
+        if (subnav) subnav.classList.remove('hide-on-scroll');
+      }
+
+      lastScrollY2 = currentScrollY;
+    });
+
+    // Hamburger menu functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (hamburger && mobileMenu) {
+        hamburger.addEventListener('click', () => {
+          mobileMenu.classList.toggle('active');
+        });
+      }
+
+      // Close menu on scroll
+      window.addEventListener('scroll', () => {
+        if (mobileMenu) {
+          mobileMenu.classList.remove('active');
+        }
+        if (picker) picker.classList.remove('active');
+        if (mobileThemePicker) mobileThemePicker.classList.remove('active');
+      });
+
+      // Close menu when clicking links
+      document.querySelectorAll('#mobile-menu > li > a').forEach(link => {
+        link.addEventListener('click', () => {
+          if (mobileMenu) {
+            mobileMenu.classList.remove('active');
+          }
+        });
+      });
+    });
   </script>
 </body>
 

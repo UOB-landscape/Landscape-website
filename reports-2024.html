@@ -6,26 +6,46 @@
     <title>Landscape Projects Report - 2024</title>
     <link rel="stylesheet" href="styles.css" />
     <style>
-        html{
+        html {
             padding: 0 !important;
+            overflow-x: hidden;
+            /* Prevent horizontal scroll on html */
         }
-        
+
         body {
             font-family: "Tahoma", Arial, sans-serif;
             line-height: 1.6;
             padding: 20px;
             background: #f0eeee;
+            margin: 0;
+            overflow-x: hidden;
+            /* Prevent horizontal scroll on body */
+            max-width: 100%;
+            box-sizing: border-box;
         }
 
         h2 {
             text-align: center;
         }
 
+        /* Make table container scrollable horizontally if needed */
+        .year-container {
+            width: 100%;
+            overflow-x: auto;
+            /* Allow horizontal scroll within container */
+            -webkit-overflow-scrolling: touch;
+            /* Smooth scrolling on iOS */
+        }
+
         table {
             border-collapse: collapse;
             width: 100%;
-            margin-bottom: 40px;
+            min-width: 1000px;
+            /* Minimum width for readability */
+            /* margin-bottom: 40px; */
             background: #fff;
+            table-layout: auto;
+            /* Allow columns to size naturally */
         }
 
         th,
@@ -34,10 +54,48 @@
             padding: 8px;
             text-align: center;
             vertical-align: middle;
+            word-wrap: break-word;
+            /* Allow text to wrap */
+            overflow-wrap: break-word;
         }
 
         th {
             background: var(--accent-light);
+            font-size: 0.9em;
+            /* Slightly smaller header text */
+        }
+
+        /* Make specific columns narrower */
+        td:nth-child(1) {
+            /* No. column */
+            width: 40px;
+            min-width: 40px;
+        }
+
+        td:nth-child(2) {
+            /* Images column */
+            width: 120px;
+            min-width: 120px;
+        }
+
+        td:nth-child(4) {
+            /* Location column */
+            min-width: 150px;
+        }
+
+        td:nth-child(6) {
+            /* Total Area column */
+            min-width: 80px;
+        }
+
+        td:nth-child(9) {
+            /* Green Area column */
+            min-width: 80px;
+        }
+
+        td:nth-child(10) {
+            /* No. of Trees column */
+            min-width: 60px;
         }
 
         .gallery-thumbnail {
@@ -52,12 +110,52 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        /* thumbnail sizing kept consistent */
+        /* Thumbnail sizing */
         .thumb-cell img {
             width: 100px;
             height: 100px;
             display: block;
             object-fit: cover;
+            margin: 0 auto;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1200px) {
+            body {
+                padding: 10px;
+            }
+
+            th,
+            td {
+                padding: 6px;
+                font-size: 0.9em;
+            }
+
+            .thumb-cell img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+
+            th,
+            td {
+                padding: 4px;
+                font-size: 0.85em;
+            }
+
+            .thumb-cell img {
+                width: 60px;
+                height: 60px;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
         }
     </style>
     <script>
@@ -98,8 +196,8 @@
                 <tr data-year="2024">
                     <td>1</td>
                     <td colspan="2" class="thumb-cell">
-                        <img src="https://i.postimg.cc/L5Sh4dL2/fence6.jpg" class="gallery-thumbnail" data-gallery="row1"
-                            width="100" height="100" alt="Inner Fence thumbnail">
+                        <img src="https://i.postimg.cc/L5Sh4dL2/fence6.jpg" class="gallery-thumbnail"
+                            data-gallery="row1" width="100" height="100" alt="Inner Fence thumbnail">
                     </td>
                     <td>Inner Fence</td>
                     <td>Planting ornamental trees</td>
@@ -114,8 +212,8 @@
                 <tr data-year="2024">
                     <td>2</td>
                     <td colspan="2" class="thumb-cell">
-                        <img src="https://i.postimg.cc/qqmt1bh3/main-gate-entrance-2.jpg" class="gallery-thumbnail" data-gallery="row2"
-                            width="100" height="100" alt="Main Gate thumbnail">
+                        <img src="https://i.postimg.cc/qqmt1bh3/main-gate-entrance-2.jpg" class="gallery-thumbnail"
+                            data-gallery="row2" width="100" height="100" alt="Main Gate thumbnail">
                     </td>
                     <td>Main Gate</td>
                     <td>Landscape redevelopment of entrance and exit zones</td>
