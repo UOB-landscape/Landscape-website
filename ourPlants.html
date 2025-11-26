@@ -12,7 +12,7 @@
         window.scrollTo(0, 0);
       }, 1);
     }
-    
+
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
       document.documentElement.setAttribute('data-theme', savedTheme);
@@ -33,11 +33,12 @@
 
     <div class="nav-center">
       <ul id="mobile-menu">
-        <li><a href="home.html">Home</a></li>
-        <li><a href="ourPlants.html" class="active">Our plants</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="locations.html">Locations</a></li>
-        <li><a href="about.html">About</a></li>
+        <li><a href="home.html">HOME</a></li>
+        <li><a href="ourPlants.html" class="active">OUR PLANTS</a></li>
+        <li><a href="projects.html">PROJECTS</a></li>
+        <li><a href="locations.html">LOCATIONS</a></li>
+        <li><a href="statistics.html">STATISTICS</a></li>
+        <li><a href="about.html">ABOUT</a></li>
 
         <li class="mobile-controls">
           <div class="dropdown">
@@ -76,8 +77,8 @@
   <!-- PLANTS SUBNAV -->
   <nav class="plants-subnav">
     <ul>
-      <li><a href="#indoor-plants" id="tab-indoor">Indoor Plants</a></li>
-      <li><a href="#outdoor-plants" id="tab-outdoor">Outdoor Plants</a></li>
+      <li><a href="#indoor-plants" id="tab-indoor">INDOOR PLANTS</a></li>
+      <li><a href="#outdoor-plants" id="tab-outdoor">OUTDOOR PLANTS</a></li>
     </ul>
   </nav>
 
@@ -200,41 +201,6 @@
       }
     });
 
-    // Navbar hide on scroll
-    let lastScrollY2 = window.scrollY;
-    let scrollThreshold = 100; // Threshold in pixels
-    let accumulatedScroll = 0; // Track accumulated scroll
-
-    const nav = document.querySelector('nav.navbar');
-    const subnav = document.querySelector('.plants-subnav') || document.querySelector('.building-subnav') || document.querySelector('.projects-subnav');
-    const logo = document.querySelector('.logo-space');
-
-    window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      const scrollDifference = currentScrollY - lastScrollY2;
-
-      // Update accumulated scroll
-      if (scrollDifference > 0) {
-        // Scrolling down
-        accumulatedScroll += scrollDifference;
-
-        // Hide navbar and subnav only if scrolled down more than threshold
-        if (accumulatedScroll >= scrollThreshold) {
-          if (nav) nav.classList.add('hide-on-scroll');
-          if (logo) logo.classList.add('hide-on-scroll');
-          if (subnav) subnav.classList.add('hide-on-scroll');
-        }
-      } else {
-        // Scrolling up - reset accumulated scroll and show nav immediately
-        accumulatedScroll = 0;
-        if (nav) nav.classList.remove('hide-on-scroll');
-        if (logo) logo.classList.remove('hide-on-scroll');
-        if (subnav) subnav.classList.remove('hide-on-scroll');
-      }
-
-      lastScrollY2 = currentScrollY;
-    });
-
     // Hamburger menu
     document.addEventListener('DOMContentLoaded', () => {
       const hamburger = document.getElementById('hamburger');
@@ -269,14 +235,14 @@
 
   <main class="grid-section">
     <section id="indoor-plants" class="plants-section">
-      <div class="search-filters-container">
+      <div class="search-filters-container" style="margin-top: 50px;">
         <div class="search-bar">
           <div class="search-input-wrapper">
             <span class="search-icon">🔍</span>
             <input type="text" id="searchInput" placeholder="Search by title..." />
           </div>
         </div>
-        <div class="filters">
+        <div class="filters" style="display: flex;">
           <select class="filter-btn">
             <option value="" disabled selected>Sort by</option>
             <option value="A-Z">A-Z</option>
@@ -291,14 +257,14 @@
     </section>
 
     <section id="outdoor-plants" class="plants-section">
-      <div class="search-filters-container">
+      <div class="search-filters-container" style="margin-top: 50px;">
         <div class="search-bar">
           <div class="search-input-wrapper">
             <span class="search-icon">🔍</span>
             <input type="text" id="searchInput2" placeholder="Search by title..." />
           </div>
         </div>
-        <div class="filters">
+        <div class="filters" style="display: flex;">
           <select class="filter-btn">
             <option value="" disabled selected>Sort by</option>
             <option value="A-Z">A-Z</option>

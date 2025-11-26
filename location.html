@@ -30,11 +30,12 @@
 
     <div class="nav-center">
       <ul id="mobile-menu">
-        <li><a href="home.html">Home</a></li>
-        <li><a href="ourPlants.html">Our plants</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="locations.html">Locations</a></li>
-        <li><a href="about.html">About</a></li>
+        <li><a href="home.html">HOME</a></li>
+        <li><a href="ourPlants.html">OUR PLANTS</a></li>
+        <li><a href="projects.html">PROJECTS</a></li>
+        <li><a href="locations.html" class="active">LOCATIONS</a></li>
+        <li><a href="statistics.html">STATISTICS</a></li>
+        <li><a href="about.html">ABOUT</a></li>
 
         <li class="mobile-controls">
           <div class="dropdown">
@@ -215,114 +216,9 @@
       });
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      // Set default or based on hash
-      const initialHash = (window.location.hash === '#Suggestions') ? '#Suggestions' : '#Plants';
-      showTab(initialHash);
-
-      // Listen to URL hash changes (e.g. back/forward)
-      window.addEventListener('hashchange', () => showTab(window.location.hash));
-
-      // Handle clicks to update hash
-      document.getElementById('tab-Plants').addEventListener('click', e => {
-        e.preventDefault();
-        window.location.hash = '#Plants';
-      });
-      document.getElementById('tab-Suggestions').addEventListener('click', e => {
-        e.preventDefault();
-        window.location.hash = '#Suggestions';
-      });
-
-      // defensive: if filterSections/filterButtons undefined, skip
-      try {
-        filterSections.forEach(section => {
-          section.style.display = 'none';
-        });
-        filterButtons.forEach(b => b.classList.remove('active'));
-      } catch (err) {
-        // ignore if those variables don't exist
-      }
-    });
-
-    // Subnav tabs switch logic
-    const tabs = document.querySelectorAll('.building-subnav a');
-    const sections = document.querySelectorAll('main > section');
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', (e) => {
-        e.preventDefault();
-
-        const targetId = tab.getAttribute('href').substring(1);
-
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-
-        sections.forEach(s => {
-          s.style.display = (s.id === targetId) ? 'block' : 'none';
-        });
-      });
-    });
-
-    // Desktop theme picker
-    const btn = document.getElementById('theme-btn');
-    const picker = document.getElementById('theme-picker');
-
-    if (btn && picker) {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        picker.classList.toggle('active');
-      });
-
-      document.addEventListener('click', e => {
-        if (!e.target.closest('.dropdown')) {
-          picker.classList.remove('active');
-        }
-      });
-
-      picker.addEventListener('click', e => {
-        const t = e.target.dataset.theme;
-        if (t) {
-          document.documentElement.setAttribute('data-theme', t);
-          localStorage.setItem('theme', t);
-          picker.classList.remove('active');
-          updateActiveTheme(t);
-        }
-      });
-
-      let lastScrollY = window.scrollY;
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > lastScrollY) {
-          picker.classList.remove('active');
-        }
-        lastScrollY = window.scrollY;
-      });
-    }
-
-    // Mobile theme picker functionality
-    const mobileThemeBtn = document.getElementById('mobile-theme-btn');
-    const mobileThemePicker = document.getElementById('mobile-theme-picker');
-
-    if (mobileThemeBtn && mobileThemePicker) {
-      mobileThemeBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        mobileThemePicker.classList.toggle('active');
-      });
-
-      document.addEventListener('click', (e) => {
-        if (!e.target.closest('.mobile-controls .dropdown')) {
-          mobileThemePicker.classList.remove('active');
-        }
-      });
-
-      mobileThemePicker.addEventListener('click', (e) => {
-        const theme = e.target.dataset.theme;
-        if (theme) {
-          document.documentElement.setAttribute('data-theme', theme);
-          localStorage.setItem('theme', theme);
-          mobileThemePicker.classList.remove('active');
-          updateActiveTheme(theme);
-        }
-      });
+    // Placeholder translation logic
+    function translate() {
+      alert('Arabic translation logic goes here.');
     }
 
     function updateActiveTheme(theme) {
@@ -331,54 +227,135 @@
       });
     }
 
-    // Apply saved theme on load
+    // ALL DOMCONTENTLOADED LOGIC IN ONE PLACE
     window.addEventListener('DOMContentLoaded', () => {
+      // Automatically redirect to #Plants if no hash is present
+      if (!window.location.hash) {
+        window.location.hash = '#Plants';
+      }
+
+      // Tab switching setup
+      const initialHash = (window.location.hash === '#Suggestions') ? '#Suggestions' : '#Plants';
+      showTab(initialHash);
+
+      // Scroll to top immediately
+      window.scrollTo(0, 0);
+
+      window.addEventListener('hashchange', () => {
+        showTab(window.location.hash);
+        // Also scroll to top when switching tabs
+        window.scrollTo(0, 0);
+      });
+
+      document.getElementById('tab-Plants').addEventListener('click', e => {
+        e.preventDefault();
+        window.location.hash = '#Plants';
+        window.scrollTo(0, 0);
+      });
+
+      document.getElementById('tab-Suggestions').addEventListener('click', e => {
+        e.preventDefault();
+        window.location.hash = '#Suggestions';
+        window.scrollTo(0, 0);
+      });
+
+      // Defensive filter handling
+      try {
+        filterSections.forEach(section => {
+          section.style.display = 'none';
+        });
+        filterButtons.forEach(b => b.classList.remove('active'));
+      } catch (err) {
+        // ignore if those variables don't exist
+      }
+
+      // Subnav tabs switch logic
+      const tabs = document.querySelectorAll('.building-subnav a');
+      const sections = document.querySelectorAll('main > section');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+          e.preventDefault();
+
+          const targetId = tab.getAttribute('href').substring(1);
+
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+
+          sections.forEach(s => {
+            s.style.display = (s.id === targetId) ? 'block' : 'none';
+          });
+        });
+      });
+
+      // Desktop theme picker
+      const btn = document.getElementById('theme-btn');
+      const picker = document.getElementById('theme-picker');
+
+      if (btn && picker) {
+        btn.addEventListener('click', e => {
+          e.stopPropagation();
+          picker.classList.toggle('active');
+        });
+
+        document.addEventListener('click', e => {
+          if (!e.target.closest('.dropdown')) {
+            picker.classList.remove('active');
+          }
+        });
+
+        picker.addEventListener('click', e => {
+          const t = e.target.dataset.theme;
+          if (t) {
+            document.documentElement.setAttribute('data-theme', t);
+            localStorage.setItem('theme', t);
+            picker.classList.remove('active');
+            updateActiveTheme(t);
+          }
+        });
+
+        let lastScrollY = window.scrollY;
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > lastScrollY) {
+            picker.classList.remove('active');
+          }
+          lastScrollY = window.scrollY;
+        });
+      }
+
+      // Mobile theme picker functionality
+      const mobileThemeBtn = document.getElementById('mobile-theme-btn');
+      const mobileThemePicker = document.getElementById('mobile-theme-picker');
+
+      if (mobileThemeBtn && mobileThemePicker) {
+        mobileThemeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          mobileThemePicker.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.mobile-controls .dropdown')) {
+            mobileThemePicker.classList.remove('active');
+          }
+        });
+
+        mobileThemePicker.addEventListener('click', (e) => {
+          const theme = e.target.dataset.theme;
+          if (theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('theme', theme);
+            mobileThemePicker.classList.remove('active');
+            updateActiveTheme(theme);
+          }
+        });
+      }
+
+      // Apply saved theme on load
       const saved = localStorage.getItem('theme') || 'default';
       document.documentElement.setAttribute('data-theme', saved);
       updateActiveTheme(saved);
-    });
 
-    // Placeholder translation logic
-    function translate() {
-      alert('Arabic translation logic goes here.');
-    }
-
-    let lastScrollY2 = window.scrollY;
-    let scrollThreshold = 100; // Threshold in pixels
-    let accumulatedScroll = 0; // Track accumulated scroll
-
-    const nav = document.querySelector('nav.navbar');
-    const subnav = document.querySelector('.plants-subnav') || document.querySelector('.building-subnav') || document.querySelector('.projects-subnav');
-    const logo = document.querySelector('.logo-space');
-
-    window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      const scrollDifference = currentScrollY - lastScrollY2;
-
-      // Update accumulated scroll
-      if (scrollDifference > 0) {
-        // Scrolling down
-        accumulatedScroll += scrollDifference;
-
-        // Hide navbar and subnav only if scrolled down more than threshold
-        if (accumulatedScroll >= scrollThreshold) {
-          if (nav) nav.classList.add('hide-on-scroll');
-          if (logo) logo.classList.add('hide-on-scroll');
-          if (subnav) subnav.classList.add('hide-on-scroll');
-        }
-      } else {
-        // Scrolling up - reset accumulated scroll and show nav immediately
-        accumulatedScroll = 0;
-        if (nav) nav.classList.remove('hide-on-scroll');
-        if (logo) logo.classList.remove('hide-on-scroll');
-        if (subnav) subnav.classList.remove('hide-on-scroll');
-      }
-
-      lastScrollY2 = currentScrollY;
-    });
-
-    // Hamburger menu functionality
-    document.addEventListener('DOMContentLoaded', () => {
+      // Hamburger menu functionality
       const hamburger = document.getElementById('hamburger');
       const mobileMenu = document.getElementById('mobile-menu');
 
@@ -403,6 +380,10 @@
           }
         });
       });
+
+      // Load data
+      loadIndoorPlantsForLocation();
+      loadProposalsForLocation();
     });
 
     async function loadIndoorPlantsForLocation() {
@@ -437,9 +418,9 @@
           const common = plant['Common name'] || 'Unknown';
           const scientific = plant['Scientific name'] || '';
           card.innerHTML = `
-  <img src="${img}" alt="${common}">
-  <h3>${common} <br><small>(${scientific})</small></h3>
-`;
+              <img src="${img}" alt="${common}">
+              <h3>${common} <br><small>(${scientific})</small></h3>
+            `;
           grid.appendChild(card);
         });
       } catch (err) {
@@ -447,13 +428,11 @@
       }
     }
 
-    // Load proposal videos for the Suggestions tab based on Location number
     async function loadProposalsForLocation() {
       const params = new URLSearchParams(window.location.search);
-      const locationId = params.get("id"); // expecting location number like S1A or S2
+      const locationId = params.get("id");
       const proposalsContainer = document.getElementById('proposals-container');
 
-      // Clear container first
       if (!proposalsContainer) return;
       proposalsContainer.innerHTML = '';
 
@@ -473,7 +452,6 @@
         }
         const data = await res.json();
 
-        // Normalize and match by Location number (exact match)
         const matched = data.filter(item => {
           const itemLoc = (item['Location number'] || item['Location Number'] || '').trim();
           return itemLoc === locationId;
@@ -484,34 +462,39 @@
           return;
         }
 
-        // Create video cards preserving existing class names and structure
         matched.forEach((p, idx) => {
           const wrapper = document.createElement('div');
           wrapper.className = 'proposal-item';
 
           const videoUrl = (p['Proposal Video'] || p['proposal video'] || '').trim();
-          let embedSrc = videoUrl;
+
+          // Extract YouTube video ID
+          let videoId = null;
           try {
-            if (videoUrl && !videoUrl.includes('/embed/')) {
-              const ytMatch = videoUrl.match(/(?:v=|\/watch\?v=|youtu\.be\/|\/v\/|\/embed\/)([A-Za-z0-9_-]{6,})/);
-              if (ytMatch && ytMatch[1]) {
-                embedSrc = `https://www.youtube.com/embed/${ytMatch[1]}`;
-              }
+            const ytMatch = videoUrl.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+            if (ytMatch && ytMatch[1]) {
+              videoId = ytMatch[1];
             }
           } catch (e) {
-            // leave embedSrc as videoUrl
+            console.error('Error parsing YouTube URL:', e);
           }
 
-          if (!embedSrc) return;
+          if (!videoId) {
+            console.log('Could not extract video ID from:', videoUrl);
+            return;
+          }
+
+          // Create iframe with proper embed URL
+          const embedSrc = `https://www.youtube.com/embed/${videoId}`;
 
           const iframe = document.createElement('iframe');
-          iframe.width = '640';
+          iframe.width = '100%';
           iframe.height = '360';
           iframe.src = embedSrc;
           iframe.frameBorder = '0';
-          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
           iframe.allowFullscreen = true;
-          iframe.referrerPolicy = 'no-referrer';
+          iframe.loading = 'lazy';
 
           const caption = document.createElement('div');
           caption.className = 'proposal-caption';
@@ -530,12 +513,6 @@
         proposalsContainer.innerHTML = `<p class="no-proposals">Unable to load proposals for ${locationId}.</p>`;
       }
     }
-
-    // Initialize both loaders when DOM is ready
-    window.addEventListener('DOMContentLoaded', () => {
-      loadIndoorPlantsForLocation();
-      loadProposalsForLocation();
-    });
   </script>
 
 

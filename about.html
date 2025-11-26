@@ -26,11 +26,12 @@
 
     <div class="nav-center">
       <ul id="mobile-menu">
-        <li><a href="home.html">Home</a></li>
-        <li><a href="ourPlants.html">Our plants</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="locations.html">Locations</a></li>
-        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="home.html">HOME</a></li>
+        <li><a href="ourPlants.html">OUR PLANTS</a></li>
+        <li><a href="projects.html">PROJECTS</a></li>
+        <li><a href="locations.html">LOCATIONS</a></li>
+        <li><a href="statistics.html">STATISTICS</a></li>
+        <li><a href="about.html" class="active">ABOUT</a></li>
 
         <li class="mobile-controls">
           <div class="dropdown">
@@ -353,40 +354,6 @@
     function translate() {
       alert('Arabic translation logic goes here.');
     }
-
-    let lastScrollY2 = window.scrollY;
-    let scrollThreshold = 100; // Threshold in pixels
-    let accumulatedScroll = 0; // Track accumulated scroll
-
-    const nav = document.querySelector('nav.navbar');
-    const subnav = document.querySelector('.plants-subnav') || document.querySelector('.building-subnav') || document.querySelector('.projects-subnav');
-    const logo = document.querySelector('.logo-space');
-
-    window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      const scrollDifference = currentScrollY - lastScrollY2;
-
-      // Update accumulated scroll
-      if (scrollDifference > 0) {
-        // Scrolling down
-        accumulatedScroll += scrollDifference;
-
-        // Hide navbar and subnav only if scrolled down more than threshold
-        if (accumulatedScroll >= scrollThreshold) {
-          if (nav) nav.classList.add('hide-on-scroll');
-          if (logo) logo.classList.add('hide-on-scroll');
-          if (subnav) subnav.classList.add('hide-on-scroll');
-        }
-      } else {
-        // Scrolling up - reset accumulated scroll and show nav immediately
-        accumulatedScroll = 0;
-        if (nav) nav.classList.remove('hide-on-scroll');
-        if (logo) logo.classList.remove('hide-on-scroll');
-        if (subnav) subnav.classList.remove('hide-on-scroll');
-      }
-
-      lastScrollY2 = currentScrollY;
-    });
 
     // Hamburger menu functionality
     document.addEventListener('DOMContentLoaded', () => {

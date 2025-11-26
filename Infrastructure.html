@@ -225,11 +225,12 @@
 
     <div class="nav-center">
       <ul id="mobile-menu">
-        <li><a href="home.html">Home</a></li>
-        <li><a href="ourPlants.html">Our plants</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="locations.html" class="active">Locations</a></li>
-        <li><a href="about.html">About</a></li>
+        <li><a href="home.html">HOME</a></li>
+        <li><a href="ourPlants.html">OUR PLANTS</a></li>
+        <li><a href="projects.html">PROJECTS</a></li>
+        <li><a href="locations.html" class="active">LOCATIONS</a></li>
+        <li><a href="statistics.html">STATISTICS</a></li>
+        <li><a href="about.html">ABOUT</a></li>
 
         <li class="mobile-controls">
           <div class="dropdown">
@@ -266,21 +267,22 @@
   </nav>
 
   <main class="grid-section">
-    <div class="search-bar">
-      <div class="search-input-wrapper">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="searchInput" placeholder="Search by name..." oninput="filterGrid()" />
+    <div class="search-filters-container" style="gap: 0;">
+      <div class="search-bar">
+        <div class="search-input-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search by name..." oninput="filterGrid()" />
+        </div>
+      </div>
+      <div class="filters">
+        <button onclick="location.href='Buildings.html'" class="filter-btn">Buildings</button>
+        <button onclick="location.href='Gates.html'" class="filter-btn">Gates</button>
+        <button onclick="location.href='Roadside.html'" class="filter-btn">Roadside</button>
+        <button onclick="location.href='Infrastructure.html'" class="filter-btn active">Infrastructure</button>
+        <button onclick="location.href='Facilities.html'" class="filter-btn">Facilities</button>
+        <button onclick="location.href='CarPark.html'" class="filter-btn">Car Park</button>
       </div>
     </div>
-    <div class="filters">
-      <button onclick="location.href='Buildings.html'" class="filter-btn">Buildings</button>
-      <button onclick="location.href='Gates.html'" class="filter-btn">Gates</button>
-      <button onclick="location.href='Roadside.html'" class="filter-btn">Roadside</button>
-      <button onclick="location.href='Infrastructure.html'" class="filter-btn active">Infrastructure</button>
-      <button onclick="location.href='Facilities.html'" class="filter-btn">Facilities</button>
-      <button onclick="location.href='CarPark.html'" class="filter-btn">Car Park</button>
-    </div>
-
     <!-- Where the cards will appear -->
     <div class="grid-container" id="locationsGrid"></div>
   </main>
@@ -487,40 +489,6 @@
     function translate() {
       alert('Arabic translation logic goes here.');
     }
-
-    let lastScrollY2 = window.scrollY;
-    let scrollThreshold = 100; // Threshold in pixels
-    let accumulatedScroll = 0; // Track accumulated scroll
-
-    const nav = document.querySelector('nav.navbar');
-    const subnav = document.querySelector('.plants-subnav') || document.querySelector('.building-subnav') || document.querySelector('.projects-subnav');
-    const logo = document.querySelector('.logo-space');
-
-    window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      const scrollDifference = currentScrollY - lastScrollY2;
-
-      // Update accumulated scroll
-      if (scrollDifference > 0) {
-        // Scrolling down
-        accumulatedScroll += scrollDifference;
-
-        // Hide navbar and subnav only if scrolled down more than threshold
-        if (accumulatedScroll >= scrollThreshold) {
-          if (nav) nav.classList.add('hide-on-scroll');
-          if (logo) logo.classList.add('hide-on-scroll');
-          if (subnav) subnav.classList.add('hide-on-scroll');
-        }
-      } else {
-        // Scrolling up - reset accumulated scroll and show nav immediately
-        accumulatedScroll = 0;
-        if (nav) nav.classList.remove('hide-on-scroll');
-        if (logo) logo.classList.remove('hide-on-scroll');
-        if (subnav) subnav.classList.remove('hide-on-scroll');
-      }
-
-      lastScrollY2 = currentScrollY;
-    });
 
     // Hamburger menu functionality
     document.addEventListener('DOMContentLoaded', () => {

@@ -17,6 +17,385 @@
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
+
+  <style>
+    .stats-mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      max-width: 600px;
+      justify-self: stretch;
+    }
+
+    .stat-mini-card {
+      background: linear-gradient(135deg, #f8faf9 0%, #f0f4f1 100%);
+      padding: 30px 65px;
+      border-radius: 12px;
+      text-align: center;
+      align-items: center;
+      justify-items: center;
+      transition: all 0.3s ease;
+      border: 2px solid rgba(44, 95, 45, 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-mini-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .stat-mini-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .stat-mini-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(44, 95, 45, 0.15);
+    }
+
+    .stat-mini-number {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: #8d6e3a;
+      margin-bottom: 6px;
+      line-height: 1;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .stat-mini-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #5a6c57;
+      letter-spacing: 0.3px;
+    }
+
+    /* Enhanced Sustainability Section */
+    .sustainability-section {
+      background-image: url('https://uobhomesiteprod.s3.me-south-1.amazonaws.com/site-prod/uploads/2020/12/Banner-uob-sdg.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: scroll;
+      padding: 0;
+      position: relative;
+      margin-top: 80px;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+    }
+
+    .sustainability-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(212, 218, 212, 0.25) 0%, rgba(26, 71, 42, 0.9) 100%);
+    }
+
+    .sustainability-overlay {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      padding: 80px 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .sustainability-header {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      margin-bottom: 60px;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .sustainability-header-content {
+      flex: 1;
+      background: rgb(255 255 255 / 60%);
+      border-left: 5px solid wheat;
+      padding: 40px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .sustainability-title {
+      font-size: 2.5rem;
+      color: #1a472a;
+      margin-bottom: 20px;
+      font-weight: 800;
+      font-family: 'Playfair Display', serif;
+      letter-spacing: 0.5px;
+      text-align: left;
+    }
+
+    .sustainability-subtitle {
+      font-size: 1.1rem;
+      color: #4a5568;
+      line-height: 1.5;
+      font-weight: 400;
+      text-align: left;
+      margin: 0;
+    }
+
+    .sdg-wheel {
+      width: 335px;
+      height: 300px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .sdg-wheel img {
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.4));
+    }
+
+    .sdg-details {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .sdg-cards-horizontal {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+
+    .sdg-card-compact {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 25px 30px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      border-left: 5px solid transparent;
+      backdrop-filter: blur(10px);
+    }
+
+    .sdg-card-compact:hover {
+      transform: translateX(10px);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+    }
+
+    .sdg-card-compact:nth-child(1) {
+      border-left-color: #4C9F38;
+    }
+
+    .sdg-card-compact:nth-child(1):hover {
+      background: rgba(76, 159, 56, 0.1);
+    }
+
+    .sdg-card-compact:nth-child(2) {
+      border-left-color: #26BDE2;
+    }
+
+    .sdg-card-compact:nth-child(2):hover {
+      background: rgba(38, 189, 226, 0.1);
+    }
+
+    .sdg-card-compact:nth-child(3) {
+      border-left-color: #FD9D24;
+    }
+
+    .sdg-card-compact:nth-child(3):hover {
+      background: rgba(253, 157, 36, 0.1);
+    }
+
+    .sdg-card-compact:nth-child(4) {
+      border-left-color: #3F7E44;
+    }
+
+    .sdg-card-compact:nth-child(4):hover {
+      background: rgba(63, 126, 68, 0.1);
+    }
+
+    .sdg-card-compact:nth-child(5) {
+      border-left-color: #56C02B;
+    }
+
+    .sdg-card-compact:nth-child(5):hover {
+      background: rgba(86, 192, 43, 0.1);
+    }
+
+    .sdg-icon-compact {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .sdg-card-compact:hover .sdg-icon-compact {
+      transform: scale(1.1) rotate(-5deg);
+    }
+
+    .sdg-number-compact {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .sdg-content-compact {
+      flex: 1;
+    }
+
+    .sdg-title-compact {
+      font-size: 1.1rem;
+      color: #2c5f2d;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .sdg-description-compact {
+      font-size: 0.9rem;
+      color: #555;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .sdg-showcase {
+        gap: 40px;
+      }
+
+      .sdg-wheel {
+        width: 240px;
+        height: 240px;
+      }
+
+      .sustainability-header-content {
+        padding: 30px;
+      }
+
+      .sustainability-title {
+        font-size: 2rem;
+      }
+
+      .sustainability-subtitle {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .stats-mini-grid {
+        gap: 15px;
+      }
+
+      .stat-mini-number {
+        font-size: 2.3rem;
+      }
+
+      .stat-mini-card {
+        padding: 25px 20px;
+      }
+
+      .sustainability-section {
+        padding: 0;
+        margin-top: 60px;
+      }
+
+      .sustainability-overlay {
+        padding: 60px 20px;
+      }
+
+      .sustainability-header {
+        flex-direction: column;
+        margin-bottom: 40px;
+        gap: 30px;
+      }
+
+      .sustainability-header-content {
+        padding: 30px 25px;
+      }
+
+      .sustainability-title {
+        font-size: 1.8rem;
+      }
+
+      .sustainability-subtitle {
+        font-size: 0.95rem;
+      }
+
+      .sdg-showcase {
+        flex-direction: column;
+        gap: 40px;
+      }
+
+      .sdg-wheel {
+        width: 200px;
+        height: 200px;
+      }
+
+      .sdg-card-compact {
+        padding: 20px;
+        gap: 15px;
+      }
+
+      .sdg-icon-compact {
+        width: 50px;
+        height: 50px;
+      }
+
+      .sdg-number-compact {
+        font-size: 1.5rem;
+      }
+
+      .sdg-title-compact {
+        font-size: 1rem;
+      }
+
+      .sdg-description-compact {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .sustainability-title {
+        font-size: 1.5rem;
+      }
+
+      .sustainability-subtitle {
+        font-size: 0.9rem;
+      }
+
+      .sustainability-header-content {
+        padding: 25px 20px;
+      }
+
+      .sdg-wheel {
+        width: 180px;
+        height: 180px;
+      }
+
+      .sdg-card-compact {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .sdg-card-compact:hover {
+        transform: translateY(-5px);
+      }
+    }
+  </style>
 </head>
 
 <body style="padding: 0;">
@@ -30,11 +409,12 @@
 
     <div class="nav-center">
       <ul id="mobile-menu">
-        <li><a href="home.html" class="active">Home</a></li>
-        <li><a href="ourPlants.html">Our plants</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="locations.html">Locations</a></li>
-        <li><a href="about.html">About</a></li>
+        <li><a href="home.html" class="active">HOME</a></li>
+        <li><a href="ourPlants.html">OUR PLANTS</a></li>
+        <li><a href="projects.html">PROJECTS</a></li>
+        <li><a href="locations.html">LOCATIONS</a></li>
+        <li><a href="statistics.html">STATISTICS</a></li>
+        <li><a href="about.html">ABOUT</a></li>
 
         <li class="mobile-controls">
           <div class="dropdown">
@@ -87,17 +467,40 @@
       <div class="info-grid">
         <div class="text-content">
           <h1>Welcome to UoB Landscape</h1>
-          <p>This website showcases the diverse flora across our campus, providing detailed <br>
-            information about each plant, its location, and its unique characteristics. It was <br>
-            created collaboratively by IT students along with landscaping and biology students,<br>
-            combining technology, science, and design to make exploring our university's green<br>
+          <p>This website showcases the diverse flora across our campus, providing detailed
+            information about each plant, its location, and its unique characteristics. It was
+            created collaboratively by IT students along with landscaping and biology students,
+            combining technology, science, and design to make exploring our university's green
             spaces informative and engaging.<br> <br>
-            Whether you are a student, researcher, or visitor, you can learn about the plants <br>
+            Whether you are a student, researcher, or visitor, you can learn about the plants
             that contribute to the beauty and sustainability of our campus.
           </p>
+
+          <div class="stats-mini-grid">
+            <div class="stat-mini-card">
+              <div class="stat-mini-number">200+</div>
+              <div class="stat-mini-label">Plant Species</div>
+            </div>
+
+            <div class="stat-mini-card">
+              <div class="stat-mini-number">50+</div>
+              <div class="stat-mini-label">Locations</div>
+            </div>
+
+            <div class="stat-mini-card">
+              <div class="stat-mini-number">80K+</div>
+              <div class="stat-mini-label">Square Meters</div>
+            </div>
+
+            <div class="stat-mini-card">
+              <div class="stat-mini-number">15+</div>
+              <div class="stat-mini-label">Projects</div>
+            </div>
+          </div>
         </div>
+
         <div class="home-info-image">
-          <img src="https://i.postimg.cc/1XWgvCnF/main-gate-exit.jpg" alt="UoB Landscape" />
+          <img src="behind S6-2.JPG" alt="UoB Landscape" />
         </div>
       </div>
     </div>
@@ -188,6 +591,93 @@
     </div>
   </div>
 
+  <div style="padding: 10px;"></div>
+
+  <!-- Enhanced Sustainability Section -->
+  <section class="sustainability-section">
+    <div class="sustainability-overlay">
+      <div class="sustainability-header">
+        <div class="sustainability-header-content">
+          <h2 class="sustainability-title">Sustainability</h2>
+          <p class="sustainability-subtitle">University of Bahrain proudly aligns with the United Nations Sustainable
+            Development Goals, fostering a greener, healthier, and more sustainable campus environment for future
+            generations.</p>
+        </div>
+
+        <div class="sdg-wheel">
+          <img src="Sustainability.png" alt="UN Sustainable Development Goals">
+        </div>
+      </div>
+
+      <div class="sdg-showcase">
+        <!-- SDG Details -->
+        <div class="sdg-details">
+          <div class="sdg-cards-horizontal">
+            <!-- SDG 3 -->
+            <div class="sdg-card-compact">
+              <div class="sdg-icon-compact" style="background-color: #4C9F38;">
+                <span class="sdg-number-compact">3</span>
+              </div>
+              <div class="sdg-content-compact">
+                <h3 class="sdg-title-compact">Good Health and Well-being</h3>
+                <p class="sdg-description-compact">Promoting physical and mental wellness through our green spaces and
+                  comprehensive campus healthcare initiatives.</p>
+              </div>
+            </div>
+
+            <!-- SDG 6 -->
+            <div class="sdg-card-compact">
+              <div class="sdg-icon-compact" style="background-color: #26BDE2;">
+                <span class="sdg-number-compact">6</span>
+              </div>
+              <div class="sdg-content-compact">
+                <h3 class="sdg-title-compact">Clean Water and Sanitation</h3>
+                <p class="sdg-description-compact">Implementing efficient irrigation systems and water conservation
+                  practices across our campus landscapes.</p>
+              </div>
+            </div>
+
+            <!-- SDG 11 -->
+            <div class="sdg-card-compact">
+              <div class="sdg-icon-compact" style="background-color: #FD9D24;">
+                <span class="sdg-number-compact">11</span>
+              </div>
+              <div class="sdg-content-compact">
+                <h3 class="sdg-title-compact">Sustainable Cities and Communities</h3>
+                <p class="sdg-description-compact">Creating sustainable infrastructure and vibrant green spaces that
+                  serve our entire university community.</p>
+              </div>
+            </div>
+
+            <!-- SDG 13 -->
+            <div class="sdg-card-compact">
+              <div class="sdg-icon-compact" style="background-color: #3F7E44;">
+                <span class="sdg-number-compact">13</span>
+              </div>
+              <div class="sdg-content-compact">
+                <h3 class="sdg-title-compact">Climate Action</h3>
+                <p class="sdg-description-compact">Taking decisive action against climate change through carbon
+                  reduction and sustainable landscaping practices.</p>
+              </div>
+            </div>
+
+            <!-- SDG 15 -->
+            <div class="sdg-card-compact">
+              <div class="sdg-icon-compact" style="background-color: #56C02B;">
+                <span class="sdg-number-compact">15</span>
+              </div>
+              <div class="sdg-content-compact">
+                <h3 class="sdg-title-compact">Life on Land</h3>
+                <p class="sdg-description-compact">Protecting biodiversity and promoting ecological balance through our
+                  diverse plant collection and natural ecosystems.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div class="map-header">
     <h2>Interactive Campus Map</h2>
     <p>Navigate through our campus facilities. Click on any building icon to explore its location and details.</p>
@@ -227,7 +717,8 @@
       <div class="footer-column">
         <h4>External Links</h4>
         <ul>
-          <li><a href="https://www.uob.edu.bh/" target="_blank" rel="noopener noreferrer">University of Bahrain</a></li>
+          <li><a href="https://www.uob.edu.bh/" target="_blank" rel="noopener noreferrer">University of Bahrain</a>
+          </li>
           <li><a href="https://www.mun.gov.bh/newportal/ar" target="_blank" rel="noopener noreferrer">Municipality of
               Bahrain</a></li>
           <li><a href="https://www.bahrain.bh/wps/portal/en/BNP/ExploreBahrain/SustainableDevelopment/" target="_blank"
@@ -471,40 +962,6 @@
     function translate() {
       alert('Arabic translation logic goes here.');
     }
-
-    let lastScrollY2 = window.scrollY;
-    let scrollThreshold = 100; // Threshold in pixels
-    let accumulatedScroll = 0; // Track accumulated scroll
-
-    const nav = document.querySelector('nav.navbar');
-    const subnav = document.querySelector('.plants-subnav') || document.querySelector('.building-subnav') || document.querySelector('.projects-subnav');
-    const logo = document.querySelector('.logo-space');
-
-    window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
-      const scrollDifference = currentScrollY - lastScrollY2;
-
-      // Update accumulated scroll
-      if (scrollDifference > 0) {
-        // Scrolling down
-        accumulatedScroll += scrollDifference;
-
-        // Hide navbar and subnav only if scrolled down more than threshold
-        if (accumulatedScroll >= scrollThreshold) {
-          if (nav) nav.classList.add('hide-on-scroll');
-          if (logo) logo.classList.add('hide-on-scroll');
-          if (subnav) subnav.classList.add('hide-on-scroll');
-        }
-      } else {
-        // Scrolling up - reset accumulated scroll and show nav immediately
-        accumulatedScroll = 0;
-        if (nav) nav.classList.remove('hide-on-scroll');
-        if (logo) logo.classList.remove('hide-on-scroll');
-        if (subnav) subnav.classList.remove('hide-on-scroll');
-      }
-
-      lastScrollY2 = currentScrollY;
-    });
 
     // Hamburger menu functionality
     document.addEventListener('DOMContentLoaded', () => {

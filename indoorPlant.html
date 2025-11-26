@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Indoor Plant Details</title>
   <link rel="stylesheet" href="styles.css" />
   <style>
@@ -33,6 +34,492 @@
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
+    }
+
+    .back-button {
+      position: fixed;
+      top: 1rem;
+      left: 1rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid #2c5f2d;
+      color: #2c5f2d;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      z-index: 1001;
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      background: #2c5f2d;
+      color: white;
+    }
+
+    .plant-details-container {
+      padding: 4rem 2rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .plant-details-card {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      max-width: 1000px;
+    }
+
+    .plant-header {
+      display: flex;
+      gap: 3rem;
+      align-items: center;
+      margin: 3rem 3rem 3rem;
+    }
+
+    .plant-thumbnail {
+      width: 350px;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .plant-thumbnail:hover {
+      transform: scale(1.05);
+    }
+
+    .plant-key-info {
+      flex: 1;
+    }
+
+    .plant-key-info h1 {
+      margin: 0 0 0.5rem 0;
+      font-size: 2rem;
+      color: #2c5f2d;
+      text-align: start;
+    }
+
+    .common-name {
+      font-size: 1.3rem;
+      color: #666;
+      font-style: italic;
+      font-family: serif;
+      margin: 0;
+      text-align: start;
+    }
+
+    .info-section {
+      margin: 4rem 2rem 2rem;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      color: #000000;
+      /* font-weight: 600; */
+      font-family: serif;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #000000;
+    }
+
+    .plant-info {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .plant-info li {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      font-size: 1rem;
+    }
+
+    .plant-info li:last-child {
+      border-bottom: none;
+    }
+
+    .plant-info li span {
+      font-size: 1.5rem;
+      margin-right: 0.8rem;
+    }
+
+    .plant-info li strong {
+      color: #2c5f2d;
+      margin-right: 0.5rem;
+    }
+
+    /* Total quantity display */
+    .total-quantity {
+      background: rgba(44, 95, 45, 0.1);
+      border-left: 4px solid #2c5f2d;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      color: #2c5f2d;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .total-quantity span {
+      font-size: 1.5rem;
+    }
+
+    /* Locations section */
+    .locations-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .location-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .location-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .location-card p {
+      margin: 0.3rem 0;
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    .location-card p:first-child {
+      color: #2c5f2d;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* PDF Section */
+    .pdf-section {
+      margin-top: 2rem;
+    }
+
+    .pdf-controls {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .pdf-button {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      background: #2c5f2d;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .pdf-button:hover {
+      background: #1e4620;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .pdf-viewer {
+      width: 100%;
+      height: 600px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .pdf-viewer iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .image-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image-modal.open {
+      display: flex;
+      height: auto;
+    }
+
+    .image-modal .modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .image-modal img {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 8px;
+    }
+
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: white;
+      border: none;
+      font-size: 1.5rem;
+      padding: 0.5rem 0.8rem;
+      cursor: pointer;
+      border-radius: 50%;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      z-index: 2001;
+    }
+
+    .close-modal:hover {
+      background: #f0f0f0;
+    }
+
+    /* Mobile Responsive Styles */
+    @media (max-width: 768px) {
+      .back-button {
+        position: fixed;
+        top: 0.5rem;
+        left: 0.5rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+        z-index: 1001;
+      }
+
+      .plant-details-container {
+        padding: 3rem 1rem 2rem;
+      }
+
+      .plant-details-card {
+        padding: 1.5rem;
+        border-radius: 12px;
+      }
+
+      .plant-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 1rem 1rem 2rem;
+      }
+
+      .plant-header img {
+        width: 250px;
+        height: 250px;
+        margin-bottom: 1rem;
+      }
+
+      .plant-key-info h1 {
+        font-size: 1.5rem;
+      }
+
+      .common-name {
+        font-size: 1.1rem;
+      }
+
+      .info-section {
+        margin: 1.5rem 1rem;
+      }
+
+      .section-title {
+        font-size: 1.1rem;
+      }
+
+      .total-quantity {
+        font-size: 1rem;
+        padding: 0.8rem 1rem;
+      }
+
+      .total-quantity span {
+        font-size: 1.2rem;
+      }
+
+      .plant-info li {
+        padding: 0.6rem 0;
+        font-size: 0.95rem;
+        flex-wrap: wrap;
+      }
+
+      .plant-info li span {
+        font-size: 1.1rem;
+        margin-right: 0.4rem;
+      }
+
+      .plant-info li strong {
+        display: block;
+        width: 100%;
+        margin-bottom: 0.2rem;
+      }
+
+      .locations-list {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+
+      .location-card {
+        padding: 0.8rem;
+      }
+
+      .location-card p {
+        font-size: 0.9rem;
+      }
+
+      .pdf-section {
+        margin-top: 1rem;
+      }
+
+      .pdf-button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
+
+      .pdf-viewer {
+        height: 400px;
+      }
+
+      .image-modal .modal-content {
+        max-width: 95%;
+        max-height: 90%;
+        border-radius: 8px;
+      }
+
+      .image-modal img {
+        max-height: 85vh;
+      }
+
+      .image-modal .close-modal {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.9rem;
+        top: 6px;
+        right: 6px;
+      }
+    }
+
+    /* Extra small mobile (max-width: 480px) */
+    @media (max-width: 480px) {
+      .back-button {
+        font-size: 0.85rem;
+        padding: 0.35rem 0.7rem;
+      }
+
+      .plant-details-container {
+        padding: 2.5rem 0.8rem 1.5rem;
+      }
+
+      .plant-details-card {
+        padding: 1.2rem;
+      }
+
+      .plant-header img {
+        width: 200px;
+        height: 200px;
+      }
+
+      .plant-key-info h1 {
+        font-size: 1.3rem;
+      }
+
+      .common-name {
+        font-size: 1rem;
+      }
+
+      .section-title {
+        font-size: 1rem;
+      }
+
+      .total-quantity {
+        font-size: 0.95rem;
+        padding: 0.7rem 0.9rem;
+      }
+
+      .plant-info li {
+        padding: 0.5rem 0;
+        font-size: 0.9rem;
+      }
+
+      .plant-info li span {
+        font-size: 1rem;
+      }
+
+      .location-card {
+        padding: 0.7rem;
+      }
+
+      .location-card p {
+        font-size: 0.85rem;
+      }
+
+      .pdf-viewer {
+        height: 350px;
+      }
+
+      .pdf-button {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Landscape mode on mobile */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .plant-details-container {
+        padding: 2rem 1.5rem;
+      }
+
+      .plant-header {
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        text-align: left;
+      }
+
+      .plant-header img {
+        width: 160px;
+        height: 160px;
+        margin-right: 1rem;
+        margin-bottom: 0;
+      }
+
+      .pdf-viewer {
+        height: 300px;
+      }
+    }
+
+    /* Tablet (481px - 768px) */
+    @media (min-width: 481px) and (max-width: 768px) {
+      .plant-details-card {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .locations-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .pdf-viewer {
+        height: 450px;
+      }
     }
   </style>
 </head>
@@ -97,42 +584,67 @@
             <div class="plant-details-card">
               <div class="plant-header">
                 <img src="${bgImage}" alt="${plant['Common name'] || ''}" class="plant-thumbnail" id="mainThumb" tabindex="0" />
-                 <h1>${plant["Scientific name"] || ''} <span>(${plant["Common name"] || ''})</span></h1>
+                <div class="plant-key-info">
+                  <h1>${plant["Scientific name"] || ''}</h1>
+                  <p class="common-name">${plant["Common name"] || ''}</p>
+                </div>
               </div>
-              <ul class="plant-info">
-                <li><span>🔬</span><strong>Scientific name:</strong> ${plant["Scientific name"] || '—'}</li>
-                <li><span>🌿</span><strong>Common name:</strong> ${plant["Common name"] || '—'}</li>
-                <li><span>☀️</span><strong>Light Requirements:</strong> ${plant["Light Requirements"] || '—'}</li>
-                <li><span>🌡️</span><strong>Stable Temperature:</strong> ${plant["Stable temperature"] || "—"}</li>
-                <li><span>💧</span><strong>Watering:</strong> ${plant["Watering"] || "—"}</li>
-                <li><span>🔢</span><strong>Total Quantity:</strong> ${plant["Quantity"] ?? '—'}</li>
-              </ul>
 
-              <h2>📍 Locations</h2>
-              <div class="locations-list">
+              <div class="info-section">
+                <ul class="plant-info">
+                  <li><span>🔬</span><strong>Scientific name:</strong> ${plant["Scientific name"] || '—'}</li>
+                  <li><span>🌿</span><strong>Common name:</strong> ${plant["Common name"] || '—'}</li>
+                  <li><span>☀️</span><strong>Light Requirements:</strong> ${plant["Light Requirements"] || '—'}</li>
+                  <li><span>🌡️</span><strong>Stable Temperature:</strong> ${plant["Stable temperature"] || "—"}</li>
+                  <li><span>💧</span><strong>Watering:</strong> ${plant["Watering"] || "—"}</li>
+                </ul>
+              </div>
           `;
 
-          (plant.Locations || []).forEach(loc => {
+          // Locations section
+          if (plant.Locations && plant.Locations.length > 0) {
             detailsHtml += `
-              <div class="location-card">
-                <p><strong>${loc["Location number"]}</strong></p>
-                <p>${loc["Location name"]}</p>
-                <p>Quantity: ${loc["Quantity"]}</p>
-              </div>
+              <div class="info-section">
+                <h2 class="section-title">📍 Locations</h2>
             `;
-          });
 
-          detailsHtml += `</div>`; // close locations-list
+            // Add total quantity above location cards
+            if (plant["Quantity"] !== undefined && plant["Quantity"] !== null) {
+              detailsHtml += `
+                <div class="total-quantity">
+                  <span>🔢</span> Total Quantity: ${plant["Quantity"]}
+                </div>
+              `;
+            }
 
+            detailsHtml += `<div class="locations-list">`;
+
+            plant.Locations.forEach(loc => {
+              detailsHtml += `
+                <div class="location-card">
+                  <p>${loc["Location number"]}</p>
+                  <p>${loc["Location name"]}</p>
+                  <p>Quantity: ${loc["Quantity"]}</p>
+                </div>
+              `;
+            });
+
+            detailsHtml += `</div></div>`; // close locations-list and info-section
+          }
+
+          // PDF section
           if (plant["PDF link"]) {
             const pdfUrl = plant["PDF link"];
             detailsHtml += `
-              <div class="pdf-section" aria-label="Plant documentation">
-                <div class="pdf-controls">
-                  <button class="pdf-button" id="viewPdfBtn">View PDF</button>
-                </div>
-                <div class="pdf-viewer" id="pdfViewer" hidden>
-                  <iframe src="${pdfUrl}"></iframe>
+              <div class="info-section">
+                <h2 class="section-title">📄 Documentation</h2>
+                <div class="pdf-section" aria-label="Plant documentation">
+                  <div class="pdf-controls">
+                    <button class="pdf-button" id="viewPdfBtn">View PDF</button>
+                  </div>
+                  <div class="pdf-viewer" id="pdfViewer" hidden>
+                    <iframe src="${pdfUrl}"></iframe>
+                  </div>
                 </div>
               </div>
             `;
