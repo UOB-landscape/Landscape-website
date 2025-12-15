@@ -17,13 +17,275 @@
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .location-header {
+      text-align: center;
+      padding: 3rem 1rem 1.5rem;
+      background: var(--card-bg, #fff);
+    }
+
+    .location-header h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: var(--text-color, #333);
+    }
+
+    .location-header h1 small {
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: #888;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, serif;
+    }
+
+    /* Add all the filter/sort CSS from Our Plants page */
+    .search-filters-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 30px;
+      margin-top: 20px;
+    }
+
+    .search-bar {
+      flex: 1;
+      max-width: 400px;
+    }
+
+    .filter-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .dropdown-filter,
+    .sort-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-filter-btn,
+    .sort-btn,
+    .clear-filters-btn {
+      background-color: #fdfdfd;
+      color: var(--primary-dark);
+      border: 1px solid var(--primary-dark);
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
+      min-height: 32px;
+      min-width: fit-content;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dropdown-filter-btn:hover,
+    .sort-btn:hover,
+    .clear-filters-btn:hover,
+    .dropdown-filter-btn.active,
+    .sort-btn.active {
+      background-color: var(--primary-dark);
+      color: white;
+    }
+
+    .clear-filters-btn {
+      background-color: #fdfdfd;
+      border-color: #e74c3c;
+      color: #e74c3c;
+    }
+
+    .clear-filters-btn:hover {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .dropdown-filter-btn i,
+    .sort-btn i {
+      transition: transform 0.3s;
+    }
+
+    .dropdown-filter-btn.active i {
+      transform: rotate(180deg);
+    }
+
+    .dropdown-filter-content,
+    .sort-dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--card-bg, #fff);
+      min-width: 280px;
+      max-height: 400px;
+      overflow-y: auto;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      border-radius: 20px;
+      padding: 15px;
+      margin-top: 5px;
+      border: 1px solid var(--primary-dark);
+    }
+
+    .dropdown-filter-content.show,
+    .sort-dropdown-content.show {
+      display: block;
+    }
+
+    .filter-section {
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border-color, #ddd);
+    }
+
+    .filter-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .filter-section h4 {
+      margin: 0 0 10px 0;
+      font-size: 14px;
+      color: var(--text-color, #333);
+      font-weight: 600;
+    }
+
+    .filter-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-option input[type="checkbox"] {
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary-dark);
+    }
+
+    .filter-option label {
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text-color, #333);
+      user-select: none;
+    }
+
+    .filter-option:hover label {
+      color: var(--primary-dark);
+    }
+
+    .sort-dropdown-content {
+      min-width: 250px;
+    }
+
+    .sort-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+      border-radius: 8px;
+      transition: background-color 0.2s;
+    }
+
+    .sort-group:hover {
+      background-color: var(--hover-bg, #f1f1f1);
+    }
+
+    .sort-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .sort-label {
+      font-size: 14px;
+      color: var(--text-color);
+      font-weight: 500;
+    }
+
+    .sort-arrows {
+      display: flex;
+      gap: 8px;
+    }
+
+    .sort-arrow {
+      background-color: #fdfdfd;
+      color: var(--primary-dark);
+      border: 1px solid var(--primary-dark);
+      padding: 6px 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sort-arrow:hover {
+      background-color: var(--primary-dark);
+      color: white;
+    }
+
+    .sort-arrow.active {
+      background-color: var(--primary-dark);
+      color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .sort-arrow i {
+      font-size: 12px;
+    }
+
+    .filter-badge {
+      background-color: #908484;
+      color: white;
+      border-radius: 20%;
+      padding: 1px;
+      font-size: 12px;
+      font-weight: bold;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .search-filters-container {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .search-bar {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .filter-controls {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .dropdown-filter-content,
+      .sort-dropdown-content {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  </style>
 </head>
 
 <body>
   <nav class="navbar">
     <div class="nav-left">
       <div class="logo-space" title="Logo">
-        <img src="UOB-new-logo.png" alt="University of Bahrain" />
+        <img src="images/UOB-new-logo.png" alt="University of Bahrain" />
       </div>
       <button class="hamburger" id="hamburger">&#9776;</button>
     </div>
@@ -73,65 +335,69 @@
 
   <nav class="building-subnav">
     <ul>
-      <li><a href="#Plants" id="tab-Plants">Plants</a></li>
-      <li><a href="#Suggestions" id="tab-Suggestions">Suggestions</a></li>
+      <li><a href="#Plants" id="tab-Plants">PLANTS</a></li>
+      <li><a href="#Suggestions" id="tab-Suggestions">SUGGESTIONS</a></li>
     </ul>
   </nav>
 
   <main class="grid-section">
     <section id="Plants" class="building-section">
+      <div class="location-header">
+        <h1 id="location-name">Loading...</h1>
+      </div>
+
       <div class="search-filters-container">
         <div class="search-bar">
           <div class="search-input-wrapper">
             <span class="search-icon">🔍</span>
-            <input type="text" id="searchInput" placeholder="Search by title..." oninput="filterGrid()" />
+            <input type="text" id="searchInput" placeholder="Search by title..." />
           </div>
         </div>
-        <div class="filters">
-          <select class="filter-btn" id="plant-filter" onchange="filterPlants(this.value)">
-            <option value="" disabled selected>Sort by</option>
-            <option value="A-Z">A-Z</option>
-          </select>
 
-          <select class="filter-btn" id="plant-filter-type" onchange="filterPlants(this.value)">
-            <option value="" disabled selected>Filter by Type</option>
-            <option value="trees">Trees</option>
-            <option value=""></option>
-            <option value=""></option>
-          </select>
+        <div class="filter-controls">
+          <!-- Sort Dropdown -->
+          <div class="sort-dropdown">
+            <button class="sort-btn" id="sort-btn">
+              <i class="fas fa-sort"></i>
+              Sort
+            </button>
+            <div class="sort-dropdown-content" id="sort-dropdown">
+              <div class="sort-group">
+                <span class="sort-label">Name</span>
+                <div class="sort-arrows">
+                  <button class="sort-arrow" data-property="name" data-order="asc" title="A to Z">
+                    <i class="fas fa-arrow-up"></i>
+                  </button>
+                  <button class="sort-arrow" data-property="name" data-order="desc" title="Z to A">
+                    <i class="fas fa-arrow-down"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <button class="filter-btn active" data-filter="all">All</button>
-          <button class="filter-btn" data-filter="indoor">Indoor</button>
-          <button class="filter-btn" data-filter="outdoor">Outdoor</button>
+          <!-- Filters Dropdown -->
+          <div class="dropdown-filter">
+            <button class="dropdown-filter-btn" id="filter-btn">
+              <i class="fas fa-filter"></i>
+              Filters
+              <span class="filter-badge" id="filter-count" style="display: none;">0</span>
+            </button>
+            <div class="dropdown-filter-content" id="filter-dropdown">
+              <!-- All filters will be populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Clear Filters Button -->
+          <button class="clear-filters-btn" id="clear-filters">
+            <i class="fas fa-times"></i> Clear
+          </button>
         </div>
       </div>
+
       <div class="grid-container">
-        <div class="grid-item">
-          <img src="Araucaria heterophylla.jpg" alt="Image 1">
-          <h3>Title 1</h3>
-        </div>
-        <div class="grid-item">
-          <img src="before.jpg" alt="Image 2">
-          <h3>Title 2</h3>
-        </div>
-        <div class="grid-item">
-          <img src="building.jpg" alt="Image 3">
-          <h3>Title 3</h3>
-        </div>
-        <div class="grid-item">
-          <img src="gate.jpg" alt="Image 4">
-          <h3>Title 4</h3>
-        </div>
-        <div class="grid-item">
-          <img src="Facilities.jpg" alt="Image 5">
-          <h3>Title 5</h3>
-        </div>
-        <div class="grid-item">
-          <img src="S45.jpg" alt="Image 6">
-          <h3>Title 6</h3>
-        </div>
+        <!-- Plants will be loaded here dynamically -->
       </div>
-
     </section>
 
     <section id="Suggestions" class="building-section">
@@ -227,6 +493,264 @@
       });
     }
 
+    // Global variables
+    let allPlants = [];
+
+    // Render plants function
+    function renderPlants(plants) {
+      const grid = document.querySelector("#Plants .grid-container");
+      if (!grid) return;
+      grid.innerHTML = "";
+
+      if (!plants.length) {
+        const params = new URLSearchParams(window.location.search);
+        const locationId = params.get("id");
+        grid.innerHTML = `<p style="text-align: center; grid-column: 1/-1; padding: 40px;">No plants found.</p>`;
+        return;
+      }
+
+      plants.forEach(plant => {
+        const card = document.createElement("a");
+        card.className = "grid-item";
+
+        // Link to appropriate plant detail page based on type
+        const detailPage = plant._plantType === 'outdoor' ? 'outdoorPlant.html' : 'indoorPlant.html';
+        card.href = `${detailPage}?id=${encodeURIComponent(plant["Plant ID"])}`;
+
+        const img = plant.Image || 'placeholder.jpg';
+        const common = plant['Common name'] || 'Unknown';
+        const scientific = plant['Scientific name'] || '';
+        card.innerHTML = `
+        <img src="${img}" alt="${common}">
+        <h3>${common} <br><small>(${scientific})</small></h3>
+      `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Setup controls function
+    function setupControls() {
+      const searchInput = document.getElementById('searchInput');
+      const sortBtn = document.getElementById('sort-btn');
+      const sortDropdown = document.getElementById('sort-dropdown');
+      const filterBtn = document.getElementById('filter-btn');
+      const filterDropdown = document.getElementById('filter-dropdown');
+      const filterCount = document.getElementById('filter-count');
+      const clearFiltersBtn = document.getElementById('clear-filters');
+
+      let currentSearch = '';
+      let currentSortProperty = '';
+      let currentSortOrder = '';
+      let currentFilters = {
+        plantType: [] // indoor or outdoor
+      };
+
+      // Populate filter with Indoor/Outdoor options
+      if (filterDropdown) {
+        // Check which plant types exist in the data
+        const hasIndoor = allPlants.some(p => p._plantType === 'indoor');
+        const hasOutdoor = allPlants.some(p => p._plantType === 'outdoor');
+
+        const section = document.createElement('div');
+        section.className = 'filter-section';
+
+        const heading = document.createElement('h4');
+        heading.textContent = 'Plant Type';
+        section.appendChild(heading);
+
+        const optionsContainer = document.createElement('div');
+        optionsContainer.className = 'filter-options';
+
+        // Indoor option
+        if (hasIndoor) {
+          const indoorOption = document.createElement('div');
+          indoorOption.className = 'filter-option';
+
+          const indoorCheckbox = document.createElement('input');
+          indoorCheckbox.type = 'checkbox';
+          indoorCheckbox.id = 'filter-indoor';
+          indoorCheckbox.value = 'indoor';
+          indoorCheckbox.dataset.filter = 'plantType';
+
+          const indoorLabel = document.createElement('label');
+          indoorLabel.htmlFor = 'filter-indoor';
+          indoorLabel.textContent = 'Indoor';
+
+          indoorOption.appendChild(indoorCheckbox);
+          indoorOption.appendChild(indoorLabel);
+          optionsContainer.appendChild(indoorOption);
+        }
+
+        // Outdoor option
+        if (hasOutdoor) {
+          const outdoorOption = document.createElement('div');
+          outdoorOption.className = 'filter-option';
+
+          const outdoorCheckbox = document.createElement('input');
+          outdoorCheckbox.type = 'checkbox';
+          outdoorCheckbox.id = 'filter-outdoor';
+          outdoorCheckbox.value = 'outdoor';
+          outdoorCheckbox.dataset.filter = 'plantType';
+
+          const outdoorLabel = document.createElement('label');
+          outdoorLabel.htmlFor = 'filter-outdoor';
+          outdoorLabel.textContent = 'Outdoor';
+
+          outdoorOption.appendChild(outdoorCheckbox);
+          outdoorOption.appendChild(outdoorLabel);
+          optionsContainer.appendChild(outdoorOption);
+        }
+
+        section.appendChild(optionsContainer);
+        filterDropdown.appendChild(section);
+      }
+
+      // Toggle sort dropdown
+      if (sortBtn && sortDropdown) {
+        sortBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          sortDropdown.classList.toggle('show');
+          filterDropdown.classList.remove('show');
+        });
+      }
+
+      // Toggle filter dropdown
+      if (filterBtn && filterDropdown) {
+        filterBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          filterDropdown.classList.toggle('show');
+          sortDropdown.classList.remove('show');
+          filterBtn.classList.toggle('active');
+        });
+      }
+
+      // Close dropdowns when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.sort-dropdown')) {
+          sortDropdown?.classList.remove('show');
+        }
+        if (!e.target.closest('.dropdown-filter')) {
+          filterDropdown?.classList.remove('show');
+          filterBtn?.classList.remove('active');
+        }
+      });
+
+      // Handle sort arrow clicks
+      if (sortDropdown) {
+        sortDropdown.querySelectorAll('.sort-arrow').forEach(arrow => {
+          arrow.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sortDropdown.querySelectorAll('.sort-arrow').forEach(a => a.classList.remove('active'));
+            arrow.classList.add('active');
+            currentSortProperty = arrow.dataset.property;
+            currentSortOrder = arrow.dataset.order;
+            applyFilters();
+          });
+        });
+      }
+
+      // Handle filter checkboxes
+      if (filterDropdown) {
+        filterDropdown.addEventListener('change', (e) => {
+          if (e.target.type === 'checkbox') {
+            const filterField = e.target.dataset.filter;
+            const value = e.target.value;
+
+            if (e.target.checked) {
+              if (!currentFilters[filterField].includes(value)) {
+                currentFilters[filterField].push(value);
+              }
+            } else {
+              currentFilters[filterField] = currentFilters[filterField].filter(v => v !== value);
+            }
+
+            updateFilterCount();
+            applyFilters();
+          }
+        });
+      }
+
+      // Update filter count badge
+      function updateFilterCount() {
+        const totalFilters = currentFilters.plantType.length;
+        if (filterCount) {
+          if (totalFilters > 0) {
+            filterCount.textContent = totalFilters;
+            filterCount.style.display = 'inline-block';
+          } else {
+            filterCount.style.display = 'none';
+          }
+        }
+      }
+
+      // Apply filters and sorting
+      function applyFilters() {
+        let filtered = [...allPlants];
+
+        // Apply search
+        if (currentSearch) {
+          filtered = filtered.filter(plant =>
+            plant['Common name']?.toLowerCase().includes(currentSearch.toLowerCase()) ||
+            plant['Scientific name']?.toLowerCase().includes(currentSearch.toLowerCase())
+          );
+        }
+
+        // Apply plant type filter (indoor/outdoor)
+        if (currentFilters.plantType.length > 0) {
+          filtered = filtered.filter(plant => {
+            return currentFilters.plantType.includes(plant._plantType);
+          });
+        }
+
+        // Apply sort (Name only)
+        if (currentSortProperty === 'name' && currentSortOrder) {
+          const isAscending = currentSortOrder === 'asc';
+          filtered.sort((a, b) => {
+            const nameA = a['Common name'] || '';
+            const nameB = b['Common name'] || '';
+            return isAscending ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+          });
+        }
+
+        renderPlants(filtered);
+      }
+
+      // Search input
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          currentSearch = e.target.value;
+          applyFilters();
+        });
+      }
+
+      // Clear filters button
+      if (clearFiltersBtn) {
+        clearFiltersBtn.addEventListener('click', () => {
+          currentSearch = '';
+          if (searchInput) searchInput.value = '';
+
+          currentSortProperty = '';
+          currentSortOrder = '';
+          sortDropdown?.querySelectorAll('.sort-arrow').forEach(a => a.classList.remove('active'));
+
+          currentFilters.plantType = [];
+
+          filterDropdown?.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+            checkbox.checked = false;
+          });
+
+          updateFilterCount();
+          renderPlants(allPlants);
+        });
+      }
+
+      // Check if filters have values on page load
+      if (searchInput && searchInput.value) {
+        currentSearch = searchInput.value;
+        applyFilters();
+      }
+    }
+
     // ALL DOMCONTENTLOADED LOGIC IN ONE PLACE
     window.addEventListener('DOMContentLoaded', () => {
       // Automatically redirect to #Plants if no hash is present
@@ -257,35 +781,6 @@
         e.preventDefault();
         window.location.hash = '#Suggestions';
         window.scrollTo(0, 0);
-      });
-
-      // Defensive filter handling
-      try {
-        filterSections.forEach(section => {
-          section.style.display = 'none';
-        });
-        filterButtons.forEach(b => b.classList.remove('active'));
-      } catch (err) {
-        // ignore if those variables don't exist
-      }
-
-      // Subnav tabs switch logic
-      const tabs = document.querySelectorAll('.building-subnav a');
-      const sections = document.querySelectorAll('main > section');
-
-      tabs.forEach(tab => {
-        tab.addEventListener('click', (e) => {
-          e.preventDefault();
-
-          const targetId = tab.getAttribute('href').substring(1);
-
-          tabs.forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
-
-          sections.forEach(s => {
-            s.style.display = (s.id === targetId) ? 'block' : 'none';
-          });
-        });
       });
 
       // Desktop theme picker
@@ -382,49 +877,102 @@
       });
 
       // Load data
-      loadIndoorPlantsForLocation();
+      loadLocationName();
+      loadPlantsForLocation(); // Changed: Load both indoor and outdoor
       loadProposalsForLocation();
     });
 
-    async function loadIndoorPlantsForLocation() {
+    async function loadLocationName() {
+      const params = new URLSearchParams(window.location.search);
+      const locationId = params.get("id");
+      const locationNameEl = document.getElementById('location-name');
+
+      if (!locationId) {
+        locationNameEl.textContent = 'No Location Selected';
+        return;
+      }
+
+      // Fetch location name from the locations API
+      try {
+        const res = await fetch('http://localhost:3000/api/locations');
+        if (res.ok) {
+          const data = await res.json();
+          const matched = data.find(item => {
+            const itemLoc = (item['Location number'] || item['Location Number'] || '').trim();
+            return itemLoc === locationId;
+          });
+
+          if (matched) {
+            const locName = matched['Location name'] || matched['Location Name'] || locationId;
+            locationNameEl.innerHTML = `${locName} <small>(${locationId})</small>`;
+            return;
+          }
+        }
+      } catch (err) {
+        console.error('Error loading location name:', err);
+      }
+
+      // Fallback to just showing the location ID
+      locationNameEl.textContent = `Location ${locationId}`;
+    }
+
+    // NEW FUNCTION: Load both indoor and outdoor plants
+    async function loadPlantsForLocation() {
       const params = new URLSearchParams(window.location.search);
       const locationId = params.get("id");
       if (!locationId) return;
 
-      const endpoint = `http://localhost:3000/api/locations/${locationId}/indoor-plants`;
+      const indoorEndpoint = `http://localhost:3000/api/locations/${locationId}/indoor-plants`;
+      const outdoorEndpoint = `http://localhost:3000/api/locations/${locationId}/outdoor-plants`;
 
       try {
-        const response = await fetch(endpoint);
-        if (!response.ok) {
-          console.error('Failed to load indoor plants:', response.status);
-          return;
+        // Fetch both indoor and outdoor plants
+        const [indoorResponse, outdoorResponse] = await Promise.all([
+          fetch(indoorEndpoint),
+          fetch(outdoorEndpoint)
+        ]);
+
+        let indoorPlants = [];
+        let outdoorPlants = [];
+
+        // Process indoor plants
+        if (indoorResponse.ok) {
+          indoorPlants = await indoorResponse.json();
+          // Tag each plant with its type
+          indoorPlants = indoorPlants.map(plant => ({
+            ...plant,
+            _plantType: 'indoor'
+          }));
         }
-        const plants = await response.json();
+
+        // Process outdoor plants
+        if (outdoorResponse.ok) {
+          outdoorPlants = await outdoorResponse.json();
+          // Tag each plant with its type
+          outdoorPlants = outdoorPlants.map(plant => ({
+            ...plant,
+            _plantType: 'outdoor'
+          }));
+        }
+
+        // Combine both arrays
+        allPlants = [...indoorPlants, ...outdoorPlants];
 
         const grid = document.querySelector("#Plants .grid-container");
         if (!grid) return;
-        grid.innerHTML = "";
 
-        if (!plants.length) {
-          grid.innerHTML = `<p>No information collected about plants at location ${locationId} yet.</p>`;
+        if (!allPlants.length) {
+          grid.innerHTML = `<p style="text-align: center; grid-column: 1/-1; padding: 40px;">No information collected about plants at location ${locationId} yet.</p>`;
           return;
         }
 
-        plants.forEach(plant => {
-          const card = document.createElement("a");
-          card.className = "grid-item";
-          card.href = `indoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
-          const img = plant.Image || 'placeholder.jpg';
-          const common = plant['Common name'] || 'Unknown';
-          const scientific = plant['Scientific name'] || '';
-          card.innerHTML = `
-              <img src="${img}" alt="${common}">
-              <h3>${common} <br><small>(${scientific})</small></h3>
-            `;
-          grid.appendChild(card);
-        });
+        // Initial render
+        renderPlants(allPlants);
+
+        // Setup controls after plants are loaded
+        setupControls();
       } catch (err) {
-        console.error("Error loading indoor plants:", err);
+        console.error("Error loading plants:", err);
       }
     }
 
@@ -514,8 +1062,6 @@
       }
     }
   </script>
-
-
 </body>
 
 </html>

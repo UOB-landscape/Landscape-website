@@ -17,392 +17,13 @@
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
-
-  <style>
-    .stats-mini-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      max-width: 600px;
-      justify-self: stretch;
-    }
-
-    .stat-mini-card {
-      background: linear-gradient(135deg, #f8faf9 0%, #f0f4f1 100%);
-      padding: 30px 65px;
-      border-radius: 12px;
-      text-align: center;
-      align-items: center;
-      justify-items: center;
-      transition: all 0.3s ease;
-      border: 2px solid rgba(44, 95, 45, 0.08);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .stat-mini-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .stat-mini-card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .stat-mini-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(44, 95, 45, 0.15);
-    }
-
-    .stat-mini-number {
-      font-size: 2.3rem;
-      font-weight: 800;
-      color: #8d6e3a;
-      margin-bottom: 6px;
-      line-height: 1;
-      font-family: 'Playfair Display', serif;
-    }
-
-    .stat-mini-label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #5a6c57;
-      letter-spacing: 0.3px;
-    }
-
-    /* Enhanced Sustainability Section */
-    .sustainability-section {
-      background-image: url('https://uobhomesiteprod.s3.me-south-1.amazonaws.com/site-prod/uploads/2020/12/Banner-uob-sdg.jpg');
-      background-size: cover;
-      background-position: center;
-      background-attachment: scroll;
-      padding: 0;
-      position: relative;
-      margin-top: 80px;
-      min-height: 600px;
-      display: flex;
-      align-items: center;
-    }
-
-    .sustainability-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(212, 218, 212, 0.25) 0%, rgba(26, 71, 42, 0.9) 100%);
-    }
-
-    .sustainability-overlay {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      padding: 80px 40px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .sustainability-header {
-      display: flex;
-      align-items: center;
-      gap: 40px;
-      margin-bottom: 60px;
-      max-width: 1100px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .sustainability-header-content {
-      flex: 1;
-      background: rgb(255 255 255 / 60%);
-      border-left: 5px solid wheat;
-      padding: 40px;
-      border-radius: 15px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .sustainability-title {
-      font-size: 2.5rem;
-      color: #1a472a;
-      margin-bottom: 20px;
-      font-weight: 800;
-      font-family: 'Playfair Display', serif;
-      letter-spacing: 0.5px;
-      text-align: left;
-    }
-
-    .sustainability-subtitle {
-      font-size: 1.1rem;
-      color: #4a5568;
-      line-height: 1.5;
-      font-weight: 400;
-      text-align: left;
-      margin: 0;
-    }
-
-    .sdg-wheel {
-      width: 335px;
-      height: 300px;
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .sdg-wheel img {
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.4));
-    }
-
-    .sdg-details {
-      flex: 1;
-      min-width: 300px;
-    }
-
-    .sdg-cards-horizontal {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 20px;
-    }
-
-    .sdg-card-compact {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 25px 30px;
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      gap: 25px;
-      transition: all 0.3s ease;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-      border-left: 5px solid transparent;
-      backdrop-filter: blur(10px);
-    }
-
-    .sdg-card-compact:hover {
-      transform: translateX(10px);
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
-    }
-
-    .sdg-card-compact:nth-child(1) {
-      border-left-color: #4C9F38;
-    }
-
-    .sdg-card-compact:nth-child(1):hover {
-      background: rgba(76, 159, 56, 0.1);
-    }
-
-    .sdg-card-compact:nth-child(2) {
-      border-left-color: #26BDE2;
-    }
-
-    .sdg-card-compact:nth-child(2):hover {
-      background: rgba(38, 189, 226, 0.1);
-    }
-
-    .sdg-card-compact:nth-child(3) {
-      border-left-color: #FD9D24;
-    }
-
-    .sdg-card-compact:nth-child(3):hover {
-      background: rgba(253, 157, 36, 0.1);
-    }
-
-    .sdg-card-compact:nth-child(4) {
-      border-left-color: #3F7E44;
-    }
-
-    .sdg-card-compact:nth-child(4):hover {
-      background: rgba(63, 126, 68, 0.1);
-    }
-
-    .sdg-card-compact:nth-child(5) {
-      border-left-color: #56C02B;
-    }
-
-    .sdg-card-compact:nth-child(5):hover {
-      background: rgba(86, 192, 43, 0.1);
-    }
-
-    .sdg-icon-compact {
-      width: 60px;
-      height: 60px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
-    }
-
-    .sdg-card-compact:hover .sdg-icon-compact {
-      transform: scale(1.1) rotate(-5deg);
-    }
-
-    .sdg-number-compact {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: white;
-      font-family: 'Playfair Display', serif;
-    }
-
-    .sdg-content-compact {
-      flex: 1;
-    }
-
-    .sdg-title-compact {
-      font-size: 1.1rem;
-      color: #2c5f2d;
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-
-    .sdg-description-compact {
-      font-size: 0.9rem;
-      color: #555;
-      line-height: 1.5;
-      margin: 0;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 1024px) {
-      .sdg-showcase {
-        gap: 40px;
-      }
-
-      .sdg-wheel {
-        width: 240px;
-        height: 240px;
-      }
-
-      .sustainability-header-content {
-        padding: 30px;
-      }
-
-      .sustainability-title {
-        font-size: 2rem;
-      }
-
-      .sustainability-subtitle {
-        font-size: 1rem;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .stats-mini-grid {
-        gap: 15px;
-      }
-
-      .stat-mini-number {
-        font-size: 2.3rem;
-      }
-
-      .stat-mini-card {
-        padding: 25px 20px;
-      }
-
-      .sustainability-section {
-        padding: 0;
-        margin-top: 60px;
-      }
-
-      .sustainability-overlay {
-        padding: 60px 20px;
-      }
-
-      .sustainability-header {
-        flex-direction: column;
-        margin-bottom: 40px;
-        gap: 30px;
-      }
-
-      .sustainability-header-content {
-        padding: 30px 25px;
-      }
-
-      .sustainability-title {
-        font-size: 1.8rem;
-      }
-
-      .sustainability-subtitle {
-        font-size: 0.95rem;
-      }
-
-      .sdg-showcase {
-        flex-direction: column;
-        gap: 40px;
-      }
-
-      .sdg-wheel {
-        width: 200px;
-        height: 200px;
-      }
-
-      .sdg-card-compact {
-        padding: 20px;
-        gap: 15px;
-      }
-
-      .sdg-icon-compact {
-        width: 50px;
-        height: 50px;
-      }
-
-      .sdg-number-compact {
-        font-size: 1.5rem;
-      }
-
-      .sdg-title-compact {
-        font-size: 1rem;
-      }
-
-      .sdg-description-compact {
-        font-size: 0.85rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .sustainability-title {
-        font-size: 1.5rem;
-      }
-
-      .sustainability-subtitle {
-        font-size: 0.9rem;
-      }
-
-      .sustainability-header-content {
-        padding: 25px 20px;
-      }
-
-      .sdg-wheel {
-        width: 180px;
-        height: 180px;
-      }
-
-      .sdg-card-compact {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .sdg-card-compact:hover {
-        transform: translateY(-5px);
-      }
-    }
-  </style>
 </head>
 
 <body style="padding: 0;">
   <nav class="navbar">
     <div class="nav-left">
       <div class="logo-space" title="Logo">
-        <img src="UOB-new-logo.png" alt="University of Bahrain" />
+        <img src="images/UOB-new-logo.png" alt="University of Bahrain" />
       </div>
       <button class="hamburger" id="hamburger">&#9776;</button>
     </div>
@@ -422,8 +43,6 @@
             <div class="theme-picker" id="mobile-theme-picker">
               <div class="theme-option" data-theme="default"></div>
               <div class="theme-option" data-theme="dark"></div>
-              <div class="theme-option" data-theme="solar"></div>
-              <div class="theme-option" data-theme="highcontrast"></div>
               <div class="theme-option" data-theme="green"></div>
             </div>
           </div>
@@ -440,8 +59,6 @@
           <div class="theme-picker" id="theme-picker">
             <div class="theme-option" data-theme="default"></div>
             <div class="theme-option" data-theme="dark"></div>
-            <div class="theme-option" data-theme="solar"></div>
-            <div class="theme-option" data-theme="highcontrast"></div>
             <div class="theme-option" data-theme="green"></div>
           </div>
         </div>
@@ -452,7 +69,7 @@
 
   <header id="hero">
     <video autoplay muted loop playsinline id="bg-video">
-      <source src="HomePage video.mp4" type="video/mp4">
+      <source src="videos/HomePage video.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
     <div class="overlay-square">
@@ -500,7 +117,7 @@
         </div>
 
         <div class="home-info-image">
-          <img src="behind S6-2.JPG" alt="UoB Landscape" />
+          <img src="images/behind S6-2.JPG" alt="UoB Landscape" />
         </div>
       </div>
     </div>
@@ -521,31 +138,31 @@
 
         <div class="carousel-item">
           <a href="Buildings.html">
-            <img src="Buildings 2.png" alt="Building"></a>
+            <img src="images/Buildings 2.png" alt="Building"></a>
           <div class="carousel-title">Buildings</div>
         </div>
 
         <div class="carousel-item">
           <a href="Gates.html">
-            <img src="gate.jpg" alt="Gate"></a>
+            <img src="images/gate.png" alt="Gate"></a>
           <div class="carousel-title">Gates</div>
         </div>
 
         <div class="carousel-item">
           <a href="Roadside.html">
-            <img src="Roadside.jpeg" alt="Roadside"></a>
+            <img src="images/Roadside.jpeg" alt="Roadside"></a>
           <div class="carousel-title">Roadsides</div>
         </div>
 
         <div class="carousel-item">
           <a href="Infrastructure.html">
-            <img src="Infrastructure2.png" alt="Infrastructure"></a>
+            <img src="images/Infrastructure2.png" alt="Infrastructure"></a>
           <div class="carousel-title">Infrastructures</div>
         </div>
 
         <div class="carousel-item">
           <a href="Facilities.html">
-            <img src="Facilities.jpeg" alt="Facilities"></a>
+            <img src="images/Facilities.jpeg" alt="Facilities"></a>
           <div class="carousel-title">Facilities</div>
         </div>
 
@@ -553,37 +170,37 @@
         <!-- Image Set 2 (Duplicate for seamless loop) -->
         <div class="carousel-item">
           <a href="CarPark.html">
-            <img src="car park.jpg" alt="Car park"></a>
+            <img src="images/car park.jpg" alt="Car park"></a>
           <div class="carousel-title">Car Parks</div>
         </div>
 
         <div class="carousel-item">
           <a href="Buildings.html">
-            <img src="Buildings 2.png" alt="Building"></a>
+            <img src="images/Buildings 2.png" alt="Building"></a>
           <div class="carousel-title">Buildings</div>
         </div>
 
         <div class="carousel-item">
           <a href="Gates.html">
-            <img src="gate.jpg" alt="Gate"></a>
+            <img src="images/gate.png" alt="Gate"></a>
           <div class="carousel-title">Gates</div>
         </div>
 
         <div class="carousel-item">
           <a href="Roadside.html">
-            <img src="Roadside.jpeg" alt="Roadside"></a>
+            <img src="images/Roadside.jpeg" alt="Roadside"></a>
           <div class="carousel-title">Roadsides</div>
         </div>
 
         <div class="carousel-item">
           <a href="Infrastructure.html">
-            <img src="Infrastructure2.png" alt="Infrastructure"></a>
+            <img src="images/Infrastructure2.png" alt="Infrastructure"></a>
           <div class="carousel-title">Infrastructures</div>
         </div>
 
         <div class="carousel-item">
           <a href="Facilities.html">
-            <img src="Facilities.jpeg" alt="Facilities"></a>
+            <img src="images/Facilities.jpeg" alt="Facilities"></a>
           <div class="carousel-title">Facilities</div>
         </div>
 
@@ -591,109 +208,103 @@
     </div>
   </div>
 
-  <div style="padding: 10px;"></div>
-
-  <!-- Enhanced Sustainability Section -->
+  <!-- ========================================
+       SUSTAINABILITY SECTION - REDESIGNED
+       ======================================== -->
   <section class="sustainability-section">
-    <div class="sustainability-overlay">
+    <div class="sustainability-container">
+
+      <!-- Header with SDG Wheel on Left -->
       <div class="sustainability-header">
-        <div class="sustainability-header-content">
-          <h2 class="sustainability-title">Sustainability</h2>
-          <p class="sustainability-subtitle">University of Bahrain proudly aligns with the United Nations Sustainable
-            Development Goals, fostering a greener, healthier, and more sustainable campus environment for future
-            generations.</p>
+        <div class="sdg-wheel-container">
+          <div class="sdg-wheel">
+            <img src="images/Sustainability.png" alt="UN Sustainable Development Goals">
+          </div>
         </div>
 
-        <div class="sdg-wheel">
-          <img src="Sustainability.png" alt="UN Sustainable Development Goals">
+        <div class="sustainability-header-content">
+          <h2 class="sustainability-title">Building a Sustainable Future</h2>
+          <div class="sustainability-badge">Commitment to Sustainability</div>
+          <p class="sustainability-subtitle">
+            University of Bahrain proudly aligns with the United Nations Sustainable Development Goals,
+            fostering a greener, healthier, and more sustainable campus environment for future generations.
+          </p>
         </div>
       </div>
 
-      <div class="sdg-showcase">
-        <!-- SDG Details -->
-        <div class="sdg-details">
+      <!-- Content Row: Info Box + SDG Icons -->
+      <div class="sdg-content-row">
+
+        <!-- SDG Icons Section -->
+        <div class="sdg-icons-section">
+          <h3 class="sdg-section-title">Featured Sustainable Development Goals</h3>
+
           <div class="sdg-cards-horizontal">
             <!-- SDG 3 -->
-            <div class="sdg-card-compact">
-              <div class="sdg-icon-compact" style="background-color: #4C9F38;">
-                <span class="sdg-number-compact">3</span>
+            <a href="" class="sdg-card-compact" tabindex="0">
+              <div class="sdg-image-wrapper">
+                <img src="sdg-icons/sdg-3.png" alt="SDG 3: Good Health and Well-being">
               </div>
-              <div class="sdg-content-compact">
-                <h3 class="sdg-title-compact">Good Health and Well-being</h3>
-                <p class="sdg-description-compact">Promoting physical and mental wellness through our green spaces and
-                  comprehensive campus healthcare initiatives.</p>
+            </a>
+
+            <!-- SDG 4 -->
+            <a href="" class="sdg-card-compact" tabindex="0">
+              <div class="sdg-image-wrapper">
+                <img src="sdg-icons/sdg-4.png" alt="SDG 4: Quality Education">
               </div>
-            </div>
+            </a>
 
             <!-- SDG 6 -->
-            <div class="sdg-card-compact">
-              <div class="sdg-icon-compact" style="background-color: #26BDE2;">
-                <span class="sdg-number-compact">6</span>
+            <a href="" class="sdg-card-compact" tabindex="0">
+              <div class="sdg-image-wrapper">
+                <img src="sdg-icons/sdg-6.png" alt="SDG 6: Clean Water and Sanitation">
               </div>
-              <div class="sdg-content-compact">
-                <h3 class="sdg-title-compact">Clean Water and Sanitation</h3>
-                <p class="sdg-description-compact">Implementing efficient irrigation systems and water conservation
-                  practices across our campus landscapes.</p>
-              </div>
-            </div>
+            </a>
 
             <!-- SDG 11 -->
-            <div class="sdg-card-compact">
-              <div class="sdg-icon-compact" style="background-color: #FD9D24;">
-                <span class="sdg-number-compact">11</span>
+            <a href="" class="sdg-card-compact" tabindex="0" aria-label="SDG 11: Sustainable Cities and Communities">
+              <div class="sdg-image-wrapper">
+                <img src="sdg-icons/sdg-11.png" alt="SDG 11: Sustainable Cities and Communities">
               </div>
-              <div class="sdg-content-compact">
-                <h3 class="sdg-title-compact">Sustainable Cities and Communities</h3>
-                <p class="sdg-description-compact">Creating sustainable infrastructure and vibrant green spaces that
-                  serve our entire university community.</p>
-              </div>
-            </div>
+            </a>
 
             <!-- SDG 13 -->
-            <div class="sdg-card-compact">
-              <div class="sdg-icon-compact" style="background-color: #3F7E44;">
-                <span class="sdg-number-compact">13</span>
+            <a href="" class="sdg-card-compact" tabindex="0">
+              <div class="sdg-image-wrapper">
+                <img src="sdg-icons/sdg-13.png" alt="SDG 13: Climate Action">
               </div>
-              <div class="sdg-content-compact">
-                <h3 class="sdg-title-compact">Climate Action</h3>
-                <p class="sdg-description-compact">Taking decisive action against climate change through carbon
-                  reduction and sustainable landscaping practices.</p>
-              </div>
-            </div>
+            </a>
 
             <!-- SDG 15 -->
-            <div class="sdg-card-compact">
-              <div class="sdg-icon-compact" style="background-color: #56C02B;">
-                <span class="sdg-number-compact">15</span>
+            <a href="" class="sdg-card-compact" tabindex="0">
+              <div class="sdg-image-wrapper">
+                <img src="sdg-icons/sdg-15.png" alt="SDG 15: Life on Land">
               </div>
-              <div class="sdg-content-compact">
-                <h3 class="sdg-title-compact">Life on Land</h3>
-                <p class="sdg-description-compact">Protecting biodiversity and promoting ecological balance through our
-                  diverse plant collection and natural ecosystems.</p>
-              </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="map-header">
-    <h2>Interactive Campus Map</h2>
-    <p>Navigate through our campus facilities. Click on any building icon to explore its location and details.</p>
-    <div class="map-header-divider"></div>
-  </div>
+  <section class="map-section-wrapper">
+    <div class="map-header">
+      <h2>Interactive Campus Map</h2>
+      <p>Navigate through our campus facilities. Click on any building icon to explore its location and details.</p>
+      <div class="map-header-divider"></div>
+    </div>
 
-  <div class="map-container">
-    <div class="map-wrapper" id="zoom-area">
-      <img src="UOB-MAP.jpg" alt="UoB Plants Map" class="map-img">
+    <div class="map-container">
+      <div class="map-wrapper" id="zoom-area">
+        <img src="images/UOB-MAP.jpg" alt="UoB Plants Map" class="map-img">
+      </div>
+      <div class="map-controls">
+        <button id="zoomIn">+</button>
+        <button id="zoomOut">−</button>
+        <button id="reset">Reset</button>
+      </div>
     </div>
-    <div class="map-controls">
-      <button id="zoomIn">+</button>
-      <button id="zoomOut">−</button>
-      <button id="reset">Reset</button>
-    </div>
-  </div>
+  </section>
 
   <footer>
     <div class="footer-container">
@@ -781,20 +392,36 @@
       { name: "S22A Guidance and Counseling Department", x: 0.546, y: 0.590, url: "location.html?id=S22A" },
       { name: "S23 Bookshop", x: 0.543, y: 0.533, url: "location.html?id=S23" },
       { name: "S24 Buildings and Maintenance Department", x: 0.666, y: 0.439, url: "location.html?id=S24" },
-      { name: "S30 College of Law", x: 0.707, y: 0.436, url: "location.html?id=S30" },
-      { name: "S31 Financial Affairs", x: 0.741, y: 0.453, url: "location.html?id=S31" },
-      { name: "S32 Deanship of Graduate Studies and Scientific Research", x: 0.678, y: 0.357, url: "location.html?id=S32" },
-      { name: "S33 College of Science", x: 0.574, y: 0.347, url: "location.html?id=S33" },
-      { name: "S34 College of Engineering", x: 0.503, y: 0.391, url: "location.html?id=S34" },
-      { name: "S35 College of Information Technology", x: 0.449, y: 0.405, url: "location.html?id=S35" },
-      { name: "S40 Conference Center", x: 0.432, y: 0.352, url: "location.html?id=S40" },
-      { name: "S40A University Theater", x: 0.361, y: 0.398, url: "location.html?id=S40A" },
-      { name: "S41 Staff Club", x: 0.303, y: 0.440, url: "location.html?id=S41" },
-      { name: "S46 Security and Safety Department", x: 0.404, y: 0.667, url: "location.html?id=S46" },
-      { name: "S47 Indoor Sports Hall", x: 0.359, y: 0.619, url: "location.html?id=S47" },
-      { name: "S50 Medical Simulation Center", x: 0.785, y: 0.295, url: "location.html?id=S50" },
-      { name: "S51 Pharmacy Unit", x: 0.831, y: 0.299, url: "location.html?id=S51" },
-      { name: "S51B Marine Science Research Center", x: 0.743, y: 0.220, url: "location.html?id=S51B" },
+      { name: "S37 Deanship of Admission & Registration", x: 0.367, y: 0.603, url: "location.html?id=S37" },
+      { name: "S38 Health Club & Swimming Pool", x: 0.401, y: 0.582, url: "location.html?id=S38" },
+      { name: "S39 College of Law ", x: 0.297, y: 0.668, url: "location.html?id=S39" },
+      { name: "S39A Legal Clinic Office", x: 0.265, y: 0.693, url: "location.html?id=S39A" },
+      { name: "S40 College of IT", x: 0.204, y: 0.471, url: "location.html?id=S40" },
+      { name: "S41 College of Science", x: 0.296, y: 0.364, url: "location.html?id=S41" },
+      { name: "S42 Transportation Building", x: 0.102, y: 0.390, url: "location.html?id=S42" },
+      { name: "S43 University Press Department", x: 0.109, y: 0.450, url: "location.html?id=S43" },
+      { name: "S44 Media Center", x: 0.618, y: 0.599, url: "location.html?id=S44" },
+      { name: "S45 E-Learning Center", x: 0.680, y: 0.548, url: "location.html?id=S45" },
+      { name: "S46 Personnel Affairs Department", x: 0.614, y: 0.476, url: "location.html?id=S46" },
+      { name: "S47 Science & IT Library", x: 0.308, y: 0.437, url: "location.html?id=S47" },
+      { name: "S48 Classrooms", x: 0.369, y: 0.320, url: "location.html?id=S48" },
+      { name: "S49 College of Science Laboratories", x: 0.348, y: 0.313, url: "location.html?id=S49" },
+      { name: "S50 Al-Haj Hasan Khonji Hall", x: 0.220, y: 0.423, url: "location.html?id=S50" },
+      { name: "S51 College of Science and Information Technology Food Outlet", x: 0.245, y: 0.397, url: "location.html?id=S51" },
+      { name: "S52 College of Science Laboratories", x: 0.320, y: 0.293, url: "location.html?id=S52" },
+      { name: "S54 Assets Department", x: 0.116, y: 0.369, url: "location.html?id=S54" },
+      { name: "S56 Trade Workshop", x: 0.033, y: 0.412, url: "location.html?id=S56" },
+      { name: "S57 Business Incubator Center", x: 0.034, y: 0.375, url: "location.html?id=S57" },
+      { name: "S6 Mosque", x: 0.484, y: 0.442, url: "location.html?id=S6" },
+
+      //Facilities
+      { name: "S15 Arboretum", x: 0.072, y: 0.362, url: "Facilities.html" },
+
+      //Gates
+      { name: "Main Gate", x: 0.617, y: 0.185, url: "Gates.html", width: 38, height: 10 },
+      { name: "S55 Main Gate", x: 0.585, y: 0.193, url: "Gates.html" },
+      { name: "Eastern Gate", x: 0.918, y: 0.493, url: "Gates.html", width: 38, height: 10 },
+      { name: "Western Gate", x: 0.091, y: 0.180, url: "Gates.html", width: 38, height: 10 },
     ];
 
     function addIcons() {
@@ -804,7 +431,7 @@
         a.href = b.url;
 
         const img = document.createElement("img");
-        img.src = "Building icon.png";
+        img.src = "images/Building icon.png";
         img.alt = b.name;
         img.title = b.name;
         img.classList.add("map-icon");

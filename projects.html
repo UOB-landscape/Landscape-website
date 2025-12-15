@@ -15,13 +15,25 @@
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .hero-section {
+      background: url('images/2.JPG');
+      background-size: cover;
+      background-position: 50% 50%;
+      padding: 120px 40px 80px;
+      text-align: center;
+      color: white;
+      margin-top: 70px;
+      position: relative;
+    }
+  </style>
 </head>
 
 <body>
   <nav class="navbar">
     <div class="nav-left">
       <div class="logo-space" title="Logo">
-        <img src="UOB-new-logo.png" alt="University of Bahrain" />
+        <img src="images/UOB-new-logo.png" alt="University of Bahrain" />
       </div>
       <button class="hamburger" id="hamburger">&#9776;</button>
     </div>
@@ -77,9 +89,15 @@
     </ul>
   </nav>
 
+  <section class="hero-section">
+    <h1>Projects & Annual Reports</h1>
+    <p>Showcasing engineering student innovations and documenting the dedicated work 
+      of our landscaping staff in maintaining and enhancing campus green spaces</p>
+  </section>
+
   <main>
     <section id="before-after" class="projects-section">
-      <h2 style="text-align: center;">Before & After Projects</h2>
+      <h2 style="text-align: center; margin: 50px;">Before & After Projects</h2>
 
       <!-- Filters placeholder (rendered from API) -->
       <div class="project-filters" id="projectFilters"></div>
@@ -90,10 +108,10 @@
 
     <section id="reports" class="projects-section" style="display:none;">
       <div class="iframe-wrapper">
-        <h2 style="text-align: center;">🌳 Landscape Projects and Achievements in 2024</h2>
+        <h2 style="text-align: center; margin: 50px;">🌳 Landscape Projects and Achievements in 2024</h2>
         <iframe src="reports-2024.html"></iframe>
         <br><br>
-        <h2 style="text-align: center;">🌿 Landscape Projects and Achievements in 2025</h2>
+        <h2 style="text-align: center; margin: 50px;">🌿 Landscape Projects and Achievements in 2025</h2>
         <iframe src="reports-2025.html"></iframe>
       </div>
     </section>
@@ -383,151 +401,156 @@
 
         function get(r, key) { return (r && Object.prototype.hasOwnProperty.call(r, key)) ? r[key] : null; }
 
-        // Group by Project Name then by Location Number
+        // Group by Project Name only
         const projects = new Map();
         records.forEach(r => {
           const projectName = get(r, 'Project Name') || 'Unnamed Project';
-          const locNumber = get(r, 'Location Number') || 'Unknown';
-          if (!projects.has(projectName)) projects.set(projectName, { name: projectName, description: null, locMap: new Map() });
-          const proj = projects.get(projectName);
-          if (!proj.description && get(r, 'Project DEscription')) proj.description = get(r, 'Project DEscription');
-          if (!proj.locMap.has(locNumber)) proj.locMap.set(locNumber, []);
-          proj.locMap.get(locNumber).push(r);
-        });
-
-        // Build location index
-        const locationIndex = new Map();
-        projects.forEach((proj, projectName) => {
-          proj.locMap.forEach((recordsForLoc, locNumber) => {
-            if (!locationIndex.has(locNumber)) locationIndex.set(locNumber, { filterImage: null, items: [] });
-            const locEntry = locationIndex.get(locNumber);
-            const filterRec = recordsForLoc.find(rr => get(rr, 'Filter Image'));
-            if (!locEntry.filterImage && filterRec) locEntry.filterImage = get(filterRec, 'Filter Image');
-            locEntry.items.push({
-              projectName: proj.name,
-              description: proj.description,
-              records: recordsForLoc.slice()
+          if (!projects.has(projectName)) {
+            projects.set(projectName, { 
+              name: projectName, 
+              description: null, 
+              records: [],
+              filterImage: null,
+              locationNumber: null
             });
-          });
+          }
+          const proj = projects.get(projectName);
+          
+          // Set description if available
+          if (!proj.description && get(r, 'Project Description')) {
+            proj.description = get(r, 'Project Description');
+          }
+          
+          // Set filter image if available
+          if (!proj.filterImage && get(r, 'Filter Image')) {
+            proj.filterImage = get(r, 'Filter Image');
+          }
+          
+          // Set location number (first one found)
+          if (!proj.locationNumber && get(r, 'Location Number')) {
+            proj.locationNumber = get(r, 'Location Number');
+          }
+          
+          proj.records.push(r);
         });
 
-        const locations = Array.from(locationIndex.entries()).map(([locNumber, data]) => ({
-          locationNumber: locNumber,
-          filterImage: data.filterImage,
-          items: data.items
-        }));
+        // Convert to array for rendering
+        const projectsArray = Array.from(projects.values());
 
-        // Render filter buttons
-        filtersRoot.innerHTML = locations.map((loc, idx) => {
-          const imgHtml = loc.filterImage ? `<img src="${loc.filterImage}" alt="${loc.locationNumber}" loading="lazy">` : '';
+        // Render filter buttons (show Location Number but filter by Project Name)
+        filtersRoot.innerHTML = projectsArray.map((proj, idx) => {
+          const imgHtml = proj.filterImage ? `<img src="${proj.filterImage}" alt="${proj.locationNumber || proj.name}" loading="lazy">` : '';
+          const displayLabel = proj.locationNumber || proj.name;
           return `
-            <button class="project-filter-btn ${idx === 0 ? 'active' : ''}" data-filter="${loc.locationNumber}">
+            <button class="project-filter-btn ${idx === 0 ? 'active' : ''}" data-filter="${proj.name}">
               <div class="image-area">${imgHtml}</div>
-              <div class="label">${loc.locationNumber}</div>
+              <div class="label">${displayLabel}</div>
             </button>
           `;
         }).join('');
 
-        // Render location
-        function renderLocation(index) {
-          const loc = locations[index];
-          if (!loc) return;
+        // Render project function
+        function renderProject(index) {
+          const proj = projectsArray[index];
+          if (!proj) return;
           contentsRoot.innerHTML = '';
-          loc.items.forEach((projItem) => {
-            if (projItem.description) {
-              const p = document.createElement('div');
-              p.className = 'project-filter-section';
-              p.dataset.type = loc.locationNumber;
-              p.innerHTML = `<h3>${projItem.projectName}</h3><p>${projItem.description}</p>`;
-              contentsRoot.appendChild(p);
+          
+          // Add project description
+          if (proj.description) {
+            const descDiv = document.createElement('div');
+            descDiv.className = 'project-filter-section';
+            descDiv.dataset.type = proj.name;
+            descDiv.innerHTML = `<h3>${proj.name}</h3><p>${proj.description}</p>`;
+            contentsRoot.appendChild(descDiv);
+          }
+
+          // Render each record
+          proj.records.forEach((rec, recIdx) => {
+            const before = get(rec, 'Before Image');
+            const after = get(rec, 'After Image');
+            const proposal = get(rec, 'Proposal Image');
+            const current = get(rec, 'Current Image');
+
+            const isThree = !!before && !!after && !!proposal;
+            const section = document.createElement('div');
+            section.className = 'project-filter-section';
+            section.dataset.type = proj.name;
+            section.innerHTML = `<h3>${proj.name}</h3>`;
+
+            if (isThree) {
+              const uniqueBase = 'three_' + proj.name.replace(/\s+/g, '_') + '_' + recIdx;
+              const sliderId = `sliderContainer_${uniqueBase}`;
+              section.innerHTML += `
+                <div class="container">
+                  <div class="slider-container" id="${sliderId}">
+                    <div class="instructions">Drag the sliders to compare all three stages</div>
+                    <div class="image-layer proposal-image">
+                      <img src="${proposal}" alt="Proposal" loading="lazy">
+                      <div class="label proposal-label">Proposal</div>
+                    </div>
+                    <div class="image-layer after-image">
+                      <img src="${after}" alt="After" loading="lazy">
+                      <div class="label after-label">After</div>
+                    </div>
+                    <div class="image-layer before-image">
+                      <img src="${before}" alt="Before" loading="lazy">
+                      <div class="label before-label">Before</div>
+                    </div>
+                    <div class="slider-line slider-line-1" style="left: 33%;">
+                      <div class="slider-handle slider-handle-1"></div>
+                    </div>
+                    <div class="slider-line slider-line-2" style="left: 66%;">
+                      <div class="slider-handle slider-handle-2"></div>
+                    </div>
+                  </div>
+                </div>
+              `;
+            } else {
+              const leftSrc = current || before || '';
+              const rightSrc = proposal || after || '';
+              const leftLabel = current ? 'Current' : 'Before';
+              const rightLabel = proposal ? 'Proposal' : 'After';
+              const uniqueBase = 'two_' + proj.name.replace(/\s+/g, '_') + '_' + recIdx;
+              const twoId = `twoImageSlider_${uniqueBase}`;
+              section.innerHTML += `
+                <div class="container">
+                  <div class="two-image-slider-container" id="${twoId}">
+                    <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
+                    <div class="two-image-layer proposal-image">
+                      <img src="${rightSrc}" alt="${rightLabel}" loading="lazy">
+                      <div class="two-image-label proposal-label">${rightLabel}</div>
+                    </div>
+                    <div class="two-image-layer current-image">
+                      <img src="${leftSrc}" alt="${leftLabel}" loading="lazy">
+                      <div class="two-image-label current-label">${leftLabel}</div>
+                    </div>
+                    <div class="two-slider-line" style="left: 50%;">
+                      <div class="two-slider-handle"></div>
+                    </div>
+                  </div>
+                </div>
+              `;
             }
 
-            projItem.records.forEach((rec, recIdx) => {
-              const before = get(rec, 'Before Image');
-              const after = get(rec, 'After Image');
-              const proposal = get(rec, 'Proposal Image');
-              const current = get(rec, 'Current Image');
-
-              const isThree = !!before && !!after && !!proposal;
-              const section = document.createElement('div');
-              section.className = 'project-filter-section';
-              section.dataset.type = loc.locationNumber;
-              section.innerHTML = `<h3>${projItem.projectName}</h3>`;
-
-              if (isThree) {
-                const uniqueBase = 'three_' + loc.locationNumber + '_' + projItem.projectName.replace(/\s+/g, '_') + '_' + recIdx;
-                const sliderId = `sliderContainer_${uniqueBase}`;
-                section.innerHTML += `
-                  <div class="container">
-                    <div class="slider-container" id="${sliderId}">
-                      <div class="instructions">Drag the sliders to compare all three stages</div>
-                      <div class="image-layer proposal-image">
-                        <img src="${proposal}" alt="Proposal" loading="lazy">
-                        <div class="label proposal-label">Proposal</div>
-                      </div>
-                      <div class="image-layer after-image">
-                        <img src="${after}" alt="After" loading="lazy">
-                        <div class="label after-label">After</div>
-                      </div>
-                      <div class="image-layer before-image">
-                        <img src="${before}" alt="Before" loading="lazy">
-                        <div class="label before-label">Before</div>
-                      </div>
-                      <div class="slider-line slider-line-1" style="left: 33%;">
-                        <div class="slider-handle slider-handle-1"></div>
-                      </div>
-                      <div class="slider-line slider-line-2" style="left: 66%;">
-                        <div class="slider-handle slider-handle-2"></div>
-                      </div>
-                    </div>
-                  </div>
-                `;
-              } else {
-                const leftSrc = current || before || '';
-                const rightSrc = proposal || after || '';
-                const leftLabel = current ? 'Current' : 'Before';
-                const rightLabel = proposal ? 'Proposal' : 'After';
-                const uniqueBase = 'two_' + loc.locationNumber + '_' + projItem.projectName.replace(/\s+/g, '_') + '_' + recIdx;
-                const twoId = `twoImageSlider_${uniqueBase}`;
-                section.innerHTML += `
-                  <div class="container">
-                    <div class="two-image-slider-container" id="${twoId}">
-                      <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
-                      <div class="two-image-layer proposal-image">
-                        <img src="${rightSrc}" alt="${rightLabel}" loading="lazy">
-                        <div class="two-image-label proposal-label">${rightLabel}</div>
-                      </div>
-                      <div class="two-image-layer current-image">
-                        <img src="${leftSrc}" alt="${leftLabel}" loading="lazy">
-                        <div class="two-image-label current-label">${leftLabel}</div>
-                      </div>
-                      <div class="two-slider-line" style="left: 50%;">
-                        <div class="two-slider-handle"></div>
-                      </div>
-                    </div>
-                  </div>
-                `;
-              }
-
-              contentsRoot.appendChild(section);
-            });
+            contentsRoot.appendChild(section);
           });
+          
           initSlidersIn(contentsRoot);
         }
 
-        // Initialize first location
-        renderLocation(0);
+        // Initialize first project
+        renderProject(0);
 
         // Filter button interactions
         filtersRoot.addEventListener('click', (e) => {
           const btn = e.target.closest('.project-filter-btn');
           if (!btn) return;
           const filter = btn.dataset.filter;
-          const idx = locations.findIndex(l => l.locationNumber === filter);
+          const idx = projectsArray.findIndex(p => p.name === filter);
           if (idx === -1) return;
           filtersRoot.querySelectorAll('.project-filter-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
-          renderLocation(idx);
+          renderProject(idx);
           window.location.hash = '#before-after';
         });
 

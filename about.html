@@ -13,13 +13,27 @@
       document.documentElement.setAttribute('data-theme', savedTheme);
     }
   </script>
+
+  <style>
+    /* Hero section styling matching statistics page */
+    .hero-section {
+      background: url('images/about2.jpg');
+      background-size: cover;
+      background-position: 50% 60%;
+      padding: 120px 40px 80px;
+      text-align: center;
+      color: white;
+      margin-top: 70px;
+      position: relative;
+    }
+  </style>
 </head>
 
 <body style="padding: 0;">
   <nav class="navbar">
     <div class="nav-left">
       <div class="logo-space" title="Logo">
-        <img src="UOB-new-logo.png" alt="University of Bahrain" />
+        <img src="images/UOB-new-logo.png" alt="University of Bahrain" />
       </div>
       <button class="hamburger" id="hamburger">&#9776;</button>
     </div>
@@ -67,16 +81,18 @@
     </div>
   </nav>
 
+  <section class="hero-section">
+    <h1>About UoB Landscapes</h1>
+    <p>Where Science Meets Design - A collaborative platform uniting biology, engineering, and technology to create a
+      sustainable and data-driven campus environment.</p>
+  </section>
+
   <main style="padding: 0;">
     <section class="about-layout">
-      <!-- About Header -->
-      <div class="about-header">
-        <h1 class="about-title">About UOB Landscapes</h1>
-      </div>
-
       <!-- Feature Section -->
       <div class="feature-section">
         <div class="feature-text">
+          <h1 style="margin-bottom: 40px; border-bottom: 2.5px solid #000000;">About Us</h1>
           <p>The University of Bahrain Landscapes initiative envisions a collaborative platform where science,
             engineering, and technology unite to create a sustainable and data-driven campus environment.
             By integrating biological research, landscape design, and digital innovation, the project aims to
@@ -85,7 +101,7 @@
             that reflects the harmony between nature, knowledge, and technology.</p>
         </div>
         <div class="feature-image-wrapper">
-          <img src="about.jpg" alt="UOB Campus" class="feature-image" />
+          <img src="images/about1.png" alt="UOB Campus" class="feature-image" />
         </div>
       </div>
 

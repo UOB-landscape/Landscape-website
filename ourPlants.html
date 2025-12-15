@@ -20,13 +20,327 @@
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .hero-section {
+      background: url('images/about2.jpg');
+      background-size: cover;
+      background-position: 50% 30%;
+      padding: 120px 40px 50px;
+      text-align: center;
+      color: white;
+      margin-top: 70px;
+      position: relative;
+    }
+
+    .filters {
+      /* display: flex; */
+      gap: 10px;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      flex-direction: row;
+      justify-content: center;
+      /* margin-bottom: 20px; */
+      /* flex-wrap: wrap; */
+      /* Allow wrapping on smaller screens */
+    }
+
+    .filter-btn {
+      background-color: #fdfdfd;
+      color: var(--primary-dark);
+      border: 1px solid var(--primary-dark);
+      padding: 10px 10px;
+      margin: 5px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
+      /* Prevent text wrapping inside buttons */
+      min-height: 32px;
+      min-width: fit-content;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background-color: var(--primary-dark);
+      color: white
+    }
+
+    .search-filters-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      /* padding: 20px; */
+      margin-bottom: 30px;
+      margin-top: 20px;
+    }
+
+    /* NEW CSS FOR DROPDOWNS - ADD THIS */
+    .search-bar {
+      flex: 1;
+      max-width: 400px;
+    }
+
+    .filter-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    /* Dropdown Button Styles */
+    .dropdown-filter,
+    .sort-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-filter-btn,
+    .sort-btn,
+    .clear-filters-btn {
+      background-color: #fdfdfd;
+      color: var(--primary-dark);
+      border: 1px solid var(--primary-dark);
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      white-space: nowrap;
+      min-height: 32px;
+      min-width: fit-content;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dropdown-filter-btn:hover,
+    .sort-btn:hover,
+    .clear-filters-btn:hover,
+    .dropdown-filter-btn.active,
+    .sort-btn.active {
+      background-color: var(--primary-dark);
+      color: white;
+    }
+
+    .clear-filters-btn {
+      background-color: #fdfdfd;
+      border-color: #e74c3c;
+      color: #e74c3c;
+    }
+
+    .clear-filters-btn:hover {
+      background-color: #e74c3c;
+      color: white;
+    }
+
+    .dropdown-filter-btn i,
+    .sort-btn i {
+      transition: transform 0.3s;
+    }
+
+    .dropdown-filter-btn.active i {
+      transform: rotate(180deg);
+    }
+
+    /* Dropdown Content */
+    .dropdown-filter-content,
+    .sort-dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--card-bg, #fff);
+      min-width: 280px;
+      max-height: 400px;
+      overflow-y: auto;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 1000;
+      border-radius: 20px;
+      padding: 15px;
+      margin-top: 5px;
+      border: 1px solid var(--primary-dark);
+    }
+
+    .dropdown-filter-content.show,
+    .sort-dropdown-content.show {
+      display: block;
+    }
+
+    /* Filter Section */
+    .filter-section {
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--border-color, #ddd);
+    }
+
+    .filter-section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .filter-section h4 {
+      margin: 0 0 10px 0;
+      font-size: 14px;
+      color: var(--text-color, #333);
+      font-weight: 600;
+    }
+
+    .filter-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-option input[type="checkbox"] {
+      cursor: pointer;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--primary-dark);
+    }
+
+    .filter-option label {
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text-color, #333);
+      user-select: none;
+    }
+
+    .filter-option:hover label {
+      color: var(--primary-dark);
+    }
+
+    /* Sort Dropdown */
+    .sort-dropdown-content {
+      min-width: 250px;
+    }
+
+    .sort-option {
+      padding: 10px 15px;
+      cursor: pointer;
+      border-radius: 15px;
+      transition: background-color 0.2s;
+      font-size: 14px;
+      color: var(--text-color);
+    }
+
+    .sort-option:hover {
+      background-color: var(--hover-bg, #f1f1f1);
+    }
+
+    .sort-option.active {
+      background-color: var(--primary-dark);
+      color: white;
+    }
+
+    /* Active Filter Badge */
+    .filter-badge {
+      background-color: #908484;
+      color: white;
+      border-radius: 20%;
+      padding: 1px;
+      font-size: 12px;
+      font-weight: bold;
+      min-width: 20px;
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .search-filters-container {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .search-bar {
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .filter-controls {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .dropdown-filter-content,
+      .sort-dropdown-content {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Sort Group Styles */
+    .sort-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 15px;
+      border-radius: 8px;
+      transition: background-color 0.2s;
+    }
+
+    .sort-group:hover {
+      background-color: var(--hover-bg, #f1f1f1);
+    }
+
+    .sort-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .sort-label {
+      font-size: 14px;
+      color: var(--text-color);
+      font-weight: 500;
+    }
+
+    .sort-arrows {
+      display: flex;
+      gap: 8px;
+    }
+
+    .sort-arrow {
+      background-color: #fdfdfd;
+      color: var(--primary-dark);
+      border: 1px solid var(--primary-dark);
+      padding: 6px 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sort-arrow:hover {
+      background-color: var(--primary-dark);
+      color: white;
+    }
+
+    .sort-arrow.active {
+      background-color: var(--primary-dark);
+      color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .sort-arrow i {
+      font-size: 12px;
+    }
+  </style>
 </head>
 
 <body class="our-plants-page">
   <nav class="navbar">
     <div class="nav-left">
       <div class="logo-space" title="Logo">
-        <img src="UOB-new-logo.png" alt="University of Bahrain" />
+        <img src="images/UOB-new-logo.png" alt="University of Bahrain" />
       </div>
       <button class="hamburger" id="hamburger">&#9776;</button>
     </div>
@@ -81,6 +395,12 @@
       <li><a href="#outdoor-plants" id="tab-outdoor">OUTDOOR PLANTS</a></li>
     </ul>
   </nav>
+
+  <section class="hero-section">
+    <h1>Our Plants Collection</h1>
+    <p>Discover the diverse flora that beautifies our campus, from lush indoor greenery to vibrant outdoor landscapes,
+      carefully cultivated to enhance our sustainable environment.</p>
+  </section>
 
   <script>
     // Tab switching
@@ -235,46 +555,218 @@
 
   <main class="grid-section">
     <section id="indoor-plants" class="plants-section">
-      <div class="search-filters-container" style="margin-top: 50px;">
+      <div class="search-filters-container">
         <div class="search-bar">
           <div class="search-input-wrapper">
             <span class="search-icon">🔍</span>
             <input type="text" id="searchInput" placeholder="Search by title..." />
           </div>
         </div>
-        <div class="filters" style="display: flex;">
-          <select class="filter-btn">
-            <option value="" disabled selected>Sort by</option>
-            <option value="A-Z">A-Z</option>
-          </select>
-          <select class="filter-btn">
-            <option value="" disabled selected>Filter by Type</option>
-            <option value="trees">Trees</option>
-          </select>
+
+        <div class="filter-controls">
+          <!-- Sort Dropdown -->
+          <div class="sort-dropdown">
+            <button class="sort-btn" id="indoor-sort-btn">
+              <i class="fas fa-sort"></i>
+              Sort
+            </button>
+            <div class="sort-dropdown-content" id="indoor-sort-dropdown">
+              <div class="sort-group">
+                <span class="sort-label">Name</span>
+                <div class="sort-arrows">
+                  <button class="sort-arrow" data-property="name" data-order="asc" title="A to Z">
+                    <i class="fas fa-arrow-up"></i>
+                  </button>
+                  <button class="sort-arrow" data-property="name" data-order="desc" title="Z to A">
+                    <i class="fas fa-arrow-down"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="sort-group">
+                <span class="sort-label">Light Requirements</span>
+                <div class="sort-arrows">
+                  <button class="sort-arrow" data-property="light" data-order="asc" title="Low to High">
+                    <i class="fas fa-arrow-up"></i>
+                  </button>
+                  <button class="sort-arrow" data-property="light" data-order="desc" title="High to Low">
+                    <i class="fas fa-arrow-down"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="sort-group">
+                <span class="sort-label">Temperature</span>
+                <div class="sort-arrows">
+                  <button class="sort-arrow" data-property="temp" data-order="asc" title="Low to High">
+                    <i class="fas fa-arrow-up"></i>
+                  </button>
+                  <button class="sort-arrow" data-property="temp" data-order="desc" title="High to Low">
+                    <i class="fas fa-arrow-down"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filters Dropdown -->
+          <div class="dropdown-filter">
+            <button class="dropdown-filter-btn" id="indoor-filter-btn">
+              <i class="fas fa-filter"></i>
+              Filters
+              <span class="filter-badge" id="indoor-filter-count" style="display: none;">0</span>
+            </button>
+            <div class="dropdown-filter-content" id="indoor-filter-dropdown">
+              <!-- All filters will be populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Clear Filters Button -->
+          <button class="clear-filters-btn" id="indoor-clear-filters">
+            <i class="fas fa-times"></i> Clear
+          </button>
         </div>
       </div>
+
       <div id="indoorGrid" class="grid-container"></div>
     </section>
 
     <section id="outdoor-plants" class="plants-section">
-      <div class="search-filters-container" style="margin-top: 50px;">
+      <div class="search-filters-container">
         <div class="search-bar">
           <div class="search-input-wrapper">
             <span class="search-icon">🔍</span>
             <input type="text" id="searchInput2" placeholder="Search by title..." />
           </div>
         </div>
-        <div class="filters" style="display: flex;">
-          <select class="filter-btn">
-            <option value="" disabled selected>Sort by</option>
-            <option value="A-Z">A-Z</option>
-          </select>
-          <select class="filter-btn">
-            <option value="" disabled selected>Filter by Type</option>
-            <option value="trees">Trees</option>
-          </select>
+
+        <div class="filter-controls">
+          <!-- Sort Dropdown -->
+          <div class="sort-dropdown">
+            <button class="sort-btn" id="outdoor-sort-btn">
+              <i class="fas fa-sort"></i>
+              Sort
+            </button>
+            <div class="sort-dropdown-content" id="outdoor-sort-dropdown">
+              <div class="sort-group">
+                <span class="sort-label">Name</span>
+                <div class="sort-arrows">
+                  <button class="sort-arrow" data-property="name" data-order="asc" title="A to Z">
+                    <i class="fas fa-arrow-up"></i>
+                  </button>
+                  <button class="sort-arrow" data-property="name" data-order="desc" title="Z to A">
+                    <i class="fas fa-arrow-down"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="sort-group">
+                <span class="sort-label">Water Requirement</span>
+                <div class="sort-arrows">
+                  <button class="sort-arrow" data-property="water" data-order="asc" title="Low to High">
+                    <i class="fas fa-arrow-up"></i>
+                  </button>
+                  <button class="sort-arrow" data-property="water" data-order="desc" title="High to Low">
+                    <i class="fas fa-arrow-down"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="sort-group">
+                <span class="sort-label">Sun Requirement</span>
+                <div class="sort-arrows">
+                  <button class="sort-arrow" data-property="sun" data-order="asc" title="Low to High">
+                    <i class="fas fa-arrow-up"></i>
+                  </button>
+                  <button class="sort-arrow" data-property="sun" data-order="desc" title="High to Low">
+                    <i class="fas fa-arrow-down"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="sort-group">
+                <span class="sort-label">Waste</span>
+                <div class="sort-arrows">
+                  <button class="sort-arrow" data-property="waste" data-order="asc" title="Low to High">
+                    <i class="fas fa-arrow-up"></i>
+                  </button>
+                  <button class="sort-arrow" data-property="waste" data-order="desc" title="High to Low">
+                    <i class="fas fa-arrow-down"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="sort-group">
+                <span class="sort-label">Drought Tolerance</span>
+                <div class="sort-arrows">
+                  <button class="sort-arrow" data-property="drought" data-order="asc" title="Low to High">
+                    <i class="fas fa-arrow-up"></i>
+                  </button>
+                  <button class="sort-arrow" data-property="drought" data-order="desc" title="High to Low">
+                    <i class="fas fa-arrow-down"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="sort-group">
+                <span class="sort-label">Heat Tolerance</span>
+                <div class="sort-arrows">
+                  <button class="sort-arrow" data-property="heat" data-order="asc" title="Low to High">
+                    <i class="fas fa-arrow-up"></i>
+                  </button>
+                  <button class="sort-arrow" data-property="heat" data-order="desc" title="High to Low">
+                    <i class="fas fa-arrow-down"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="sort-group">
+                <span class="sort-label">Environmental Impact</span>
+                <div class="sort-arrows">
+                  <button class="sort-arrow" data-property="impact" data-order="asc" title="Low to High">
+                    <i class="fas fa-arrow-up"></i>
+                  </button>
+                  <button class="sort-arrow" data-property="impact" data-order="desc" title="High to Low">
+                    <i class="fas fa-arrow-down"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="sort-group">
+                <span class="sort-label">Oxygen Production</span>
+                <div class="sort-arrows">
+                  <button class="sort-arrow" data-property="oxygen" data-order="asc" title="Low to High">
+                    <i class="fas fa-arrow-up"></i>
+                  </button>
+                  <button class="sort-arrow" data-property="oxygen" data-order="desc" title="High to Low">
+                    <i class="fas fa-arrow-down"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="sort-group">
+                <span class="sort-label">CO₂ Absorption</span>
+                <div class="sort-arrows">
+                  <button class="sort-arrow" data-property="co2" data-order="asc" title="Low to High">
+                    <i class="fas fa-arrow-up"></i>
+                  </button>
+                  <button class="sort-arrow" data-property="co2" data-order="desc" title="High to Low">
+                    <i class="fas fa-arrow-down"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Filters Dropdown -->
+          <div class="dropdown-filter">
+            <button class="dropdown-filter-btn" id="outdoor-filter-btn">
+              <i class="fas fa-filter"></i>
+              Filters
+              <span class="filter-badge" id="outdoor-filter-count" style="display: none;">0</span>
+            </button>
+            <div class="dropdown-filter-content" id="outdoor-filter-dropdown">
+              <!-- All filters will be populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Clear Filters Button -->
+          <button class="clear-filters-btn" id="outdoor-clear-filters">
+            <i class="fas fa-times"></i> Clear
+          </button>
         </div>
       </div>
+
       <div class="grid-container"></div>
     </section>
   </main>
@@ -311,11 +803,15 @@
       <div class="footer-column">
         <h4>Contact</h4>
         <div class="social-links">
-          <i class="fa-solid fa-envelope"></i>
+          <a target="_blank" rel="noopener noreferrer">
+            <i class="fa-solid fa-envelope"></i>
+          </a>
           <span>landscape@uob.edu.bh</span>
         </div>
         <div class="social-links">
-          <i class="fa-solid fa-phone"></i>
+          <a target="_blank" rel="noopener noreferrer">
+            <i class="fa-solid fa-phone"></i>
+          </a>
           <span>+973 1743 8181</span>
         </div>
         <div class="social-links">
@@ -332,43 +828,818 @@
   </footer>
 
   <script>
-    fetch('http://localhost:3000/api/indoor-plants')
-      .then(res => res.json())
-      .then(plants => {
+    // fetch('http://localhost:3000/api/indoor-plants')
+    //   .then(res => res.json())
+    //   .then(plants => {
+    //     const grid = document.getElementById('indoorGrid');
+    //     plants.forEach(plant => {
+    //       const card = document.createElement('div');
+    //       card.className = 'grid-item';
+    //       card.innerHTML = `
+    //         <img src="${plant.Image}" alt="${plant['Scientific name']}">
+    //         <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
+    //       `;
+    //       card.addEventListener('click', () => {
+    //         window.location.href = `indoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
+    //       });
+    //       grid.appendChild(card);
+    //     });
+    //   })
+    //   .catch(err => console.error('Indoor fetch error:', err));
+    //   console.log('Light values:', indoorPlants.map(p => `"${p['Light Requirements']}"`));
+
+    // fetch('http://localhost:3000/api/outdoor-plants')
+    //   .then(res => res.json())
+    //   .then(plants => {
+    //     const grid = document.querySelector('#outdoor-plants .grid-container');
+    //     plants.forEach(plant => {
+    //       const card = document.createElement('div');
+    //       card.className = 'grid-item';
+    //       card.innerHTML = `
+    //         <img src="${plant.Image}" alt="${plant['Scientific name']}">
+    //         <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
+    //       `;
+    //       card.addEventListener('click', () => {
+    //         window.location.href = `outdoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
+    //       });
+    //       grid.appendChild(card);
+    //     });
+    //   })
+    //   .catch(err => console.error('Outdoor fetch error:', err));
+
+
+    // Indoor Plants - Search, Sort, and Filter
+    document.addEventListener('DOMContentLoaded', () => {
+      let indoorPlants = [];
+      let outdoorPlants = [];
+
+      // Fetch indoor plants
+      fetch('http://localhost:3000/api/indoor-plants')
+        .then(res => res.json())
+        .then(plants => {
+          indoorPlants = plants;
+          renderIndoorPlants(indoorPlants);
+          setupIndoorControls();
+        })
+        .catch(err => console.error('Indoor fetch error:', err));
+      console.log('Light values:', indoorPlants.map(p => `"${p['Light Requirements']}"`));
+
+      // Fetch outdoor plants
+      fetch('http://localhost:3000/api/outdoor-plants')
+        .then(res => res.json())
+        .then(plants => {
+          outdoorPlants = plants;
+          renderOutdoorPlants(outdoorPlants);
+          setupOutdoorControls();
+        })
+        .catch(err => console.error('Outdoor fetch error:', err));
+
+      // Helper function to extract temperature range average
+      function getTempAverage(tempString) {
+        if (!tempString) return null;
+
+        // Extract numbers from strings like "18-30 ℃" or "18-30"
+        const matches = tempString.match(/(\d+)-(\d+)/);
+        if (matches) {
+          const min = parseInt(matches[1]);
+          const max = parseInt(matches[2]);
+          return (min + max) / 2;
+        }
+
+        // If single number
+        const single = tempString.match(/(\d+)/);
+        if (single) {
+          return parseInt(single[1]);
+        }
+
+        return null;
+      }
+
+      // Helper function to categorize temperature
+      function getTempCategory(tempString) {
+        const avg = getTempAverage(tempString);
+        if (avg === null) return null;
+
+        if (avg >= 25) return 'high';
+        if (avg >= 18) return 'medium';
+        return 'low';
+      }
+
+      // Render indoor plants
+      function renderIndoorPlants(plants) {
         const grid = document.getElementById('indoorGrid');
+        grid.innerHTML = '';
+
+        if (plants.length === 0) {
+          grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 40px;">No plants found.</p>';
+          return;
+        }
+
         plants.forEach(plant => {
           const card = document.createElement('div');
           card.className = 'grid-item';
           card.innerHTML = `
-            <img src="${plant.Image}" alt="${plant['Scientific name']}">
-            <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
-          `;
+          <img src="${plant.Image}" alt="${plant['Scientific name']}">
+          <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
+        `;
           card.addEventListener('click', () => {
             window.location.href = `indoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
           });
           grid.appendChild(card);
         });
-      })
-      .catch(err => console.error('Indoor fetch error:', err));
+      }
 
-    fetch('http://localhost:3000/api/outdoor-plants')
-      .then(res => res.json())
-      .then(plants => {
+      // Render outdoor plants
+      function renderOutdoorPlants(plants) {
         const grid = document.querySelector('#outdoor-plants .grid-container');
+        grid.innerHTML = '';
+
+        if (plants.length === 0) {
+          grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 40px;">No plants found.</p>';
+          return;
+        }
+
         plants.forEach(plant => {
           const card = document.createElement('div');
           card.className = 'grid-item';
           card.innerHTML = `
-            <img src="${plant.Image}" alt="${plant['Scientific name']}">
-            <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
-          `;
+          <img src="${plant.Image}" alt="${plant['Scientific name']}">
+          <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
+        `;
           card.addEventListener('click', () => {
             window.location.href = `outdoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
           });
           grid.appendChild(card);
         });
-      })
-      .catch(err => console.error('Outdoor fetch error:', err));
+      }
+
+      // Setup indoor controls
+      function setupIndoorControls() {
+        const searchInput = document.getElementById('searchInput');
+        const sortBtn = document.getElementById('indoor-sort-btn');
+        const sortDropdown = document.getElementById('indoor-sort-dropdown');
+        const filterBtn = document.getElementById('indoor-filter-btn');
+        const filterDropdown = document.getElementById('indoor-filter-dropdown');
+        const filterCount = document.getElementById('indoor-filter-count');
+        const clearFiltersBtn = document.getElementById('indoor-clear-filters');
+
+        let currentSearch = '';
+        let currentSortProperty = '';
+        let currentSortOrder = '';
+        let currentFilters = {};
+
+        // Define which fields to create filters for
+        const filterFields = [
+          { field: 'Type', label: 'Type' },
+          { field: 'Light Requirements', label: 'Light Requirements' },
+          { field: 'Stable temperature', label: 'Temperature Range', transform: getTempCategory }
+        ];
+
+        // Helper function to categorize temperature
+        function getTempCategory(tempString) {
+          if (!tempString) return null;
+
+          const matches = tempString.match(/(\d+)-(\d+)/);
+          if (matches) {
+            const min = parseInt(matches[1]);
+            const max = parseInt(matches[2]);
+            const avg = (min + max) / 2;
+
+            if (avg >= 25) return 'High (25℃+)';
+            if (avg >= 18) return 'Medium (18-25℃)';
+            return 'Low (Below 18℃)';
+          }
+
+          const single = tempString.match(/(\d+)/);
+          if (single) {
+            const temp = parseInt(single[1]);
+            if (temp >= 25) return 'High (25℃+)';
+            if (temp >= 18) return 'Medium (18-25℃)';
+            return 'Low (Below 18℃)';
+          }
+
+          return null;
+        }
+
+        // Helper function to get temperature average
+        function getTempAverage(tempString) {
+          if (!tempString) return null;
+
+          const matches = tempString.match(/(\d+)-(\d+)/);
+          if (matches) {
+            const min = parseInt(matches[1]);
+            const max = parseInt(matches[2]);
+            return (min + max) / 2;
+          }
+
+          const single = tempString.match(/(\d+)/);
+          if (single) {
+            return parseInt(single[1]);
+          }
+
+          return null;
+        }
+
+        // Populate all filters dynamically
+        if (filterDropdown) {
+          filterFields.forEach(({ field, label, transform }) => {
+            let uniqueValues;
+
+            if (transform) {
+              // Apply transformation function (e.g., for temperature)
+              uniqueValues = [...new Set(
+                indoorPlants.map(p => transform(p[field])).filter(Boolean)
+              )].sort();
+            } else {
+              // Get unique values directly
+              uniqueValues = [...new Set(
+                indoorPlants.map(p => p[field]).filter(Boolean)
+              )].sort();
+            }
+
+            if (uniqueValues.length > 0) {
+              // Initialize filter array
+              currentFilters[field] = [];
+
+              // Create filter section
+              const section = document.createElement('div');
+              section.className = 'filter-section';
+
+              const heading = document.createElement('h4');
+              heading.textContent = label;
+              section.appendChild(heading);
+
+              const optionsContainer = document.createElement('div');
+              optionsContainer.className = 'filter-options';
+
+              // Create checkbox for each unique value
+              uniqueValues.forEach((value, index) => {
+                const option = document.createElement('div');
+                option.className = 'filter-option';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `indoor-${field.replace(/\s+/g, '-').toLowerCase()}-${index}`;
+                checkbox.value = value;
+                checkbox.dataset.filter = field;
+                if (transform) {
+                  checkbox.dataset.transform = 'true';
+                }
+
+                const labelEl = document.createElement('label');
+                labelEl.htmlFor = checkbox.id;
+                labelEl.textContent = value;
+
+                option.appendChild(checkbox);
+                option.appendChild(labelEl);
+                optionsContainer.appendChild(option);
+              });
+
+              section.appendChild(optionsContainer);
+              filterDropdown.appendChild(section);
+            }
+          });
+        }
+
+        // Toggle sort dropdown
+        if (sortBtn && sortDropdown) {
+          sortBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sortDropdown.classList.toggle('show');
+            filterDropdown.classList.remove('show');
+          });
+        }
+
+        // Toggle filter dropdown
+        if (filterBtn && filterDropdown) {
+          filterBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            filterDropdown.classList.toggle('show');
+            sortDropdown.classList.remove('show');
+            filterBtn.classList.toggle('active');
+          });
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.sort-dropdown')) {
+            sortDropdown?.classList.remove('show');
+          }
+          if (!e.target.closest('.dropdown-filter')) {
+            filterDropdown?.classList.remove('show');
+            filterBtn?.classList.remove('active');
+          }
+        });
+
+        // Handle sort arrow clicks
+        if (sortDropdown) {
+          sortDropdown.querySelectorAll('.sort-arrow').forEach(arrow => {
+            arrow.addEventListener('click', (e) => {
+              e.stopPropagation();
+
+              // Remove active class from all arrows
+              sortDropdown.querySelectorAll('.sort-arrow').forEach(a => a.classList.remove('active'));
+
+              // Add active class to clicked arrow
+              arrow.classList.add('active');
+
+              // Set current sort
+              currentSortProperty = arrow.dataset.property;
+              currentSortOrder = arrow.dataset.order;
+
+              // Apply filters
+              applyFilters();
+            });
+          });
+        }
+
+        // Handle filter checkboxes
+        if (filterDropdown) {
+          filterDropdown.addEventListener('change', (e) => {
+            if (e.target.type === 'checkbox') {
+              const filterField = e.target.dataset.filter;
+              const value = e.target.value;
+              const hasTransform = e.target.dataset.transform === 'true';
+
+              if (!currentFilters[filterField]) {
+                currentFilters[filterField] = [];
+              }
+
+              if (e.target.checked) {
+                if (!currentFilters[filterField].includes(value)) {
+                  currentFilters[filterField].push(value);
+                }
+              } else {
+                currentFilters[filterField] = currentFilters[filterField].filter(v => v !== value);
+              }
+
+              updateFilterCount();
+              applyFilters();
+            }
+          });
+        }
+
+        // Update filter count badge
+        function updateFilterCount() {
+          const totalFilters = Object.values(currentFilters).reduce((sum, arr) => sum + arr.length, 0);
+          if (filterCount) {
+            if (totalFilters > 0) {
+              filterCount.textContent = totalFilters;
+              filterCount.style.display = 'inline-block';
+            } else {
+              filterCount.style.display = 'none';
+            }
+          }
+        }
+
+        // Apply filters and sorting
+        function applyFilters() {
+          let filtered = [...indoorPlants];
+
+          // Apply search
+          if (currentSearch) {
+            filtered = filtered.filter(plant =>
+              plant['Common name']?.toLowerCase().includes(currentSearch.toLowerCase()) ||
+              plant['Scientific name']?.toLowerCase().includes(currentSearch.toLowerCase())
+            );
+          }
+
+          // Apply all dynamic filters
+          Object.keys(currentFilters).forEach(field => {
+            if (currentFilters[field].length > 0) {
+              filtered = filtered.filter(plant => {
+                let plantValue;
+
+                // Special handling for temperature (needs transformation)
+                if (field === 'Stable temperature') {
+                  plantValue = getTempCategory(plant[field]);
+                } else {
+                  plantValue = (plant[field] || '').toString().trim();
+                }
+
+                return currentFilters[field].some(filterValue =>
+                  plantValue && plantValue.toLowerCase() === filterValue.toLowerCase()
+                );
+              });
+            }
+          });
+
+          // Apply sort
+          if (currentSortProperty && currentSortOrder) {
+            const isAscending = currentSortOrder === 'asc';
+
+            if (currentSortProperty === 'name') {
+              filtered.sort((a, b) => {
+                const nameA = a['Common name'] || '';
+                const nameB = b['Common name'] || '';
+                return isAscending ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+              });
+            } else if (currentSortProperty === 'light') {
+              const lightOrder = { 'low': 1, 'medium': 2, 'high': 3 };
+              filtered.sort((a, b) => {
+                const aLight = (a['Light Requirements'] || '').toLowerCase();
+                const bLight = (b['Light Requirements'] || '').toLowerCase();
+                const aValue = lightOrder[aLight] || 0;
+                const bValue = lightOrder[bLight] || 0;
+                return isAscending ? aValue - bValue : bValue - aValue;
+              });
+            } else if (currentSortProperty === 'temp') {
+              filtered.sort((a, b) => {
+                const aTemp = getTempAverage(a['Stable temperature']) || 0;
+                const bTemp = getTempAverage(b['Stable temperature']) || 0;
+                return isAscending ? aTemp - bTemp : bTemp - aTemp;
+              });
+            }
+          }
+
+          renderIndoorPlants(filtered);
+        }
+
+        // Search input
+        if (searchInput) {
+          searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value;
+            applyFilters();
+          });
+        }
+
+        // Clear filters button
+        if (clearFiltersBtn) {
+          clearFiltersBtn.addEventListener('click', () => {
+            currentSearch = '';
+            if (searchInput) searchInput.value = '';
+
+            currentSortProperty = '';
+            currentSortOrder = '';
+            sortDropdown?.querySelectorAll('.sort-arrow').forEach(a => a.classList.remove('active'));
+
+            // Reset all filters
+            Object.keys(currentFilters).forEach(key => {
+              currentFilters[key] = [];
+            });
+
+            filterDropdown?.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+              checkbox.checked = false;
+            });
+
+            updateFilterCount();
+            renderIndoorPlants(indoorPlants);
+          });
+        }
+
+        // Check if filters have values on page load
+        if (searchInput && searchInput.value) {
+          currentSearch = searchInput.value;
+          applyFilters();
+        }
+      }
+
+      // Setup outdoor controls
+      function setupOutdoorControls() {
+        const searchInput = document.getElementById('searchInput2');
+        const sortBtn = document.getElementById('outdoor-sort-btn');
+        const sortDropdown = document.getElementById('outdoor-sort-dropdown');
+        const filterBtn = document.getElementById('outdoor-filter-btn');
+        const filterDropdown = document.getElementById('outdoor-filter-dropdown');
+        const filterCount = document.getElementById('outdoor-filter-count');
+        const clearFiltersBtn = document.getElementById('outdoor-clear-filters');
+
+        let currentSearch = '';
+        let currentSortProperty = '';
+        let currentSortOrder = '';
+        let currentFilters = {};
+
+        // Define which fields to create filters for - EDIT THIS ARRAY TO ADD/REMOVE FILTERS
+        const filterFields = [
+          { field: 'Category', label: 'Category' },
+          {
+            field: 'Water requirement',
+            label: 'Water Requirement',
+            sortOrder: ['High', 'Medium', 'Low']
+          },
+          {
+            field: 'Sun requirement',
+            label: 'Sun Requirement',
+            sortOrder: ['Full shade', 'Partial shade', 'Partial sun', 'Full sun']
+          },
+          { field: 'Shade', label: 'Shade' },
+          {
+            field: 'waste',
+            label: 'Waste',
+            sortOrder: ['High', 'Medium', 'Low']
+          },
+          {
+            field: 'Evaporation mitigation',
+            label: 'Evaporation Mitigation',
+            sortOrder: ['High', 'Medium', 'Low']
+          },
+          {
+            field: 'Drought tolerance',
+            label: 'Drought Tolerance',
+            sortOrder: ['High', 'Medium', 'Low']
+          },
+          {
+            field: 'Heat tolerance',
+            label: 'Heat Tolerance',
+            sortOrder: ['High', 'Medium', 'Low']
+          },
+          { field: 'Continuous bloom', label: 'Continuous Bloom' },
+          {
+            field: 'Environmental impact',
+            label: 'Environmental Impact',
+            sortOrder: ['High', 'Medium', 'Low']
+          }
+        ];
+
+        // Populate all filters dynamically
+        if (filterDropdown) {
+          filterFields.forEach(({ field, label }) => {
+            // Get unique values for this field
+            const uniqueValues = [...new Set(outdoorPlants.map(p => p[field]).filter(Boolean))].sort();
+
+            if (uniqueValues.length > 0) {
+              // Initialize filter array
+              currentFilters[field] = [];
+
+              // Create filter section
+              const section = document.createElement('div');
+              section.className = 'filter-section';
+
+              const heading = document.createElement('h4');
+              heading.textContent = label;
+              section.appendChild(heading);
+
+              const optionsContainer = document.createElement('div');
+              optionsContainer.className = 'filter-options';
+
+              // Create checkbox for each unique value
+              uniqueValues.forEach((value, index) => {
+                const option = document.createElement('div');
+                option.className = 'filter-option';
+
+                const checkbox = document.createElement('input');
+                checkbox.type = 'checkbox';
+                checkbox.id = `outdoor-${field.replace(/\s+/g, '-').toLowerCase()}-${index}`;
+                checkbox.value = value;
+                checkbox.dataset.filter = field;
+
+                const labelEl = document.createElement('label');
+                labelEl.htmlFor = checkbox.id;
+                labelEl.textContent = value;
+
+                option.appendChild(checkbox);
+                option.appendChild(labelEl);
+                optionsContainer.appendChild(option);
+              });
+
+              section.appendChild(optionsContainer);
+              filterDropdown.appendChild(section);
+            }
+          });
+        }
+
+        // Helper function to parse numeric values
+        function parseNumeric(value) {
+          if (!value) return null;
+          const num = parseFloat(value);
+          return isNaN(num) ? null : num;
+        }
+
+        // Toggle sort dropdown
+        if (sortBtn && sortDropdown) {
+          sortBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            sortDropdown.classList.toggle('show');
+            filterDropdown.classList.remove('show');
+          });
+        }
+
+        // Toggle filter dropdown
+        if (filterBtn && filterDropdown) {
+          filterBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            filterDropdown.classList.toggle('show');
+            sortDropdown.classList.remove('show');
+            filterBtn.classList.toggle('active');
+          });
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.sort-dropdown')) {
+            sortDropdown?.classList.remove('show');
+          }
+          if (!e.target.closest('.dropdown-filter')) {
+            filterDropdown?.classList.remove('show');
+            filterBtn?.classList.remove('active');
+          }
+        });
+
+        // Handle sort arrow clicks
+        if (sortDropdown) {
+          sortDropdown.querySelectorAll('.sort-arrow').forEach(arrow => {
+            arrow.addEventListener('click', (e) => {
+              e.stopPropagation();
+
+              // Remove active class from all arrows
+              sortDropdown.querySelectorAll('.sort-arrow').forEach(a => a.classList.remove('active'));
+
+              // Add active class to clicked arrow
+              arrow.classList.add('active');
+
+              // Set current sort
+              currentSortProperty = arrow.dataset.property;
+              currentSortOrder = arrow.dataset.order;
+
+              // Apply filters
+              applyFilters();
+            });
+          });
+        }
+
+        // Handle filter checkboxes
+        if (filterDropdown) {
+          filterDropdown.addEventListener('change', (e) => {
+            if (e.target.type === 'checkbox') {
+              const filterField = e.target.dataset.filter;
+              const value = e.target.value;
+
+              if (!currentFilters[filterField]) {
+                currentFilters[filterField] = [];
+              }
+
+              if (e.target.checked) {
+                if (!currentFilters[filterField].includes(value)) {
+                  currentFilters[filterField].push(value);
+                }
+              } else {
+                currentFilters[filterField] = currentFilters[filterField].filter(v => v !== value);
+              }
+
+              updateFilterCount();
+              applyFilters();
+            }
+          });
+        }
+
+        // Update filter count badge
+        function updateFilterCount() {
+          const totalFilters = Object.values(currentFilters).reduce((sum, arr) => sum + arr.length, 0);
+          if (filterCount) {
+            if (totalFilters > 0) {
+              filterCount.textContent = totalFilters;
+              filterCount.style.display = 'inline-block';
+            } else {
+              filterCount.style.display = 'none';
+            }
+          }
+        }
+
+        // Apply filters and sorting
+        function applyFilters() {
+          let filtered = [...outdoorPlants];
+
+          // Apply search
+          if (currentSearch) {
+            filtered = filtered.filter(plant =>
+              plant['Common name']?.toLowerCase().includes(currentSearch.toLowerCase()) ||
+              plant['Scientific name']?.toLowerCase().includes(currentSearch.toLowerCase())
+            );
+          }
+
+          // Apply all dynamic filters
+          Object.keys(currentFilters).forEach(field => {
+            if (currentFilters[field].length > 0) {
+              filtered = filtered.filter(plant => {
+                const plantValue = (plant[field] || '').toString().trim();
+                return currentFilters[field].some(filterValue =>
+                  plantValue.toLowerCase() === filterValue.toLowerCase()
+                );
+              });
+            }
+          });
+
+          // Apply sort
+          if (currentSortProperty && currentSortOrder) {
+            const isAscending = currentSortOrder === 'asc';
+
+            if (currentSortProperty === 'name') {
+              filtered.sort((a, b) => {
+                const nameA = a['Common name'] || '';
+                const nameB = b['Common name'] || '';
+                return isAscending ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+              });
+            } else if (currentSortProperty === 'water') {
+              const waterOrder = { 'low': 1, 'medium': 2, 'high': 3 };
+              filtered.sort((a, b) => {
+                const aWater = (a['Water requirement'] || '').toLowerCase();
+                const bWater = (b['Water requirement'] || '').toLowerCase();
+                const aValue = waterOrder[aWater] || 0;
+                const bValue = waterOrder[bWater] || 0;
+                return isAscending ? aValue - bValue : bValue - aValue;
+              });
+            } else if (currentSortProperty === 'sun') {
+              const sunOrder = { 'full shade': 1, 'partial shade': 2, 'partial sun': 3, 'full sun': 4 };
+              filtered.sort((a, b) => {
+                const aSun = (a['Sun requirement'] || '').toLowerCase();
+                const bSun = (b['Sun requirement'] || '').toLowerCase();
+                const aValue = sunOrder[aSun] || 0;
+                const bValue = sunOrder[bSun] || 0;
+                return isAscending ? aValue - bValue : bValue - aValue;
+              });
+            } else if (currentSortProperty === 'waste') {
+              const wasteOrder = { 'low': 1, 'medium': 2, 'high': 3 };
+              filtered.sort((a, b) => {
+                const aWaste = (a['waste'] || '').toLowerCase();
+                const bWaste = (b['waste'] || '').toLowerCase();
+                const aValue = wasteOrder[aWaste] || 0;
+                const bValue = wasteOrder[bWaste] || 0;
+                return isAscending ? aValue - bValue : bValue - aValue;
+              });
+            } else if (currentSortProperty === 'drought') {
+              const droughtOrder = { 'low': 1, 'medium': 2, 'high': 3 };
+              filtered.sort((a, b) => {
+                const aDrought = (a['Drought tolerance'] || '').toLowerCase();
+                const bDrought = (b['Drought tolerance'] || '').toLowerCase();
+                const aValue = droughtOrder[aDrought] || 0;
+                const bValue = droughtOrder[bDrought] || 0;
+                return isAscending ? aValue - bValue : bValue - aValue;
+              });
+            } else if (currentSortProperty === 'heat') {
+              const heatOrder = { 'low': 1, 'medium': 2, 'high': 3 };
+              filtered.sort((a, b) => {
+                const aHeat = (a['Heat tolerance'] || '').toLowerCase();
+                const bHeat = (b['Heat tolerance'] || '').toLowerCase();
+                const aValue = heatOrder[aHeat] || 0;
+                const bValue = heatOrder[bHeat] || 0;
+                return isAscending ? aValue - bValue : bValue - aValue;
+              });
+            } else if (currentSortProperty === 'impact') {
+              const impactOrder = { 'low': 1, 'medium': 2, 'high': 3 };
+              filtered.sort((a, b) => {
+                const aImpact = (a['Environmental impact'] || '').toLowerCase();
+                const bImpact = (b['Environmental impact'] || '').toLowerCase();
+                const aValue = impactOrder[aImpact] || 0;
+                const bValue = impactOrder[bImpact] || 0;
+                return isAscending ? aValue - bValue : bValue - aValue;
+              });
+            } else if (currentSortProperty === 'oxygen') {
+              filtered.sort((a, b) => {
+                const aOxygen = parseNumeric(a['Oxygen gas production (g/year)']) || 0;
+                const bOxygen = parseNumeric(b['Oxygen gas production (g/year)']) || 0;
+                return isAscending ? aOxygen - bOxygen : bOxygen - aOxygen;
+              });
+            } else if (currentSortProperty === 'co2') {
+              filtered.sort((a, b) => {
+                const aCO2 = parseNumeric(a['Carbon dioxide gas absorption (g/year)']) || 0;
+                const bCO2 = parseNumeric(b['Carbon dioxide gas absorption (g/year)']) || 0;
+                return isAscending ? aCO2 - bCO2 : bCO2 - aCO2;
+              });
+            }
+          }
+
+          renderOutdoorPlants(filtered);
+        }
+
+        // Search input
+        if (searchInput) {
+          searchInput.addEventListener('input', (e) => {
+            currentSearch = e.target.value;
+            applyFilters();
+          });
+        }
+
+        // Clear filters button
+        if (clearFiltersBtn) {
+          clearFiltersBtn.addEventListener('click', () => {
+            currentSearch = '';
+            if (searchInput) searchInput.value = '';
+
+            currentSortProperty = '';
+            currentSortOrder = '';
+            sortDropdown?.querySelectorAll('.sort-arrow').forEach(a => a.classList.remove('active'));
+
+            // Reset all filters
+            Object.keys(currentFilters).forEach(key => {
+              currentFilters[key] = [];
+            });
+
+            filterDropdown?.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+              checkbox.checked = false;
+            });
+
+            updateFilterCount();
+            renderOutdoorPlants(outdoorPlants);
+          });
+        }
+
+        // Check if filters have values on page load
+        if (searchInput && searchInput.value) {
+          currentSearch = searchInput.value;
+          applyFilters();
+        }
+      }
+    });
   </script>
 </body>
 
