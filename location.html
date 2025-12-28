@@ -32,9 +32,9 @@
 
     .location-header h1 small {
       font-size: 1.4rem;
-      font-weight: 300;
+      /* font-weight: 300; */
       color: #888;
-      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, serif;
+      /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, serif; */
     }
 
     /* Add all the filter/sort CSS from Our Plants page */
@@ -278,6 +278,31 @@
         transform: translateX(-50%);
       }
     }
+
+    .pdf-link-container {
+      margin-top: 10px;
+    }
+
+    .pdf-download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: var(--primary-dark);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background-color 0.3s ease;
+    }
+
+    .pdf-download-btn:hover {
+      background-color: var(--primary-light);
+    }
+
+    .pdf-download-btn i {
+      font-size: 16px;
+    }
   </style>
 </head>
 
@@ -425,6 +450,7 @@
           <li><a href="ourPlants.html">Our Plants</a></li>
           <li><a href="projects.html">Projects</a></li>
           <li><a href="locations.html">Locations</a></li>
+          <li><a href="statistics.html">Statistics</a></li>
           <li><a href="about.html">About</a></li>
         </ul>
       </div>
@@ -1014,45 +1040,73 @@
           const wrapper = document.createElement('div');
           wrapper.className = 'proposal-item';
 
+          const locName = p['Location name'] || p['Location Name'] || '';
+          const projectName = p['Project name'] || p['Project Name'] || '';
           const videoUrl = (p['Proposal Video'] || p['proposal video'] || '').trim();
+          const pdfUrl = (p['Proposal PDF'] || p['proposal pdf'] || '').trim();
 
           // Extract YouTube video ID
           let videoId = null;
-          try {
-            const ytMatch = videoUrl.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
-            if (ytMatch && ytMatch[1]) {
-              videoId = ytMatch[1];
+          if (videoUrl) {
+            try {
+              const ytMatch = videoUrl.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+              if (ytMatch && ytMatch[1]) {
+                videoId = ytMatch[1];
+              }
+            } catch (e) {
+              console.error('Error parsing YouTube URL:', e);
             }
-          } catch (e) {
-            console.error('Error parsing YouTube URL:', e);
           }
 
-          if (!videoId) {
-            console.log('Could not extract video ID from:', videoUrl);
-            return;
+          // Create iframe with proper embed URL (if video exists)
+          if (videoId) {
+            const embedSrc = `https://www.youtube.com/embed/${videoId}`;
+
+            const iframe = document.createElement('iframe');
+            iframe.width = '100%';
+            iframe.height = '360';
+            iframe.src = embedSrc;
+            iframe.frameBorder = '0';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            iframe.allowFullscreen = true;
+            iframe.loading = 'lazy';
+
+            wrapper.appendChild(iframe);
           }
 
-          // Create iframe with proper embed URL
-          const embedSrc = `https://www.youtube.com/embed/${videoId}`;
-
-          const iframe = document.createElement('iframe');
-          iframe.width = '100%';
-          iframe.height = '360';
-          iframe.src = embedSrc;
-          iframe.frameBorder = '0';
-          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-          iframe.allowFullscreen = true;
-          iframe.loading = 'lazy';
-
+          // Create caption
           const caption = document.createElement('div');
           caption.className = 'proposal-caption';
-          const locName = p['Location name'] || p['Location Name'] || '';
-          const projectName = p['Project name'] || p['Project Name'] || '';
           caption.innerHTML = `<h3>${locName || locationId} <small>${locationId}</small></h3><p>${projectName || ''}</p>`;
 
-          wrapper.appendChild(iframe);
-          wrapper.appendChild(caption);
+          // Add PDF link if it exists (INSIDE THE LOOP!)
+          if (pdfUrl) {
+            const pdfLinkContainer = document.createElement('div');
+            pdfLinkContainer.className = 'pdf-link-container';
+            pdfLinkContainer.style.marginTop = '10px';
 
+            const pdfLink = document.createElement('a');
+
+            // Convert raw.githubusercontent.com to media URL for Git LFS files
+            let finalPdfUrl = pdfUrl;
+            if (pdfUrl.includes('raw.githubusercontent.com')) {
+              finalPdfUrl = pdfUrl.replace(
+                'raw.githubusercontent.com',
+                'media.githubusercontent.com/media'
+              );
+            }
+
+            pdfLink.href = finalPdfUrl;
+            pdfLink.target = '_blank';
+            pdfLink.rel = 'noopener noreferrer';
+            pdfLink.className = 'pdf-download-btn';
+            pdfLink.innerHTML = '<i class="fas fa-file-pdf"></i> View Proposal PDF';
+
+            pdfLinkContainer.appendChild(pdfLink);
+            caption.appendChild(pdfLinkContainer);
+          }
+
+          wrapper.appendChild(caption);
           proposalsContainer.appendChild(wrapper);
         });
 

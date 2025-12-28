@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -450,8 +451,107 @@
         grid-template-columns: repeat(2, 1fr);
       }
     }
+
+    /* Total quantity display */
+    .total-quantity {
+      background: rgba(44, 95, 45, 0.1);
+      border-left: 4px solid #2c5f2d;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      color: #2c5f2d;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .total-quantity span {
+      font-size: 1.5rem;
+    }
+
+    /* Locations section */
+    .locations-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .location-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .location-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .location-card p {
+      margin: 0.3rem 0;
+      color: #555;
+      font-size: 0.95rem;
+    }
+
+    .location-card p:first-child {
+      color: #2c5f2d;
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    /* Mobile styles for locations */
+    @media (max-width: 768px) {
+      .total-quantity {
+        font-size: 1rem;
+        padding: 0.8rem 1rem;
+      }
+
+      .total-quantity span {
+        font-size: 1.2rem;
+      }
+
+      .locations-list {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+
+      .location-card {
+        padding: 0.8rem;
+      }
+
+      .location-card p {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .total-quantity {
+        font-size: 0.95rem;
+        padding: 0.7rem 0.9rem;
+      }
+
+      .location-card {
+        padding: 0.7rem;
+      }
+
+      .location-card p {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (min-width: 481px) and (max-width: 768px) {
+      .locations-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
   </style>
 </head>
+
 <body>
   <button class="back-button" onclick="history.back()">← Back</button>
 
@@ -508,7 +608,8 @@
           }
 
           const bgImage = plant.Image || '';
-          document.body.style.backgroundImage = `url('${bgImage}')`;
+          // document.body.style.backgroundImage = `url('${bgImage}')`;
+          document.body.style.backgroundImage = `url('https://i.postimg.cc/x8sk6xJH/main_gate_entrance-3.jpg')`;
 
           const excludedKeys = ["Plant ID", "Picture", "Image", "Locations", "PDF link"];
           const iconMap = {
@@ -532,7 +633,6 @@
             "Evaporation mitigation": "💨"
           };
 
-          // Group definitions
           const groups = {
             "Physical Characteristics": ["Height (m)", "Spread (m)", "Root type"],
             "Growing Conditions": ["Shade", "Drought tolerance", "Heat tolerance"],
@@ -546,36 +646,34 @@
             "Refuse Output": ["waste"]
           };
 
-          // First 4 fields to display as cards
           const cardFields = ["Category", "Water requirement", "Sun requirement", "life cycle"];
-          
-          let detailsHtml = `
-            <div class="plant-details-card">
-              <div class="plant-header">
-                <img src="${bgImage}" alt="${plant['Common name'] || ''}" class="plant-thumbnail" id="mainThumb" tabindex="0" />
-                <div class="plant-key-info">
-                  <h1>${plant["Scientific name"] || ''}</h1>
-                  <p class="common-name">${plant["Common name"] || ''}</p>
-                  <div class="info-cards-grid">
-          `;
 
-          // Add cards for the first 4 fields
+          let detailsHtml = `
+      <div class="plant-details-card">
+        <div class="plant-header">
+          <img src="${bgImage}" alt="${plant['Common name'] || ''}" class="plant-thumbnail" id="mainThumb" tabindex="0" />
+          <div class="plant-key-info">
+            <h1>${plant["Scientific name"] || ''}</h1>
+            <p class="common-name">${plant["Common name"] || ''}</p>
+            <div class="info-cards-grid">
+    `;
+
           cardFields.forEach(key => {
             if (plant[key]) {
               const icon = iconMap[key] || "📄";
               detailsHtml += `
-                <div class="info-card">
-                  <span class="card-icon">${icon}</span>
-                  <div class="card-content">
-                    <strong>${key}</strong>
-                    <p>${plant[key]}</p>
-                  </div>
-                </div>
-              `;
+          <div class="info-card">
+            <span class="card-icon">${icon}</span>
+            <div class="card-content">
+              <strong>${key}</strong>
+              <p>${plant[key]}</p>
+            </div>
+          </div>
+        `;
             }
           });
 
-          detailsHtml += `</div></div></div>`; // close info-cards-grid, plant-key-info, and plant-header
+          detailsHtml += `</div></div></div>`;
 
           // Add grouped sections
           Object.keys(groups).forEach(groupTitle => {
@@ -591,13 +689,52 @@
 
             if (fieldsHtml) {
               detailsHtml += `
-                <div class="info-section">
-                  <h2 class="section-title">${groupTitle}</h2>
-                  <ul class="plant-info">${fieldsHtml}</ul>
-                </div>
-              `;
+          <div class="info-section">
+            <h2 class="section-title">${groupTitle}</h2>
+            <ul class="plant-info">${fieldsHtml}</ul>
+          </div>
+        `;
             }
           });
+
+          // Locations section
+          if (plant.Locations && plant.Locations.length > 0) {
+            detailsHtml += `
+        <div class="info-section">
+          <h2 class="section-title">Locations on Campus</h2>
+      `;
+
+            // Calculate and display total quantity
+            const totalQuantity = plant.Locations.reduce((sum, loc) => {
+              return sum + (parseInt(loc["Quantity"]) || 0);
+            }, 0);
+
+            if (totalQuantity > 0) {
+              detailsHtml += `
+          <div class="total-quantity">
+            <span>🔢</span> Total Quantity: ${totalQuantity}
+          </div>
+        `;
+            }
+
+            detailsHtml += `<div class="locations-list">`;
+
+            plant.Locations.forEach(loc => {
+              const locationNumber = loc["Location number"] || '';
+              const locationName = loc["Location name"] || '';
+              const quantity = loc["Quantity"] || '—';
+
+              detailsHtml += `
+          <div class="location-card">
+            <p>${locationNumber}</p>
+            ${locationName ? `<p>${locationName}</p>` : ''}
+            <p>Quantity: ${quantity}</p>
+          </div>
+        `;
+            });
+
+            detailsHtml += `</div></div>`; // close locations-list and info-section
+          }
 
           detailsHtml += `</div>`; // close plant-details-card
           plantDetails.innerHTML = detailsHtml;
@@ -620,4 +757,5 @@
     })();
   </script>
 </body>
+
 </html>

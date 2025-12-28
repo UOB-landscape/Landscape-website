@@ -277,7 +277,7 @@
       <div class="search-bar">
         <div class="search-input-wrapper">
           <span class="search-icon">🔍</span>
-          <input type="text" id="searchInput" placeholder="Search by name..." oninput="filterGrid()" />
+          <input type="text" id="searchInput" placeholder="Search by name..."/>
         </div>
       </div>
 
@@ -313,6 +313,7 @@
           <li><a href="ourPlants.html">Our Plants</a></li>
           <li><a href="projects.html">Projects</a></li>
           <li><a href="locations.html">Locations</a></li>
+          <li><a href="statistics.html">Statistics</a></li>
           <li><a href="about.html">About</a></li>
         </ul>
       </div>
@@ -371,28 +372,82 @@
         // Filter for only buildings
         const buildings = data.filter(item => item["Location type"] === "Building");
 
-        buildings.forEach(location => {
-          const locNum = location["Location Number"] || location["Location number"];
-          const locName = location["Location name"];
+        if (buildings.length === 0) {
+          grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 40px;">No buildings found.</p>';
+          return;
+        }
 
-          const card = document.createElement('a');
-          card.className = 'grid-item';
-          card.href = `location.html?id=${encodeURIComponent(locNum)}`;
-          card.innerHTML = `
-         <img src="${location.Picture}" alt="${locName}">
-         <h3>${locName} (${locNum})</h3>
-         `;
-          grid.appendChild(card);
+        // Store buildings data globally for search
+        window.buildingsData = buildings;
 
-        });
+        // Render function
+        function renderBuildings(buildingsToRender) {
+          grid.innerHTML = '';
+
+          if (buildingsToRender.length === 0) {
+            grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 40px;">No results found.</p>';
+            return;
+          }
+
+          buildingsToRender.forEach(location => {
+            const locNum = location["Location Number"] || location["Location number"];
+            const locName = location["Location name"] || location["Location Name"];
+            const picture = location.Picture || 'placeholder.jpg';
+
+            const card = document.createElement('a');
+            card.className = 'grid-item';
+            card.href = `location.html?id=${encodeURIComponent(locNum)}`;
+            card.innerHTML = `
+          <img src="${picture}" alt="${locName}">
+          <h3>${locName} <br><small>(${locNum})</small></h3>
+        `;
+            grid.appendChild(card);
+          });
+        }
+
+        // Initial render
+        renderBuildings(buildings);
+
+        // Setup search functionality
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) {
+          searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+
+            const filtered = buildings.filter(location => {
+              const locNum = (location["Location Number"] || location["Location number"] || '').toLowerCase();
+              const locName = (location["Location name"] || location["Location Name"] || '').toLowerCase();
+
+              return locName.includes(searchTerm) || locNum.includes(searchTerm);
+            });
+
+            renderBuildings(filtered);
+          });
+        }
 
       } catch (err) {
         console.error('Error loading buildings:', err);
+        const grid = document.getElementById('locationsGrid');
+        grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 40px;">Error loading buildings.</p>';
       }
     }
 
     loadBuildings();
 
+    function filterGrid() {
+      const searchInput = document.getElementById('searchInput');
+      const searchTerm = searchInput.value.toLowerCase();
+      const gridItems = document.querySelectorAll('.grid-item');
+
+      gridItems.forEach(item => {
+        const title = item.querySelector('h3').textContent.toLowerCase();
+        if (title.includes(searchTerm)) {
+          item.style.display = '';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
     document.addEventListener('DOMContentLoaded', () => {
       const navLinks = document.querySelectorAll('nav a');
       const currentPage = window.location.pathname.split('/').pop() || 'home.html';

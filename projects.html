@@ -91,7 +91,7 @@
 
   <section class="hero-section">
     <h1>Projects & Annual Reports</h1>
-    <p>Showcasing engineering student innovations and documenting the dedicated work 
+    <p>Showcasing engineering student innovations and documenting the dedicated work
       of our landscaping staff in maintaining and enhancing campus green spaces</p>
   </section>
 
@@ -326,7 +326,6 @@
         const saved = localStorage.getItem('theme') || 'default';
         document.documentElement.setAttribute('data-theme', saved);
 
-        // Close picker on scroll
         let lastScrollYPicker = window.scrollY;
         window.addEventListener('scroll', () => {
           if (window.scrollY > lastScrollYPicker) {
@@ -336,26 +335,22 @@
         });
       }
 
-      // Mobile theme picker - Pop-up style
+      // Mobile theme picker
       const mobileThemeBtn = document.getElementById('mobile-theme-btn');
       const mobileThemePicker = document.getElementById('mobile-theme-picker');
 
       if (mobileThemeBtn && mobileThemePicker) {
-        // Open theme picker
         mobileThemeBtn.addEventListener('click', (e) => {
           e.stopPropagation();
           mobileThemePicker.classList.toggle('active');
         });
 
-        // Close theme picker when clicking
         mobileThemePicker.addEventListener('click', (e) => {
-          // Close if clicking on the backdrop
           if (e.target === mobileThemePicker) {
             mobileThemePicker.classList.remove('active');
             return;
           }
 
-          // Close if clicking near the close button (top-right area)
           const rect = mobileThemePicker.getBoundingClientRect();
           const clickX = e.clientX - rect.left;
           const clickY = e.clientY - rect.top;
@@ -365,7 +360,6 @@
             return;
           }
 
-          // Handle theme selection
           const theme = e.target.dataset.theme;
           if (theme) {
             document.documentElement.setAttribute('data-theme', theme);
@@ -375,7 +369,6 @@
           }
         });
 
-        // Close theme picker when escape key is pressed
         document.addEventListener('keydown', (e) => {
           if (e.key === 'Escape' && mobileThemePicker.classList.contains('active')) {
             mobileThemePicker.classList.remove('active');
@@ -383,7 +376,6 @@
         });
       }
 
-      // Send initial theme to iframes
       postThemeToIframes(localStorage.getItem('theme') || 'default');
 
       // Fetch API and render
@@ -401,71 +393,122 @@
 
         function get(r, key) { return (r && Object.prototype.hasOwnProperty.call(r, key)) ? r[key] : null; }
 
-        // Group by Project Name only
-        const projects = new Map();
+        // Group by Location Number first, then by Project Name
+        const locationGroups = new Map();
+
         records.forEach(r => {
+          const locationNumber = get(r, 'Location Number') || 'Unknown Location';
           const projectName = get(r, 'Project Name') || 'Unnamed Project';
-          if (!projects.has(projectName)) {
-            projects.set(projectName, { 
-              name: projectName, 
-              description: null, 
-              records: [],
+
+          if (!locationGroups.has(locationNumber)) {
+            locationGroups.set(locationNumber, {
+              locationNumber: locationNumber,
               filterImage: null,
-              locationNumber: null
+              projects: new Map()
             });
           }
-          const proj = projects.get(projectName);
-          
-          // Set description if available
-          if (!proj.description && get(r, 'Project Description')) {
-            proj.description = get(r, 'Project Description');
+
+          const location = locationGroups.get(locationNumber);
+
+          // Set filter image for the location (first one found)
+          if (!location.filterImage && get(r, 'Filter Image')) {
+            location.filterImage = get(r, 'Filter Image');
           }
-          
-          // Set filter image if available
-          if (!proj.filterImage && get(r, 'Filter Image')) {
-            proj.filterImage = get(r, 'Filter Image');
+
+          if (!location.projects.has(projectName)) {
+            location.projects.set(projectName, {
+              name: projectName,
+              description: null,
+              records: []
+            });
           }
-          
-          // Set location number (first one found)
-          if (!proj.locationNumber && get(r, 'Location Number')) {
-            proj.locationNumber = get(r, 'Location Number');
+
+          const project = location.projects.get(projectName);
+
+          if (!project.description && get(r, 'Project Description')) {
+            project.description = get(r, 'Project Description');
           }
-          
-          proj.records.push(r);
+
+          project.records.push(r);
         });
 
-        // Convert to array for rendering
-        const projectsArray = Array.from(projects.values());
+        // Convert to arrays for rendering
+        const locationsArray = Array.from(locationGroups.values()).map(loc => ({
+          ...loc,
+          projects: Array.from(loc.projects.values())
+        }));
 
-        // Render filter buttons (show Location Number but filter by Project Name)
-        filtersRoot.innerHTML = projectsArray.map((proj, idx) => {
-          const imgHtml = proj.filterImage ? `<img src="${proj.filterImage}" alt="${proj.locationNumber || proj.name}" loading="lazy">` : '';
-          const displayLabel = proj.locationNumber || proj.name;
+        let activeLocationIndex = 0;
+        let activeProjectIndex = 0;
+
+        // Render location filter buttons
+        function renderLocationFilters() {
+          filtersRoot.innerHTML = locationsArray.map((loc, idx) => {
+            const imgHtml = loc.filterImage ? `<img src="${loc.filterImage}" alt="${loc.locationNumber}" loading="lazy">` : '';
+            return `
+          <button class="project-filter-btn ${idx === activeLocationIndex ? 'active' : ''}" data-location-index="${idx}">
+            <div class="image-area">${imgHtml}</div>
+            <div class="label">${loc.locationNumber}</div>
+          </button>
+        `;
+          }).join('');
+        }
+
+        // Render project sub-buttons for active location
+        function renderProjectSubButtons() {
+          const location = locationsArray[activeLocationIndex];
+          if (!location || location.projects.length === 0) return '';
+
+          // Only show sub-buttons if there are multiple projects
+          if (location.projects.length === 1) return '';
+
           return `
-            <button class="project-filter-btn ${idx === 0 ? 'active' : ''}" data-filter="${proj.name}">
-              <div class="image-area">${imgHtml}</div>
-              <div class="label">${displayLabel}</div>
+        <div class="project-sub-filters">
+          ${location.projects.map((proj, idx) => `
+            <button class="project-sub-btn ${idx === activeProjectIndex ? 'active' : ''}" data-project-index="${idx}">
+              ${proj.name}
             </button>
-          `;
-        }).join('');
+          `).join('')}
+        </div>
+      `;
+        }
 
-        // Render project function
-        function renderProject(index) {
-          const proj = projectsArray[index];
-          if (!proj) return;
+        // Render active project
+        function renderActiveProject() {
+          const location = locationsArray[activeLocationIndex];
+          if (!location) return;
+
+          const project = location.projects[activeProjectIndex];
+          if (!project) return;
+
           contentsRoot.innerHTML = '';
-          
+
+          // Add sub-buttons
+          const subButtonsHtml = renderProjectSubButtons();
+          if (subButtonsHtml) {
+            const subButtonsContainer = document.createElement('div');
+            subButtonsContainer.innerHTML = subButtonsHtml;
+            contentsRoot.appendChild(subButtonsContainer.firstElementChild);
+
+            // Add event listeners to sub-buttons
+            contentsRoot.querySelectorAll('.project-sub-btn').forEach(btn => {
+              btn.addEventListener('click', () => {
+                activeProjectIndex = parseInt(btn.dataset.projectIndex);
+                renderActiveProject();
+              });
+            });
+          }
+
           // Add project description
-          if (proj.description) {
+          if (project.description) {
             const descDiv = document.createElement('div');
-            descDiv.className = 'project-filter-section';
-            descDiv.dataset.type = proj.name;
-            descDiv.innerHTML = `<h3>${proj.name}</h3><p>${proj.description}</p>`;
+            descDiv.className = 'project-description-section';
+            descDiv.innerHTML = `<h4>${project.name}</h4><p>${project.description}</p>`;
             contentsRoot.appendChild(descDiv);
           }
 
-          // Render each record
-          proj.records.forEach((rec, recIdx) => {
+          // Render each record in the project
+          project.records.forEach((rec, recIdx) => {
             const before = get(rec, 'Before Image');
             const after = get(rec, 'After Image');
             const proposal = get(rec, 'Proposal Image');
@@ -473,85 +516,85 @@
 
             const isThree = !!before && !!after && !!proposal;
             const section = document.createElement('div');
-            section.className = 'project-filter-section';
-            section.dataset.type = proj.name;
-            section.innerHTML = `<h3>${proj.name}</h3>`;
+            section.className = 'project-content-section';
 
             if (isThree) {
-              const uniqueBase = 'three_' + proj.name.replace(/\s+/g, '_') + '_' + recIdx;
+              const uniqueBase = 'three_' + location.locationNumber.replace(/\s+/g, '_') + '_' + project.name.replace(/\s+/g, '_') + '_' + recIdx;
               const sliderId = `sliderContainer_${uniqueBase}`;
-              section.innerHTML += `
-                <div class="container">
-                  <div class="slider-container" id="${sliderId}">
-                    <div class="instructions">Drag the sliders to compare all three stages</div>
-                    <div class="image-layer proposal-image">
-                      <img src="${proposal}" alt="Proposal" loading="lazy">
-                      <div class="label proposal-label">Proposal</div>
-                    </div>
-                    <div class="image-layer after-image">
-                      <img src="${after}" alt="After" loading="lazy">
-                      <div class="label after-label">After</div>
-                    </div>
-                    <div class="image-layer before-image">
-                      <img src="${before}" alt="Before" loading="lazy">
-                      <div class="label before-label">Before</div>
-                    </div>
-                    <div class="slider-line slider-line-1" style="left: 33%;">
-                      <div class="slider-handle slider-handle-1"></div>
-                    </div>
-                    <div class="slider-line slider-line-2" style="left: 66%;">
-                      <div class="slider-handle slider-handle-2"></div>
-                    </div>
-                  </div>
+              section.innerHTML = `
+            <div class="container">
+              <div class="slider-container" id="${sliderId}">
+                <div class="instructions">Drag the sliders to compare all three stages</div>
+                <div class="image-layer proposal-image">
+                  <img src="${proposal}" alt="Proposal" loading="lazy">
+                  <div class="label proposal-label">Proposal</div>
                 </div>
-              `;
+                <div class="image-layer after-image">
+                  <img src="${after}" alt="After" loading="lazy">
+                  <div class="label after-label">After</div>
+                </div>
+                <div class="image-layer before-image">
+                  <img src="${before}" alt="Before" loading="lazy">
+                  <div class="label before-label">Before</div>
+                </div>
+                <div class="slider-line slider-line-1" style="left: 33%;">
+                  <div class="slider-handle slider-handle-1"></div>
+                </div>
+                <div class="slider-line slider-line-2" style="left: 66%;">
+                  <div class="slider-handle slider-handle-2"></div>
+                </div>
+              </div>
+            </div>
+          `;
             } else {
               const leftSrc = current || before || '';
               const rightSrc = proposal || after || '';
               const leftLabel = current ? 'Current' : 'Before';
               const rightLabel = proposal ? 'Proposal' : 'After';
-              const uniqueBase = 'two_' + proj.name.replace(/\s+/g, '_') + '_' + recIdx;
+              const uniqueBase = 'two_' + location.locationNumber.replace(/\s+/g, '_') + '_' + project.name.replace(/\s+/g, '_') + '_' + recIdx;
               const twoId = `twoImageSlider_${uniqueBase}`;
-              section.innerHTML += `
-                <div class="container">
-                  <div class="two-image-slider-container" id="${twoId}">
-                    <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
-                    <div class="two-image-layer proposal-image">
-                      <img src="${rightSrc}" alt="${rightLabel}" loading="lazy">
-                      <div class="two-image-label proposal-label">${rightLabel}</div>
-                    </div>
-                    <div class="two-image-layer current-image">
-                      <img src="${leftSrc}" alt="${leftLabel}" loading="lazy">
-                      <div class="two-image-label current-label">${leftLabel}</div>
-                    </div>
-                    <div class="two-slider-line" style="left: 50%;">
-                      <div class="two-slider-handle"></div>
-                    </div>
-                  </div>
+              section.innerHTML = `
+            <div class="container">
+              <div class="two-image-slider-container" id="${twoId}">
+                <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
+                <div class="two-image-layer proposal-image">
+                  <img src="${rightSrc}" alt="${rightLabel}" loading="lazy">
+                  <div class="two-image-label proposal-label">${rightLabel}</div>
                 </div>
-              `;
+                <div class="two-image-layer current-image">
+                  <img src="${leftSrc}" alt="${leftLabel}" loading="lazy">
+                  <div class="two-image-label current-label">${leftLabel}</div>
+                </div>
+                <div class="two-slider-line" style="left: 50%;">
+                  <div class="two-slider-handle"></div>
+                </div>
+              </div>
+            </div>
+          `;
             }
 
             contentsRoot.appendChild(section);
           });
-          
+
           initSlidersIn(contentsRoot);
         }
 
-        // Initialize first project
-        renderProject(0);
+        // Initialize
+        renderLocationFilters();
+        renderActiveProject();
 
-        // Filter button interactions
+        // Location filter button interactions
         filtersRoot.addEventListener('click', (e) => {
           const btn = e.target.closest('.project-filter-btn');
           if (!btn) return;
-          const filter = btn.dataset.filter;
-          const idx = projectsArray.findIndex(p => p.name === filter);
-          if (idx === -1) return;
+
+          activeLocationIndex = parseInt(btn.dataset.locationIndex);
+          activeProjectIndex = 0; // Reset to first project when changing location
+
           filtersRoot.querySelectorAll('.project-filter-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
-          renderProject(idx);
-          window.location.hash = '#before-after';
+
+          renderActiveProject();
         });
 
         // Initialize sliders
@@ -624,6 +667,7 @@
           <li><a href="ourPlants.html">Our Plants</a></li>
           <li><a href="projects.html">Projects</a></li>
           <li><a href="locations.html">Locations</a></li>
+          <li><a href="statistics.html">Statistics</a></li>
           <li><a href="about.html">About</a></li>
         </ul>
       </div>

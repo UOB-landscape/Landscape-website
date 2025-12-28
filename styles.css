@@ -23,7 +23,7 @@
 }
 
 [data-theme="dark"] {
---bg: #282727;
+  --bg: #282727;
   --fg: #e8e6e3;
   --font: Georgia, serif;
 
@@ -54,7 +54,7 @@
   --fg: #000000;
   --font: Georgia, serif;
 
-  --primary-dark: #2e493a;
+  --primary-dark: #23392d;
   --primary-light: #3d614d;
   --accent: #a2c0a8;
   --accent-light: #d9e7df;
@@ -1440,6 +1440,88 @@ h2 {
   text-align: center;
 }
 
+/* Project sub-filters */
+.project-sub-filters {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 50px auto;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.project-sub-btn {
+  padding: 10px 30px;
+  background: var(--card-bg, #fff);
+  border: 2px solid var(--primary-dark, #2c5f2d);
+  color: var(--primary-dark, #2c5f2d);
+  border-radius: 20px;
+  cursor: pointer;
+  /* font-size: 14px;
+  font-weight: 600; */
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.project-sub-btn:hover {
+  background: var(--primary-light, #4a7c59);
+  border-color: var(--primary-light, #4a7c59);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.project-sub-btn.active {
+  background: var(--primary-dark, #2c5f2d);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.project-description-section {
+  text-align: left;
+  max-width: 950px;
+  margin: 0 auto;
+  margin-top: 5%;
+}
+
+.project-description-section h4 {
+  color: var(--primary-dark, #2c5f2d);
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  text-align: left;
+}
+
+.project-description-section p {
+  color: var(--text-color, #333);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.project-content-section {
+  margin-bottom: 50px;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .project-sub-filters {
+    gap: 10px;
+    margin: 20px auto 30px;
+  }
+
+  .project-sub-btn {
+    padding: 10px 18px;
+    font-size: 13px;
+  }
+
+  .project-description-section h3 {
+    font-size: 1.4rem;
+  }
+
+  .project-description-section p {
+    font-size: 1rem;
+  }
+}
+
 .SDG {
   width: 50px;
   height: 50px;
@@ -2021,7 +2103,7 @@ main.grid-section {
 .map-container {
   width: 900px;
   max-width: 95%;
-  border: 2px solid #ccc;
+  /* border: 2px solid #ccc; */
   overflow: hidden;
   position: relative;
   margin: 135px auto 70px auto;
@@ -2037,6 +2119,7 @@ main.grid-section {
 .map-wrapper img.map-img {
   width: 100%;
   display: block;
+  border-radius: 20px;
 }
 
 .map-icon {
