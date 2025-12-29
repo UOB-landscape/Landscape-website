@@ -76,7 +76,6 @@
     <h2 id="title">Report Images</h2>
     <div class="controls">
       <button id="backBtn" class="btn btn-back" title="Back to report">Back</button>
-      <button id="closeBtn" class="btn btn-close" title="Close viewer">Close</button>
     </div>
   </header>
 
@@ -117,19 +116,26 @@
       const fallback = document.getElementById('fallback');
       const metaPanel = document.getElementById('metaPanel');
       const backBtn = document.getElementById('backBtn');
-      const closeBtn = document.getElementById('closeBtn');
 
       let images = [];
       let index = 0;
 
-      closeBtn.addEventListener('click', () => {
-        try { window.close(); } catch (e) { history.back(); }
-      });
-
       backBtn.addEventListener('click', () => {
-        if (document.referrer && document.referrer.indexOf('reports-2025') !== -1) history.back();
-        else location.href = 'reports-2025.html';
-      });
+       if (document.referrer) {
+        history.back();
+       } else {
+      // fallback based on year
+       if (yearParam === '2024') {
+        location.href = 'reports-2024.html';
+       } else if (yearParam === '2025') {
+        location.href = 'reports-2025.html';
+       } else {
+         location.href = 'reports-2025.html'; // default
+       }
+      }
+  });
+
+
 
       function setNoImages(locationText) {
         metaPanel.style.display = 'none';
