@@ -2598,9 +2598,9 @@ footer {
   }
 }
 
-/* body {
+body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  /* font-family: 'Segoe UI', sans-serif; */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -2621,7 +2621,8 @@ body::before {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-} */
+}
+
 .back-button {
   position: fixed;
   top: 1rem;

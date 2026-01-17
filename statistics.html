@@ -226,7 +226,7 @@
     <div class="stats-overview">
       <div class="stat-card">
         <div class="stat-icon"><i class="fas fa-seedling"></i></div>
-        <div class="stat-number">200+</div>
+        <div class="stat-number">100+</div>
         <div class="stat-label">Total Plant Species</div>
       </div>
 
@@ -238,7 +238,7 @@
 
       <div class="stat-card">
         <div class="stat-icon"><i class="fas fa-project-diagram"></i></div>
-        <div class="stat-number">15+</div>
+        <div class="stat-number">30+</div>
         <div class="stat-label">Completed Projects</div>
       </div>
 
@@ -431,12 +431,12 @@
     const statisticsData = {
       // Past years (completed data)
       years: ['2022', '2023', '2024', '2025'],
-      plantsIndoor: [15, 12, 10, 8],
-      plantsOutdoor: [25, 18, 18, 14],
+      plantsIndoor: [358, 421, 447, 605],
+      plantsOutdoor: [25761, 28165, 40238, 53644],
       squareMeters: [10000, 8000, 16000, 18000],
-      buildingsPlanted: [5, 4, 7, 9],
-      projectsCompleted: [5, 4, 6, 6],
-      projectsPlanned: [4, 5, 4, 3],
+      buildingsPlanted: [5, 4, 7, 38],
+      projectsCompleted: [5, 4, 23, 11],
+      projectsPlanned: [4, 5, 20, 10],
 
       // Future years (planned/target data)
       futureYears: ['2026', '2027', '2028'],
@@ -505,7 +505,7 @@
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: false  // DISABLED - using custom legend instead
+            display: false
           },
           tooltip: {
             backgroundColor: 'rgba(82, 82, 82, 0.95)',
@@ -517,8 +517,13 @@
         scales: {
           y: {
             beginAtZero: true,
+            max: 60000, // Set maximum value
             ticks: {
-              font: { size: 12 }
+              stepSize: 5000, // Changed from 10,000 to 5,000
+              font: { size: 12 },
+              callback: function (value) {
+                return value.toLocaleString(); // Format with commas
+              }
             },
             grid: {
               color: 'rgba(0, 0, 0, 0.05)'
@@ -537,8 +542,8 @@
     });
 
     // Plant Categories Count
-    const totalIndoor = 45;
-    const totalOutdoor = 75;
+    const totalIndoor = 53;
+    const totalOutdoor = 67;
 
     // Plant Categories Bar Chart
     const categoriesCtx = document.getElementById('categoriesChart').getContext('2d');
