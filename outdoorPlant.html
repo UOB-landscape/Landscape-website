@@ -598,7 +598,7 @@
         if (e.key === 'Escape' && imageModal.classList.contains('open')) closeImageModal();
       });
 
-      fetch("http://localhost:3000/api/outdoor-plants")
+      fetch("https://landscapinguob-api.onrender.com/api/outdoor-plants")
         .then(res => res.json())
         .then(plants => {
           const plant = plants.find(p => p["Plant ID"] === plantId);

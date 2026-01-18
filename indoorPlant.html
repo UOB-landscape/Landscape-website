@@ -570,7 +570,7 @@
         if (e.key === 'Escape' && imageModal.classList.contains('open')) closeImageModal();
       });
 
-      fetch("http://localhost:3000/api/indoor-plants")
+      fetch("https://landscapinguob-api.onrender.com/api/indoor-plants")
         .then(res => res.json())
         .then(plants => {
           const plant = plants.find(p => p["Plant ID"] === plantId);

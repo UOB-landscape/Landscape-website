@@ -920,7 +920,7 @@
 
       // Fetch location name from the locations API
       try {
-        const res = await fetch('http://localhost:3000/api/locations');
+        const res = await fetch('https://landscapinguob-api.onrender.com/api/locations');
         if (res.ok) {
           const data = await res.json();
           const matched = data.find(item => {
@@ -948,8 +948,8 @@
       const locationId = params.get("id");
       if (!locationId) return;
 
-      const indoorEndpoint = `http://localhost:3000/api/locations/${locationId}/indoor-plants`;
-      const outdoorEndpoint = `http://localhost:3000/api/locations/${locationId}/outdoor-plants`;
+      const indoorEndpoint = `https://landscapinguob-api.onrender.com/api/locations/${locationId}/indoor-plants`;
+      const outdoorEndpoint = `https://landscapinguob-api.onrender.com/api/locations/${locationId}/outdoor-plants`;
 
       try {
         // Fetch both indoor and outdoor plants

@@ -353,7 +353,7 @@
   <script>
     async function loadRoadside() {
       try {
-        const response = await fetch('http://localhost:3000/api/locations');
+        const response = await fetch('https://landscapinguob-api.onrender.com/api/locations');
         const data = await response.json();
 
         const grid = document.getElementById('locationsGrid');

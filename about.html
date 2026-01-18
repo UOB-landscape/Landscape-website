@@ -251,9 +251,9 @@
     async function loadCollaborators() {
       try {
         const [bioRes, engRes, softRes] = await Promise.all([
-          fetch("http://localhost:3000/api/creators/biologists"),
-          fetch("http://localhost:3000/api/creators/landscape-engineers"),
-          fetch("http://localhost:3000/api/creators/software-engineers")
+          fetch("https://landscapinguob-api.onrender.com/api/creators/biologists"),
+          fetch("https://landscapinguob-api.onrender.com/api/creators/landscape-engineers"),
+          fetch("https://landscapinguob-api.onrender.com/api/creators/software-engineers")
         ]);
 
         const biologists = await bioRes.json();
