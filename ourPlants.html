@@ -875,7 +875,7 @@
       let outdoorPlants = [];
 
       // Fetch indoor plants
-      fetch('https://your-render-url.onrender.com/api/indoor-plants')
+      fetch('https://landscapinguob-api.onrender.com/api/indoor-plants')
         .then(res => res.json())
         .then(plants => {
           indoorPlants = plants;
@@ -886,7 +886,7 @@
       console.log('Light values:', indoorPlants.map(p => `"${p['Light Requirements']}"`));
 
       // Fetch outdoor plants
-      fetch('https://your-render-url.onrender.com/api/outdoor-plants')
+      fetch('https://landscapinguob-api.onrender.com/api/outdoor-plants')
         .then(res => res.json())
         .then(plants => {
           outdoorPlants = plants;
