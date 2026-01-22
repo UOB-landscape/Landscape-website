@@ -100,16 +100,22 @@
 
     .plant-key-info h1 {
       margin: 0 0 0.5rem 0;
-      font-size: 2rem;
-      color: #2c5f2d;
-    }
-
-    .common-name {
-      font-size: 1.3rem;
+      font-size: 1.8rem;
       color: #666;
       font-style: italic;
       font-family: serif;
+      font-weight: normal;
+    }
+
+    .common-name {
+      font-size: 1.5rem;
+      color: #2c5f2d;
+      font-style: normal;
+      font-family: 'Segoe UI', sans-serif;
+      font-weight: 700;
       margin: 0 0 1.5rem 0;
+      letter-spacing: 0.05em;
+      word-spacing: 0.2em;
     }
 
     .info-cards-grid {
@@ -608,10 +614,9 @@
           }
 
           const bgImage = plant.Image || '';
-          // document.body.style.backgroundImage = `url('${bgImage}')`;
           document.body.style.backgroundImage = `url('https://i.postimg.cc/x8sk6xJH/main_gate_entrance-3.jpg')`;
 
-          const excludedKeys = ["Plant ID", "Picture", "Image", "Locations", "PDF link"];
+          const excludedKeys = ["Plant ID", "Picture", "Image", "Locations", "PDF link", "Scientific name", "Common name"];
           const iconMap = {
             "Scientific name": "🔬",
             "Common name": "🌿",
@@ -653,8 +658,8 @@
         <div class="plant-header">
           <img src="${bgImage}" alt="${plant['Common name'] || ''}" class="plant-thumbnail" id="mainThumb" tabindex="0" />
           <div class="plant-key-info">
-            <h1>${plant["Scientific name"] || ''}</h1>
-            <p class="common-name">${plant["Common name"] || ''}</p>
+            <h1>${plant["Common name"] || ''}</h1>
+            <p class="common-name">${plant["Scientific name"] || ''}</p>
             <div class="info-cards-grid">
     `;
 
@@ -674,6 +679,16 @@
           });
 
           detailsHtml += `</div></div></div>`;
+
+          // Add Plant Names section first
+          detailsHtml += `
+        <div class="info-section">
+          <ul class="plant-info">
+            <li><span>🌿</span><strong>Common name:</strong> ${plant["Common name"] || '—'}</li>
+            <li><span>🔬</span><strong>Scientific name:</strong> ${plant["Scientific name"] || '—'}</li>
+          </ul>
+        </div>
+      `;
 
           // Add grouped sections
           Object.keys(groups).forEach(groupTitle => {

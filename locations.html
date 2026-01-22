@@ -93,27 +93,27 @@
     <h2>Our Landscape Locations</h2>
 
     <div class="locations-container">
-      <div class="locations-item" data-link="Buildings.html">
+      <div class="locations-item" data-filter="Building">
         <img src="images/Buildings 2.png" alt="Image 1">
         <h4 class="locations-title">Buildings</h4>
       </div>
-      <div class="locations-item" data-link="Gates.html">
+      <div class="locations-item" data-filter="Gate">
         <img src="images/gate.png" alt="Image 2">
         <h4 class="locations-title">Gates</h4>
       </div>
-      <div class="locations-item" data-link="Roadside.html">
+      <div class="locations-item" data-filter="Roadside">
         <img src="images/Roadside.jpeg" alt="Image 3">
         <h4 class="locations-title">Roadsides</h4>
       </div>
-      <div class="locations-item" data-link="Infrastructure.html">
+      <div class="locations-item" data-filter="Infrastructure">
         <img src="images/Infrastructure2.png" alt="Image 5">
         <h4 class="locations-title">Infrastructures</h4>
       </div>
-      <div class="locations-item" data-link="Facilities.html">
+      <div class="locations-item" data-filter="Facilities">
         <img src="images/Facilities.jpeg" alt="Image 6">
         <h4 class="locations-title">Facilities</h4>
       </div>
-      <div class="locations-item" data-link="CarPark.html">
+      <div class="locations-item" data-filter="Car park">
         <img src="images/car park.jpg" alt="Image 7">
         <h4 class="locations-title">Car Parks</h4>
       </div>
@@ -186,9 +186,10 @@
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.locations-item').forEach(item => {
         item.addEventListener('click', () => {
-          const link = item.dataset.link;
-          if (link) {
-            window.location.href = link;
+          const filter = item.dataset.filter;
+          if (filter) {
+            // Navigate to Buildings.html with filter parameter
+            window.location.href = `Buildings.html?filter=${encodeURIComponent(filter)}`;
           }
         });
       });

@@ -26,6 +26,666 @@
       margin-top: 70px;
       position: relative;
     }
+
+    /* Year Tabs Styling - Updated to match project-sub-filters */
+    .year-tabs {
+      display: flex;
+      width: 100%;
+      max-width: 95%;
+      margin: 10px auto 30px auto;
+      gap: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      justify-content: center;
+    }
+
+    .year-tab {
+      flex: 1;
+      padding: 15px 20px;
+      background: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      color: var(--text-primary, #333);
+      text-align: center;
+      position: relative;
+    }
+
+    .year-tab:hover {
+      background: #e8f4ed;
+    }
+
+    .year-tab.active {
+      background: var(--secondary-mid, #D3E4CD);
+      color: white;
+    }
+
+    /* Responsive adjustments for year tabs */
+    @media (max-width: 768px) {
+      .year-tabs {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .year-tab {
+        border-right: none;
+        border-bottom: 2px solid var(--secondary-mid, #D3E4CD);
+        padding: 12px 15px;
+        font-size: 0.9rem;
+      }
+
+      .year-tab:last-child {
+        border-bottom: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .year-tab {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+      }
+    }
+
+    /* Reports Table Styling */
+    .year-container-report {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      display: none;
+      margin-top: 20px;
+    }
+
+    .year-container-report.active {
+      display: block;
+    }
+
+    .year-container-report table {
+      border-collapse: collapse;
+      width: 95%;
+      justify-self: center;
+      min-width: 1000px;
+      background: #fff;
+      table-layout: auto;
+    }
+
+    .year-container-report th,
+    .year-container-report td {
+      border: 1px solid #000;
+      padding: 8px;
+      text-align: center;
+      vertical-align: middle;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .year-container-report th {
+      background: var(--secondary-mid, #D3E4CD);
+      color: var(--white);
+      font-size: 0.9em;
+      font-weight: bold;
+    }
+
+    .year-container-report td:nth-child(1) {
+      width: 40px;
+      min-width: 40px;
+    }
+
+    .year-container-report td:nth-child(2) {
+      width: 120px;
+      min-width: 120px;
+    }
+
+    .year-container-report .thumb-cell img {
+      width: 100px;
+      height: 100px;
+      display: block;
+      object-fit: cover;
+      margin: 0 auto;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .year-container-report .thumb-cell img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .year-container-report .map-link {
+      display: inline-block;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .year-container-report .map-link:hover {
+      transform: scale(1.2);
+    }
+
+    /* ===========================
+       IMAGE MODAL STYLES
+    =========================== */
+    .image-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(10, 15, 26, 0.7);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      z-index: 9999;
+      /* padding: 32px 0 0 0; */
+      overflow-y: auto;
+      overflow-x: hidden;
+      animation: modalFadeIn 0.3s ease-out;
+    }
+
+    .image-modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-close-btn {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      border: 1px solid #374151;
+      background: rgba(17, 24, 39, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #9ca3af;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 10001;
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    .modal-close-btn:hover {
+      background: #dc2626;
+      color: #f9fafb;
+      border-color: #dc2626;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+    }
+
+    .image-modal-content {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      animation: modalSlideUp 0.4s ease-out;
+      margin: auto 0;
+      min-height: min-content;
+    }
+
+    .modal-viewer-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      flex-shrink: 0;
+    }
+
+    .modal-frame {
+      background: #111827;
+      padding: 0;
+      border-radius: 16px;
+      border: 1px solid #1f2937;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      max-height: 65vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .modal-frame::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #518166, transparent);
+      opacity: 0.5;
+    }
+
+    .modal-frame img {
+      max-width: 100%;
+      max-height: 65vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    .modal-nav-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      border: 1px solid #374151;
+      background: rgba(17, 24, 39, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #9ca3af;
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 10;
+      font-weight: 300;
+    }
+
+    .modal-nav-arrow:hover {
+      background: #518166;
+      color: #f9fafb;
+      border-color: #518166;
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: 0 0 20px rgba(81, 129, 102, 0.3);
+    }
+
+    .modal-nav-arrow:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .modal-nav-prev {
+      left: -70px;
+    }
+
+    .modal-nav-next {
+      right: -70px;
+    }
+
+    .modal-meta-compact {
+      background: #111827;
+      border: none;
+      border-top: 1px solid #1f2937;
+      border-bottom: 1px solid #1f2937;
+      padding: 16px 24px;
+      border-radius: 0;
+      box-shadow: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      flex-shrink: 0;
+    }
+
+    .modal-meta-compact>div {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .modal-meta-compact strong {
+      color: #6b7280;
+      font-weight: 500;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .modal-meta-compact span {
+      color: #f9fafb;
+      font-weight: 500;
+    }
+
+    .modal-thumbs-container {
+      background: #111827;
+      border: none;
+      border-top: 1px solid #1f2937;
+      border-bottom: 1px solid #1f2937;
+      /* padding: 16px 0; */
+      border-radius: 0;
+      box-shadow: none;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      overflow: visible;
+      flex-shrink: 0;
+    }
+
+    .modal-thumbs {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      overflow-y: visible;
+      padding: 8px 24px;
+      align-items: center;
+      justify-content: center;
+      scrollbar-width: thin;
+      scrollbar-color: #518166 #1f2937;
+    }
+
+    .modal-thumbs::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .modal-thumbs::-webkit-scrollbar-track {
+      background: #1a2332;
+      border-radius: 3px;
+    }
+
+    .modal-thumbs::-webkit-scrollbar-thumb {
+      background: #518166;
+      border-radius: 3px;
+    }
+
+    .modal-thumbs::-webkit-scrollbar-thumb:hover {
+      background: #60956f;
+    }
+
+    .modal-thumbs img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      flex-shrink: 0;
+      background: #1a2332;
+    }
+
+    .modal-thumbs img:hover {
+      transform: translateY(-3px);
+      border-color: #518166;
+      box-shadow: 0 0 20px rgba(81, 129, 102, 0.3);
+    }
+
+    .modal-thumbs img.active {
+      border-color: #518166;
+      box-shadow: 0 0 20px rgba(81, 129, 102, 0.3);
+    }
+
+    .modal-fallback {
+      padding: 64px 48px;
+      text-align: center;
+      color: #9ca3af;
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      font-size: 16px;
+      line-height: 1.6;
+      margin: 0 20px;
+    }
+
+    .modal-fallback::before {
+      content: "📷";
+      display: block;
+      font-size: 72px;
+      margin-bottom: 24px;
+      opacity: 0.2;
+      filter: grayscale(1);
+    }
+
+    .modal-hidden {
+      display: none !important;
+    }
+
+    /* Modal Responsive */
+    @media (max-width: 1200px) {
+      .modal-nav-prev {
+        left: -60px;
+      }
+
+      .modal-nav-next {
+        right: -60px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .modal-nav-arrow {
+        position: static;
+        transform: none;
+        margin: 0 8px;
+      }
+
+      .modal-nav-arrow:hover {
+        transform: scale(1.05);
+      }
+
+      .modal-viewer-container {
+        gap: 8px;
+      }
+
+      .modal-frame {
+        max-height: 55vh;
+      }
+
+      .modal-frame img {
+        max-height: 55vh;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .modal-close-btn {
+        top: 16px;
+        right: 16px;
+        width: 42px;
+        height: 42px;
+        font-size: 24px;
+      }
+
+      .image-modal-overlay {
+        padding: 24px 0;
+      }
+
+      .image-modal-content {
+        gap: 16px;
+      }
+
+      .modal-viewer-container {
+        padding: 0 16px;
+      }
+
+      .modal-nav-arrow {
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+      }
+
+      .modal-frame {
+        max-height: 50vh;
+        border-radius: 12px;
+      }
+
+      .modal-frame img {
+        max-height: 50vh;
+      }
+
+      .modal-meta-compact {
+        padding: 12px 16px;
+        gap: 20px;
+        font-size: 13px;
+      }
+
+      .modal-meta-compact>div {
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        text-align: center;
+      }
+
+      .modal-thumbs-container {
+        padding: 12px 0;
+      }
+
+      .modal-thumbs {
+        gap: 10px;
+        padding: 8px 16px;
+      }
+
+      .modal-thumbs img {
+        width: 80px;
+        height: 80px;
+      }
+
+      .modal-fallback {
+        padding: 48px 32px;
+        font-size: 15px;
+        margin: 0 16px;
+      }
+
+      .modal-fallback::before {
+        font-size: 56px;
+        margin-bottom: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .image-modal-overlay {
+        padding: 20px 0;
+      }
+
+      .modal-nav-arrow {
+        width: 42px;
+        height: 42px;
+        font-size: 22px;
+        margin: 0 4px;
+      }
+
+      .modal-thumbs img {
+        width: 70px;
+        height: 70px;
+      }
+
+      .modal-meta-compact {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes modalSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ===========================
+       PROJECT SUB-FILTERS STYLING
+    =========================== */
+    .project-sub-filters {
+      display: flex;
+      width: 100%;
+      max-width: 93%;
+      margin: 10px 0 30px 0;
+      gap: 0;
+      /* border: 2px solid var(--secondary-mid, #D3E4CD); */
+      border-radius: 16px;
+      overflow: hidden;
+      background: #fff;
+      justify-content: center;
+      justify-self: center;
+    }
+
+    .project-sub-btn {
+      flex: 1;
+      padding: 15px 20px;
+      background: #fff;
+      border: none;
+      /* border-right: 2px solid var(--secondary-mid, #D3E4CD); */
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+      color: var(--text-primary, #333);
+      text-align: center;
+      position: relative;
+    }
+
+    .project-sub-btn:last-child {
+      border-right: none;
+    }
+
+    .project-sub-btn:hover {
+      background: #e8f4ed;
+    }
+
+    .project-sub-btn.active {
+      background: var(--secondary-mid, #D3E4CD);
+      color: white;
+    }
+
+    /* .project-sub-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--primary-dark, #0B2B26);
+    } */
+
+    /* Responsive adjustments for sub-filters */
+    @media (max-width: 768px) {
+      .project-sub-filters {
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .project-sub-btn {
+        border-right: none;
+        border-bottom: 2px solid var(--secondary-mid, #D3E4CD);
+        padding: 12px 15px;
+        font-size: 0.9rem;
+      }
+
+      .project-sub-btn:last-child {
+        border-bottom: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .project-sub-btn {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+      }
+    }
   </style>
 </head>
 
@@ -107,17 +767,267 @@
     </section>
 
     <section id="reports" class="projects-section" style="display:none;">
-      <div class="iframe-wrapper">
-        <h2 style="text-align: center; margin: 50px;">🌳 Landscape Projects and Achievements in 2024</h2>
-        <iframe src="reports-2024.html"></iframe>
-        <br><br>
-        <h2 style="text-align: center; margin: 50px;">🌿 Landscape Projects and Achievements in 2025</h2>
-        <iframe src="reports-2025.html"></iframe>
+      <div class="reports-container" style="padding: 20px;">
+        <h2 style="text-align: center; margin: 50px 20px 30px;">🌳 Landscape Projects Annual Reports</h2>
+
+        <!-- Year Tabs -->
+        <div class="year-tabs" id="yearTabs"
+          style="display: flex; justify-content: center; margin-bottom: 30px; flex-wrap: wrap;">
+          <!-- Tabs will be generated dynamically -->
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading" id="reportsLoading"
+          style="text-align: center; padding: 50px; font-size: 1.2rem; color: #666; display: none;">
+          Loading reports data...
+        </div>
+
+        <!-- Error Message -->
+        <div id="reportsError"
+          style="display: none; background: #ffe6e6; border: 2px solid #ff4444; border-radius: 8px; padding: 20px; margin: 20px auto; max-width: 600px; text-align: center; color: #cc0000;">
+          Failed to load reports data. Please try again later.
+        </div>
+
+        <!-- Table Containers (will be generated dynamically) -->
+        <div id="reportsTablesContainer"></div>
       </div>
     </section>
   </main>
 
+  <!-- IMAGE MODAL -->
+  <div class="image-modal-overlay" id="imageModalOverlay">
+    <button id="modalCloseBtn" class="modal-close-btn" title="Close" aria-label="Close">×</button>
+
+    <div class="image-modal-content" id="imageModalContent">
+      <!-- Meta Information -->
+      <div class="modal-meta-compact" id="modalMetaCompact">
+        <div><strong>Year</strong> <span id="modalMetaYear">-</span></div>
+        <div><strong>Record</strong> <span id="modalMetaRecord">-</span></div>
+        <div><strong>Location</strong> <span id="modalMetaLocation">-</span></div>
+      </div>
+
+      <!-- Main Viewer -->
+      <div class="modal-viewer-container">
+        <button id="modalPrevBtn" class="modal-nav-arrow modal-nav-prev" aria-label="Previous image">‹</button>
+        <div class="modal-frame" id="modalFrame">
+          <img id="modalMainImg" src="" alt="Report image" />
+        </div>
+        <button id="modalNextBtn" class="modal-nav-arrow modal-nav-next" aria-label="Next image">›</button>
+      </div>
+
+      <!-- Thumbnails -->
+      <div class="modal-thumbs-container" id="modalThumbsContainer">
+        <div class="modal-thumbs" id="modalThumbs" aria-label="Image thumbnails"></div>
+      </div>
+
+      <!-- Fallback -->
+      <div id="modalFallback" class="modal-fallback modal-hidden">No images available for this record.</div>
+    </div>
+  </div>
+
   <script>
+    // ===========================
+    // IMAGE MODAL LOGIC
+    // ===========================
+    (function initImageModal() {
+      const IMAGES_API = 'https://landscapinguob-api.onrender.com/api/reportImages';
+
+      const modalOverlay = document.getElementById('imageModalOverlay');
+      const modalContent = document.getElementById('imageModalContent');
+      const closeBtn = document.getElementById('modalCloseBtn');
+      const metaCompact = document.getElementById('modalMetaCompact');
+      const metaYear = document.getElementById('modalMetaYear');
+      const metaRecord = document.getElementById('modalMetaRecord');
+      const metaLocation = document.getElementById('modalMetaLocation');
+      const mainImg = document.getElementById('modalMainImg');
+      const prevBtn = document.getElementById('modalPrevBtn');
+      const nextBtn = document.getElementById('modalNextBtn');
+      const thumbs = document.getElementById('modalThumbs');
+      const thumbsContainer = document.getElementById('modalThumbsContainer');
+      const fallback = document.getElementById('modalFallback');
+      const frame = document.getElementById('modalFrame');
+
+      let allImagesData = [];
+      let currentImages = [];
+      let currentIndex = 0;
+
+      // Fetch all images data once
+      async function fetchImagesData() {
+        if (allImagesData.length > 0) return allImagesData;
+        try {
+          const res = await fetch(IMAGES_API);
+          if (!res.ok) throw new Error('API fetch failed');
+          allImagesData = await res.json();
+          return allImagesData;
+        } catch (err) {
+          console.error('Failed to fetch images API', err);
+          return [];
+        }
+      }
+
+      function extractImagesFromRecord(rec) {
+        const list = [];
+        for (let i = 1; i <= 20; i++) {
+          const k = 'Image ' + i;
+          if (rec[k] && typeof rec[k] === 'string' && rec[k].trim()) {
+            list.push(rec[k].trim());
+          }
+        }
+        return list;
+      }
+
+      function showNoImages(locationText) {
+        metaCompact.classList.add('modal-hidden');
+        frame.classList.add('modal-hidden');
+        thumbsContainer.classList.add('modal-hidden');
+        prevBtn.classList.add('modal-hidden');
+        nextBtn.classList.add('modal-hidden');
+        fallback.classList.remove('modal-hidden');
+        fallback.textContent = 'No images available for this record' + (locationText ? ': ' + locationText : '.');
+      }
+
+      function render() {
+        if (!currentImages.length) return;
+        mainImg.src = currentImages[currentIndex];
+        const thumbImgs = Array.from(thumbs.querySelectorAll('img'));
+        thumbImgs.forEach((t, i) => t.classList.toggle('active', i === currentIndex));
+
+        // Scroll thumbnail into view within its container only
+        const activeThumb = thumbImgs[currentIndex];
+        if (activeThumb) {
+          const thumbsScrollContainer = activeThumb.parentElement;
+          const thumbLeft = activeThumb.offsetLeft;
+          const thumbWidth = activeThumb.offsetWidth;
+          const containerWidth = thumbsScrollContainer.offsetWidth;
+          const scrollLeft = thumbLeft - (containerWidth / 2) + (thumbWidth / 2);
+
+          thumbsScrollContainer.scrollTo({
+            left: scrollLeft,
+            behavior: 'smooth'
+          });
+        }
+      }
+
+      function closeModal() {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      async function openModal(year, record) {
+        // Reset state first
+        metaYear.textContent = year;
+        metaRecord.textContent = record;
+        metaLocation.textContent = '-';
+        currentImages = [];
+        currentIndex = 0;
+        thumbs.innerHTML = '';
+
+        // Show loading state
+        fallback.classList.remove('modal-hidden');
+        fallback.textContent = 'Loading images...';
+        metaCompact.classList.add('modal-hidden');
+        frame.classList.add('modal-hidden');
+        thumbsContainer.classList.add('modal-hidden');
+        prevBtn.classList.add('modal-hidden');
+        nextBtn.classList.add('modal-hidden');
+
+        // Show modal and prevent body scroll
+        modalOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Force scroll to top immediately and after render
+        modalOverlay.scrollTop = 0;
+        setTimeout(() => {
+          modalOverlay.scrollTop = 0;
+        }, 0);
+
+        // Fetch data
+        const data = await fetchImagesData();
+        if (!data || data.length === 0) {
+          showNoImages();
+          return;
+        }
+
+        const rec = data.find(r => Number(r.Year) === year && Number(r['Record Number']) === record);
+        if (!rec) {
+          showNoImages();
+          return;
+        }
+
+        metaLocation.textContent = rec.Row || '-';
+        currentImages = extractImagesFromRecord(rec);
+
+        if (!currentImages.length) {
+          showNoImages(rec.Row);
+          return;
+        }
+
+        // Hide fallback, show content
+        fallback.classList.add('modal-hidden');
+        metaCompact.classList.remove('modal-hidden');
+        frame.classList.remove('modal-hidden');
+        thumbsContainer.classList.remove('modal-hidden');
+
+        // Build thumbnails
+        currentImages.forEach((src, i) => {
+          const t = document.createElement('img');
+          t.src = src;
+          t.alt = 'Image ' + (i + 1);
+          t.addEventListener('click', () => {
+            currentIndex = i;
+            render();
+          });
+          thumbs.appendChild(t);
+        });
+
+        currentIndex = 0;
+        render();
+
+        if (currentImages.length > 1) {
+          prevBtn.classList.remove('modal-hidden');
+          nextBtn.classList.remove('modal-hidden');
+        }
+      }
+
+      // Event listeners
+      closeBtn.addEventListener('click', closeModal);
+
+      modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+          closeModal();
+        }
+      });
+
+      prevBtn.addEventListener('click', () => {
+        if (currentImages.length <= 1) return;
+        currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+        render();
+      });
+
+      nextBtn.addEventListener('click', () => {
+        if (currentImages.length <= 1) return;
+        currentIndex = (currentIndex + 1) % currentImages.length;
+        render();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (!modalOverlay.classList.contains('active')) return;
+
+        if (fallback.classList.contains('modal-hidden')) {
+          if (e.key === 'ArrowRight') nextBtn.click();
+          if (e.key === 'ArrowLeft') prevBtn.click();
+        }
+        if (e.key === 'Escape') closeModal();
+      });
+
+      // Make openModal globally accessible
+      window.openReportImagesModal = openModal;
+    })();
+
+    // ===========================
+    // ORIGINAL PROJECT CODE
+    // ===========================
+
     // --- Slider classes ---
     class ThreeImageSlider {
       constructor(containerId) {
@@ -293,7 +1203,7 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
-      const initialHash = (window.location.hash === '#reports') ? '#reports' : '#before-after';
+      const initialHash = window.location.hash || '#before-after';
       showTab(initialHash);
 
       tabBefore.addEventListener('click', e => { e.preventDefault(); window.location.hash = '#before-after'; });
@@ -503,7 +1413,18 @@
           if (project.description) {
             const descDiv = document.createElement('div');
             descDiv.className = 'project-description-section';
-            descDiv.innerHTML = `<h4>${project.name}</h4><p>${project.description}</p>`;
+            descDiv.innerHTML = `
+              <h4>${project.name}</h4>
+              <p>${project.description}</p>
+              <div class="sdg-icons">
+                <img src="sdg-icons/sdg-3.png" alt="SDG 3: Good Health and Well-being">
+                <img src="sdg-icons/sdg-4.png" alt="SDG 4: Quality Education">
+                <img src="sdg-icons/sdg-6.png" alt="SDG 6: Clean Water and Sanitation">
+                <img src="sdg-icons/sdg-11.png" alt="SDG 11: Sustainable Cities and Communities">
+                <img src="sdg-icons/sdg-13.png" alt="SDG 13: Climate Action">
+                <img src="sdg-icons/sdg-15.png" alt="SDG 15: Life on Land">
+              </div>
+            `;
             contentsRoot.appendChild(descDiv);
           }
 
@@ -649,6 +1570,181 @@
           }
         });
       });
+    });
+
+    // Reports API Integration
+    async function loadReportsData() {
+      const REPORTS_API = 'https://landscapinguob-api.onrender.com/api/reports';
+      const IMAGES_API = 'https://landscapinguob-api.onrender.com/api/reportImages';
+
+      const yearTabsContainer = document.getElementById('yearTabs');
+      const tablesContainer = document.getElementById('reportsTablesContainer');
+      const loadingDiv = document.getElementById('reportsLoading');
+      const errorDiv = document.getElementById('reportsError');
+
+      let allProjects = [];
+      let allImages = [];
+      let availableYears = [];
+
+      // Show loading
+      loadingDiv.style.display = 'block';
+
+      try {
+        // Fetch projects data
+        const projectsResponse = await fetch(REPORTS_API);
+        if (!projectsResponse.ok) throw new Error('Failed to fetch projects');
+        allProjects = await projectsResponse.json();
+
+        // Fetch images data
+        const imagesResponse = await fetch(IMAGES_API);
+        if (!imagesResponse.ok) throw new Error('Failed to fetch images');
+        allImages = await imagesResponse.json();
+
+        // Get unique years and sort (newest first)
+        availableYears = [...new Set(allProjects.map(p => Number(p.Year)))].sort((a, b) => b - a);
+
+        // Render year tabs
+        renderYearTabs();
+
+        // Render all tables
+        renderAllTables();
+
+        // Hide loading, show 2025 year by default (or most recent if 2025 not available)
+        loadingDiv.style.display = 'none';
+        if (availableYears.length > 0) {
+          const defaultYear = availableYears.includes(2025) ? 2025 : availableYears[0];
+          showReportYear(defaultYear);
+        }
+      } catch (error) {
+        console.error('Error loading reports:', error);
+        loadingDiv.style.display = 'none';
+        errorDiv.style.display = 'block';
+      }
+
+      function renderYearTabs() {
+        yearTabsContainer.innerHTML = availableYears.map(year =>
+          `<div class="year-tab" data-year="${year}" onclick="showReportYear(${year})">${year}</div>`
+        ).join('');
+      }
+
+      function getFirstImage(year, recordNumber) {
+        const imageRecord = allImages.find(img =>
+          Number(img.Year) === year && Number(img['Record Number']) === recordNumber
+        );
+
+        if (!imageRecord) return '';
+
+        for (let i = 1; i <= 20; i++) {
+          const imageKey = 'Image ' + i;
+          if (imageRecord[imageKey] && typeof imageRecord[imageKey] === 'string' && imageRecord[imageKey].trim()) {
+            return imageRecord[imageKey].trim();
+          }
+        }
+        return '';
+      }
+
+      function renderAllTables() {
+        tablesContainer.innerHTML = '';
+
+        availableYears.forEach(year => {
+          const yearProjects = allProjects.filter(p => Number(p.Year) === year);
+
+          const yearContainer = document.createElement('div');
+          yearContainer.className = 'year-container-report';
+          yearContainer.id = `report-year-${year}`;
+
+          const table = document.createElement('table');
+          table.innerHTML = `
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th colspan="2">Images</th>
+            <th>Location</th>
+            <th>Action</th>
+            <th>Total Area</th>
+            <th>Previous Condition</th>
+            <th>Current Condition</th>
+            <th>Green Area</th>
+            <th>No. of Ornamental Trees</th>
+            <th>Additional Notes</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      `;
+
+          const tbody = table.querySelector('tbody');
+
+          yearProjects.forEach(project => {
+            const recordNum = Number(project['Record Number']);
+            const firstImage = getFirstImage(year, recordNum);
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+          <td>${recordNum}</td>
+          <td colspan="2" class="thumb-cell">
+            <img src="${firstImage || ''}" 
+                 class="gallery-thumbnail" 
+                 data-year="${year}" 
+                 data-record="${recordNum}"
+                 width="100" height="100" 
+                 alt="${project.Location || ''} thumbnail"
+                 style="${firstImage ? '' : 'visibility:hidden;'}"
+                 onclick="openReportImagesModal(${year}, ${recordNum})">
+          </td>
+          <td>
+            ${project['Map Link'] ? `<a href="${project['Map Link']}" target="_blank" class="map-link" title="View on Google Maps">📍</a>` : ''}
+            ${project.Location || ''}
+          </td>
+          <td>${project.Action || ''}</td>
+          <td>${project['Total Area'] || '—'}</td>
+          <td>${project['Previous Condition'] || ''}</td>
+          <td>${project['Current Condition'] || ''}</td>
+          <td>${project['Green Area'] || '—'}</td>
+          <td>${project['No. of Trees'] || '—'}</td>
+          <td>${project['Additional Notes'] || ''}</td>
+        `;
+
+            tbody.appendChild(row);
+          });
+
+          yearContainer.appendChild(table);
+          tablesContainer.appendChild(yearContainer);
+        });
+      }
+    }
+
+    // Define global functions OUTSIDE loadReportsData
+    window.showReportYear = function (year) {
+      // Update active tab
+      document.querySelectorAll('.year-tab').forEach(tab => {
+        tab.classList.toggle('active', Number(tab.dataset.year) === year);
+      });
+
+      // Show corresponding table
+      document.querySelectorAll('.year-container-report').forEach(container => {
+        container.classList.toggle('active', container.id === `report-year-${year}`);
+      });
+    };
+
+    // Load reports when the reports tab is shown
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabReportsOriginal = document.getElementById('tab-reports');
+      let reportsLoaded = false;
+
+      if (tabReportsOriginal) {
+        tabReportsOriginal.addEventListener('click', () => {
+          if (!reportsLoaded) {
+            loadReportsData();
+            reportsLoaded = true;
+          }
+        });
+      }
+
+      // Load reports if starting on #reports hash
+      if (window.location.hash === '#reports') {
+        loadReportsData();
+        reportsLoaded = true;
+      }
     });
   </script>
 

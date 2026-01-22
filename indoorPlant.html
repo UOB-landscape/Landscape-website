@@ -100,16 +100,20 @@
 
     .plant-key-info h1 {
       margin: 0 0 0.5rem 0;
-      font-size: 2rem;
-      color: #2c5f2d;
+      font-size: 2.4rem;
+      color: #666;
       text-align: start;
+      font-style: italic;
+      font-family: serif;
+      font-weight: normal;
     }
 
     .common-name {
-      font-size: 1.3rem;
-      color: #666;
-      font-style: italic;
-      font-family: serif;
+      font-size: 1.5rem;
+      color: #2c5f2d;
+      font-style: normal;
+      font-family: 'Segoe UI', sans-serif;
+      font-weight: 600;
       margin: 0;
       text-align: start;
     }
@@ -590,15 +594,15 @@
               <div class="plant-header">
                 <img src="${bgImage}" alt="${plant['Common name'] || ''}" class="plant-thumbnail" id="mainThumb" tabindex="0" />
                 <div class="plant-key-info">
-                  <h1>${plant["Scientific name"] || ''}</h1>
-                  <p class="common-name">${plant["Common name"] || ''}</p>
+                  <h1>${plant["Common name"] || ''}</h1>
+                  <p class="common-name">${plant["Scientific name"] || ''}</p>
                 </div>
               </div>
 
               <div class="info-section">
                 <ul class="plant-info">
-                  <li><span>🔬</span><strong>Scientific name:</strong> ${plant["Scientific name"] || '—'}</li>
                   <li><span>🌿</span><strong>Common name:</strong> ${plant["Common name"] || '—'}</li>
+                  <li><span>🔬</span><strong>Scientific name:</strong> ${plant["Scientific name"] || '—'}</li>
                   <li><span>☀️</span><strong>Light Requirements:</strong> ${plant["Light Requirements"] || '—'}</li>
                   <li><span>🌡️</span><strong>Stable Temperature:</strong> ${plant["Stable temperature"] || "—"}</li>
                   <li><span>💧</span><strong>Watering:</strong> ${plant["Watering"] || "—"}</li>

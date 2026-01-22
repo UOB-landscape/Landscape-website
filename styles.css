@@ -50,26 +50,36 @@
 }
 
 [data-theme="green"] {
-  --bg: #ffffff;
+  --bg: #f4f4f4;
   --fg: #000000;
   --font: Georgia, serif;
 
-  --primary-dark: #23392d;
-  --primary-light: #3d614d;
-  --accent: #a2c0a8;
-  --accent-light: #d9e7df;
+  /* Primary Colors - Dark to Light Greens */
+  --primary-dark: #0b393b;
+  --primary-light: #0B2B26;
+  --accent: #8EB69B;
+  --accent-light: #DAF1DE;
 
+  /* Secondary Greens */
+  --secondary-dark: #163832;
+  --secondary-mid: #235347;
+
+  /* Gold Accents */
   --gold-accent: #a67d4a;
   --gold-light: #c89d63;
 
+  /* Red Accent */
   --red-accent: #a41e23;
 
+  /* Neutral Colors */
   --neutral-light: #f8f6f2;
-  --neutral-dark: #1e1f21;
+  --neutral-dark: #051F20;
   --text-dark: #0a0a0a;
   --text-light: #4d4f52;
   --white: #ffffff;
-  --shadow: 0 4px 6px rgba(30, 77, 123, 0.15);
+
+  /* Effects */
+  --shadow: 0 4px 6px rgba(5, 31, 32, 0.15);
   --transition: all 0.3s ease;
 }
 
@@ -398,9 +408,9 @@ h2 {
 
 .landscape-info {
   background: white;
-  /* padding: 10px 0; */
-  border-radius: 15px;
-  /* margin: 2rem 0; */
+  padding: 0 0 30px 0;
+  /* border-radius: 15px; */
+  padding: 0 0 30px 0;
   text-align: left;
   /* box-shadow: 0 10px 30px rgba(0,0,0,0.1); */
 }
@@ -483,10 +493,10 @@ h2 {
   overflow: hidden;
   width: 100%;
   height: 500px;
-  background: var(--bg);
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.05));
+  /* background: var(--bg); */
+  /* background: linear-gradient(135deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.05)); */
   padding: 50px 0;
-  margin-top: 40px;
+  /* margin-top: 40px; */
   margin-bottom: 50px;
   border-top: 2px solid var(--border-color, #e0e0e0);
   display: flex;
@@ -655,6 +665,7 @@ h2 {
   padding: 60px 0;
   position: relative;
   overflow: hidden;
+  background: rgb(236, 234, 234);
 }
 
 /* Decorative background elements */
@@ -1440,41 +1451,75 @@ h2 {
   text-align: center;
 }
 
-/* Project sub-filters */
+/* ===========================
+       PROJECT SUB-FILTERS STYLING
+    =========================== */
 .project-sub-filters {
   display: flex;
+  width: 100%;
+  max-width: 93%;
+  margin: 10px 0 30px 0;
+  gap: 0;
+  /* border: 2px solid var(--secondary-mid, #D3E4CD); */
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
   justify-content: center;
-  gap: 15px;
-  margin: 50px auto;
-  flex-wrap: wrap;
-  padding: 0 20px;
+  justify-self: center;
 }
 
 .project-sub-btn {
-  padding: 10px 30px;
-  background: var(--card-bg, #fff);
-  border: 2px solid var(--primary-dark, #2c5f2d);
-  color: var(--primary-dark, #2c5f2d);
-  border-radius: 20px;
+  flex: 1;
+  padding: 15px 20px;
+  background: #fff;
+  border: none;
+  /* border-right: 2px solid var(--secondary-mid, #D3E4CD); */
   cursor: pointer;
-  /* font-size: 14px;
-  font-weight: 600; */
+  font-weight: 600;
+  font-size: 0.95rem;
   transition: all 0.3s ease;
-  white-space: nowrap;
+  color: var(--text-primary, #333);
+  text-align: center;
+  position: relative;
+}
+
+.project-sub-btn:last-child {
+  border-right: none;
 }
 
 .project-sub-btn:hover {
-  background: var(--primary-light, #4a7c59);
-  border-color: var(--primary-light, #4a7c59);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: #e8f4ed;
 }
 
 .project-sub-btn.active {
-  background: var(--primary-dark, #2c5f2d);
+  background: var(--secondary-mid, #D3E4CD);
   color: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments for sub-filters */
+@media (max-width: 768px) {
+  .project-sub-filters {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .project-sub-btn {
+    border-right: none;
+    border-bottom: 2px solid var(--secondary-mid, #D3E4CD);
+    padding: 12px 15px;
+    font-size: 0.9rem;
+  }
+
+  .project-sub-btn:last-child {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-sub-btn {
+    padding: 10px 12px;
+    font-size: 0.85rem;
+  }
 }
 
 .project-description-section {
@@ -1495,6 +1540,45 @@ h2 {
   color: var(--text-color, #333);
   font-size: 1rem;
   line-height: 1.5;
+}
+
+.sdg-icons {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  justify-content: left;
+  align-items: center;
+}
+
+.sdg-icons img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.sdg-icons img:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sdg-icons img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sdg-icons {
+    gap: 8px;
+  }
+
+  .sdg-icons img {
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .project-content-section {
@@ -1567,7 +1651,7 @@ h2 {
 
 .filter-btn.active,
 .filter-btn:hover {
-  background-color: var(--primary-dark);
+  /* background-color: var(--primary-dark); */
   color: white
 }
 
@@ -1877,109 +1961,169 @@ main.grid-section {
   /* navbar (60px) + subnav (37px) + spacing (13px) */
 }
 
+/* GRID CONTAINER - 4 columns */
 .grid-container {
   display: grid;
   margin: 0 auto;
   justify-content: center;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 30px 20px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 40px 20px;
+  max-width: 1600px;
 }
 
+/* GRID ITEM - Bigger with modern style */
 .grid-item {
-  /* background-color: var(--bg); */
-  background-color: #fdfdfd;
-  /* border: 1px solid #fdfdfd; */
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  background-color: transparent;
+  border-radius: 10px;
   overflow: hidden;
-  transition: transform 0.7s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
   text-align: center;
-  /* padding: 6px 6px 15px 6px; */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  position: relative;
 
-  max-width: 200px;
-  /* padding: 8px; */
-  /* width: 280px;
-  height: 310px; */
+  width: 100%;
+  max-width: 250px;
+  /* Add this - limits each item width */
+  margin: 0 auto;
+  /* Add this - centers items in grid cell */
 
   text-decoration: none;
   color: inherit;
 }
 
 .grid-item:hover {
-  /* transform: translateY(-7px); */
-  transform: scale(1.05);
-  /* Zoom in slightly on hover */
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
+/* IMAGE CONTAINER - attached to title */
 .grid-item img {
   width: 100%;
-  height: 180px;
+  height: 280px;
   object-fit: cover;
-  /* border-radius: 8px; */
+  transition: transform 0.4s ease;
+  display: block;
 }
 
-/* Updated .grid-item h3 CSS to fix text wrapping and display */
+.grid-item:hover img {
+  transform: scale(1.03);
+}
 
+/* TITLE - Overlays bottom 10% of image (about 24px) */
 .grid-item h3 {
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+
   margin: 0;
-  padding: 15px 8px;
-  font-size: 1.1rem;
-  color: var(--black);
+  padding: 12px 16px 14px 16px;
+  min-height: auto;
+  /* CHANGED - no fixed height */
+
+  /* Black transparent background */
+  background: rgba(0, 0, 0, 0.6);
+  /* CHANGED - slightly darker for better readability */
+  backdrop-filter: blur(10px);
+  /* CHANGED - more blur for clarity */
+  -webkit-backdrop-filter: blur(10px);
+
+  font-size: 20px;
+  /* CHANGED - slightly smaller */
+  color: white;
+  font-weight: 600;
   text-decoration: none;
   text-align: center;
+  line-height: 1.3;
+  /* CHANGED - tighter line height */
+  letter-spacing: 0.3px;
 
-  /* Center the text vertically */
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex: 1;
-  line-height: 1.3;
 
-  /* Fix text wrapping */
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  hyphens: auto;
-
-  /* Ensure proper layout for multi-line content */
-  flex-direction: column;
-  gap: 4px;
+  transition: all 0.3s ease;
 }
 
-/* Style for the scientific name (small tag) */
+.grid-item:hover h3 {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* .grid-item:hover h3 small {
+  color: #8EB69B;
+  opacity: 1;
+} */
+
+/* Small tag (building code) */
 .grid-item h3 small {
   display: block;
-  font-size: 0.85em;
-  font-weight: normal;
-  font-style: italic;
-  color: #666;
+  font-size: 14px;
+  font-weight: 400;
+  color: white;
+  opacity: 0.9;
   margin-top: 4px;
+  font-style: normal;
+  letter-spacing: 0.5px;
 }
 
-/* Alternative: If you want to limit height and add ellipsis for very long names */
-.grid-item h3.with-ellipsis {
-  margin: 0;
-  padding: 15px 8px;
-  font-size: 1.1rem;
-  color: var(--black);
-  text-decoration: none;
-  text-align: center;
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  line-height: 1.3;
+  .grid-item img {
+    height: 240px;
+  }
 
-  /* Limit to 3 lines and add ellipsis */
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  .grid-item h3 {
+    min-height: 95px;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-container {
+    gap: 20px;
+  }
+
+  .grid-item img {
+    height: 220px;
+  }
+
+  .grid-item h3 {
+    font-size: 15px;
+    padding: 14px 16px;
+    min-height: 90px;
+  }
+
+  .grid-item h3 small {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 640px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .grid-item {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .grid-item img {
+    height: 260px;
+  }
+
+  .grid-item h3 {
+    min-height: 85px;
+  }
 }
 
 .building-subnav {

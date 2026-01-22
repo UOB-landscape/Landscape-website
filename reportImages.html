@@ -5,98 +5,492 @@
   <title>Report Images Viewer</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     :root {
-      --bg: #f0eeee;
-      --panel: #ffffff;
-      --accent: #2b7cff;
-      --text: #111;
-      --muted: #666;
+      --bg-overlay: rgba(10, 15, 26, 0.7);
+      --bg-secondary: #111827;
+      --bg-tertiary: #1a2332;
+      --accent: #518166;
+      --accent-hover: #60956f;
+      --text-primary: #f9fafb;
+      --text-secondary: #9ca3af;
+      --text-muted: #6b7280;
+      --border: #1f2937;
+      --border-light: #374151;
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.5);
+      --shadow-accent: 0 0 20px rgba(81, 129, 102, 0.3);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
     }
-    html,body { height:100%; margin:0; font-family: "Tahoma", Arial, sans-serif; background:var(--bg); color:var(--text); }
-    header {
-      background:var(--panel);
-      border-bottom:1px solid rgba(0,0,0,0.06);
-      padding:12px 16px;
-      display:flex;
-      align-items:center;
-      gap:12px;
+
+    html, body {
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+      overflow: hidden;
     }
-    header h2 { margin:0; font-size:18px; font-weight:600; }
-    .controls { margin-left:auto; display:flex; gap:8px; align-items:center; }
-    .btn { border:0; padding:8px 12px; border-radius:6px; cursor:pointer; font-size:14px; }
-    .btn-close { background:#ff4444; color:#fff; }
-    .btn-back { background:#efefef; color:#111; }
-    main.viewer {
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-      min-height: calc(100vh - 160px);
-      position:relative;
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--bg-overlay);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 32px 20px;
+      overflow-y: auto;
+      animation: fadeIn 0.3s ease-out;
     }
+
+    /* Close Button */
+    .close-btn {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+      background: rgba(17, 24, 39, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--text-secondary);
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      z-index: 10001;
+      font-weight: 300;
+      line-height: 1;
+    }
+
+    .close-btn:hover {
+      background: #dc2626;
+      color: var(--text-primary);
+      border-color: #dc2626;
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+    }
+
+    /* Modal Content */
+    .modal-content {
+      position: relative;
+      width: 100%;
+      max-width: 1600px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      animation: slideUp 0.4s ease-out;
+      margin: auto;
+    }
+
+    /* Main Viewer */
+    .viewer-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .frame {
-      background:var(--panel);
-      padding:12px;
-      border-radius:8px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.12);
-      max-width:90%;
-      max-height:80vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      background: var(--bg-secondary);
+      padding: 0;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      max-height: 65vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
     }
-    .frame img { max-width:100%; max-height:72vh; object-fit:contain; border-radius:6px; display:block; }
+
+    .frame::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0.5;
+    }
+
+    .frame img {
+      max-width: 100%;
+      max-height: 65vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Navigation Arrows */
     .nav-arrow {
-      position:absolute; top:50%; transform:translateY(-50%); width:56px; height:56px; border-radius:50%;
-      border:none; background:rgba(0,0,0,0.35); color:#fff; font-size:28px; display:flex; align-items:center;
-      justify-content:center; cursor:pointer;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-light);
+      background: rgba(17, 24, 39, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: var(--text-secondary);
+      font-size: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+      z-index: 10;
+      font-weight: 300;
     }
-    .nav-arrow:hover { background:rgba(0,0,0,0.5); }
-    .nav-prev { left:28px; }
-    .nav-next { right:28px; }
-    .meta {
-      margin:18px auto; max-width:1100px; width:calc(100% - 48px); display:flex; justify-content:space-between;
-      gap:12px; background:var(--panel); padding:12px 16px; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.06);
-      align-items:center; flex-wrap:wrap;
+
+    .nav-arrow:hover {
+      background: var(--accent);
+      color: var(--text-primary);
+      border-color: var(--accent);
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: var(--shadow-accent);
     }
-    .meta .info { display:flex; gap:14px; align-items:center; color:var(--muted); }
-    .thumbs { display:flex; gap:10px; overflow-x:auto; padding:8px 4px; align-items:center; }
-    .thumbs img { width:70px; height:70px; object-fit:cover; border-radius:6px; cursor:pointer; border:2px solid transparent; display:block; }
-    .thumbs img.active { border-color:var(--accent); }
-    .fallback { max-width:900px; margin:28px auto; padding:18px; text-align:center; color:var(--muted); background:var(--panel); border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.06); }
-    @media (max-width:640px) {
-      .nav-arrow { width:44px; height:44px; font-size:22px; left:12px; right:12px; }
-      .frame img { max-height:56vh; }
-      .meta { padding:10px; gap:8px; }
+
+    .nav-arrow:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .nav-prev {
+      left: -70px;
+    }
+
+    .nav-next {
+      right: -70px;
+    }
+
+    /* Meta Information - Compact */
+    .meta-compact {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      padding: 16px 24px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .meta-compact > div {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .meta-compact strong {
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .meta-compact span {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    /* Thumbnails */
+    .thumbs-container {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+      max-width: 100%;
+      overflow: visible;
+    }
+
+    .thumbs {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      overflow-y: visible;
+      padding: 8px 4px;
+      align-items: center;
+      justify-content: center;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) var(--border);
+    }
+
+    .thumbs::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .thumbs::-webkit-scrollbar-track {
+      background: var(--bg-tertiary);
+      border-radius: 3px;
+    }
+
+    .thumbs::-webkit-scrollbar-thumb {
+      background: var(--accent);
+      border-radius: 3px;
+    }
+
+    .thumbs::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-hover);
+    }
+
+    .thumbs img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: var(--transition);
+      flex-shrink: 0;
+      background: var(--bg-tertiary);
+    }
+
+    .thumbs img:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+      box-shadow: var(--shadow-accent);
+    }
+
+    .thumbs img.active {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-accent);
+    }
+
+    /* Fallback */
+    .fallback {
+      padding: 64px 48px;
+      text-align: center;
+      color: var(--text-secondary);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .fallback::before {
+      content: "📷";
+      display: block;
+      font-size: 72px;
+      margin-bottom: 24px;
+      opacity: 0.2;
+      filter: grayscale(1);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1200px) {
+      .nav-prev {
+        left: -60px;
+      }
+
+      .nav-next {
+        right: -60px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .nav-arrow {
+        position: static;
+        transform: none;
+        margin: 0 8px;
+      }
+
+      .nav-arrow:hover {
+        transform: scale(1.05);
+      }
+
+      .viewer-container {
+        gap: 8px;
+      }
+
+      .frame {
+        max-height: 55vh;
+      }
+
+      .frame img {
+        max-height: 55vh;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .close-btn {
+        top: 16px;
+        right: 16px;
+        width: 42px;
+        height: 42px;
+        font-size: 24px;
+      }
+
+      .modal-overlay {
+        padding: 24px 16px;
+      }
+
+      .modal-content {
+        gap: 16px;
+      }
+
+      .nav-arrow {
+        width: 48px;
+        height: 48px;
+        font-size: 24px;
+      }
+
+      .frame {
+        max-height: 50vh;
+        border-radius: var(--radius-md);
+      }
+
+      .frame img {
+        max-height: 50vh;
+      }
+
+      .meta-compact {
+        padding: 12px 16px;
+        gap: 20px;
+        font-size: 13px;
+      }
+
+      .meta-compact > div {
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        text-align: center;
+      }
+
+      .thumbs-container {
+        padding: 12px;
+      }
+
+      .thumbs {
+        gap: 10px;
+        padding: 8px 4px;
+      }
+
+      .thumbs img {
+        width: 70px;
+        height: 70px;
+      }
+
+      .fallback {
+        padding: 48px 32px;
+        font-size: 15px;
+      }
+
+      .fallback::before {
+        font-size: 56px;
+        margin-bottom: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .modal-overlay {
+        padding: 20px 12px;
+      }
+
+      .nav-arrow {
+        width: 42px;
+        height: 42px;
+        font-size: 22px;
+        margin: 0 4px;
+      }
+
+      .thumbs img {
+        width: 60px;
+        height: 60px;
+      }
+
+      .meta-compact {
+        flex-direction: column;
+        gap: 12px;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Hidden state */
+    .hidden {
+      display: none !important;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h2 id="title">Report Images</h2>
-    <div class="controls">
-      <button id="backBtn" class="btn btn-back" title="Back to report">Back</button>
-    </div>
-  </header>
+  <div class="modal-overlay" id="modalOverlay">
+    <button id="closeBtn" class="close-btn" title="Close" aria-label="Close">×</button>
+    
+    <div class="modal-content" id="modalContent">
+      <!-- Meta Information - Compact at top -->
+      <div class="meta-compact" id="metaCompact">
+        <div><strong>Year</strong> <span id="metaYear">-</span></div>
+        <div><strong>Record</strong> <span id="metaRecord">-</span></div>
+        <div><strong>Location</strong> <span id="metaLocation">-</span></div>
+      </div>
 
-  <main class="viewer" id="viewer">
-    <button id="prevBtn" class="nav-arrow nav-prev" aria-label="Previous image">‹</button>
-    <div class="frame" id="frame">
-      <img id="mainImg" src="" alt="Report image" />
-    </div>
-    <button id="nextBtn" class="nav-arrow nav-next" aria-label="Next image">›</button>
-  </main>
+      <!-- Main Viewer -->
+      <div class="viewer-container">
+        <button id="prevBtn" class="nav-arrow nav-prev" aria-label="Previous image">‹</button>
+        <div class="frame" id="frame">
+          <img id="mainImg" src="" alt="Report image" />
+        </div>
+        <button id="nextBtn" class="nav-arrow nav-next" aria-label="Next image">›</button>
+      </div>
 
-  <section class="meta" id="metaPanel">
-    <div class="info">
-      <div><strong>Year:</strong> <span id="metaYear">-</span></div>
-      <div><strong>Record:</strong> <span id="metaRecord">-</span></div>
-      <div><strong>Location:</strong> <span id="metaLocation">-</span></div>
-    </div>
-    <div class="thumbs" id="thumbs" aria-label="Image thumbnails"></div>
-  </section>
+      <!-- Thumbnails -->
+      <div class="thumbs-container" id="thumbsContainer">
+        <div class="thumbs" id="thumbs" aria-label="Image thumbnails"></div>
+      </div>
 
-  <div id="fallback" class="fallback" style="display:none;">No images available for this record.</div>
+      <!-- Fallback -->
+      <div id="fallback" class="fallback hidden">No images available for this record.</div>
+    </div>
+  </div>
 
   <script>
     (function () {
@@ -105,7 +499,10 @@
       const yearParam = qs.get('year');
       const recordParam = qs.get('record');
 
-      const titleEl = document.getElementById('title');
+      const modalOverlay = document.getElementById('modalOverlay');
+      const modalContent = document.getElementById('modalContent');
+      const closeBtn = document.getElementById('closeBtn');
+      const metaCompact = document.getElementById('metaCompact');
       const metaYear = document.getElementById('metaYear');
       const metaRecord = document.getElementById('metaRecord');
       const metaLocation = document.getElementById('metaLocation');
@@ -113,34 +510,42 @@
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
       const thumbs = document.getElementById('thumbs');
+      const thumbsContainer = document.getElementById('thumbsContainer');
       const fallback = document.getElementById('fallback');
-      const metaPanel = document.getElementById('metaPanel');
-      const backBtn = document.getElementById('backBtn');
+      const frame = document.getElementById('frame');
 
       let images = [];
       let index = 0;
 
-      backBtn.addEventListener('click', () => {
-       if (document.referrer) {
-        history.back();
-       } else {
-      // fallback based on year
-       if (yearParam === '2024') {
-        location.href = 'reports-2024.html';
-       } else if (yearParam === '2025') {
-        location.href = 'reports-2025.html';
-       } else {
-         location.href = 'reports-2025.html'; // default
-       }
+      // Close modal functions
+      function closeModal() {
+        if (document.referrer && document.referrer.includes(window.location.origin)) {
+          history.back();
+        } else {
+          window.close();
+          // If window.close() doesn't work (popup blockers), redirect
+          setTimeout(() => {
+            location.href = 'projects.html#reports';
+          }, 100);
+        }
       }
-  });
 
+      closeBtn.addEventListener('click', closeModal);
 
+      // Close on overlay click (not on content)
+      modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+          closeModal();
+        }
+      });
 
       function setNoImages(locationText) {
-        metaPanel.style.display = 'none';
-        document.getElementById('viewer').style.display = 'none';
-        fallback.style.display = 'block';
+        metaCompact.classList.add('hidden');
+        frame.classList.add('hidden');
+        thumbsContainer.classList.add('hidden');
+        prevBtn.classList.add('hidden');
+        nextBtn.classList.add('hidden');
+        fallback.classList.remove('hidden');
         fallback.textContent = 'No images available for this record' + (locationText ? ': ' + locationText : '.');
       }
 
@@ -149,6 +554,12 @@
         mainImg.src = images[index];
         const thumbImgs = Array.from(thumbs.querySelectorAll('img'));
         thumbImgs.forEach((t, i) => t.classList.toggle('active', i === index));
+        
+        // Scroll active thumbnail into view
+        const activeThumb = thumbImgs[index];
+        if (activeThumb) {
+          activeThumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
       }
 
       prevBtn.addEventListener('click', () => {
@@ -164,13 +575,11 @@
       });
 
       document.addEventListener('keydown', (e) => {
-        if (fallback.style.display === 'block') {
-          if (e.key === 'Escape') backBtn.click();
-          return;
+        if (fallback.classList.contains('hidden')) {
+          if (e.key === 'ArrowRight') nextBtn.click();
+          if (e.key === 'ArrowLeft') prevBtn.click();
         }
-        if (e.key === 'ArrowRight') nextBtn.click();
-        if (e.key === 'ArrowLeft') prevBtn.click();
-        if (e.key === 'Escape') backBtn.click();
+        if (e.key === 'Escape') closeModal();
       });
 
       function extractImagesFromRecord(rec) {
@@ -187,7 +596,6 @@
         const record = recordParam ? Number(recordParam) : null;
 
         if (!year || !record) {
-          titleEl.textContent = 'Invalid parameters';
           setNoImages();
           return;
         }
@@ -208,7 +616,6 @@
 
         const rec = Array.isArray(data) ? data.find(r => Number(r.Year) === year && Number(r['Record Number']) === record) : null;
         if (!rec) {
-          titleEl.textContent = 'Record not found';
           setNoImages();
           return;
         }
@@ -237,8 +644,8 @@
         render();
 
         if (images.length <= 1) {
-          prevBtn.style.display = 'none';
-          nextBtn.style.display = 'none';
+          prevBtn.classList.add('hidden');
+          nextBtn.classList.add('hidden');
         }
       }
 

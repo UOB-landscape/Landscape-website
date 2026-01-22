@@ -1,213 +1,10 @@
-<!-- <!DOCTYPE html>
-<html lang="en" data-theme="default">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>UOB Landscape</title>
-
-  <script>
-    // Get saved theme from localStorage
-    const savedTheme = localStorage.getItem('theme');
-
-    if (savedTheme) {
-      // Set theme attribute before CSS is applied
-      document.documentElement.setAttribute('data-theme', savedTheme);
-    }
-  </script>
-
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="logo-space" title="Logo">
-    <img src="images/UOB-new-logo.png" alt="University of Bahrain" />
-  </div>
-  <nav>
-    <ul>
-      <li><a href="home.html">Home</a></li>
-      <li><a href="ourPlants.html">Our plants</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="locations.html">Locations</a></li>
-      <li><a href="map.html">Map</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-    <div class="controls">
-      <button class="arabic-btn" onclick="translate()">عربي</button>
-      <div class="dropdown">
-        <button class="theme-btn" id="theme-btn">🎨</button>
-        <div class="theme-picker" id="theme-picker">
-          <div class="theme-option" data-theme="default"></div>
-          <div class="theme-option" data-theme="dark"></div>
-          <div class="theme-option" data-theme="solar"></div>
-          <div class="theme-option" data-theme="highcontrast"></div>
-          <div class="theme-option" data-theme="green"></div>
-        </div>
-      </div>
-      <input type="search" placeholder="Search…">
-    </div>
-  </nav>
- 
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const navLinks = document.querySelectorAll('nav a');
-      const currentPage = window.location.pathname.split('/').pop() || 'home.html';
-
-      // List of pages considered part of the "Locations" section
-      const locationPages = [
-        'CarPark.html',
-        'Buildings.html',
-        'Gates.html',
-        'Roadside.html',
-        'Residential.html',
-        'Infrastructure.html',
-        'Facilities.html',
-        'locations.html'
-      ];
-
-      navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-
-        if (locationPages.includes(currentPage) && href === 'locations.html') {
-          // Highlight Locations nav link if current page is any location page
-          link.classList.add('active');
-        } else if (href === currentPage) {
-          // Highlight the matching nav link for other pages
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
-      });
-
-      // Optional: maintain active state on click (if navigation doesn't reload)
-      navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          navLinks.forEach(l => l.classList.remove('active'));
-          this.classList.add('active');
-        });
-      });
-    });
-
-    //Navifate to building.html
-    function goToPage() {
-    window.location.href = 'building.html';
-    }
-
-    // Theme dropdown behavior
-    const btn = document.getElementById('theme-btn');
-    const picker = document.getElementById('theme-picker');
-
-    if (btn && picker) {
-      btn.addEventListener('click', e => {
-        e.stopPropagation();
-        picker.classList.toggle('active');
-      });
-
-      document.addEventListener('click', e => {
-        if (!e.target.closest('.dropdown')) {
-          picker.classList.remove('active');
-        }
-      });
-
-      picker.addEventListener('click', e => {
-        const t = e.target.dataset.theme;
-        if (t) {
-          document.documentElement.setAttribute('data-theme', t);
-          localStorage.setItem('theme', t);
-          picker.classList.remove('active');
-        }
-      });
-    }
-
-    // Apply saved theme on load
-    window.addEventListener('DOMContentLoaded', () => {
-      const saved = localStorage.getItem('theme') || 'default';
-      document.documentElement.setAttribute('data-theme', saved);
-    });
-
-    // Placeholder translation logic
-    function translate() {
-      alert('Arabic translation logic goes here.');
-    }
-  </script>
-
-  <main class="grid-section">
-      <div class="search-bar">
-          <div class="search-input-wrapper">
-              <span class="search-icon">🔍</span>
-              <input type="text" id="searchInput" placeholder="Search by name..." oninput="filterGrid()" />
-          </div>
-      </div>
-        <div class="filters">
-          <button onclick="location.href='Buildings.html'" class="filter-btn active" data-filter="Buildings">Buildings</button>
-          <button onclick="location.href='Gates.html'" class="filter-btn" data-filter="Gates">Gates</button>
-          <button onclick="location.href='Roadside.html'" class="filter-btn" data-filter="Roadside">Roadside</button>
-          <button onclick="location.href='Residential.html'" class="filter-btn" data-filter="Residential">Residential</button>
-          <button onclick="location.href='Infrastructure.html'" class="filter-btn" data-filter="Infrastructure">Infrastructure</button>
-          <button onclick="location.href='Facilities.html'" class="filter-btn" data-filter="Facilities">Facilities</button>
-          <button onclick="location.href='CarPark.html'" class="filter-btn" data-filter="CarPark">Car Park</button>
-        </div>
-      <div class="grid-container" onclick="goToPage()">
-          <div class="grid-item">
-            <img src="S45.jpg" alt="Image 1">
-            <h3>S45 E-Learning Center</h3>
-          </div>
-          <div class="grid-item">
-            <img src="https://raw.githubusercontent.com/UOB-landscape/plant-images/main/Images/Bougainvillea%20(10).jpg" alt="Image 2">
-            <h3>Title 2</h3>
-          </div>
-          <div class="grid-item">
-            <img src="https://i.imgur.com/cY0emJv.jpeg" alt="Image 3">
-            <h3>Title 3</h3>
-          </div>
-          <div class="grid-item">
-            <img src="https://i.postimg.cc/fbLCDFGq/pexels-dutumong-2382970.jpg" alt="Image 4">
-            <h3>Title 4</h3>
-          </div>
-          <div class="grid-item">
-            <img src="https://i.postimg.cc/TPVtkgXf/pexels-dutumong-2382970.jpg" alt="Image 5">
-            <h3>Title 5</h3>
-          </div>
-          <div class="grid-item">
-            <img src="https://i.postimg.cc/d1Y3c2G1/Bougainvillea-10.jpg" alt="Bougainvillea">
-            <h3>Title 6</h3>
-          </div>
-      </div>
-  </main>
-
-  <footer>
-    <div class="footer-container">
-      <div class="footer-column">
-        <h4>About UOB Landscape</h4>
-        <p>Empowering knowledge on geological safety and Landscape monitoring.</p>
-      </div>
-      <div class="footer-column">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="#">Our Plants</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">Map</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer-column">
-        <h4>Connect</h4>
-        <p>Email: landscape@uob.edu.bh</p>
-        <p>Phone: +973 1743 8181</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      &copy; 2025 UOB Landscape. All rights reserved.
-    </div>
-  </footer>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="en" data-theme="default">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>UOB Landscape - Buildings</title>
+  <title>UOB Landscape - Locations</title>
 
   <script>
     // Restore theme from localStorage
@@ -218,6 +15,214 @@
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* Search and Filters Container - Same Line */
+    .search-filters-row {
+      display: flex;
+      align-items: baseline;
+      padding: 30px 0 45px 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    /* Search Bar */
+    .search-bar {
+      flex: 0 0 auto;
+      margin: 0;
+    }
+
+    /* Filter Buttons Container */
+    .filters-container {
+      flex: 1 1 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Individual filter button */
+    .filter-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      background: transparent;
+      border: none;
+      padding: 0;
+      position: relative;
+      width: 110px;
+    }
+
+    .filter-btn:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Icon circle */
+    .filter-btn-circle {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: #c8b092;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(11, 43, 38, 0.25);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .filter-btn-circle::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .filter-btn:hover .filter-btn-circle::before {
+      opacity: 1;
+    }
+
+    .filter-btn:hover .filter-btn-circle {
+      background: var(--secondary-mid, #518166);
+      box-shadow: 0 6px 16px rgba(81, 129, 102, 0.4);
+      transform: scale(1.1);
+    }
+
+    /* Active state - same gradient as hover */
+    .filter-btn.active .filter-btn-circle {
+      background: var(--secondary-mid, #9b8971);
+    }
+
+    .filter-btn.active .filter-btn-circle::before {
+      opacity: 1;
+    }
+
+    /* Icon */
+    .filter-btn-icon {
+      font-size: 2rem;
+      color: white;
+      transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover .filter-btn-icon {
+      transform: scale(1.15);
+    }
+
+    /* Label */
+    .filter-btn-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-primary, #333);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      text-align: center;
+      transition: color 0.3s ease;
+    }
+
+    .filter-btn:hover .filter-btn-label {
+      color: var(--primary-dark, #0B2B26);
+    }
+
+    .filter-btn.active .filter-btn-label {
+      color: var(--secondary-mid, #518166);
+      font-weight: 700;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+      .search-filters-row {
+        gap: 20px;
+      }
+
+      .filters-container {
+        gap: 15px;
+      }
+
+      .filter-btn {
+        width: 80px;
+      }
+
+      .filter-btn-circle {
+        width: 60px;
+        height: 60px;
+      }
+
+      .filter-btn-icon {
+        font-size: 1.8rem;
+      }
+
+      .filter-btn-label {
+        font-size: 0.7rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .search-filters-row {
+        flex-direction: column;
+        gap: 20px;
+        padding: 15px;
+      }
+
+      .search-bar {
+        width: 100%;
+      }
+
+      .filters-container {
+        width: 100%;
+        gap: 12px;
+      }
+
+      .filter-btn {
+        width: 70px;
+      }
+
+      .filter-btn-circle {
+        width: 55px;
+        height: 55px;
+      }
+
+      .filter-btn-icon {
+        font-size: 1.6rem;
+      }
+
+      .filter-btn-label {
+        font-size: 0.65rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .filters-container {
+        gap: 10px;
+      }
+
+      .filter-btn {
+        width: 65px;
+      }
+
+      .filter-btn-circle {
+        width: 50px;
+        height: 50px;
+      }
+
+      .filter-btn-icon {
+        font-size: 1.5rem;
+      }
+
+      .filter-btn-label {
+        font-size: 0.6rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -273,23 +278,62 @@
   </nav>
 
   <main class="grid-section">
-    <div class="search-filters-container" style="gap: 0;">
+    <!-- Search and Filters on Same Line -->
+    <div class="search-filters-row">
+      <!-- Search Bar -->
       <div class="search-bar">
         <div class="search-input-wrapper">
           <span class="search-icon">🔍</span>
-          <input type="text" id="searchInput" placeholder="Search by name..."/>
+          <input type="text" id="searchInput" placeholder="Search by name..." />
         </div>
       </div>
 
-      <div class="filters" style="gap: 10px;">
-        <button onclick="location.href='Buildings.html'" class="filter-btn active">Buildings</button>
-        <button onclick="location.href='Gates.html'" class="filter-btn">Gates</button>
-        <button onclick="location.href='Roadside.html'" class="filter-btn">Roadside</button>
-        <button onclick="location.href='Infrastructure.html'" class="filter-btn">Infrastructure</button>
-        <button onclick="location.href='Facilities.html'" class="filter-btn">Facilities</button>
-        <button onclick="location.href='CarPark.html'" class="filter-btn">Car Park</button>
+      <!-- Filter Buttons -->
+      <div class="filters-container">
+        <button class="filter-btn" data-filter="Building">
+          <div class="filter-btn-circle">
+            <i class="fas fa-building filter-btn-icon"></i>
+          </div>
+          <span class="filter-btn-label">Buildings</span>
+        </button>
+
+        <button class="filter-btn" data-filter="Gate">
+          <div class="filter-btn-circle">
+            <i class="fas fa-dungeon filter-btn-icon"></i>
+          </div>
+          <span class="filter-btn-label">Gates</span>
+        </button>
+
+        <button class="filter-btn" data-filter="Roadside">
+          <div class="filter-btn-circle">
+            <i class="fas fa-road filter-btn-icon"></i>
+          </div>
+          <span class="filter-btn-label">Roadside</span>
+        </button>
+
+        <button class="filter-btn" data-filter="Infrastructure">
+          <div class="filter-btn-circle">
+            <i class="fas fa-tools filter-btn-icon"></i>
+          </div>
+          <span class="filter-btn-label">Infrastructure</span>
+        </button>
+
+        <button class="filter-btn" data-filter="Facilities">
+          <div class="filter-btn-circle">
+            <i class="fas fa-landmark filter-btn-icon"></i>
+          </div>
+          <span class="filter-btn-label">Facilities</span>
+        </button>
+
+        <button class="filter-btn" data-filter="Car park">
+          <div class="filter-btn-circle">
+            <i class="fas fa-parking filter-btn-icon"></i>
+          </div>
+          <span class="filter-btn-label">Car Park</span>
+        </button>
       </div>
     </div>
+
     <!-- Where the cards will appear -->
     <div class="grid-container" id="locationsGrid"></div>
   </main>
@@ -361,105 +405,137 @@
   </footer>
 
   <script>
-    async function loadBuildings() {
+    // Store all locations data
+    let allLocations = [];
+    let currentFilter = 'Building'; // Default filter
+
+    // Get filter from URL parameter or default to 'Building'
+    function getFilterFromURL() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get('filter') || 'Building';
+    }
+
+    // Set active filter button
+    function setActiveFilter(filterType) {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      filterButtons.forEach(btn => {
+        if (btn.dataset.filter === filterType) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+      currentFilter = filterType;
+    }
+
+    // Load and filter locations
+    async function loadLocations() {
       try {
         const response = await fetch('https://landscapinguob-api.onrender.com/api/locations');
         const data = await response.json();
+        allLocations = data;
 
-        const grid = document.getElementById('locationsGrid');
-        grid.innerHTML = '';
+        // Get filter from URL
+        const filterType = getFilterFromURL();
+        setActiveFilter(filterType);
 
-        // Filter for only buildings
-        const buildings = data.filter(item => item["Location type"] === "Building");
-
-        if (buildings.length === 0) {
-          grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 40px;">No buildings found.</p>';
-          return;
-        }
-
-        // Store buildings data globally for search
-        window.buildingsData = buildings;
-
-        // Render function
-        function renderBuildings(buildingsToRender) {
-          grid.innerHTML = '';
-
-          if (buildingsToRender.length === 0) {
-            grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 40px;">No results found.</p>';
-            return;
-          }
-
-          buildingsToRender.forEach(location => {
-            const locNum = location["Location Number"] || location["Location number"];
-            const locName = location["Location name"] || location["Location Name"];
-            const picture = location.Picture || 'placeholder.jpg';
-
-            const card = document.createElement('a');
-            card.className = 'grid-item';
-            card.href = `location.html?id=${encodeURIComponent(locNum)}`;
-            card.innerHTML = `
-          <img src="${picture}" alt="${locName}">
-          <h3>${locName} <br><small>(${locNum})</small></h3>
-        `;
-            grid.appendChild(card);
-          });
-        }
-
-        // Initial render
-        renderBuildings(buildings);
-
-        // Setup search functionality
-        const searchInput = document.getElementById('searchInput');
-        if (searchInput) {
-          searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-
-            const filtered = buildings.filter(location => {
-              const locNum = (location["Location Number"] || location["Location number"] || '').toLowerCase();
-              const locName = (location["Location name"] || location["Location Name"] || '').toLowerCase();
-
-              return locName.includes(searchTerm) || locNum.includes(searchTerm);
-            });
-
-            renderBuildings(filtered);
-          });
-        }
+        // Render filtered locations
+        renderLocations(filterType);
 
       } catch (err) {
-        console.error('Error loading buildings:', err);
+        console.error('Error loading locations:', err);
         const grid = document.getElementById('locationsGrid');
-        grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 40px;">Error loading buildings.</p>';
+        grid.innerHTML = '<p style="text-align: center; grid-column: 1/-1; padding: 40px;">Error loading locations.</p>';
       }
     }
 
-    loadBuildings();
+    // Render locations based on filter
+    function renderLocations(filterType, searchTerm = '') {
+      const grid = document.getElementById('locationsGrid');
+      grid.innerHTML = '';
 
-    function filterGrid() {
-      const searchInput = document.getElementById('searchInput');
-      const searchTerm = searchInput.value.toLowerCase();
-      const gridItems = document.querySelectorAll('.grid-item');
+      // Filter by location type
+      let filtered = allLocations.filter(item => item["Location type"] === filterType);
 
-      gridItems.forEach(item => {
-        const title = item.querySelector('h3').textContent.toLowerCase();
-        if (title.includes(searchTerm)) {
-          item.style.display = '';
-        } else {
-          item.style.display = 'none';
-        }
+      // Apply search filter if search term exists
+      if (searchTerm) {
+        filtered = filtered.filter(location => {
+          const locNum = (location["Location Number"] || location["Location number"] || '').toLowerCase();
+          const locName = (location["Location name"] || location["Location Name"] || '').toLowerCase();
+          return locName.includes(searchTerm) || locNum.includes(searchTerm);
+        });
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<p style="text-align: center; grid-column: 1/-1; padding: 40px;">No ${filterType.toLowerCase()}s found.</p>`;
+        return;
+      }
+
+      filtered.forEach(location => {
+        const locNum = location["Location Number"] || location["Location number"];
+        const locName = location["Location name"] || location["Location Name"];
+        const picture = location.Picture || 'placeholder.jpg';
+
+        const card = document.createElement('a');
+        card.className = 'grid-item';
+        card.href = `location.html?id=${encodeURIComponent(locNum)}`;
+        card.innerHTML = `
+          <img src="${picture}" alt="${locName}">
+          <h3>${locName} <br><small>(${locNum})</small></h3>
+        `;
+        grid.appendChild(card);
       });
     }
+
+    // Setup filter button click handlers
+    function setupFilterButtons() {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filterType = btn.dataset.filter;
+
+          // Update URL without reloading page
+          const newUrl = `${window.location.pathname}?filter=${filterType}`;
+          window.history.pushState({ filter: filterType }, '', newUrl);
+
+          // Update active state and render
+          setActiveFilter(filterType);
+          renderLocations(filterType, document.getElementById('searchInput').value.toLowerCase());
+        });
+      });
+    }
+
+    // Setup search functionality
+    function setupSearch() {
+      const searchInput = document.getElementById('searchInput');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const searchTerm = e.target.value.toLowerCase();
+          renderLocations(currentFilter, searchTerm);
+        });
+      }
+    }
+
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', (event) => {
+      if (event.state && event.state.filter) {
+        setActiveFilter(event.state.filter);
+        renderLocations(event.state.filter);
+      }
+    });
+
+    // Initialize
+    loadLocations();
+    setupFilterButtons();
+    setupSearch();
+
     document.addEventListener('DOMContentLoaded', () => {
       const navLinks = document.querySelectorAll('nav a');
       const currentPage = window.location.pathname.split('/').pop() || 'home.html';
 
       // List of pages considered part of the "Locations" section
       const locationPages = [
-        'CarPark.html',
         'Buildings.html',
-        'Gates.html',
-        'Roadside.html',
-        'Infrastructure.html',
-        'Facilities.html',
         'locations.html'
       ];
 
@@ -467,17 +543,14 @@
         const href = link.getAttribute('href');
 
         if (locationPages.includes(currentPage) && href === 'locations.html') {
-          // Highlight Locations nav link if current page is any location page
           link.classList.add('active');
         } else if (href === currentPage) {
-          // Highlight the matching nav link for other pages
           link.classList.add('active');
         } else {
           link.classList.remove('active');
         }
       });
 
-      // Optional: maintain active state on click (if navigation doesn't reload)
       navLinks.forEach(link => {
         link.addEventListener('click', function (e) {
           navLinks.forEach(l => l.classList.remove('active'));
@@ -512,7 +585,6 @@
         }
       });
 
-      // Close picker on scroll
       let lastScrollY = window.scrollY;
       window.addEventListener('scroll', () => {
         if (window.scrollY > lastScrollY) {
@@ -527,20 +599,17 @@
     const mobileThemePicker = document.getElementById('mobile-theme-picker');
 
     if (mobileThemeBtn && mobileThemePicker) {
-      // Toggle mobile theme picker
       mobileThemeBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         mobileThemePicker.classList.toggle('active');
       });
 
-      // Close mobile theme picker when clicking outside
       document.addEventListener('click', (e) => {
         if (!e.target.closest('.mobile-controls .dropdown')) {
           mobileThemePicker.classList.remove('active');
         }
       });
 
-      // Handle mobile theme selection
       mobileThemePicker.addEventListener('click', (e) => {
         const theme = e.target.dataset.theme;
         if (theme) {
@@ -552,14 +621,12 @@
       });
     }
 
-    // Update active state for all theme options (both desktop and mobile)
     function updateActiveTheme(theme) {
       document.querySelectorAll('.theme-option').forEach(opt => {
         opt.classList.toggle('active', opt.dataset.theme === theme);
       });
     }
 
-    // Apply saved theme on load
     window.addEventListener('DOMContentLoaded', () => {
       const saved = localStorage.getItem('theme') || 'default';
       document.documentElement.setAttribute('data-theme', saved);
@@ -596,7 +663,6 @@
         });
       }
 
-      // Close menu on scroll
       window.addEventListener('scroll', () => {
         if (mobileMenu) {
           mobileMenu.classList.remove('active');
@@ -605,7 +671,6 @@
         if (mobileThemePicker) mobileThemePicker.classList.remove('active');
       });
 
-      // Close menu when clicking links
       document.querySelectorAll('#mobile-menu > li > a').forEach(link => {
         link.addEventListener('click', () => {
           if (mobileMenu) {
