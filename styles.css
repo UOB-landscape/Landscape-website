@@ -2031,7 +2031,7 @@ main.grid-section {
   /* CHANGED - more blur for clarity */
   -webkit-backdrop-filter: blur(10px);
 
-  font-size: 20px;
+  font-size: 18px;
   /* CHANGED - slightly smaller */
   color: white;
   font-weight: 600;

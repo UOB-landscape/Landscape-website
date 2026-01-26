@@ -245,10 +245,7 @@
     }
 
     .filter-badge {
-      background-color: #908484;
-      color: white;
       border-radius: 20%;
-      padding: 1px;
       font-size: 12px;
       font-weight: bold;
       min-width: 20px;
@@ -283,6 +280,18 @@
       margin-top: 10px;
     }
 
+    .pdf-viewer-container {
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .pdf-viewer-container iframe {
+      width: 100%;
+      min-height: 600px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+
     .pdf-download-btn {
       display: inline-flex;
       align-items: center;
@@ -302,6 +311,12 @@
 
     .pdf-download-btn i {
       font-size: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .pdf-viewer-container iframe {
+        min-height: 400px;
+      }
     }
   </style>
 </head>
@@ -498,6 +513,36 @@
   </footer>
 
   <script>
+    // Parse unique ID back into name and type
+    function parseLocationId(uniqueId) {
+      if (!uniqueId) return { name: '', type: '' };
+
+      const lastDashIndex = uniqueId.lastIndexOf('-');
+      if (lastDashIndex === -1) return { name: uniqueId, type: '' };
+
+      const name = uniqueId.substring(0, lastDashIndex);
+      const typeSlug = uniqueId.substring(lastDashIndex + 1);
+
+      // Map type slugs back to readable format
+      const typeMap = {
+        'Building': 'Building',
+        'Buildings': 'Buildings',
+        'CarPark': 'Car Park',
+        'CarParks': 'Car Parks',
+        'Gate': 'Gate',
+        'Gates': 'Gates',
+        'Roadside': 'Roadside',
+        'Roadsides': 'Roadsides',
+        'Infrastructure': 'Infrastructure',
+        'Infrastructures': 'Infrastructures',
+        'Facility': 'Facility',
+        'Facilities': 'Facilities'
+      };
+
+      const readableType = typeMap[typeSlug] || typeSlug;
+      return { name, type: readableType };
+    }
+
     // Switch tabs based on URL hash changes
     function showTab(hash) {
       document.querySelectorAll('.building-section').forEach(sec => {
@@ -904,33 +949,48 @@
 
       // Load data
       loadLocationName();
-      loadPlantsForLocation(); // Changed: Load both indoor and outdoor
+      loadPlantsForLocation();
       loadProposalsForLocation();
     });
 
     async function loadLocationName() {
       const params = new URLSearchParams(window.location.search);
-      const locationId = params.get("id");
+      const uniqueId = params.get("id"); // e.g., "S39-Building" or "S39-CarPark"
       const locationNameEl = document.getElementById('location-name');
 
-      if (!locationId) {
+      if (!uniqueId) {
         locationNameEl.textContent = 'No Location Selected';
         return;
       }
 
-      // Fetch location name from the locations API
+      // Parse the unique ID
+      const { name: locationNumber, type: locationType } = parseLocationId(uniqueId);
+
+      // Fetch location data from API
       try {
         const res = await fetch('https://landscapinguob-api.onrender.com/api/locations');
         if (res.ok) {
           const data = await res.json();
+
+          // Find location by Location number AND type
           const matched = data.find(item => {
-            const itemLoc = (item['Location number'] || item['Location Number'] || '').trim();
-            return itemLoc === locationId;
+            const itemNumber = (item['Location number'] || item['Location Number'] || '').trim();
+            const itemType = (item['Location type'] || item['Location Type'] || '').trim();
+            return itemNumber === locationNumber && itemType === locationType;
           });
 
           if (matched) {
-            const locName = matched['Location name'] || matched['Location Name'] || locationId;
-            locationNameEl.innerHTML = `${locName} <small>(${locationId})</small>`;
+            const locName = matched['Location name'] || matched['Location Name'] || locationNumber;
+            const locType = matched['Location type'] || matched['Location Type'] || locationType;
+
+            // Display: "College of Law Building" or "S39 Car Park"
+            if (locName && locType) {
+              locationNameEl.innerHTML = `${locName} ${locType}`;
+            } else if (locName) {
+              locationNameEl.innerHTML = locName;
+            } else {
+              locationNameEl.innerHTML = `${locationNumber} ${locationType}`;
+            }
             return;
           }
         }
@@ -938,18 +998,23 @@
         console.error('Error loading location name:', err);
       }
 
-      // Fallback to just showing the location ID
-      locationNameEl.textContent = `Location ${locationId}`;
+      // Fallback
+      locationNameEl.textContent = `${locationNumber} ${locationType}`;
     }
 
-    // NEW FUNCTION: Load both indoor and outdoor plants
+    // Load both indoor and outdoor plants
     async function loadPlantsForLocation() {
       const params = new URLSearchParams(window.location.search);
-      const locationId = params.get("id");
-      if (!locationId) return;
+      const uniqueId = params.get("id"); // e.g., "S39-Building" or "S39-CarPark"
 
-      const indoorEndpoint = `https://landscapinguob-api.onrender.com/api/locations/${locationId}/indoor-plants`;
-      const outdoorEndpoint = `https://landscapinguob-api.onrender.com/api/locations/${locationId}/outdoor-plants`;
+      if (!uniqueId) return;
+
+      // Parse the unique ID to get location number and type
+      const { name: locationNumber, type: locationType } = parseLocationId(uniqueId);
+
+      // Build API URLs with location type as query parameter
+      const indoorEndpoint = `https://landscapinguob-api.onrender.com/api/locations/${locationNumber}/indoor-plants?type=${encodeURIComponent(locationType)}`;
+      const outdoorEndpoint = `https://landscapinguob-api.onrender.com/api/locations/${locationNumber}/outdoor-plants?type=${encodeURIComponent(locationType)}`;
 
       try {
         // Fetch both indoor and outdoor plants
@@ -964,7 +1029,6 @@
         // Process indoor plants
         if (indoorResponse.ok) {
           indoorPlants = await indoorResponse.json();
-          // Tag each plant with its type
           indoorPlants = indoorPlants.map(plant => ({
             ...plant,
             _plantType: 'indoor'
@@ -974,7 +1038,6 @@
         // Process outdoor plants
         if (outdoorResponse.ok) {
           outdoorPlants = await outdoorResponse.json();
-          // Tag each plant with its type
           outdoorPlants = outdoorPlants.map(plant => ({
             ...plant,
             _plantType: 'outdoor'
@@ -988,7 +1051,7 @@
         if (!grid) return;
 
         if (!allPlants.length) {
-          grid.innerHTML = `<p style="text-align: center; grid-column: 1/-1; padding: 40px;">No information collected about plants at location ${locationId} yet.</p>`;
+          grid.innerHTML = `<p style="text-align: center; grid-column: 1/-1; padding: 40px;">No information collected about plants at ${locationNumber} ${locationType} yet.</p>`;
           return;
         }
 
@@ -1004,46 +1067,52 @@
 
     async function loadProposalsForLocation() {
       const params = new URLSearchParams(window.location.search);
-      const locationId = params.get("id");
+      const uniqueId = params.get("id"); // e.g., "S39-Building"
       const proposalsContainer = document.getElementById('proposals-container');
 
       if (!proposalsContainer) return;
       proposalsContainer.innerHTML = '';
 
-      if (!locationId) {
-        proposalsContainer.innerHTML = `<p class="no-proposals">No Location number provided in URL.</p>`;
+      if (!uniqueId) {
+        proposalsContainer.innerHTML = `<p class="no-proposals">No Location provided in URL.</p>`;
         return;
       }
 
-      const endpoint = 'http://localhost:3000/api/proposals';
+      // Parse the unique ID to get location number and type
+      const { name: locationNumber, type: locationType } = parseLocationId(uniqueId);
 
+      // Fetch proposals and match by both location number AND type
       try {
+        const endpoint = 'https://landscapinguob-api.onrender.com/api/proposals';
         const res = await fetch(endpoint);
+
         if (!res.ok) {
           console.error('Failed to fetch proposals:', res.status);
-          proposalsContainer.innerHTML = `<p class="no-proposals">Unable to load proposals for ${locationId}.</p>`;
+          proposalsContainer.innerHTML = `<p class="no-proposals">Unable to load proposals.</p>`;
           return;
         }
+
         const data = await res.json();
 
-        const matched = data.filter(item => {
-          const itemLoc = (item['Location number'] || item['Location Number'] || '').trim();
-          return itemLoc === locationId;
+        const matchedProposals = data.filter(item => {
+          const itemNumber = (item['Location number'] || '').trim();
+          const itemType = (item['Location type'] || '').trim();
+          return itemNumber === locationNumber && itemType === locationType;
         });
 
-        if (!matched.length) {
-          proposalsContainer.innerHTML = `<p class="no-proposals">No proposals for ${locationId}.</p>`;
+        if (!matchedProposals.length) {
+          proposalsContainer.innerHTML = `<p class="no-proposals">No proposals for this location yet.</p>`;
           return;
         }
 
-        matched.forEach((p, idx) => {
+        matchedProposals.forEach((p, idx) => {
           const wrapper = document.createElement('div');
           wrapper.className = 'proposal-item';
 
-          const locName = p['Location name'] || p['Location Name'] || '';
-          const projectName = p['Project name'] || p['Project Name'] || '';
-          const videoUrl = (p['Proposal Video'] || p['proposal video'] || '').trim();
-          const pdfUrl = (p['Proposal PDF'] || p['proposal pdf'] || '').trim();
+          const locName = p['Location name'] || '';
+          const projectName = p['Project name'] || '';
+          const videoUrl = (p['Proposal Video'] || '').trim();
+          const pdfUrl = (p['PDF link'] || '').trim();
 
           // Extract YouTube video ID
           let videoId = null;
@@ -1077,15 +1146,13 @@
           // Create caption
           const caption = document.createElement('div');
           caption.className = 'proposal-caption';
-          caption.innerHTML = `<h3>${locName || locationId} <small>${locationId}</small></h3><p>${projectName || ''}</p>`;
+          caption.innerHTML = `<h3>${locName || locationNumber} ${locationType}</h3><p>${projectName || ''}</p>`;
 
-          // Add PDF link if it exists (INSIDE THE LOOP!)
+          // Add PDF viewer if it exists
           if (pdfUrl) {
-            const pdfLinkContainer = document.createElement('div');
-            pdfLinkContainer.className = 'pdf-link-container';
-            pdfLinkContainer.style.marginTop = '10px';
-
-            const pdfLink = document.createElement('a');
+            const pdfViewerContainer = document.createElement('div');
+            pdfViewerContainer.className = 'pdf-viewer-container';
+            pdfViewerContainer.style.marginTop = '20px';
 
             // Convert raw.githubusercontent.com to media URL for Git LFS files
             let finalPdfUrl = pdfUrl;
@@ -1096,14 +1163,104 @@
               );
             }
 
-            pdfLink.href = finalPdfUrl;
-            pdfLink.target = '_blank';
-            pdfLink.rel = 'noopener noreferrer';
-            pdfLink.className = 'pdf-download-btn';
-            pdfLink.innerHTML = '<i class="fas fa-file-pdf"></i> View Proposal PDF';
+            // Create title for PDF section
+            const pdfTitle = document.createElement('h4');
+            pdfTitle.textContent = 'Proposal Document';
+            pdfTitle.style.marginBottom = '15px';
+            pdfTitle.style.color = 'var(--text-color)';
+            pdfViewerContainer.appendChild(pdfTitle);
 
-            pdfLinkContainer.appendChild(pdfLink);
-            caption.appendChild(pdfLinkContainer);
+            // Create buttons container
+            const buttonContainer = document.createElement('div');
+            buttonContainer.style.display = 'flex';
+            buttonContainer.style.gap = '10px';
+            buttonContainer.style.flexWrap = 'wrap';
+            buttonContainer.style.marginBottom = '15px';
+
+            // Mozilla PDF.js viewer URL (works for all file sizes)
+            const pdfViewerUrl = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(finalPdfUrl)}`;
+
+            // Try to detect file size to show it to users
+            fetch(finalPdfUrl, { method: 'HEAD' })
+              .then(response => {
+                const fileSizeBytes = response.headers.get('content-length');
+                const fileSizeMB = fileSizeBytes ? (fileSizeBytes / (1024 * 1024)).toFixed(2) : null;
+
+                // View button (opens in new tab)
+                const viewButton = document.createElement('a');
+                viewButton.href = pdfViewerUrl;
+                viewButton.target = '_blank';
+                viewButton.rel = 'noopener noreferrer';
+                viewButton.className = 'pdf-download-btn';
+                viewButton.innerHTML = '<i class="fas fa-external-link-alt"></i> Open in New Tab';
+                buttonContainer.appendChild(viewButton);
+
+                // Download button
+                const downloadButton = document.createElement('a');
+                downloadButton.href = finalPdfUrl;
+                downloadButton.target = '_blank';
+                downloadButton.rel = 'noopener noreferrer';
+                downloadButton.className = 'pdf-download-btn';
+                downloadButton.style.backgroundColor = '#27ae60';
+                downloadButton.innerHTML = '<i class="fas fa-download"></i> Download PDF';
+                buttonContainer.appendChild(downloadButton);
+
+                // Show file size if available
+                if (fileSizeMB) {
+                  const sizeInfo = document.createElement('span');
+                  sizeInfo.style.fontSize = '13px';
+                  sizeInfo.style.color = '#666';
+                  sizeInfo.style.alignSelf = 'center';
+                  sizeInfo.innerHTML = `<i class="fas fa-file"></i> ${fileSizeMB} MB`;
+                  buttonContainer.appendChild(sizeInfo);
+                }
+              })
+              .catch(error => {
+                console.warn('Could not detect file size:', error);
+
+                // View button (opens in new tab)
+                const viewButton = document.createElement('a');
+                viewButton.href = pdfViewerUrl;
+                viewButton.target = '_blank';
+                viewButton.rel = 'noopener noreferrer';
+                viewButton.className = 'pdf-download-btn';
+                viewButton.innerHTML = '<i class="fas fa-external-link-alt"></i> Open in New Tab';
+                buttonContainer.appendChild(viewButton);
+
+                // Download button
+                const downloadButton = document.createElement('a');
+                downloadButton.href = finalPdfUrl;
+                downloadButton.target = '_blank';
+                downloadButton.rel = 'noopener noreferrer';
+                downloadButton.className = 'pdf-download-btn';
+                downloadButton.style.backgroundColor = '#27ae60';
+                downloadButton.innerHTML = '<i class="fas fa-download"></i> Download PDF';
+                buttonContainer.appendChild(downloadButton);
+              });
+
+            pdfViewerContainer.appendChild(buttonContainer);
+
+            // Add embedded preview using Mozilla PDF.js viewer
+            const embedPreview = document.createElement('details');
+            embedPreview.open = false;
+            embedPreview.style.marginTop = '15px';
+            embedPreview.innerHTML = `
+              <summary style="cursor: pointer; color: var(--primary-dark); font-weight: 600; padding: 10px; background: #f5f5f5; border-radius: 8px;">
+                <i class="fas fa-desktop"></i> Preview PDF
+              </summary>
+              <div style="margin-top: 10px;">
+                <iframe 
+                  src="${pdfViewerUrl}"
+                  width="100%"
+                  height="600"
+                  style="border: 1px solid #ddd; border-radius: 8px;"
+                  title="Proposal PDF Preview">
+                </iframe>
+              </div>
+            `;
+
+            pdfViewerContainer.appendChild(embedPreview);
+            caption.appendChild(pdfViewerContainer);
           }
 
           wrapper.appendChild(caption);
@@ -1112,7 +1269,7 @@
 
       } catch (err) {
         console.error('Error fetching proposals:', err);
-        proposalsContainer.innerHTML = `<p class="no-proposals">Unable to load proposals for ${locationId}.</p>`;
+        proposalsContainer.innerHTML = `<p class="no-proposals">Unable to load proposals.</p>`;
       }
     }
   </script>

@@ -1342,11 +1342,28 @@
           project.records.push(r);
         });
 
-        // Convert to arrays for rendering
+        // Convert to arrays for rendering and sort alphabetically by location number
         const locationsArray = Array.from(locationGroups.values()).map(loc => ({
           ...loc,
           projects: Array.from(loc.projects.values())
-        }));
+        })).sort((a, b) => {
+          // Extract numeric parts for proper sorting (e.g., "S10" before "S2")
+          const getNumericPart = (str) => {
+            const match = str.match(/(\d+)/);
+            return match ? parseInt(match[1]) : 0;
+          };
+
+          const aNum = getNumericPart(a.locationNumber);
+          const bNum = getNumericPart(b.locationNumber);
+
+          // If both have numbers, sort numerically
+          if (aNum && bNum) {
+            return aNum - bNum;
+          }
+
+          // Otherwise, sort alphabetically
+          return a.locationNumber.localeCompare(b.locationNumber);
+        });
 
         let activeLocationIndex = 0;
         let activeProjectIndex = 0;

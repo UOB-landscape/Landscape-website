@@ -405,6 +405,14 @@
   </footer>
 
   <script>
+    // Helper function to generate unique location ID
+    function generateLocationId(locationNumber, locationType) {
+      const number = (locationNumber || '').trim();
+      const type = (locationType || '').trim();
+      const typeSlug = type.replace(/\s+/g, ''); // "Car Park" → "CarPark"
+      return `${number}-${typeSlug}`;
+    }
+
     // Store all locations data
     let allLocations = [];
     let currentFilter = 'Building'; // Default filter
@@ -474,11 +482,15 @@
       filtered.forEach(location => {
         const locNum = location["Location Number"] || location["Location number"];
         const locName = location["Location name"] || location["Location Name"];
+        const locType = location["Location type"] || location["Location Type"];
         const picture = location.Picture || 'placeholder.jpg';
+
+        // Generate unique ID with both number and type
+        const uniqueId = generateLocationId(locNum, locType);
 
         const card = document.createElement('a');
         card.className = 'grid-item';
-        card.href = `location.html?id=${encodeURIComponent(locNum)}`;
+        card.href = `location.html?id=${encodeURIComponent(uniqueId)}`;
         card.innerHTML = `
           <img src="${picture}" alt="${locName}">
           <h3>${locName} <br><small>(${locNum})</small></h3>
