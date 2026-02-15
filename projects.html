@@ -14,6 +14,8 @@
     }
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
   <link rel="stylesheet" href="styles.css" />
   <style>
     .hero-section {
@@ -25,666 +27,6 @@
       color: white;
       margin-top: 70px;
       position: relative;
-    }
-
-    /* Year Tabs Styling - Updated to match project-sub-filters */
-    .year-tabs {
-      display: flex;
-      width: 100%;
-      max-width: 95%;
-      margin: 10px auto 30px auto;
-      gap: 0;
-      border-radius: 16px;
-      overflow: hidden;
-      background: #fff;
-      justify-content: center;
-    }
-
-    .year-tab {
-      flex: 1;
-      padding: 15px 20px;
-      background: #fff;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-      color: var(--text-primary, #333);
-      text-align: center;
-      position: relative;
-    }
-
-    .year-tab:hover {
-      background: #e8f4ed;
-    }
-
-    .year-tab.active {
-      background: var(--secondary-mid, #D3E4CD);
-      color: white;
-    }
-
-    /* Responsive adjustments for year tabs */
-    @media (max-width: 768px) {
-      .year-tabs {
-        flex-direction: column;
-        gap: 0;
-      }
-
-      .year-tab {
-        border-right: none;
-        border-bottom: 2px solid var(--secondary-mid, #D3E4CD);
-        padding: 12px 15px;
-        font-size: 0.9rem;
-      }
-
-      .year-tab:last-child {
-        border-bottom: none;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .year-tab {
-        padding: 10px 12px;
-        font-size: 0.85rem;
-      }
-    }
-
-    /* Reports Table Styling */
-    .year-container-report {
-      width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      display: none;
-      margin-top: 20px;
-    }
-
-    .year-container-report.active {
-      display: block;
-    }
-
-    .year-container-report table {
-      border-collapse: collapse;
-      width: 95%;
-      justify-self: center;
-      min-width: 1000px;
-      background: #fff;
-      table-layout: auto;
-    }
-
-    .year-container-report th,
-    .year-container-report td {
-      border: 1px solid #000;
-      padding: 8px;
-      text-align: center;
-      vertical-align: middle;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-    }
-
-    .year-container-report th {
-      background: var(--secondary-mid, #D3E4CD);
-      color: var(--white);
-      font-size: 0.9em;
-      font-weight: bold;
-    }
-
-    .year-container-report td:nth-child(1) {
-      width: 40px;
-      min-width: 40px;
-    }
-
-    .year-container-report td:nth-child(2) {
-      width: 120px;
-      min-width: 120px;
-    }
-
-    .year-container-report .thumb-cell img {
-      width: 100px;
-      height: 100px;
-      display: block;
-      object-fit: cover;
-      margin: 0 auto;
-      cursor: pointer;
-      border-radius: 4px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .year-container-report .thumb-cell img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
-
-    .year-container-report .map-link {
-      display: inline-block;
-      text-decoration: none;
-      transition: transform 0.2s ease;
-      cursor: pointer;
-      font-size: 0.9rem;
-    }
-
-    .year-container-report .map-link:hover {
-      transform: scale(1.2);
-    }
-
-    /* ===========================
-       IMAGE MODAL STYLES
-    =========================== */
-    .image-modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(10, 15, 26, 0.7);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      display: none;
-      align-items: flex-start;
-      justify-content: center;
-      z-index: 9999;
-      /* padding: 32px 0 0 0; */
-      overflow-y: auto;
-      overflow-x: hidden;
-      animation: modalFadeIn 0.3s ease-out;
-    }
-
-    .image-modal-overlay.active {
-      display: flex;
-    }
-
-    .modal-close-btn {
-      position: fixed;
-      top: 24px;
-      right: 24px;
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      border: 1px solid #374151;
-      background: rgba(17, 24, 39, 0.9);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      color: #9ca3af;
-      font-size: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 10001;
-      font-weight: 300;
-      line-height: 1;
-    }
-
-    .modal-close-btn:hover {
-      background: #dc2626;
-      color: #f9fafb;
-      border-color: #dc2626;
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
-    }
-
-    .image-modal-content {
-      position: relative;
-      width: 100%;
-      max-width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      animation: modalSlideUp 0.4s ease-out;
-      margin: auto 0;
-      min-height: min-content;
-    }
-
-    .modal-viewer-container {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 20px;
-      flex-shrink: 0;
-    }
-
-    .modal-frame {
-      background: #111827;
-      padding: 0;
-      border-radius: 16px;
-      border: 1px solid #1f2937;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-      max-height: 65vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .modal-frame::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #518166, transparent);
-      opacity: 0.5;
-    }
-
-    .modal-frame img {
-      max-width: 100%;
-      max-height: 65vh;
-      object-fit: contain;
-      display: block;
-    }
-
-    .modal-nav-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 56px;
-      height: 56px;
-      border-radius: 12px;
-      border: 1px solid #374151;
-      background: rgba(17, 24, 39, 0.9);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      color: #9ca3af;
-      font-size: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      z-index: 10;
-      font-weight: 300;
-    }
-
-    .modal-nav-arrow:hover {
-      background: #518166;
-      color: #f9fafb;
-      border-color: #518166;
-      transform: translateY(-50%) scale(1.05);
-      box-shadow: 0 0 20px rgba(81, 129, 102, 0.3);
-    }
-
-    .modal-nav-arrow:active {
-      transform: translateY(-50%) scale(0.95);
-    }
-
-    .modal-nav-prev {
-      left: -70px;
-    }
-
-    .modal-nav-next {
-      right: -70px;
-    }
-
-    .modal-meta-compact {
-      background: #111827;
-      border: none;
-      border-top: 1px solid #1f2937;
-      border-bottom: 1px solid #1f2937;
-      padding: 16px 24px;
-      border-radius: 0;
-      box-shadow: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 32px;
-      flex-wrap: wrap;
-      width: 100vw;
-      margin-left: calc(-50vw + 50%);
-      flex-shrink: 0;
-    }
-
-    .modal-meta-compact>div {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-    }
-
-    .modal-meta-compact strong {
-      color: #6b7280;
-      font-weight: 500;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .modal-meta-compact span {
-      color: #f9fafb;
-      font-weight: 500;
-    }
-
-    .modal-thumbs-container {
-      background: #111827;
-      border: none;
-      border-top: 1px solid #1f2937;
-      border-bottom: 1px solid #1f2937;
-      /* padding: 16px 0; */
-      border-radius: 0;
-      box-shadow: none;
-      width: 100vw;
-      margin-left: calc(-50vw + 50%);
-      overflow: visible;
-      flex-shrink: 0;
-    }
-
-    .modal-thumbs {
-      display: flex;
-      gap: 12px;
-      overflow-x: auto;
-      overflow-y: visible;
-      padding: 8px 24px;
-      align-items: center;
-      justify-content: center;
-      scrollbar-width: thin;
-      scrollbar-color: #518166 #1f2937;
-    }
-
-    .modal-thumbs::-webkit-scrollbar {
-      height: 6px;
-    }
-
-    .modal-thumbs::-webkit-scrollbar-track {
-      background: #1a2332;
-      border-radius: 3px;
-    }
-
-    .modal-thumbs::-webkit-scrollbar-thumb {
-      background: #518166;
-      border-radius: 3px;
-    }
-
-    .modal-thumbs::-webkit-scrollbar-thumb:hover {
-      background: #60956f;
-    }
-
-    .modal-thumbs img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 8px;
-      cursor: pointer;
-      border: 2px solid transparent;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      flex-shrink: 0;
-      background: #1a2332;
-    }
-
-    .modal-thumbs img:hover {
-      transform: translateY(-3px);
-      border-color: #518166;
-      box-shadow: 0 0 20px rgba(81, 129, 102, 0.3);
-    }
-
-    .modal-thumbs img.active {
-      border-color: #518166;
-      box-shadow: 0 0 20px rgba(81, 129, 102, 0.3);
-    }
-
-    .modal-fallback {
-      padding: 64px 48px;
-      text-align: center;
-      color: #9ca3af;
-      background: #111827;
-      border: 1px solid #1f2937;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      font-size: 16px;
-      line-height: 1.6;
-      margin: 0 20px;
-    }
-
-    .modal-fallback::before {
-      content: "📷";
-      display: block;
-      font-size: 72px;
-      margin-bottom: 24px;
-      opacity: 0.2;
-      filter: grayscale(1);
-    }
-
-    .modal-hidden {
-      display: none !important;
-    }
-
-    /* Modal Responsive */
-    @media (max-width: 1200px) {
-      .modal-nav-prev {
-        left: -60px;
-      }
-
-      .modal-nav-next {
-        right: -60px;
-      }
-    }
-
-    @media (max-width: 1024px) {
-      .modal-nav-arrow {
-        position: static;
-        transform: none;
-        margin: 0 8px;
-      }
-
-      .modal-nav-arrow:hover {
-        transform: scale(1.05);
-      }
-
-      .modal-viewer-container {
-        gap: 8px;
-      }
-
-      .modal-frame {
-        max-height: 55vh;
-      }
-
-      .modal-frame img {
-        max-height: 55vh;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .modal-close-btn {
-        top: 16px;
-        right: 16px;
-        width: 42px;
-        height: 42px;
-        font-size: 24px;
-      }
-
-      .image-modal-overlay {
-        padding: 24px 0;
-      }
-
-      .image-modal-content {
-        gap: 16px;
-      }
-
-      .modal-viewer-container {
-        padding: 0 16px;
-      }
-
-      .modal-nav-arrow {
-        width: 48px;
-        height: 48px;
-        font-size: 24px;
-      }
-
-      .modal-frame {
-        max-height: 50vh;
-        border-radius: 12px;
-      }
-
-      .modal-frame img {
-        max-height: 50vh;
-      }
-
-      .modal-meta-compact {
-        padding: 12px 16px;
-        gap: 20px;
-        font-size: 13px;
-      }
-
-      .modal-meta-compact>div {
-        flex-direction: column;
-        align-items: center;
-        gap: 4px;
-        text-align: center;
-      }
-
-      .modal-thumbs-container {
-        padding: 12px 0;
-      }
-
-      .modal-thumbs {
-        gap: 10px;
-        padding: 8px 16px;
-      }
-
-      .modal-thumbs img {
-        width: 80px;
-        height: 80px;
-      }
-
-      .modal-fallback {
-        padding: 48px 32px;
-        font-size: 15px;
-        margin: 0 16px;
-      }
-
-      .modal-fallback::before {
-        font-size: 56px;
-        margin-bottom: 20px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .image-modal-overlay {
-        padding: 20px 0;
-      }
-
-      .modal-nav-arrow {
-        width: 42px;
-        height: 42px;
-        font-size: 22px;
-        margin: 0 4px;
-      }
-
-      .modal-thumbs img {
-        width: 70px;
-        height: 70px;
-      }
-
-      .modal-meta-compact {
-        flex-direction: column;
-        gap: 12px;
-      }
-    }
-
-    @keyframes modalFadeIn {
-      from {
-        opacity: 0;
-      }
-
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes modalSlideUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* ===========================
-       PROJECT SUB-FILTERS STYLING
-    =========================== */
-    .project-sub-filters {
-      display: flex;
-      width: 100%;
-      max-width: 93%;
-      margin: 10px 0 30px 0;
-      gap: 0;
-      /* border: 2px solid var(--secondary-mid, #D3E4CD); */
-      border-radius: 16px;
-      overflow: hidden;
-      background: #fff;
-      justify-content: center;
-      justify-self: center;
-    }
-
-    .project-sub-btn {
-      flex: 1;
-      padding: 15px 20px;
-      background: #fff;
-      border: none;
-      /* border-right: 2px solid var(--secondary-mid, #D3E4CD); */
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-      color: var(--text-primary, #333);
-      text-align: center;
-      position: relative;
-    }
-
-    .project-sub-btn:last-child {
-      border-right: none;
-    }
-
-    .project-sub-btn:hover {
-      background: #e8f4ed;
-    }
-
-    .project-sub-btn.active {
-      background: var(--secondary-mid, #D3E4CD);
-      color: white;
-    }
-
-    /* .project-sub-btn.active::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: var(--primary-dark, #0B2B26);
-    } */
-
-    /* Responsive adjustments for sub-filters */
-    @media (max-width: 768px) {
-      .project-sub-filters {
-        flex-direction: column;
-        gap: 0;
-      }
-
-      .project-sub-btn {
-        border-right: none;
-        border-bottom: 2px solid var(--secondary-mid, #D3E4CD);
-        padding: 12px 15px;
-        font-size: 0.9rem;
-      }
-
-      .project-sub-btn:last-child {
-        border-bottom: none;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .project-sub-btn {
-        padding: 10px 12px;
-        font-size: 0.85rem;
-      }
     }
   </style>
 </head>
@@ -736,7 +78,10 @@
             <div class="theme-option" data-theme="green"></div>
           </div>
         </div>
-        <input type="search" placeholder="Search…" />
+        <div class="main-search-wrapper">
+          <input type="search" id="main-search-input" placeholder="Search…" autocomplete="off" />
+          <div id="main-search-results" class="main-search-results"></div>
+        </div>
       </div>
     </div>
   </nav>
@@ -1181,6 +526,44 @@
       const btn = document.getElementById('theme-btn');
       const picker = document.getElementById('theme-picker');
 
+      function checkAndApplyLocationFilter() {
+        const params = new URLSearchParams(window.location.search);
+        const locationFilter = params.get('location');
+
+        if (locationFilter && window.location.hash === '#before-after') {
+          // Wait for the page to load all locations
+          setTimeout(() => {
+            // Find the filter button that matches the location
+            const filterButtons = document.querySelectorAll('.project-filter-btn');
+
+            filterButtons.forEach((btn, index) => {
+              const label = btn.querySelector('.label');
+              if (label && label.textContent.trim() === locationFilter) {
+                // Remove active class from all buttons
+                filterButtons.forEach(b => b.classList.remove('active'));
+
+                // Add active to the matched button
+                btn.classList.add('active');
+
+                // Update the active location index
+                activeLocationIndex = index;
+
+                // Trigger project rendering
+                renderActiveProject();
+
+                // Scroll to the active filter button
+                setTimeout(() => {
+                  btn.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                    inline: 'center'
+                  });
+                }, 300);
+              }
+            });
+          }, 500); // Give time for data to load
+        }
+      }
       // Post theme to iframes
       function postThemeToIframes(theme) {
         document.querySelectorAll('iframe').forEach(iframe => {
@@ -1381,6 +764,45 @@
           }).join('');
         }
 
+        function checkAndApplyLocationFilter() {
+          const params = new URLSearchParams(window.location.search);
+          const locationFilter = params.get('location');
+
+          if (locationFilter && window.location.hash === '#before-after') {
+            // Wait for the page to load all locations
+            setTimeout(() => {
+              // Find the filter button that matches the location
+              const filterButtons = document.querySelectorAll('.project-filter-btn');
+
+              filterButtons.forEach((btn, index) => {
+                const label = btn.querySelector('.label');
+                if (label && label.textContent.trim() === locationFilter) {
+                  // Remove active class from all buttons
+                  filterButtons.forEach(b => b.classList.remove('active'));
+
+                  // Add active to the matched button
+                  btn.classList.add('active');
+
+                  // Update the active location index
+                  activeLocationIndex = index;
+
+                  // Trigger project rendering
+                  renderActiveProject();
+
+                  // Scroll to the active filter button horizontally
+                  setTimeout(() => {
+                    btn.scrollIntoView({
+                      behavior: 'smooth',
+                      block: 'nearest',
+                      inline: 'center'
+                    });
+                  }, 300);
+                }
+              });
+            }, 500); // Give time for data to load
+          }
+        }
+
         // Render project sub-buttons for active location
         function renderProjectSubButtons() {
           const location = locationsArray[activeLocationIndex];
@@ -1485,30 +907,31 @@
             </div>
           `;
             } else {
-              const leftSrc = current || before || '';
+              const leftSrc = before || '';
               const rightSrc = proposal || after || '';
-              const leftLabel = current ? 'Current' : 'Before';
+              const leftLabel = proposal ? 'Current' : 'Before';
               const rightLabel = proposal ? 'Proposal' : 'After';
+              const instructionText = `Drag the slider to compare ${leftLabel} vs ${rightLabel}`;
               const uniqueBase = 'two_' + location.locationNumber.replace(/\s+/g, '_') + '_' + project.name.replace(/\s+/g, '_') + '_' + recIdx;
               const twoId = `twoImageSlider_${uniqueBase}`;
               section.innerHTML = `
-            <div class="container">
-              <div class="two-image-slider-container" id="${twoId}">
-                <div class="two-image-instructions">Drag the slider to compare Current vs Proposal</div>
-                <div class="two-image-layer proposal-image">
-                  <img src="${rightSrc}" alt="${rightLabel}" loading="lazy">
-                  <div class="two-image-label proposal-label">${rightLabel}</div>
+                <div class="container">
+                  <div class="two-image-slider-container" id="${twoId}">
+                    <div class="two-image-instructions">${instructionText}</div>
+                    <div class="two-image-layer proposal-image">
+                      <img src="${rightSrc}" alt="${rightLabel}" loading="lazy">
+                      <div class="two-image-label proposal-label">${rightLabel}</div>
+                    </div>
+                    <div class="two-image-layer current-image">
+                      <img src="${leftSrc}" alt="${leftLabel}" loading="lazy">
+                      <div class="two-image-label current-label">${leftLabel}</div>
+                    </div>
+                    <div class="two-slider-line" style="left: 50%;">
+                      <div class="two-slider-handle"></div>
+                    </div>
+                  </div>
                 </div>
-                <div class="two-image-layer current-image">
-                  <img src="${leftSrc}" alt="${leftLabel}" loading="lazy">
-                  <div class="two-image-label current-label">${leftLabel}</div>
-                </div>
-                <div class="two-slider-line" style="left: 50%;">
-                  <div class="two-slider-handle"></div>
-                </div>
-              </div>
-            </div>
-          `;
+              `;
             }
 
             contentsRoot.appendChild(section);
@@ -1520,6 +943,8 @@
         // Initialize
         renderLocationFilters();
         renderActiveProject();
+
+        checkAndApplyLocationFilter();
 
         // Location filter button interactions
         filtersRoot.addEventListener('click', (e) => {
@@ -1590,6 +1015,10 @@
     });
 
     // Reports API Integration
+    // Global variables to store data
+    let allProjects = [];
+    let allImages = [];
+
     async function loadReportsData() {
       const REPORTS_API = 'https://landscapinguob-api.onrender.com/api/reports';
       const IMAGES_API = 'https://landscapinguob-api.onrender.com/api/reportImages';
@@ -1599,8 +1028,6 @@
       const loadingDiv = document.getElementById('reportsLoading');
       const errorDiv = document.getElementById('reportsError');
 
-      let allProjects = [];
-      let allImages = [];
       let availableYears = [];
 
       // Show loading
@@ -1626,10 +1053,13 @@
         // Render all tables
         renderAllTables();
 
-        // Hide loading, show 2025 year by default (or most recent if 2025 not available)
+        // Hide loading, show previous year by default (current year - 1)
         loadingDiv.style.display = 'none';
         if (availableYears.length > 0) {
-          const defaultYear = availableYears.includes(2025) ? 2025 : availableYears[0];
+          const currentYear = new Date().getFullYear();
+          const previousYear = currentYear - 1;
+          // Use previous year if available, otherwise use most recent
+          const defaultYear = availableYears.includes(previousYear) ? previousYear : availableYears[0];
           showReportYear(defaultYear);
         }
       } catch (error) {
@@ -1640,7 +1070,9 @@
 
       function renderYearTabs() {
         yearTabsContainer.innerHTML = availableYears.map(year =>
-          `<div class="year-tab" data-year="${year}" onclick="showReportYear(${year})">${year}</div>`
+          `<div class="year-tab" data-year="${year}" onclick="showReportYear(${year})">
+            ${year}
+          </div>`
         ).join('');
       }
 
@@ -1669,6 +1101,16 @@
           const yearContainer = document.createElement('div');
           yearContainer.className = 'year-container-report';
           yearContainer.id = `report-year-${year}`;
+
+          // Add download button section
+          const downloadSection = document.createElement('div');
+          downloadSection.className = 'download-section';
+          downloadSection.innerHTML = `
+            <button class="download-year-btn" onclick="downloadReportPDF(${year})" title="Download ${year} Report as PDF">
+              <i class="fas fa-download"></i>
+              Download ${year} Report
+            </button>
+          `;
 
           const table = document.createElement('table');
           table.innerHTML = `
@@ -1724,6 +1166,7 @@
             tbody.appendChild(row);
           });
 
+          yearContainer.appendChild(downloadSection);
           yearContainer.appendChild(table);
           tablesContainer.appendChild(yearContainer);
         });
@@ -1763,6 +1206,235 @@
         reportsLoaded = true;
       }
     });
+
+    // Download report as PDF (WITH IMAGES - no loading overlay)
+    window.downloadReportPDF = async function (year) {
+      try {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF('landscape', 'mm', 'a4');
+
+        // Get data for this year
+        const yearProjects = allProjects.filter(p => Number(p.Year) === year);
+
+        if (yearProjects.length === 0) {
+          alert('No data available for this year');
+          return;
+        }
+
+        // Title
+        doc.setFontSize(18);
+        doc.setFont(undefined, 'bold');
+        doc.text(`UOB Landscape Projects Report - ${year}`, 148, 15, { align: 'center' });
+
+        // Helper function to load image as base64
+        async function getImageAsBase64(url) {
+          try {
+            const response = await fetch(url);
+            const blob = await response.blob();
+            return new Promise((resolve, reject) => {
+              const reader = new FileReader();
+              reader.onloadend = () => resolve(reader.result);
+              reader.onerror = reject;
+              reader.readAsDataURL(blob);
+            });
+          } catch (error) {
+            console.error('Failed to load image:', url, error);
+            return null;
+          }
+        }
+
+        function getFirstImage(year, recordNumber) {
+          const imageRecord = allImages.find(img =>
+            Number(img.Year) === year && Number(img['Record Number']) === recordNumber
+          );
+
+          if (!imageRecord) return '';
+
+          for (let i = 1; i <= 20; i++) {
+            const imageKey = 'Image ' + i;
+            if (imageRecord[imageKey] && typeof imageRecord[imageKey] === 'string' && imageRecord[imageKey].trim()) {
+              return imageRecord[imageKey].trim();
+            }
+          }
+          return '';
+        }
+
+        // Prepare table data with images
+        const totalRecords = yearProjects.length;
+        const tableDataWithImages = [];
+
+        for (let i = 0; i < yearProjects.length; i++) {
+          const project = yearProjects[i];
+          const recordNum = Number(project['Record Number']);
+          const firstImage = getFirstImage(year, recordNum);
+
+          let imageData = null;
+          if (firstImage) {
+            imageData = await getImageAsBase64(firstImage);
+          }
+
+          tableDataWithImages.push({
+            data: [
+              project['Record Number'] || '',
+              project.Location || '',
+              project['Map Link'] || '',
+              project.Action || '',
+              project['Total Area'] || '—',
+              project['Previous Condition'] || '',
+              project['Current Condition'] || '',
+              project['Green Area'] || '—',
+              project['No. of Trees'] || '—',
+              project['Additional Notes'] || ''
+            ],
+            imageData: imageData
+          });
+        }
+
+        // Extract just the data array for the table
+        const tableData = tableDataWithImages.map(item => item.data);
+
+        // Generate table
+        doc.autoTable({
+          startY: 25,
+          head: [[
+            'No.',
+            'Image',
+            'Location',
+            'Map',
+            'Action',
+            'Total Area',
+            'Previous Condition',
+            'Current Condition',
+            'Green Area',
+            'No. of Trees',
+            'Additional Notes'
+          ]],
+          body: tableData.map(row => {
+            // Insert empty placeholder for image column at index 1
+            const newRow = [...row];
+            newRow.splice(1, 0, ''); // Add empty cell at index 1 for images
+            return newRow;
+          }),
+          theme: 'grid',
+          headStyles: {
+            fillColor: [180, 212, 194],
+            textColor: [0, 0, 0],
+            fontStyle: 'bold',
+            halign: 'center',
+            valign: 'middle', // Vertical middle alignment for headers
+            lineWidth: 0.1,
+            lineColor: [0, 0, 0]
+          },
+          bodyStyles: {
+            fontSize: 9,
+            lineWidth: 0.1,
+            lineColor: [0, 0, 0],
+            textColor: [0, 0, 0],
+            minCellHeight: 20, // Taller rows for images
+            valign: 'middle' // Vertical middle alignment for all body cells
+          },
+          columnStyles: {
+            0: { halign: 'center', cellWidth: 12, valign: 'middle' }, // No.
+            1: { halign: 'center', cellWidth: 25, valign: 'middle' }, // Image (fixed width)
+            2: { cellWidth: 'auto', valign: 'middle' }, // Location
+            3: { halign: 'center', cellWidth: 20, valign: 'middle' }, // Map
+            4: { cellWidth: 'auto', valign: 'middle' }, // Action
+            5: { halign: 'center', cellWidth: 'auto', valign: 'middle' }, // Total Area
+            6: { cellWidth: 'auto', valign: 'middle' }, // Previous Condition
+            7: { cellWidth: 'auto', valign: 'middle' }, // Current Condition
+            8: { halign: 'center', cellWidth: 'auto', valign: 'middle' }, // Green Area
+            9: { halign: 'center', cellWidth: 'auto', valign: 'middle' }, // No. of Trees
+            10: { cellWidth: 'auto', valign: 'middle' } // Additional Notes
+          },
+          margin: { left: 10, right: 10 },
+          tableWidth: 'auto',
+          styles: {
+            halign: 'center',
+            cellPadding: 2,
+            valign: 'middle' // Global vertical middle alignment
+          },
+          rowPageBreak: 'avoid',
+          showHead: 'everyPage',
+          didDrawCell: function (data) {
+            // Handle Images (column index 1)
+            if (data.column.index === 1 && data.cell.section === 'body') {
+              const rowIndex = data.row.index;
+              const imageData = tableDataWithImages[rowIndex]?.imageData;
+
+              if (imageData) {
+                const imgWidth = 20;
+                const imgHeight = 15;
+                const xPos = data.cell.x + (data.cell.width - imgWidth) / 2;
+                const yPos = data.cell.y + (data.cell.height - imgHeight) / 2;
+
+                try {
+                  doc.addImage(imageData, 'JPEG', xPos, yPos, imgWidth, imgHeight);
+                } catch (error) {
+                  console.error('Failed to add image to PDF:', error);
+                }
+              }
+            }
+
+            // Handle Map links (column index 3)
+            if (data.column.index === 3 && data.cell.section === 'body') {
+              const mapLink = data.cell.raw;
+              if (mapLink && mapLink.trim()) {
+                doc.setFillColor(255, 255, 255);
+                doc.rect(data.cell.x, data.cell.y, data.cell.width, data.cell.height, 'F');
+                doc.setDrawColor(0, 0, 0);
+                doc.setLineWidth(0.1);
+                doc.rect(data.cell.x, data.cell.y, data.cell.width, data.cell.height, 'S');
+                doc.setTextColor(0, 0, 255);
+                doc.setFontSize(9);
+                const textWidth = doc.getTextWidth('View Map');
+                const xPos = data.cell.x + (data.cell.width - textWidth) / 2;
+                const yPos = data.cell.y + data.cell.height / 2 + 1.5;
+                doc.textWithLink('View Map', xPos, yPos, { url: mapLink });
+                doc.setDrawColor(0, 0, 255);
+                doc.line(xPos, yPos + 0.5, xPos + textWidth, yPos + 0.5);
+              } else {
+                doc.setFillColor(255, 255, 255);
+                doc.rect(data.cell.x, data.cell.y, data.cell.width, data.cell.height, 'F');
+                doc.setDrawColor(0, 0, 0);
+                doc.setLineWidth(0.1);
+                doc.rect(data.cell.x, data.cell.y, data.cell.width, data.cell.height, 'S');
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(9);
+                doc.text('—', data.cell.x + data.cell.width / 2, data.cell.y + data.cell.height / 2 + 1.5, { align: 'center' });
+              }
+            }
+          }
+        });
+
+        // Get current date for footer
+        const generatedDate = new Date().toLocaleDateString();
+
+        // Footer on all pages
+        const pageCount = doc.internal.getNumberOfPages();
+        for (let i = 1; i <= pageCount; i++) {
+          doc.setPage(i);
+          doc.setFontSize(9);
+          doc.setFont(undefined, 'normal');
+          doc.setTextColor(0, 0, 0);
+
+          doc.text(`Generated on: ${generatedDate}`, 10, 205);
+          doc.text(
+            `University of Bahrain - Landscape Projects ${year}`,
+            148,
+            205,
+            { align: 'center' }
+          );
+          doc.text(`Page ${i} of ${pageCount}`, 287, 205, { align: 'right' });
+        }
+
+        // Save the PDF
+        doc.save(`UOB_Landscape_Report_${year}.pdf`);
+
+      } catch (error) {
+        console.error('Error generating PDF:', error);
+        alert('Failed to generate PDF. Please try again.');
+      }
+    };
   </script>
 
   <footer>

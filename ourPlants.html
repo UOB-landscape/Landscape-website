@@ -382,7 +382,10 @@
             <div class="theme-option" data-theme="green"></div>
           </div>
         </div>
-        <input type="search" placeholder="Search…" />
+        <div class="main-search-wrapper">
+          <input type="search" id="main-search-input" placeholder="Search…" autocomplete="off" />
+          <div id="main-search-results" class="main-search-results"></div>
+        </div>
       </div>
     </div>
   </nav>
@@ -1641,6 +1644,7 @@
       }
     });
   </script>
+  <script src="search.js"></script>
 </body>
 
 </html>

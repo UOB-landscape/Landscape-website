@@ -76,7 +76,10 @@
             <div class="theme-option" data-theme="green"></div>
           </div>
         </div>
-        <input type="search" placeholder="Search…" />
+        <div class="main-search-wrapper">
+          <input type="search" id="main-search-input" placeholder="Search…" autocomplete="off" />
+          <div id="main-search-results" class="main-search-results"></div>
+        </div>
       </div>
     </div>
   </nav>
@@ -92,7 +95,7 @@
       <!-- Feature Section -->
       <div class="feature-section">
         <div class="feature-text">
-          <h1 style="margin-bottom: 40px; border-bottom: 2.5px solid #000000;">About Us</h1>
+          <h1 style="margin-bottom: 30px;">About Us</h1>
           <p>The University of Bahrain Landscapes initiative envisions a collaborative platform where science,
             engineering, and technology unite to create a sustainable and data-driven campus environment.
             By integrating biological research, landscape design, and digital innovation, the project aims to
@@ -404,6 +407,7 @@
       });
     });
   </script>
+  <script src="search.js"></script>
 </body>
 
 </html>

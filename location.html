@@ -18,10 +18,19 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
   <style>
+    /* Override main section padding for full-width header */
+    .grid-section {
+      padding: 0;
+    }
+
+    .building-section#Plants {
+      padding: 0;
+    }
+
     .location-header {
       text-align: center;
       padding: 3rem 1rem 1.5rem;
-      /* background: var(--card-bg, #fff); */
+      display: none;
     }
 
     .location-header h1 {
@@ -32,12 +41,426 @@
 
     .location-header h1 small {
       font-size: 1.4rem;
-      /* font-weight: 300; */
       color: #888;
-      /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, serif; */
     }
 
-    /* Add all the filter/sort CSS from Our Plants page */
+    /* Location Image Slider - Card-Based Carousel Design */
+    .location-image-slider {
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0;
+      box-shadow: none;
+      /* padding: 80px 0; */
+      /* background: linear-gradient(to bottom, #f5f5f5 0%, #e8e8e8 100%); */
+    }
+
+    .location-slider-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      height: 515px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+    }
+
+    .location-slider-track {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      transition: none;
+      height: 100%;
+      gap: 0;
+    }
+
+    .location-slide {
+      position: absolute;
+      width: 450px;
+      height: 300px;
+      flex-shrink: 0;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: scale(0.85) translateX(0);
+      opacity: 0.4;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      z-index: 1;
+      left: 50%;
+      top: 50%;
+      margin-left: -225px;
+      margin-top: -150px;
+      cursor: pointer;
+    }
+
+    /* Position side cards */
+    .location-slide.prev-card {
+      transform: scale(0.85) translateX(-480px);
+      opacity: 0.5;
+      z-index: 2;
+    }
+
+    .location-slide.next-card {
+      transform: scale(0.85) translateX(480px);
+      opacity: 0.5;
+      z-index: 2;
+    }
+
+    /* Hover effect for clickable side cards */
+    .location-slide.prev-card:hover,
+    .location-slide.next-card:hover {
+      opacity: 0.75;
+      transform: scale(0.9) translateX(-480px);
+    }
+
+    .location-slide.next-card:hover {
+      transform: scale(0.9) translateX(480px);
+    }
+
+    /* Center active card */
+    .location-slide.active {
+      transform: scale(1) translateX(0);
+      opacity: 1;
+      width: 600px;
+      height: 420px;
+      margin-left: -300px;
+      margin-top: -210px;
+      /* box-shadow: 0 25px 70px rgba(0, 0, 0, 0.3); */
+      z-index: 3;
+      cursor: default;
+    }
+
+    /* Hide other slides - but keep them clickable */
+    .location-slide.hidden {
+      opacity: 0.3;
+      pointer-events: auto;
+      transform: scale(0.5);
+      z-index: 0;
+      filter: brightness(0.4) grayscale(0.5);
+    }
+
+    /* Add dark overlay to hidden slide images */
+    .location-slide.hidden::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.9);
+      /* Dark overlay */
+      z-index: 1;
+      pointer-events: none;
+      border-radius: 20px;
+      /* Match the slide border radius */
+    }
+
+    .location-slide.hidden:hover {
+      opacity: 0.5;
+      filter: brightness(0.4);
+      /* Slightly brighter on hover */
+    }
+
+    .location-slide.hidden:hover::after {
+      background-color: rgba(0, 0, 0, 0.5);
+      /* Lighter on hover */
+    }
+
+    .location-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Overlay with location title */
+    .location-slide-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(22, 56, 50, 0.95), rgba(22, 56, 50, 0.7), transparent);
+      padding: 40px 30px 30px;
+      color: white;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      pointer-events: none;
+    }
+
+    .location-slide.active .location-slide-overlay {
+      opacity: 1;
+    }
+
+    .location-slide-overlay h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .location-slide-overlay p {
+      margin: 0;
+      font-size: 1rem;
+      opacity: 0.95;
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .location-slider-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 14px;
+      z-index: 10;
+    }
+
+    .location-slider-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(22, 56, 50, 0.3);
+      cursor: pointer;
+      transition: all 0.4s ease;
+      border: none;
+    }
+
+    .location-slider-dot.active {
+      background: var(--primary-dark, #163832);
+      transform: scale(1.4);
+      box-shadow: 0 3px 4px rgba(22, 56, 50, 0.4);
+    }
+
+    .location-slider-dot:hover {
+      background: rgba(22, 56, 50, 0.6);
+      transform: scale(1.2);
+    }
+
+    /* No images state */
+    .no-location-images {
+      text-align: center;
+      padding: 40px;
+      background: var(--card-bg);
+      border-radius: 16px;
+      margin: 0 auto 30px;
+      max-width: 1200px;
+      color: #999;
+      font-style: italic;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1200px) {
+      .location-slide.prev-card {
+        transform: scale(0.85) translateX(-400px);
+      }
+
+      .location-slide.next-card {
+        transform: scale(0.85) translateX(400px);
+      }
+
+      .location-slide.prev-card:hover {
+        transform: scale(0.9) translateX(-400px);
+      }
+
+      .location-slide.next-card:hover {
+        transform: scale(0.9) translateX(400px);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .location-slider-wrapper {
+        height: 450px;
+      }
+
+      .location-slide {
+        width: 380px;
+        height: 260px;
+        margin-left: -190px;
+        margin-top: -130px;
+      }
+
+      .location-slide.active {
+        width: 500px;
+        height: 360px;
+        margin-left: -250px;
+        margin-top: -180px;
+      }
+
+      .location-slide.prev-card {
+        transform: scale(0.8) translateX(-350px);
+      }
+
+      .location-slide.next-card {
+        transform: scale(0.8) translateX(350px);
+      }
+
+      .location-slide.prev-card:hover {
+        transform: scale(0.85) translateX(-350px);
+      }
+
+      .location-slide.next-card:hover {
+        transform: scale(0.85) translateX(350px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .location-image-slider {
+        padding: 60px 0;
+      }
+
+      .location-slider-wrapper {
+        height: 400px;
+      }
+
+      .location-slide {
+        width: 300px;
+        height: 220px;
+        margin-left: -150px;
+        margin-top: -110px;
+      }
+
+      .location-slide.active {
+        width: 400px;
+        height: 300px;
+        margin-left: -200px;
+        margin-top: -150px;
+      }
+
+      .location-slide.prev-card {
+        transform: scale(0.75) translateX(-280px);
+        opacity: 0.4;
+      }
+
+      .location-slide.next-card {
+        transform: scale(0.75) translateX(280px);
+        opacity: 0.4;
+      }
+
+      .location-slide.prev-card:hover {
+        transform: scale(0.8) translateX(-280px);
+      }
+
+      .location-slide.next-card:hover {
+        transform: scale(0.8) translateX(280px);
+      }
+
+      .location-slide-overlay {
+        padding: 25px 20px 20px;
+      }
+
+      .location-slide-overlay h3 {
+        font-size: 1.4rem;
+      }
+
+      .location-slide-overlay p {
+        font-size: 1rem;
+      }
+
+      .location-slider-dot {
+        width: 10px;
+        height: 10px;
+      }
+
+      .location-slider-dots {
+        bottom: 25px;
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .location-image-slider {
+        padding: 40px 0;
+      }
+
+      .location-slider-wrapper {
+        height: 320px;
+      }
+
+      .location-slide {
+        width: 220px;
+        height: 180px;
+        margin-left: -110px;
+        margin-top: -90px;
+        opacity: 0.3;
+      }
+
+      .location-slide.active {
+        width: 300px;
+        height: 240px;
+        margin-left: -150px;
+        margin-top: -120px;
+      }
+
+      .location-slide.prev-card {
+        transform: scale(0.7) translateX(-200px);
+      }
+
+      .location-slide.next-card {
+        transform: scale(0.7) translateX(200px);
+      }
+
+      .location-slide.prev-card:hover {
+        transform: scale(0.75) translateX(-200px);
+      }
+
+      .location-slide.next-card:hover {
+        transform: scale(0.75) translateX(200px);
+      }
+
+      .location-slide-overlay {
+        padding: 20px 15px 15px;
+      }
+
+      .location-slide-overlay h3 {
+        font-size: 1.1rem;
+      }
+
+      .location-slide-overlay p {
+        font-size: 0.85rem;
+      }
+
+      .location-slider-dots {
+        bottom: 20px;
+      }
+    }
+
+    /* Plants Section Title - Add padding back to content */
+    .plants-section-title {
+      text-align: center;
+      padding: 45px 20px 10px;
+      margin: 0 auto 20px;
+      max-width: 1200px;
+    }
+
+    .plants-section-title h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: var(--text-color);
+      font-weight: 600;
+    }
+
+    .plants-section-title h2 small {
+      font-size: 1.3rem;
+      color: #888;
+      font-weight: 400;
+    }
+
+    .plants-section-subtitle {
+      margin: 8px 0 0 0;
+      font-size: 1rem;
+      color: #666;
+      font-style: italic;
+    }
+
+    /* Add padding to content sections */
     .search-filters-container {
       display: flex;
       align-items: center;
@@ -45,6 +468,19 @@
       gap: 25px;
       margin-bottom: 30px;
       margin-top: 20px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .grid-container {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
     }
 
     .search-bar {
@@ -317,6 +753,28 @@
       .pdf-viewer-container iframe {
         min-height: 400px;
       }
+
+      .plants-section-title h2 {
+        font-size: 1.4rem;
+      }
+
+      .plants-section-title h2 small {
+        font-size: 1.1rem;
+      }
+
+      .plants-section-subtitle {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .plants-section-title h2 {
+        font-size: 1.2rem;
+      }
+
+      .plants-section-title h2 small {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
@@ -368,7 +826,10 @@
             <div class="theme-option" data-theme="green"></div>
           </div>
         </div>
-        <input type="search" placeholder="Search…" />
+        <div class="main-search-wrapper">
+          <input type="search" id="main-search-input" placeholder="Search…" autocomplete="off" />
+          <div id="main-search-results" class="main-search-results"></div>
+        </div>
       </div>
     </div>
   </nav>
@@ -382,8 +843,17 @@
 
   <main class="grid-section">
     <section id="Plants" class="building-section">
-      <div class="location-header">
+      <div class="location-header" style="display: none;">
         <h1 id="location-name">Loading...</h1>
+      </div>
+
+      <!-- Location Image Slider -->
+      <div id="location-images-container"></div>
+
+      <!-- Plants Section Title -->
+      <div class="plants-section-title">
+        <h2 id="plants-location-title">Loading...</h2>
+        <p class="plants-section-subtitle">Explore the plant species at this location</p>
       </div>
 
       <div class="search-filters-container">
@@ -441,12 +911,12 @@
     </section>
 
     <section id="Suggestions" class="building-section">
-      <h1>Suggestions</h1>
-
       <div id="proposals-container" class="proposals-container">
         <!-- Proposal videos for this location will be injected here -->
       </div>
-
+      <div id="before-after-link-container" style="text-align: center; margin: 40px 0 20px 0;">
+        <!-- Before & After link will be injected here -->
+      </div>
     </section>
   </main>
 
@@ -454,7 +924,7 @@
     <div class="footer-container">
       <div class="footer-column">
         <h4>About</h4>
-        <p>UOB Landscape documents and showcases the diverse flora across our campus, providing detailed information
+        <p>UoB Landscape documents and showcases the diverse flora across our campus, providing detailed information
           about plants, their locations, and ecological significance.</p>
       </div>
 
@@ -473,7 +943,8 @@
       <div class="footer-column">
         <h4>External Links</h4>
         <ul>
-          <li><a href="https://www.uob.edu.bh/" target="_blank" rel="noopener noreferrer">University of Bahrain</a></li>
+          <li><a href="https://www.uob.edu.bh/" target="_blank" rel="noopener noreferrer">University of Bahrain</a>
+          </li>
           <li><a href="https://www.mun.gov.bh/newportal/ar" target="_blank" rel="noopener noreferrer">Municipality of
               Bahrain</a></li>
           <li><a href="https://www.bahrain.bh/wps/portal/en/BNP/ExploreBahrain/SustainableDevelopment/" target="_blank"
@@ -512,6 +983,7 @@
     </div>
   </footer>
 
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script>
     // Parse unique ID back into name and type
     function parseLocationId(uniqueId) {
@@ -562,6 +1034,222 @@
       document.querySelectorAll('.theme-option').forEach(opt => {
         opt.classList.toggle('active', opt.dataset.theme === theme);
       });
+    }
+
+    // Location Image Slider Class
+    class LocationImageSlider {
+      constructor(containerId, images, locationInfo) {
+        this.container = document.getElementById(containerId);
+        this.images = images;
+        this.locationInfo = locationInfo;
+        this.currentIndex = 0;
+        this.autoPlayInterval = null;
+
+        if (this.images.length > 0) {
+          this.render();
+          this.init();
+        }
+      }
+
+      render() {
+        // Calculate initial prev and next indices
+        const prevIndex = this.images.length - 1; // Last image
+        const nextIndex = 1; // Second image
+
+        const sliderHTML = `
+      <div class="location-image-slider">
+        <div class="location-slider-wrapper">
+          <div class="location-slider-track" id="location-slider-track">
+            ${this.images.map((img, index) => {
+          let cardClass = 'hidden';
+          if (index === 0) cardClass = 'active';
+          else if (index === prevIndex) cardClass = 'prev-card';
+          else if (index === nextIndex) cardClass = 'next-card';
+
+          return `
+              <div class="location-slide ${cardClass}" data-index="${index}">
+                <img src="${img}" alt="${this.locationInfo.name} - Image ${index + 1}" loading="${index === 0 || index === prevIndex || index === nextIndex ? 'eager' : 'lazy'}">
+                <div class="location-slide-overlay">
+                  <h3>${this.locationInfo.name}</h3>
+                  <p>${this.locationInfo.number} ${this.locationInfo.type}</p>
+                </div>
+              </div>
+            `;
+        }).join('')}
+          </div>
+          
+          ${this.images.length > 1 ? `
+            <div class="location-slider-dots">
+              ${this.images.map((_, index) => `
+                <div class="location-slider-dot ${index === 0 ? 'active' : ''}" data-index="${index}"></div>
+              `).join('')}
+            </div>
+          ` : ''}
+        </div>
+      </div>
+    `;
+
+        this.container.innerHTML = sliderHTML;
+      }
+
+      init() {
+        if (this.images.length <= 1) return;
+
+        this.track = document.getElementById('location-slider-track');
+        this.slides = this.container.querySelectorAll('.location-slide');
+        this.dots = this.container.querySelectorAll('.location-slider-dot');
+
+        // Click navigation on ALL slides
+        this.slides.forEach((slide) => {
+          slide.addEventListener('click', () => {
+            const targetIndex = parseInt(slide.dataset.index);
+            // Navigate to the clicked image
+            this.goToSlide(targetIndex);
+          });
+        });
+
+        // Dots navigation
+        this.dots.forEach(dot => {
+          dot.addEventListener('click', (e) => {
+            const index = parseInt(e.target.dataset.index);
+            this.goToSlide(index);
+          });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') this.prev();
+          if (e.key === 'ArrowRight') this.next();
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        this.container.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        });
+
+        this.container.addEventListener('touchend', (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          if (touchStartX - touchEndX > 50) this.next();
+          if (touchEndX - touchStartX > 50) this.prev();
+        });
+
+        // Auto-play
+        this.startAutoPlay();
+
+        // Pause on hover
+        this.container.addEventListener('mouseenter', () => this.stopAutoPlay());
+        this.container.addEventListener('mouseleave', () => this.startAutoPlay());
+      }
+
+      goToSlide(index) {
+        this.currentIndex = index;
+        this.updateSlider();
+      }
+
+      next() {
+        this.currentIndex = (this.currentIndex + 1) % this.images.length;
+        this.updateSlider();
+      }
+
+      prev() {
+        this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+        this.updateSlider();
+      }
+
+      updateSlider() {
+        if (!this.track || !this.slides.length) return;
+
+        // Calculate previous and next indices with wrapping
+        const prevIndex = this.currentIndex === 0 ? this.images.length - 1 : this.currentIndex - 1;
+        const nextIndex = this.currentIndex === this.images.length - 1 ? 0 : this.currentIndex + 1;
+
+        // Update all slides
+        this.slides.forEach((slide, index) => {
+          // Remove all positioning classes
+          slide.classList.remove('active', 'prev-card', 'next-card', 'hidden');
+
+          if (index === this.currentIndex) {
+            slide.classList.add('active');
+          } else if (index === prevIndex) {
+            slide.classList.add('prev-card');
+          } else if (index === nextIndex) {
+            slide.classList.add('next-card');
+          } else {
+            slide.classList.add('hidden');
+          }
+        });
+
+        // Update dots
+        this.dots?.forEach((dot, index) => {
+          dot.classList.toggle('active', index === this.currentIndex);
+        });
+      }
+
+      startAutoPlay() {
+        if (this.images.length <= 1) return;
+        this.stopAutoPlay();
+        this.autoPlayInterval = setInterval(() => this.next(), 5000);
+      }
+
+      stopAutoPlay() {
+        if (this.autoPlayInterval) {
+          clearInterval(this.autoPlayInterval);
+          this.autoPlayInterval = null;
+        }
+      }
+    }
+
+    // Function to load location images
+    async function loadLocationImages() {
+      const params = new URLSearchParams(window.location.search);
+      const uniqueId = params.get("id");
+      const container = document.getElementById('location-images-container');
+
+      if (!container || !uniqueId) return;
+
+      const { name: locationNumber, type: locationType } = parseLocationId(uniqueId);
+
+      try {
+        // Fetch location data
+        const locRes = await fetch('https://landscapinguob-api.onrender.com/api/locations');
+        if (!locRes.ok) throw new Error('Failed to fetch locations');
+
+        const locations = await locRes.json();
+
+        // Find matching location
+        const location = locations.find(item => {
+          const itemNumber = (item['Location number'] || item['Location Number'] || '').trim();
+          const itemType = (item['Location type'] || item['Location Type'] || '').trim();
+          return itemNumber === locationNumber && itemType === locationType;
+        });
+
+        // Extract images from Image 1, Image 2, Image 3, etc.
+        const images = [];
+        for (let i = 1; i <= 10; i++) {
+          const imageKey = `Image ${i}`;
+          const imageUrl = location[imageKey];
+          if (imageUrl && typeof imageUrl === 'string' && imageUrl.trim()) {
+            images.push(imageUrl.trim());
+          }
+        }
+
+        // Get location info for overlay
+        const locationInfo = {
+          name: location['Location name'] || location['Location Name'] || locationNumber,
+          number: locationNumber,
+          type: locationType
+        };
+
+        // Initialize slider with location info
+        new LocationImageSlider('location-images-container', images, locationInfo);
+
+      } catch (error) {
+        console.error('Error loading location images:', error);
+        container.innerHTML = '';
+      }
     }
 
     // Global variables
@@ -949,30 +1637,30 @@
 
       // Load data
       loadLocationName();
+      loadLocationImages();
       loadPlantsForLocation();
       loadProposalsForLocation();
     });
 
     async function loadLocationName() {
       const params = new URLSearchParams(window.location.search);
-      const uniqueId = params.get("id"); // e.g., "S39-Building" or "S39-CarPark"
+      const uniqueId = params.get("id");
       const locationNameEl = document.getElementById('location-name');
+      const plantsTitleEl = document.getElementById('plants-location-title');
 
       if (!uniqueId) {
-        locationNameEl.textContent = 'No Location Selected';
+        if (locationNameEl) locationNameEl.textContent = 'No Location Selected';
+        if (plantsTitleEl) plantsTitleEl.textContent = 'No Location Selected';
         return;
       }
 
-      // Parse the unique ID
       const { name: locationNumber, type: locationType } = parseLocationId(uniqueId);
 
-      // Fetch location data from API
       try {
         const res = await fetch('https://landscapinguob-api.onrender.com/api/locations');
         if (res.ok) {
           const data = await res.json();
 
-          // Find location by Location number AND type
           const matched = data.find(item => {
             const itemNumber = (item['Location number'] || item['Location Number'] || '').trim();
             const itemType = (item['Location type'] || item['Location Type'] || '').trim();
@@ -980,16 +1668,19 @@
           });
 
           if (matched) {
-            const locName = matched['Location name'] || matched['Location Name'] || locationNumber;
+            const locName = matched['Location name'] || matched['Location Name'] || '';
+            const locNumber = matched['Location number'] || matched['Location Number'] || locationNumber;
             const locType = matched['Location type'] || matched['Location Type'] || locationType;
 
-            // Display: "College of Law Building" or "S39 Car Park"
-            if (locName && locType) {
-              locationNameEl.innerHTML = `${locName} ${locType}`;
-            } else if (locName) {
-              locationNameEl.innerHTML = locName;
+            // Update both titles
+            if (locName) {
+              const titleHTML = `${locName} <small>(${locNumber} ${locType})</small>`;
+              if (locationNameEl) locationNameEl.innerHTML = titleHTML;
+              if (plantsTitleEl) plantsTitleEl.innerHTML = `Plants at ${titleHTML}`;
             } else {
-              locationNameEl.innerHTML = `${locationNumber} ${locationType}`;
+              const fallbackTitle = `${locNumber} ${locType}`;
+              if (locationNameEl) locationNameEl.innerHTML = fallbackTitle;
+              if (plantsTitleEl) plantsTitleEl.innerHTML = `Plants at ${fallbackTitle}`;
             }
             return;
           }
@@ -999,7 +1690,9 @@
       }
 
       // Fallback
-      locationNameEl.textContent = `${locationNumber} ${locationType}`;
+      const fallbackTitle = `${locationNumber} ${locationType}`;
+      if (locationNameEl) locationNameEl.innerHTML = fallbackTitle;
+      if (plantsTitleEl) plantsTitleEl.innerHTML = `Plants at ${fallbackTitle}`;
     }
 
     // Load both indoor and outdoor plants
@@ -1069,12 +1762,15 @@
       const params = new URLSearchParams(window.location.search);
       const uniqueId = params.get("id"); // e.g., "S39-Building"
       const proposalsContainer = document.getElementById('proposals-container');
+      const linkContainer = document.getElementById('before-after-link-container');
 
-      if (!proposalsContainer) return;
+      if (!proposalsContainer || !linkContainer) return;
+
       proposalsContainer.innerHTML = '';
+      linkContainer.innerHTML = '';
 
       if (!uniqueId) {
-        proposalsContainer.innerHTML = `<p class="no-proposals">No Location provided in URL.</p>`;
+        proposalsContainer.innerHTML = `<p class="no-proposals" style="grid-column: 1/-1;">No Location provided in URL.</p>`;
         return;
       }
 
@@ -1088,7 +1784,7 @@
 
         if (!res.ok) {
           console.error('Failed to fetch proposals:', res.status);
-          proposalsContainer.innerHTML = `<p class="no-proposals">Unable to load proposals.</p>`;
+          proposalsContainer.innerHTML = `<p class="no-proposals" style="grid-column: 1/-1;">Unable to load proposals.</p>`;
           return;
         }
 
@@ -1101,7 +1797,7 @@
         });
 
         if (!matchedProposals.length) {
-          proposalsContainer.innerHTML = `<p class="no-proposals">No proposals for this location yet.</p>`;
+          proposalsContainer.innerHTML = `<p class="no-proposals" style="grid-column: 1/-1;">No proposals for this location yet.</p>`;
           return;
         }
 
@@ -1163,19 +1859,20 @@
               );
             }
 
-            // Create title for PDF section
+            // Create header container with title and download button on same line
+            const pdfHeader = document.createElement('div');
+            pdfHeader.style.display = 'flex';
+            pdfHeader.style.justifyContent = 'space-between';
+            pdfHeader.style.alignItems = 'center';
+            pdfHeader.style.marginTop = '30px';
+
             const pdfTitle = document.createElement('h4');
             pdfTitle.textContent = 'Proposal Document';
-            pdfTitle.style.marginBottom = '15px';
+            pdfTitle.style.margin = '0';
             pdfTitle.style.color = 'var(--text-color)';
-            pdfViewerContainer.appendChild(pdfTitle);
 
-            // Create buttons container
-            const buttonContainer = document.createElement('div');
-            buttonContainer.style.display = 'flex';
-            buttonContainer.style.gap = '10px';
-            buttonContainer.style.flexWrap = 'wrap';
-            buttonContainer.style.marginBottom = '15px';
+            pdfHeader.appendChild(pdfTitle);
+            pdfViewerContainer.appendChild(pdfHeader);
 
             // Mozilla PDF.js viewer URL (works for all file sizes)
             const pdfViewerUrl = `https://mozilla.github.io/pdf.js/web/viewer.html?file=${encodeURIComponent(finalPdfUrl)}`;
@@ -1186,46 +1883,20 @@
                 const fileSizeBytes = response.headers.get('content-length');
                 const fileSizeMB = fileSizeBytes ? (fileSizeBytes / (1024 * 1024)).toFixed(2) : null;
 
-                // View button (opens in new tab)
-                const viewButton = document.createElement('a');
-                viewButton.href = pdfViewerUrl;
-                viewButton.target = '_blank';
-                viewButton.rel = 'noopener noreferrer';
-                viewButton.className = 'pdf-download-btn';
-                viewButton.innerHTML = '<i class="fas fa-external-link-alt"></i> Open in New Tab';
-                buttonContainer.appendChild(viewButton);
-
-                // Download button
-                const downloadButton = document.createElement('a');
-                downloadButton.href = finalPdfUrl;
-                downloadButton.target = '_blank';
-                downloadButton.rel = 'noopener noreferrer';
-                downloadButton.className = 'pdf-download-btn';
-                downloadButton.style.backgroundColor = '#27ae60';
-                downloadButton.innerHTML = '<i class="fas fa-download"></i> Download PDF';
-                buttonContainer.appendChild(downloadButton);
+                // Create container for download button and file size
+                const downloadContainer = document.createElement('div');
+                downloadContainer.style.display = 'flex';
+                downloadContainer.style.alignItems = 'center';
+                downloadContainer.style.gap = '10px';
 
                 // Show file size if available
                 if (fileSizeMB) {
                   const sizeInfo = document.createElement('span');
                   sizeInfo.style.fontSize = '13px';
                   sizeInfo.style.color = '#666';
-                  sizeInfo.style.alignSelf = 'center';
                   sizeInfo.innerHTML = `<i class="fas fa-file"></i> ${fileSizeMB} MB`;
-                  buttonContainer.appendChild(sizeInfo);
+                  downloadContainer.appendChild(sizeInfo);
                 }
-              })
-              .catch(error => {
-                console.warn('Could not detect file size:', error);
-
-                // View button (opens in new tab)
-                const viewButton = document.createElement('a');
-                viewButton.href = pdfViewerUrl;
-                viewButton.target = '_blank';
-                viewButton.rel = 'noopener noreferrer';
-                viewButton.className = 'pdf-download-btn';
-                viewButton.innerHTML = '<i class="fas fa-external-link-alt"></i> Open in New Tab';
-                buttonContainer.appendChild(viewButton);
 
                 // Download button
                 const downloadButton = document.createElement('a');
@@ -1234,30 +1905,59 @@
                 downloadButton.rel = 'noopener noreferrer';
                 downloadButton.className = 'pdf-download-btn';
                 downloadButton.style.backgroundColor = '#27ae60';
+                downloadButton.style.fontSize = '13px';
+                downloadButton.style.padding = '8px 16px';
+                downloadButton.innerHTML = '<i class="fas fa-download"></i> Download PDF';
+                downloadContainer.appendChild(downloadButton);
+
+                pdfHeader.appendChild(downloadContainer);
+              })
+              .catch(error => {
+                console.warn('Could not detect file size:', error);
+
+                // Create container for buttons
+                const buttonContainer = document.createElement('div');
+                buttonContainer.style.display = 'flex';
+                buttonContainer.style.gap = '10px';
+                buttonContainer.style.alignItems = 'center';
+
+                // Download button
+                const downloadButton = document.createElement('a');
+                downloadButton.href = finalPdfUrl;
+                downloadButton.target = '_blank';
+                downloadButton.rel = 'noopener noreferrer';
+                downloadButton.className = 'pdf-download-btn';
+                downloadButton.style.backgroundColor = '#27ae60';
+                downloadButton.style.fontSize = '13px';
+                downloadButton.style.padding = '8px 16px';
                 downloadButton.innerHTML = '<i class="fas fa-download"></i> Download PDF';
                 buttonContainer.appendChild(downloadButton);
+
+                pdfHeader.appendChild(buttonContainer);
               });
 
-            pdfViewerContainer.appendChild(buttonContainer);
-
-            // Add embedded preview using Mozilla PDF.js viewer
+            // Add embedded preview with Open in New Tab button inside
             const embedPreview = document.createElement('details');
             embedPreview.open = false;
-            embedPreview.style.marginTop = '15px';
             embedPreview.innerHTML = `
-              <summary style="cursor: pointer; color: var(--primary-dark); font-weight: 600; padding: 10px; background: #f5f5f5; border-radius: 8px;">
-                <i class="fas fa-desktop"></i> Preview PDF
-              </summary>
-              <div style="margin-top: 10px;">
-                <iframe 
-                  src="${pdfViewerUrl}"
-                  width="100%"
-                  height="600"
-                  style="border: 1px solid #ddd; border-radius: 8px;"
-                  title="Proposal PDF Preview">
-                </iframe>
-              </div>
-            `;
+          <summary style="cursor: pointer; color: var(--primary-dark); font-weight: 600; padding: 10px; border-radius: 8px;">
+            <i class="fas fa-desktop"></i> Preview PDF
+          </summary>
+          <div>
+            <div style="margin-bottom: 10px; text-align: right;">
+              <a href="${pdfViewerUrl}" target="_blank" rel="noopener noreferrer" class="pdf-download-btn" style="font-size: 13px; padding: 8px 16px;">
+                <i class="fas fa-external-link-alt"></i> Open in New Tab
+              </a>
+            </div>
+            <iframe 
+              src="${pdfViewerUrl}"
+              width="100%"
+              height="600"
+              style="border: 1px solid #ddd; border-radius: 8px;"
+              title="Proposal PDF Preview">
+            </iframe>
+          </div>
+        `;
 
             pdfViewerContainer.appendChild(embedPreview);
             caption.appendChild(pdfViewerContainer);
@@ -1267,9 +1967,18 @@
           proposalsContainer.appendChild(wrapper);
         });
 
+        // Add "View Before & After" button in the separate link container
+        linkContainer.innerHTML = `
+      <a href="projects.html?location=${encodeURIComponent(locationNumber)}#before-after" 
+         class="pdf-download-btn" 
+         style="display: inline-flex; align-items: center; gap: 10px; font-size: 16px; padding: 14px 28px; background-color: var(--primary-dark);">
+        <i class="fas fa-images"></i> View Before & After Projects for ${locationNumber} ${locationType}
+      </a>
+    `;
+
       } catch (err) {
         console.error('Error fetching proposals:', err);
-        proposalsContainer.innerHTML = `<p class="no-proposals">Unable to load proposals.</p>`;
+        proposalsContainer.innerHTML = `<p class="no-proposals" style="grid-column: 1/-1;">Unable to load proposals.</p>`;
       }
     }
   </script>

@@ -1,0 +1,41 @@
+[{
+    "title": "Home",
+    "url": "home.html",
+    "content": "Welcome to the University of Bahrain's official website. Explore our academic programs, research initiatives, and campus life. Find quick links to admissions, student services, and faculty directories."
+  },
+  {
+    "title": "Our Plants",
+    "url": "ourPlants.html",
+    "content": "Discover the diverse flora cultivated across our campus. Learn about our plant conservation efforts, botanical gardens, and the species native to Bahrain. Includes sections on 'Plant Species Database', 'Conservation Projects', and 'Campus Green Initiatives'."
+  },
+  {
+    "title": "Projects",
+    "url": "projects.html",
+    "content": "Showcasing engineering student innovations and documenting the dedicated work of our landscaping staff in maintaining and enhancing campus green spaces. Explore 'Student Engineering Projects', 'Campus Beautification Initiatives', and 'Research & Development'."
+  },
+  {
+    "title": "Locations",
+    "url": "locations.html",
+    "content": "Find maps and directions to all University of Bahrain campuses and facilities. Includes 'Main Campus Map', 'College Buildings', 'Libraries', and 'Sports Facilities'."
+  },
+  {
+    "title": "Statistics",
+    "url": "statistics.html",
+    "content": "Access key facts and figures about the University of Bahrain. View data on student enrollment, graduation rates, faculty research output, and campus demographics. Sections include 'Enrollment Data', 'Academic Performance', and 'Research Metrics'."
+  },
+  {
+    "title": "About Us",
+    "url": "about.html",
+    "content": "Learn more about the University of Bahrain's mission, vision, history, and leadership. Discover our commitment to academic excellence and community engagement. Includes 'University History', 'Mission & Vision', and 'Leadership Team'."
+  },
+  {
+    "title": "Before & After Projects",
+    "url": "before-after.html",
+    "content": "View the transformative impact of our campus development and landscaping projects through before and after comparisons. See improvements in infrastructure, green spaces, and facilities."
+  },
+  {
+    "title": "Reports",
+    "url": "reports.html",
+    "content": "Access annual reports, financial statements, academic publications, and research findings from the University of Bahrain. Download official documents and institutional reviews. Includes 'Annual Reports', 'Financial Statements', and 'Research Publications'."
+  }
+]
