@@ -161,7 +161,7 @@
     .location-slide.hidden:hover {
       opacity: 0.5;
       filter: brightness(0.4);
-   }
+    }
 
     .location-slide.hidden:hover::after {
       background-color: rgba(0, 0, 0, 0.5);
@@ -795,10 +795,7 @@
             <button class="theme-btn" id="mobile-theme-btn">🎨</button>
             <div class="theme-picker" id="mobile-theme-picker">
               <div class="theme-option" data-theme="default"></div>
-              <div class="theme-option" data-theme="dark"></div>
-              <div class="theme-option" data-theme="solar"></div>
-              <div class="theme-option" data-theme="highcontrast"></div>
-              <div class="theme-option" data-theme="green"></div>
+              <div class="theme-option" data-theme="blue"></div>
             </div>
           </div>
           <button class="arabic-btn" onclick="translate()">عربي</button>
@@ -813,10 +810,7 @@
           <button class="theme-btn" id="theme-btn">🎨</button>
           <div class="theme-picker" id="theme-picker">
             <div class="theme-option" data-theme="default"></div>
-            <div class="theme-option" data-theme="dark"></div>
-            <div class="theme-option" data-theme="solar"></div>
-            <div class="theme-option" data-theme="highcontrast"></div>
-            <div class="theme-option" data-theme="green"></div>
+            <div class="theme-option" data-theme="blue"></div>
           </div>
         </div>
         <div class="main-search-wrapper">
@@ -992,8 +986,8 @@
       const typeMap = {
         'Building': 'Building',
         'Buildings': 'Buildings',
-        'CarPark': 'Car park', 
-        'CarParks': 'Car park', 
+        'CarPark': 'Car park',
+        'CarParks': 'Car park',
         'Carpark': 'Car park',
         'Gate': 'Gate',
         'Gates': 'Gates',
@@ -1976,6 +1970,7 @@
       }
     }
   </script>
+  <script src="search.js"></script>
 </body>
 
 </html>

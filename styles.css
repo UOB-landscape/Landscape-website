@@ -1,66 +1,4 @@
 :root {
-  --bg: #f5f7fa;
-  --fg: #000000;
-  --font: Georgia, serif;
-
-  /* Primary Colors – Dark to Light Blues */
-  --primary-dark: #0a3460;
-  --primary-light: #3e6d9b;
-  --accent: #2a5d8f;
-  --accent-light: #dbe9f6;
-
-  /* Secondary Blues */
-  --secondary-dark: #163a59;
-  --secondary-mid: #1e4f7a;
-
-  /* Gold Accents */
-  --gold-accent: #a67d4a;
-  --gold-light: #c89d63;
-
-  /* Red Accent */
-  --red-accent: #a41e23;
-
-  /* Neutral Colors */
-  --neutral-light: #f8f6f2;
-  --neutral-dark: #1e1f21;
-  --text-dark: #0a0a0a;
-  --text-light: #4d4f52;
-  --white: #ffffff;
-
-  /* Effects */
-  --shadow: 0 4px 6px rgba(30, 77, 123, 0.15);
-  --transition: all 0.3s ease;
-}
-
-
-[data-theme="dark"] {
-  --bg: #282727;
-  --fg: #e8e6e3;
-  --font: Georgia, serif;
-
-  --primary-dark: #0a3460;
-  --primary-light: #3e6d9b;
-  --accent: #4a8cc9;
-  --accent-light: #638ebb;
-
-  --gold-accent: #d4a574;
-  --gold-light: #c89d63;
-
-  --red-accent: #e63946;
-
-  --neutral-light: #1e1e1e;
-  --neutral-dark: #0d0d0d;
-  --text-dark: #e8e6e3;
-  --text-light: #b8b5b0;
-  --white: #1e1e1e;
-  --card-bg: #1e1e1e;
-  --border-color: #2a2a2a;
-  --hover-bg: #2a2a2a;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  --transition: all 0.3s ease;
-}
-
-[data-theme="green"] {
   --bg: #f4f4f4;
   --fg: #000000;
   --font: Georgia, serif;
@@ -91,6 +29,40 @@
 
   /* Effects */
   --shadow: 0 4px 6px rgba(5, 31, 32, 0.15);
+  --transition: all 0.3s ease;
+}
+
+[data-theme="blue"] {
+  --bg: #f5f7fa;
+  --fg: #000000;
+  --font: Georgia, serif;
+
+  /* Primary Colors – Dark to Light Blues */
+  --primary-dark: #0a3460;
+  --primary-light: #3e6d9b;
+  --accent: #2a5d8f;
+  --accent-light: #dbe9f6;
+
+  /* Secondary Blues */
+  --secondary-dark: #163a59;
+  --secondary-mid: #1e4f7a;
+
+  /* Gold Accents */
+  --gold-accent: #a67d4a;
+  --gold-light: #c89d63;
+
+  /* Red Accent */
+  --red-accent: #a41e23;
+
+  /* Neutral Colors */
+  --neutral-light: #f8f6f2;
+  --neutral-dark: #1e1f21;
+  --text-dark: #0a0a0a;
+  --text-light: #4d4f52;
+  --white: #ffffff;
+
+  /* Effects */
+  --shadow: 0 4px 6px rgba(30, 77, 123, 0.15);
   --transition: all 0.3s ease;
 }
 
@@ -424,23 +396,11 @@ nav a.active {
 }
 
 .theme-option[data-theme="default"] {
-  background: #1b5098;
+  background: #163832;
 }
 
-.theme-option[data-theme="dark"] {
-  background: #006bb3;
-}
-
-.theme-option[data-theme="solar"] {
-  background: #b58900;
-}
-
-.theme-option[data-theme="highcontrast"] {
-  background: #cb9d65;
-}
-
-.theme-option[data-theme="green"] {
-  background: #4f9253;
+.theme-option[data-theme="blue"] {
+  background: #163a59;
 }
 
 .controls input[type="search"] {
