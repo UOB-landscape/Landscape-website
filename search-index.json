@@ -1,41 +1,602 @@
-[{
+[
+  {
     "title": "Home",
     "url": "home.html",
-    "content": "Welcome to the University of Bahrain's official website. Explore our academic programs, research initiatives, and campus life. Find quick links to admissions, student services, and faculty directories."
+    "content": "Your browser does not support the video tag. University of BahrainLandscapes Welcome to UoB Landscape This website showcases the diverse flora across our campus, providing detailed information about each plant, its location, and its unique characteristics. It was created collaboratively by IT students along with landscaping and biology students, combining technology, science, and design to make exploring our university's green spaces informative and engaging. Whether you are a student, researcher, or visitor, you can learn about the plants that contribute to the beauty and sustainability of our campus. 100+ Plant Species 50+ Locations 36K+ Square Meters 30+ Projects Explore Our Landscape Locations Car Parks Buildings Gates Roadsides Infrastructures Facilities Car Parks Buildings Gates Roadsides Infrastructures Facilities Building a Sustainable Future Commitment to Sustainability University of Bahrain proudly aligns with the United Nations Sustainable Development Goals, fostering a greener, healthier, and more sustainable campus environment for future generations. Featured Sustainable Development Goals Interactive Campus Map Navigate through our campus facilities. Click on any building icon to explore its location and details. + − Reset"
   },
   {
     "title": "Our Plants",
     "url": "ourPlants.html",
-    "content": "Discover the diverse flora cultivated across our campus. Learn about our plant conservation efforts, botanical gardens, and the species native to Bahrain. Includes sections on 'Plant Species Database', 'Conservation Projects', and 'Campus Green Initiatives'."
+    "content": "Indoor Plants Explore the lush greenery that thrives inside our campus buildings, carefully selected to enhance indoor spaces and air quality. 🔍 Sort Name Light Requirements Temperature Filters 0 Clear 🔍 Sort Name Water Requirement Sun Requirement Waste Drought Tolerance Heat Tolerance Environmental Impact Oxygen Production CO₂ Absorption Filters 0 Clear"
   },
   {
     "title": "Projects",
     "url": "projects.html",
-    "content": "Showcasing engineering student innovations and documenting the dedicated work of our landscaping staff in maintaining and enhancing campus green spaces. Explore 'Student Engineering Projects', 'Campus Beautification Initiatives', and 'Research & Development'."
+    "content": "Projects & Annual Reports Showcasing engineering student innovations and documenting the dedicated work of our landscaping staff in maintaining and enhancing campus green spaces Before & After Projects 🌳 Landscape Projects Annual Reports Loading reports data... Failed to load reports data. Please try again later. × Year - Record - Location - ‹ › No images available for this record."
   },
   {
-    "title": "Locations",
-    "url": "locations.html",
-    "content": "Find maps and directions to all University of Bahrain campuses and facilities. Includes 'Main Campus Map', 'College Buildings', 'Libraries', and 'Sports Facilities'."
+    "title": "Buildings",
+    "url": "Buildings.html",
+    "content": "🔍 Buildings Gates Roadside Infrastructure Facilities Car Park"
   },
   {
     "title": "Statistics",
     "url": "statistics.html",
-    "content": "Access key facts and figures about the University of Bahrain. View data on student enrollment, graduation rates, faculty research output, and campus demographics. Sections include 'Enrollment Data', 'Academic Performance', and 'Research Metrics'."
+    "content": "UoB Landscape Statistics Track the growth and development of our campus landscape through comprehensive data and visual insights spanning multiple years of environmental enhancement. 100+ Total Plant Species 36K+ Square Meters 30+ Completed Projects 50+ Campus Locations Annual Growth Trends Visualizing the expansion of our campus landscape initiatives over the years Plant Categories Distribution Indoor Plants Outdoor Plants Plants Added Per Year Indoor Plants Outdoor Plants Planted Square Meters Per Year Square Meters Buildings Planted Completed Projects Per Year Projects Completed Planned Projects Detailed Statistics Comprehensive breakdown of landscape development data Year Indoor Plants Outdoor Plants Total Plants Square Meters Buildings Planned Projects Completed Projects"
   },
   {
-    "title": "About Us",
+    "title": "About",
     "url": "about.html",
-    "content": "Learn more about the University of Bahrain's mission, vision, history, and leadership. Discover our commitment to academic excellence and community engagement. Includes 'University History', 'Mission & Vision', and 'Leadership Team'."
+    "content": "About UoB Landscapes Where Science Meets Design - A collaborative platform uniting biology, engineering, and technology to create a sustainable and data-driven campus environment. About Us The University of Bahrain Landscapes initiative envisions a collaborative platform where science, engineering, and technology unite to create a sustainable and data-driven campus environment. By integrating biological research, landscape design, and digital innovation, the project aims to cultivate a living repository of plant data and design proposals that evolve with time. This ongoing collaboration lays the groundwork for a greener, smarter, and more connected university landscape that reflects the harmony between nature, knowledge, and technology. Where Science Meets Design This initiative lays the foundation for a continuously evolving landscape strategy, where scientific insight and engineering creativity converge to shape a greener, smarter campus experience. 🔬 Scientific Research Biologists from the College of Science meticulously document indoor plant species, creating a comprehensive database that serves as a valuable resource for botanical research and education. 🏗️ Engineering Excellence Landscape engineers from the College of Engineering design innovative outdoor and indoor landscaping proposals with detailed plans and 3D models that bring visions to life. 💻 Digital Innovation Software engineers from the College of IT develop and maintain the platform, ensuring seamless data integration and user-friendly access to all landscape information. 🌱 Future Growth Both biological surveys and engineering designs are part of an ongoing process, with future expansions planned to cover additional locations and introduce new proposals across campus. Meet Our Team 🧬 Biologists College of Science 🌿 Landscape Engineers College of Engineering 💻 Software Engineers College of Information Technology"
   },
   {
-    "title": "Before & After Projects",
-    "url": "before-after.html",
-    "content": "View the transformative impact of our campus development and landscaping projects through before and after comparisons. See improvements in infrastructure, green spaces, and facilities."
+    "title": "كركديه صيني",
+    "url": "indoorPlant.html?id=IP-001",
+    "content": "كركديه صيني Hibiscus rosa-sinensis Medium Once a week or when soil is dry 18-30 ℃ Yes"
   },
   {
-    "title": "Reports",
-    "url": "reports.html",
-    "content": "Access annual reports, financial statements, academic publications, and research findings from the University of Bahrain. Download official documents and institutional reviews. Includes 'Annual Reports', 'Financial Statements', and 'Research Publications'."
+    "title": "فيلوديندرون القلبي",
+    "url": "indoorPlant.html?id=IP-002",
+    "content": "فيلوديندرون القلبي Philodendron hederaceum Medium Once a week or when soil is dry 18-27 ℃ Yes"
+  },
+  {
+    "title": "إيوبيا",
+    "url": "indoorPlant.html?id=IP-003",
+    "content": "إيوبيا Euphorbia milii High Once a week or when soil is dry 18-30 ℃ Yes"
+  },
+  {
+    "title": "سينغونيوم",
+    "url": "indoorPlant.html?id=IP-004",
+    "content": "سينغونيوم Syngonium podophyllum Medium Once a week or when soil is dry 18-27 ℃ Yes"
+  },
+  {
+    "title": "بوثوس ذهبي",
+    "url": "indoorPlant.html?id=IP-005",
+    "content": "بوثوس ذهبي Epipremnum aureum Medium Once a week or when soil is dry 21-29 ℃ No"
+  },
+  {
+    "title": "سيندابسوس",
+    "url": "indoorPlant.html?id=IP-006",
+    "content": "سيندابسوس Scindapsus pictus Medium Once a week or when soil is dry 18-24 ℃ Yes"
+  },
+  {
+    "title": "أراوكاريا",
+    "url": "indoorPlant.html?id=IP-007",
+    "content": "أراوكاريا Araucaria heterophylla Medium Once a week or when soil is dry 16-24 ℃ Yes"
+  },
+  {
+    "title": "رافينيا",
+    "url": "indoorPlant.html?id=IP-008",
+    "content": "رافينيا Ravenea rivularis Medium Once a week or when soil is dry 18-27 ℃ Yes"
+  },
+  {
+    "title": "شيفليرا",
+    "url": "indoorPlant.html?id=IP-009",
+    "content": "شيفليرا Schefflera arboricola High Once a week or when soil is dry 18-27 ℃ Yes"
+  },
+  {
+    "title": "دراكينا",
+    "url": "indoorPlant.html?id=IP-010",
+    "content": "دراكينا Dracaena marginata Medium Once a week or when soil is dry 20-27 ℃ Yes"
+  },
+  {
+    "title": "دراكينا ضيقة الأوراق",
+    "url": "indoorPlant.html?id=IP-011",
+    "content": "دراكينا ضيقة الأوراق Dracaena angustifolia High Once a week or when soil is dry 18-29 ℃ Yes"
+  },
+  {
+    "title": "سانسيفيريا أسطوانية",
+    "url": "indoorPlant.html?id=IP-012",
+    "content": "سانسيفيريا أسطوانية Sansevieria cylindrica High Once a week or when soil is dry 18-29 ℃ Yes"
+  },
+  {
+    "title": "باتشيرا",
+    "url": "indoorPlant.html?id=IP-013",
+    "content": "باتشيرا Pachira glabra Medium Once a week or when soil is dry 16-26 ℃ Yes"
+  },
+  {
+    "title": "فيكس مطاطي",
+    "url": "indoorPlant.html?id=IP-014",
+    "content": "فيكس مطاطي Ficus elastica Medium Once a week or when soil is dry 18-25 ℃ Yes"
+  },
+  {
+    "title": "كروتون",
+    "url": "indoorPlant.html?id=IP-015",
+    "content": "كروتون Codiaeum variegatum High Once a week or when soil is dry 18-27 ℃ Yes"
+  },
+  {
+    "title": "فيكس ميكروكاربا",
+    "url": "indoorPlant.html?id=IP-016",
+    "content": "فيكس ميكروكاربا Ficus microcapa High Once a week or when soil is dry 18-24 ℃ Yes"
+  },
+  {
+    "title": "كلانشو",
+    "url": "indoorPlant.html?id=IP-017",
+    "content": "كلانشو Kalanchoe blossfeldiana High Once a week or when soil is dry 18-26 ℃ Yes"
+  },
+  {
+    "title": "الجهنمية الجرداء",
+    "url": "indoorPlant.html?id=IP-018",
+    "content": "الجهنمية الجرداء Bougainvillea glabra High Once a week or when soil is dry 20-30 ℃ Yes"
+  },
+  {
+    "title": "دراكينا عطرية",
+    "url": "indoorPlant.html?id=IP-019",
+    "content": "دراكينا عطرية Dracaena fragrans Medium Once a week or when soil is dry 18-27 ℃ Yes"
+  },
+  {
+    "title": "زاميا",
+    "url": "indoorPlant.html?id=IP-020",
+    "content": "زاميا Zamioculcas zamiifolia Low Once a week or when soil is dry 18-28 ℃ No"
+  },
+  {
+    "title": "خزامى",
+    "url": "indoorPlant.html?id=IP-021",
+    "content": "خزامى Lavandula angustifolia High Once a week or when soil is dry 18-28 ℃ Yes"
+  },
+  {
+    "title": "عشب الليمون",
+    "url": "indoorPlant.html?id=IP-022",
+    "content": "عشب الليمون Cymbopogon citratus High Once a week or when soil is dry 20-30 ℃ Yes"
+  },
+  {
+    "title": "موناردا",
+    "url": "indoorPlant.html?id=IP-023",
+    "content": "موناردا Monarda punctata High Once a week or when soil is dry 18-28 ℃ Yes"
+  },
+  {
+    "title": "بليكترا",
+    "url": "indoorPlant.html?id=IP-024",
+    "content": "بليكترا Plectranthus amboinicus High Once a week or when soil is dry 18-30 ℃ Yes"
+  },
+  {
+    "title": "مريمية",
+    "url": "indoorPlant.html?id=IP-025",
+    "content": "مريمية Salvia officinalis High Once a week or when soil is dry 18-25 ℃ Yes"
+  },
+  {
+    "title": "زعتر",
+    "url": "indoorPlant.html?id=IP-026",
+    "content": "زعتر Thymus vulgaris High Once a week or when soil is dry 18-25 ℃ Yes"
+  },
+  {
+    "title": "نعناع أخضر",
+    "url": "indoorPlant.html?id=IP-027",
+    "content": "نعناع أخضر Mentha spicata High Once a week or when soil is dry 18-24 ℃ No"
+  },
+  {
+    "title": "إكليل الجبل",
+    "url": "indoorPlant.html?id=IP-028",
+    "content": "إكليل الجبل Salvia rosmarinus High Once a week or when soil is dry 15-21 ℃ Yes"
+  },
+  {
+    "title": "جيرانيوم",
+    "url": "indoorPlant.html?id=IP-029",
+    "content": "جيرانيوم Pelargonium graveolens High Once a week or when soil is dry 18-24 ℃ Yes"
+  },
+  {
+    "title": "إكسورا",
+    "url": "indoorPlant.html?id=IP-030",
+    "content": "إكسورا Ixora coccinea High Once a week or when soil is dry 20-30 ℃ No"
+  },
+  {
+    "title": "فيكس بنجاميا",
+    "url": "indoorPlant.html?id=IP-031",
+    "content": "فيكس بنجاميا Ficus benjamina High Once a week or when soil is dry 18-29 ℃ Yes"
+  },
+  {
+    "title": "ديبسياس",
+    "url": "indoorPlant.html?id=IP-032",
+    "content": "ديبسياس Dypsis lutescens High Once a week or when soil is dry 18-28 ℃ Yes"
+  },
+  {
+    "title": "زنبق السلام",
+    "url": "indoorPlant.html?id=IP-033",
+    "content": "زنبق السلام Spathiphyllum High Once a week or when soil is dry 18-27 ℃ Yes"
+  },
+  {
+    "title": "أنثوريوم",
+    "url": "indoorPlant.html?id=IP-034",
+    "content": "أنثوريوم Anthurium andraeanum High Once a week or when soil is dry 18-29 ℃ Yes"
+  },
+  {
+    "title": "دراكينا ساندر",
+    "url": "indoorPlant.html?id=IP-035",
+    "content": "دراكينا ساندر Dracaena sanderiana High Once a week or when soil is dry 18-35 ℃ Yes"
+  },
+  {
+    "title": "نبات الثعبان",
+    "url": "indoorPlant.html?id=IP-036",
+    "content": "نبات الثعبان Sansevieria trifasciata Low Once a week or when soil is dry 15-30 ℃ Yes"
+  },
+  {
+    "title": "كاتارانثوس وردي",
+    "url": "indoorPlant.html?id=IP-037",
+    "content": "كاتارانثوس وردي Catharanthus roseus High Once a week or when soil is dry 20-30 ℃ Yes"
+  },
+  {
+    "title": "زنبق الفهد",
+    "url": "indoorPlant.html?id=IP-038",
+    "content": "زنبق الفهد Ledebouria socialis Medium Once a week or when soil is dry 15-25 ℃ Yes"
+  },
+  {
+    "title": "ديفينباخيا",
+    "url": "indoorPlant.html?id=IP-039",
+    "content": "ديفينباخيا Dieffenbachia seguine Medium Once a week or when soil is dry 18-24 ℃ Yes"
+  },
+  {
+    "title": "أجلونيما",
+    "url": "indoorPlant.html?id=IP-040",
+    "content": "أجلونيما Aglaonema commutatum Medium Once a week or when soil is dry 18-24 ℃ Yes"
+  },
+  {
+    "title": "فيلوديندرون زانادو",
+    "url": "indoorPlant.html?id=IP-041",
+    "content": "فيلوديندرون زانادو Philodendron xanadu Medium Once a week or when soil is dry 18-28 ℃ Yes"
+  },
+  {
+    "title": "تريدسكينتيا",
+    "url": "indoorPlant.html?id=IP-042",
+    "content": "تريدسكينتيا Tradescantia spathacea Medium Once a week or when soil is dry 18-27 ℃ Yes"
+  },
+  {
+    "title": "سانسيفيريا مخططة",
+    "url": "indoorPlant.html?id=IP-043",
+    "content": "سانسيفيريا مخططة Sansevieria trifasciata var. laurentii Medium Once a week or when soil is dry 18-30 ℃ Yes"
+  },
+  {
+    "title": "بوكارنيا",
+    "url": "indoorPlant.html?id=IP-044",
+    "content": "بوكارنيا Beaucarnea recurvata Medium Once a week or when soil is dry 18-28 ℃ Yes"
+  },
+  {
+    "title": "نبات العنكبوت",
+    "url": "indoorPlant.html?id=IP-045",
+    "content": "نبات العنكبوت Chlorophytum comosum Medium Once a week or when soil is dry 18-27 ℃ Yes"
+  },
+  {
+    "title": "تريدسكينتيا بنفسجية",
+    "url": "indoorPlant.html?id=IP-046",
+    "content": "تريدسكينتيا بنفسجية Tradescantia pallida Medium Once a week or when soil is dry 18-30 ℃ No"
+  },
+  {
+    "title": "دراكينا كمبودية",
+    "url": "indoorPlant.html?id=IP-047",
+    "content": "دراكينا كمبودية Dracaena cambodiana Medium Once a week or when soil is dry 18-25 ℃ Yes"
+  },
+  {
+    "title": "دراكينا منعكسة",
+    "url": "indoorPlant.html?id=IP-048",
+    "content": "دراكينا منعكسة Dracaena reflexa Medium Once a week or when soil is dry 18-27 ℃ Yes"
+  },
+  {
+    "title": "سيكاس",
+    "url": "indoorPlant.html?id=IP-049",
+    "content": "سيكاس Cycas revoluta Medium Once a week or when soil is dry 18-27 ℃ Yes"
+  },
+  {
+    "title": "بورتيولا",
+    "url": "indoorPlant.html?id=IP-050",
+    "content": "بورتيولا ‏Portulaca umbraticola High Once a week or when soil is dry 15-30 ℃ No"
+  },
+  {
+    "title": "بورتيولا كبيرة الأزهار",
+    "url": "indoorPlant.html?id=IP-051",
+    "content": "بورتيولا كبيرة الأزهار Portulaca grandiflora High Once a week or when soil is dry 15-30 ℃ Yes"
+  },
+  {
+    "title": "ورد هجين",
+    "url": "indoorPlant.html?id=IP-052",
+    "content": "ورد هجين Rosa hybrida High Once a week or when soil is dry 18-25 ℃ Yes"
+  },
+  {
+    "title": "ألتيرنانثيرا برازيلية",
+    "url": "indoorPlant.html?id=IP-053",
+    "content": "ألتيرنانثيرا برازيلية Alternanthera brasiliana Medium Once a week or when soil is dry 20-30 ℃ Yes"
+  },
+  {
+    "title": "نبات العنكبوت",
+    "url": "outdoorPlant.html?id=OP-001",
+    "content": "نبات العنكبوت Chlorophytum comosum Herbs Medium Partial shade Medium Medium Yes"
+  },
+  {
+    "title": "ليديبوريا فضية",
+    "url": "outdoorPlant.html?id=OP-002",
+    "content": "ليديبوريا فضية Ledebouria socialis Succulents Medium Partial shade High High No"
+  },
+  {
+    "title": " أوفوربيا ملياي",
+    "url": "outdoorPlant.html?id=OP-003",
+    "content": " أوفوربيا ملياي Euphorbia milii Succulents Low Full sun High High No"
+  },
+  {
+    "title": "الألوفيرا",
+    "url": "outdoorPlant.html?id=OP-004",
+    "content": "الألوفيرا Aloe vera Succulents Low Full sun High High No"
+  },
+  {
+    "title": "تيكوما صفراء",
+    "url": "outdoorPlant.html?id=OP-005",
+    "content": "تيكوما صفراء Tecoma stans Shrubs Medium Full sun High High No"
+  },
+  {
+    "title": "القرنفل",
+    "url": "outdoorPlant.html?id=OP-006",
+    "content": "القرنفل Dianthus spp. Succulents Low Full sun Medium Medium No"
+  },
+  {
+    "title": "عشبة ألترنانثيرا",
+    "url": "outdoorPlant.html?id=OP-007",
+    "content": "عشبة ألترنانثيرا Alternanthera brasiliana Grasses Medium Full sun Medium Low No"
+  },
+  {
+    "title": "بورتولاكا",
+    "url": "outdoorPlant.html?id=OP-008",
+    "content": "بورتولاكا Portulaca Oleracea Grasses Low Full sun High Low No"
+  },
+  {
+    "title": "نبات الحلفا",
+    "url": "outdoorPlant.html?id=OP-009",
+    "content": "نبات الحلفا Pennisetum spp. Grasses Medium Full sun Medium Medium No"
+  },
+  {
+    "title": "أغاف",
+    "url": "outdoorPlant.html?id=OP-010",
+    "content": "أغاف Foxtail Agave Succulents Low Full sun High Low No"
+  },
+  {
+    "title": "الفربيون",
+    "url": "outdoorPlant.html?id=OP-011",
+    "content": "الفربيون Euphorbia Succulents Low Full sun High Medium No"
+  },
+  {
+    "title": "الجهنمية",
+    "url": "outdoorPlant.html?id=OP-013",
+    "content": "الجهنمية Bougainvillea spp. Shrubs Low Full sun High Medium No"
+  },
+  {
+    "title": "لانتانا",
+    "url": "outdoorPlant.html?id=OP-014",
+    "content": "لانتانا lantana camara Herbs Low Full sun High High No"
+  },
+  {
+    "title": "نبات الثعبان الأسطواني",
+    "url": "outdoorPlant.html?id=OP-015",
+    "content": "نبات الثعبان الأسطواني Dracaena angolensis Succulents Low Full sun High High Yes"
+  },
+  {
+    "title": "نبات المظلة",
+    "url": "outdoorPlant.html?id=OP-016",
+    "content": "نبات المظلة Cyperus aternifolius Grasses High Full sun Low Medium Yes"
+  },
+  {
+    "title": "نبات المحار",
+    "url": "outdoorPlant.html?id=OP-017",
+    "content": "نبات المحار Tradescantia spathacea Herbs Medium Partial sun High Medium Yes"
+  },
+  {
+    "title": "بونسيانا",
+    "url": "outdoorPlant.html?id=OP-019",
+    "content": "بونسيانا Delonix regia Trees Medium Full sun Medium High Yes"
+  },
+  {
+    "title": "شجرة الملنجتونيا",
+    "url": "outdoorPlant.html?id=OP-020",
+    "content": "شجرة الملنجتونيا Millingtonia hortensis Trees Medium Full sun Medium Medium Yes"
+  },
+  {
+    "title": "شجرة النيم",
+    "url": "outdoorPlant.html?id=OP-021",
+    "content": "شجرة النيم Azadirachta indica Trees Low Full sun High High Yes"
+  },
+  {
+    "title": "اوليندر",
+    "url": "outdoorPlant.html?id=OP-022",
+    "content": "اوليندر Nerium oleander Shrubs Medium Full sun High High Yes"
+  },
+  {
+    "title": "الفيكس",
+    "url": "outdoorPlant.html?id=OP-023",
+    "content": "الفيكس Ficus spp Trees Medium Full sun Medium Medium Yes"
+  },
+  {
+    "title": "شجرة الكافور",
+    "url": "outdoorPlant.html?id=OP-024",
+    "content": "شجرة الكافور Cinnamomum camphora Trees Medium Full sun Medium Medium Yes"
+  },
+  {
+    "title": "تمرحنا",
+    "url": "outdoorPlant.html?id=OP-025",
+    "content": "تمرحنا Ligustrum spp Shrubs Low Full sun Medium Medium Yes"
+  },
+  {
+    "title": "خيار الشمبر",
+    "url": "outdoorPlant.html?id=OP-026",
+    "content": "خيار الشمبر Cassia fistula Trees Medium Full sun Medium High Yes"
+  },
+  {
+    "title": "الياسمين الهندي",
+    "url": "outdoorPlant.html?id=OP-027",
+    "content": "الياسمين الهندي Plumeria alba Trees Low Full sun Medium High Yes"
+  },
+  {
+    "title": "شجرة التابوبيا",
+    "url": "outdoorPlant.html?id=OP-028",
+    "content": "شجرة التابوبيا Tabebuia spp Trees Low Full sun High High Yes"
+  },
+  {
+    "title": "الخبيز الساحلي",
+    "url": "outdoorPlant.html?id=OP-029",
+    "content": "الخبيز الساحلي Thespesia populnea Trees Medium Full sun High High Yes"
+  },
+  {
+    "title": "شجرة الغاف",
+    "url": "outdoorPlant.html?id=OP-030",
+    "content": "شجرة الغاف Prosopis cineraria Trees Low Full sun High High Yes"
+  },
+  {
+    "title": "السدرالبلدي",
+    "url": "outdoorPlant.html?id=OP-031",
+    "content": "السدرالبلدي Ziziphus spina-christi Trees Low Full sun High High Yes"
+  },
+  {
+    "title": "اللوز الهندي",
+    "url": "outdoorPlant.html?id=OP-032",
+    "content": "اللوز الهندي Terminalia catappa Trees Medium Full sun Medium High Yes"
+  },
+  {
+    "title": "نخيل واشنطن",
+    "url": "outdoorPlant.html?id=OP-033",
+    "content": "نخيل واشنطن Washingtonia robusta Trees Medium Full sun Medium High Yes"
+  },
+  {
+    "title": "نخلة التمر",
+    "url": "outdoorPlant.html?id=OP-034",
+    "content": "نخلة التمر Phoenix dactylifera Trees High Full sun High High Yes"
+  },
+  {
+    "title": "كف مريم",
+    "url": "outdoorPlant.html?id=OP-035",
+    "content": "كف مريم Vitex agnus-castus Shrubs Low Full sun High High Yes"
+  },
+  {
+    "title": "شجرة المورينغا",
+    "url": "outdoorPlant.html?id=OP-036",
+    "content": "شجرة المورينغا Moringa oleifera Trees Low Full sun High High Yes"
+  },
+  {
+    "title": "شجرة السيسبان",
+    "url": "outdoorPlant.html?id=OP-037",
+    "content": "شجرة السيسبان Sesbania grandiflora Trees Medium Full sun Medium High Yes"
+  },
+  {
+    "title": "الحبن الأصفر",
+    "url": "outdoorPlant.html?id=OP-038",
+    "content": "الحبن الأصفر Thevetia peruviana Shrubs Medium Full sun Medium High Yes"
+  },
+  {
+    "title": "الكازورينا",
+    "url": "outdoorPlant.html?id=OP-039",
+    "content": "الكازورينا Casuarina equisetifolia Trees Low Full sun High High Yes"
+  },
+  {
+    "title": "شجرة كورديا",
+    "url": "outdoorPlant.html?id=OP-040",
+    "content": "شجرة كورديا Cordia sebestena Trees Medium Full sun Medium High Yes"
+  },
+  {
+    "title": "دمس رمادي",
+    "url": "outdoorPlant.html?id=OP-041",
+    "content": "دمس رمادي Conocarpus erectus Trees Medium Full sun High High Yes"
+  },
+  {
+    "title": "مريمية فضية",
+    "url": "outdoorPlant.html?id=OP-042",
+    "content": "مريمية فضية Leucophyllum frutescens Shrubs Low Full sun High Medium Yes"
+  },
+  {
+    "title": "المشموم البحريني",
+    "url": "outdoorPlant.html?id=OP-043",
+    "content": "المشموم البحريني Ocimum basilicum Herbs Medium Full sun Low Medium Yes"
+  },
+  {
+    "title": "غازانيا",
+    "url": "outdoorPlant.html?id=OP-044",
+    "content": "غازانيا Gazania rigens Ground covers Low Full sun High High Yes"
+  },
+  {
+    "title": "البتوتيا المكسيكية",
+    "url": "outdoorPlant.html?id=OP-045",
+    "content": "البتوتيا المكسيكية Ruellia simplex Herbs Medium Full sun Medium High Yes"
+  },
+  {
+    "title": "البورتولاكا",
+    "url": "outdoorPlant.html?id=OP-046",
+    "content": "البورتولاكا Portulaca grandiflora Ground covers Low Full sun High High Yes"
+  },
+  {
+    "title": "شجرة المانجو",
+    "url": "outdoorPlant.html?id=OP-047",
+    "content": "شجرة المانجو Mangifera indica L. Trees Medium Full sun Medium High Yes"
+  },
+  {
+    "title": "الثيل، العشب الأفريقي",
+    "url": "outdoorPlant.html?id=OP-048",
+    "content": "الثيل، العشب الأفريقي Cynodon dactylon Grasses Medium Full sun High High Yes"
+  },
+  {
+    "title": "كاسيا جلوكا",
+    "url": "outdoorPlant.html?id=OP-049",
+    "content": "كاسيا جلوكا Senna surattensis Trees Medium Full sun Medium High Yes"
+  },
+  {
+    "title": "التوت الأسود",
+    "url": "outdoorPlant.html?id=OP-050",
+    "content": "التوت الأسود Morus nigra L. Trees Medium Full sun Medium High Yes"
+  },
+  {
+    "title": "الفينكا",
+    "url": "outdoorPlant.html?id=OP-051",
+    "content": "الفينكا Catharanthus roseus Shrubs Low Full sun Medium High Yes"
+  },
+  {
+    "title": "الزينيا",
+    "url": "outdoorPlant.html?id=OP-052",
+    "content": "الزينيا Zinnia elegans Jacq. Herbs Medium Full sun Low Medium Yes"
+  },
+  {
+    "title": "سانسيفيريا",
+    "url": "outdoorPlant.html?id=OP-053",
+    "content": "سانسيفيريا Sansevieria trifasciata Prain Succulents Low Full sun High Medium Yes"
+  },
+  {
+    "title": "نبات المكحلة",
+    "url": "outdoorPlant.html?id=OP-054",
+    "content": "نبات المكحلة Tradescantia pallida Ground covers Medium Full sun Medium High Yes"
+  },
+  {
+    "title": "الويديليا",
+    "url": "outdoorPlant.html?id=OP-055",
+    "content": "الويديليا Sphagneticola trilobata Ground covers Medium Full sun Medium High Yes"
+  },
+  {
+    "title": "��للانتانا المتدلي",
+    "url": "outdoorPlant.html?id=OP-056",
+    "content": "��للانتانا المتدلي Lantana montevidensis Ground covers Low Full sun High High Yes"
+  },
+  {
+    "title": "السنط العربي الشوكي",
+    "url": "outdoorPlant.html?id=OP-057",
+    "content": "السنط العربي الشوكي Vachellia nilotica Trees Low Full sun High High Yes"
+  },
+  {
+    "title": "قطر الندى، حي العلم",
+    "url": "outdoorPlant.html?id=OP-058",
+    "content": "قطر الندى، حي العلم Mesembryanthemum cordifolium L.f. Ground covers Low Full sun High High Yes"
+  },
+  {
+    "title": "الفربيون تيثيمالويدس",
+    "url": "outdoorPlant.html?id=OP-059",
+    "content": "الفربيون تيثيمالويدس Euphorbia tithymaloides Succulents Low Full sun High High Yes"
+  },
+  {
+    "title": "زنبق العنكبوت",
+    "url": "outdoorPlant.html?id=OP-060",
+    "content": "زنبق العنكبوت Crinum asiaticum Herbs Medium Full sun Medium High Yes"
+  },
+  {
+    "title": "الياسمين الزفر",
+    "url": "outdoorPlant.html?id=OP-061",
+    "content": "الياسمين الزفر Volkameria inermis Shrubs Medium Full sun Medium High Yes"
+  },
+  {
+    "title": "الجاتروفا",
+    "url": "outdoorPlant.html?id=OP-062",
+    "content": "الجاتروفا Jatropha integerrima Shrubs Low Full sun High High Yes"
+  },
+  {
+    "title": "طاووس الجنة",
+    "url": "outdoorPlant.html?id=OP-063",
+    "content": "طاووس الجنة Caesalpinia pulcherrima Shrubs Low Full sun High High Yes"
   }
 ]
