@@ -28,7 +28,7 @@
       padding: 120px 40px 50px;
       text-align: center;
       color: white;
-      margin-top: 70px;
+      margin-top: 65px;
       position: relative;
     }
 
@@ -349,7 +349,7 @@
         <li><a href="home.html">HOME</a></li>
         <li><a href="ourPlants.html" class="active">OUR PLANTS</a></li>
         <li><a href="projects.html">PROJECTS</a></li>
-        <li><a href="locations.html">LOCATIONS</a></li>
+        <li><a href="Buildings.html">LOCATIONS</a></li>
         <li><a href="statistics.html">STATISTICS</a></li>
         <li><a href="about.html">ABOUT</a></li>
 
@@ -399,9 +399,9 @@
   </nav>
 
   <section class="hero-section">
-    <h1>Our Plants Collection</h1>
-    <p>Discover the diverse flora that beautifies our campus, from lush indoor greenery to vibrant outdoor landscapes,
-      carefully cultivated to enhance our sustainable environment.</p>
+    <h1 id="hero-title">Indoor Plants</h1>
+    <p id="hero-desc">Explore the lush greenery that thrives inside our campus buildings, carefully selected to enhance
+      indoor spaces and air quality.</p>
   </section>
 
   <script>
@@ -413,6 +413,17 @@
       document.querySelectorAll('.plants-subnav a').forEach(link => {
         link.classList.toggle('active', link.getAttribute('href') === hash);
       });
+
+      // Update hero content
+      const title = document.getElementById('hero-title');
+      const desc = document.getElementById('hero-desc');
+      if (hash === '#outdoor-plants') {
+        title.textContent = 'Outdoor Plants';
+        desc.textContent = 'Discover the vibrant flora that beautifies our campus grounds, from drought-tolerant species to lush greenery sustaining our outdoor environment.';
+      } else {
+        title.textContent = 'Indoor Plants';
+        desc.textContent = 'Explore the lush greenery that thrives inside our campus buildings, carefully selected to enhance indoor spaces and air quality.';
+      }
     }
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -789,7 +800,7 @@
           <li><a href="home.html">Home</a></li>
           <li><a href="ourPlants.html">Our Plants</a></li>
           <li><a href="projects.html">Projects</a></li>
-          <li><a href="locations.html">Locations</a></li>
+          <li><a href="Buildings.html">Locations</a></li>
           <li><a href="statistics.html">Statistics</a></li>
           <li><a href="about.html">About</a></li>
         </ul>
@@ -995,7 +1006,8 @@
         const filterFields = [
           { field: 'Type', label: 'Type' },
           { field: 'Light Requirements', label: 'Light Requirements' },
-          { field: 'Stable temperature', label: 'Temperature Range', transform: getTempCategory }
+          { field: 'Stable temperature', label: 'Temperature Range', transform: getTempCategory },
+          { field: 'Portable', label: 'Portable' }
         ];
 
         // Helper function to categorize temperature
@@ -1312,7 +1324,7 @@
         let currentSortOrder = '';
         let currentFilters = {};
 
-        // Define which fields to create filters for - EDIT THIS ARRAY TO ADD/REMOVE FILTERS
+        // Define which fields to create filters for
         const filterFields = [
           { field: 'Category', label: 'Category' },
           {
@@ -1351,7 +1363,8 @@
             field: 'Environmental impact',
             label: 'Environmental Impact',
             sortOrder: ['High', 'Medium', 'Low']
-          }
+          },
+          { field: 'Portable', label: 'Portable' },
         ];
 
         // Populate all filters dynamically

@@ -114,15 +114,10 @@
       z-index: 2;
     }
 
-    /* Hover effect for clickable side cards */
     .location-slide.prev-card:hover,
     .location-slide.next-card:hover {
       opacity: 0.75;
-      transform: scale(0.9) translateX(-480px);
-    }
-
-    .location-slide.next-card:hover {
-      transform: scale(0.9) translateX(480px);
+      /* transform: scale(0.9) translateX(-480px); */
     }
 
     /* Center active card */
@@ -138,7 +133,7 @@
       cursor: default;
     }
 
-    /* Hide other slides - but keep them clickable */
+    /* Hide other slides */
     .location-slide.hidden {
       opacity: 0.3;
       pointer-events: auto;
@@ -166,12 +161,10 @@
     .location-slide.hidden:hover {
       opacity: 0.5;
       filter: brightness(0.4);
-      /* Slightly brighter on hover */
-    }
+   }
 
     .location-slide.hidden:hover::after {
       background-color: rgba(0, 0, 0, 0.5);
-      /* Lighter on hover */
     }
 
     .location-slide img {
@@ -793,7 +786,7 @@
         <li><a href="home.html">HOME</a></li>
         <li><a href="ourPlants.html">OUR PLANTS</a></li>
         <li><a href="projects.html">PROJECTS</a></li>
-        <li><a href="locations.html" class="active">LOCATIONS</a></li>
+        <li><a href="Buildings.html" class="active">LOCATIONS</a></li>
         <li><a href="statistics.html">STATISTICS</a></li>
         <li><a href="about.html">ABOUT</a></li>
 
@@ -934,7 +927,7 @@
           <li><a href="home.html">Home</a></li>
           <li><a href="ourPlants.html">Our Plants</a></li>
           <li><a href="projects.html">Projects</a></li>
-          <li><a href="locations.html">Locations</a></li>
+          <li><a href="Buildings.html">Locations</a></li>
           <li><a href="statistics.html">Statistics</a></li>
           <li><a href="about.html">About</a></li>
         </ul>
@@ -999,8 +992,9 @@
       const typeMap = {
         'Building': 'Building',
         'Buildings': 'Buildings',
-        'CarPark': 'Car Park',
-        'CarParks': 'Car Parks',
+        'CarPark': 'Car park', 
+        'CarParks': 'Car park', 
+        'Carpark': 'Car park',
         'Gate': 'Gate',
         'Gates': 'Gates',
         'Roadside': 'Roadside',

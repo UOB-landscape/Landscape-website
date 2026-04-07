@@ -44,10 +44,10 @@
       width: 50px;
       height: 50px;
       border-radius: 30%;
-      background: white;
-      border: 2px solid #0b393b;
-      color: #0b393b;
-      font-size: 1.3rem;
+      background: none;
+      /* border: 2px solid #0b393b; */
+      color: white;
+      font-size: 2rem;
       cursor: pointer;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       transition: all 0.3s ease;
@@ -58,8 +58,8 @@
     }
 
     .back-button:hover {
-      background: var(--primary-dark);
-      color: white;
+      /* background: var(--primary-dark);
+      color: white; */
       transform: translateX(-5px);
     }
 
@@ -109,9 +109,8 @@
 
     .plant-key-info h1 {
       margin: 0 0 0.5rem 0;
-      font-size: 2.4rem;
+      font-size: 1.8rem;
       color: #666;
-      text-align: start;
       font-style: italic;
       font-family: serif;
       font-weight: normal;
@@ -122,9 +121,54 @@
       color: #2c5f2d;
       font-style: normal;
       font-family: 'Segoe UI', sans-serif;
+      font-weight: 700;
+      margin: 0 0 1.5rem 0;
+      /* letter-spacing: 0.05em; */
+      word-spacing: 0.2em;
+    }
+
+    .info-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      padding: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .card-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-content strong {
+      display: block;
+      color: #2c5f2d;
+      font-size: 0.75rem;
+      margin-bottom: 0.3rem;
       font-weight: 600;
+    }
+
+    .card-content p {
       margin: 0;
-      text-align: start;
+      color: #555;
+      font-size: 0.9rem;
+      font-weight: 500;
     }
 
     .info-section {
@@ -132,13 +176,14 @@
     }
 
     .section-title {
-      font-size: 1.3rem;
+      font-size: 1.6rem;
       color: #000000;
       /* font-weight: 600; */
       font-family: serif;
       margin-bottom: 1rem;
       padding-bottom: 0.5rem;
       border-bottom: 2px solid #000000;
+      text-align: left;
     }
 
     .plant-info {
@@ -292,6 +337,49 @@
       max-width: 100%;
       max-height: 90vh;
       border-radius: 8px;
+    }
+
+    .image-wrapper {
+      position: relative;
+      /* width: 350px; */
+      flex-shrink: 0;
+    }
+
+    .portable-badge {
+      position: absolute;
+      bottom: 15px;
+      left: 10px;
+      background: rgba(255, 255, 255, 0.9);
+      color: #2c5f2d;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .portable-badge::after {
+      content: "This plant is in a portable pot and can be moved around campus";
+      position: absolute;
+      bottom: 130%;
+      left: 0;
+      background: rgba(0, 0, 0, 0.75);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 400;
+      padding: 6px 10px;
+      border-radius: 8px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .portable-badge:hover::after {
+      opacity: 1;
     }
 
     .close-modal {
@@ -602,25 +690,56 @@
           document.body.style.backgroundImage = `url('https://i.postimg.cc/x8sk6xJH/main_gate_entrance-3.jpg')`;
           // https://images.pexels.com/photos/3119965/pexels-photo-3119965.jpeg
 
-          let detailsHtml = `
-            <div class="plant-details-card">
-              <div class="plant-header">
-                <img src="${bgImage}" alt="${plant['Common name'] || ''}" class="plant-thumbnail" id="mainThumb" tabindex="0" />
-                <div class="plant-key-info">
-                  <h1>${plant["Common name"] || ''}</h1>
-                  <p class="common-name">${plant["Scientific name"] || ''}</p>
-                </div>
-              </div>
+          const iconMap = {
+            "Light Requirements": "☀️",
+            "Stable temperature": "🌡️",
+            "Watering": "💧",
+            "Type": "🌿",
+            "Portable": "🪴"
+          };
 
-              <div class="info-section">
-                <ul class="plant-info">
-                  <li><span>🌿</span><strong>Common name:</strong> ${plant["Common name"] || '—'}</li>
-                  <li><span>🔬</span><strong>Scientific name:</strong> ${plant["Scientific name"] || '—'}</li>
-                  <li><span>☀️</span><strong>Light Requirements:</strong> ${plant["Light Requirements"] || '—'}</li>
-                  <li><span>🌡️</span><strong>Stable Temperature:</strong> ${plant["Stable temperature"] || "—"}</li>
-                  <li><span>💧</span><strong>Watering:</strong> ${plant["Watering"] || "—"}</li>
-                </ul>
-              </div>
+          const cardFields = ["Type", "Light Requirements", "Watering", "Stable temperature", "Portable"];
+
+          const excludedKeys = ["Plant ID", "Picture", "Image", "Locations", "PDF link", "Scientific name", "Common name"];
+
+          let detailsHtml = `
+  <div class="plant-details-card">
+    <div class="plant-header">
+      <div class="image-wrapper">
+        <img src="${bgImage}" alt="${plant['Common name'] || ''}" class="plant-thumbnail" id="mainThumb" tabindex="0" />
+        ${plant['Portable'] === 'Yes' ? `<div class="portable-badge">🪴 Portable</div>` : ''}
+      </div>
+      <div class="plant-key-info">
+        <h1>${plant["Common name"] || ''}</h1>
+        <p class="common-name">${plant["Scientific name"] || ''}</p>
+        <div class="info-cards-grid">
+`;
+
+          cardFields.forEach(key => {
+            if (plant[key]) {
+              const icon = iconMap[key] || "📄";
+              detailsHtml += `
+      <div class="info-card">
+        <span class="card-icon">${icon}</span>
+        <div class="card-content">
+          <strong>${key}</strong>
+          <p>${plant[key]}</p>
+        </div>
+      </div>
+    `;
+            }
+          });
+
+          detailsHtml += `</div></div></div>`;
+
+          // Plant names section
+          detailsHtml += `
+            <div class="info-section">
+              <ul class="plant-info">
+                <li><span>🌿</span><strong>Common name:</strong> ${plant["Common name"] || '—'}</li>
+                <li><span>🔬</span><strong>Scientific name:</strong> ${plant["Scientific name"] || '—'}</li>
+              </ul>
+            </div>
           `;
 
           // Locations section

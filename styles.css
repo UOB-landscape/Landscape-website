@@ -878,7 +878,8 @@ h2 {
   padding: 60px 0;
   position: relative;
   overflow: hidden;
-  background: rgb(236, 234, 234);
+  border-top: 2px solid #e0e0e0;
+  background: rgba(0, 0, 0, 0.02);
 }
 
 /* Decorative background elements */
@@ -2826,7 +2827,7 @@ h2 {
 }
 
 main.grid-section {
-  padding: 60px 50px;
+  padding: 40px 50px 60px;
   /* navbar (60px) + subnav (37px) + spacing (13px) */
 }
 
@@ -3101,7 +3102,7 @@ main.grid-section {
 }
 
 .map-section-wrapper {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.05));
+  /* background: linear-gradient(135deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.05)); */
   padding: 40px 0;
   border-top: 2px solid var(--border-color, #e0e0e0);
 }
@@ -4169,7 +4170,7 @@ body::before {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 30px;
-  margin-bottom: 130px;
+  margin-bottom: 100px;
   width: 80%;
   justify-self: center;
 }
@@ -4256,7 +4257,7 @@ body::before {
 .chart-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-  gap: 20px;
+  gap: 25px;
   margin-bottom: 60px;
   width: 100%;
   justify-self: center;
