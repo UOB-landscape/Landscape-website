@@ -99,6 +99,11 @@ body {
   width: 230px;
 }
 
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  display: none;
+}
+
 /* Search results dropdown */
 .main-search-results {
   position: absolute;
@@ -214,6 +219,101 @@ mark {
   .main-result-excerpt {
     font-size: 11px;
   }
+}
+
+/* ========================= 
+    nav search
+   ========================= */
+#search-navigator {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: none;
+  z-index: 9999;
+  font-size: 0.85rem;
+  color: #2c5f2d;
+  font-weight: 600;
+}
+
+#search-nav-query {
+  display: none;
+}
+
+#search-navigator button {
+  background: none;
+  border: none;
+  color: #2c5f2d;
+  cursor: pointer;
+  font-size: 0.9rem;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+#search-navigator button:hover {
+  color: #1e4620;
+  background: none;
+}
+
+#search-nav-close {
+  color: #e74c3c !important;
+}
+
+#search-nav-close:hover {
+  background: #e74c3c !important;
+  color: white !important;
+}
+
+.search-highlight-text {
+  background: yellow;
+  padding: 0 2px;
+  border-radius: 2px;
+
+  font: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  color: inherit;
+}
+
+.search-highlight-container {
+  font: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  color: inherit;
+}
+
+.search-highlight-active {
+  background: orange !important;
+  outline: 2px solid darkorange;
+}
+
+.search-group-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #2c5f2d;
+  padding: 8px 12px 4px;
+  border-top: 1px solid #eee;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.search-group-label:first-child {
+  border-top: none;
 }
 
 .hide-on-scroll {
@@ -3677,6 +3777,26 @@ body::before {
 
 .plant-info li span {
   font-size: 1.2rem;
+}
+
+.plant-info li span.search-highlight-container,
+.plant-info li span.search-highlight-text {
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1rem;
+  font-weight: normal;
+  color: #333;
+}
+
+.grid-item.search-highlight-card {
+  outline: 3px solid yellow;
+  box-shadow: 0 0 15px rgba(255, 220, 0, 0.8);
+  transform: scale(1.02);
+  transition: all 0.3s ease;
+}
+
+.grid-item.search-highlight-card-active {
+  outline: 3px solid orange;
+  box-shadow: 0 0 20px rgba(255, 140, 0, 0.9);
 }
 
 .locations-list {

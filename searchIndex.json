@@ -1,0 +1,944 @@
+[
+  {
+    "title": "Home",
+    "url": "home.html",
+    "content": "Welcome to UoB Landscape Explore Our Landscape Locations Building a Sustainable Future Interactive Campus Map This website showcases the diverse flora across our campus, providing detailed information about each plant, its location, and its unique characteristics. It was created collaboratively by IT students along with landscaping and biology students, combining technology, science, and design to make exploring our university's green spaces informative and engaging. Whether you are a student, researcher, or visitor, you can learn about the plants that contribute to the beauty and sustainability of our campus. University of Bahrain proudly aligns with the United Nations Sustainable Development Goals, fostering a greener, healthier, and more sustainable campus environment for future generations. Navigate through our campus facilities. Click on any building icon to explore its location and details. Plant Species Locations Square Meters Projects"
+  },
+  {
+    "title": "Our Plants",
+    "url": "ourPlants.html",
+    "content": "Indoor Plants Explore the lush greenery that thrives inside our campus buildings, carefully selected to enhance indoor spaces and air quality."
+  },
+  {
+    "title": "Projects",
+    "url": "projects.html",
+    "content": "Projects & Annual Reports Before & After Projects 🌳 Landscape Projects Annual Reports Showcasing engineering student innovations and documenting the dedicated work of our landscaping staff in maintaining and enhancing campus green spaces"
+  },
+  {
+    "title": "Locations",
+    "url": "Buildings.html",
+    "content": ""
+  },
+  {
+    "title": "Statistics",
+    "url": "statistics.html",
+    "content": "UoB Landscape Statistics Annual Growth Trends Detailed Statistics Track the growth and development of our campus landscape through comprehensive data and visual insights spanning multiple years of environmental enhancement. Visualizing the expansion of our campus landscape initiatives over the years Comprehensive breakdown of landscape development data Total Plant Species Square Meters Completed Projects Campus Locations"
+  },
+  {
+    "title": "About",
+    "url": "about.html",
+    "content": "About UoB Landscapes About Us Where Science Meets Design Meet Our Team 🔬 Scientific Research 🏗️ Engineering Excellence 💻 Digital Innovation 🌱 Future Growth Biologists Landscape Engineers Software Engineers Where Science Meets Design - A collaborative platform uniting biology, engineering, and technology to create a sustainable and data-driven campus environment. The University of Bahrain Landscapes initiative envisions a collaborative platform where science, engineering, and technology unite to create a sustainable and data-driven campus environment. By integrating biological research, landscape design, and digital innovation, the project aims to cultivate a living repository of plant data and design proposals that evolve with time. This ongoing collaboration lays the groundwork for a greener, smarter, and more connected university landscape that reflects the harmony between nature, knowledge, and technology. This initiative lays the foundation for a continuously evolving landscape strategy, where scientific insight and engineering creativity converge to shape a greener, smarter campus experience. Biologists from the College of Science meticulously document indoor plant species, creating a comprehensive database that serves as a valuable resource for botanical research and education. Landscape engineers from the College of Engineering design innovative outdoor and indoor landscaping proposals with detailed plans and 3D models that bring visions to life. Software engineers from the College of IT develop and maintain the platform, ensuring seamless data integration and user-friendly access to all landscape information. Both biological surveys and engineering designs are part of an ongoing process, with future expansions planned to cover additional locations and introduce new proposals across campus. College of Science College of Engineering College of Information Technology"
+  },
+  {
+    "title": "كركديه صيني Hibiscus rosa-sinensis",
+    "displayTitle": "Hibiscus rosa-sinensis كركديه صيني",
+    "subtitle": "Hibiscus rosa-sinensis",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D9%83%D8%B1%D9%83%D8%AF%D9%8A%D9%87%20%D8%B5%D9%8A%D9%86%D9%8A&tab=indoor",
+    "content": "كركديه صيني Hibiscus rosa-sinensis"
+  },
+  {
+    "title": "فيلوديندرون القلبي Philodendron hederaceum",
+    "displayTitle": "Philodendron hederaceum فيلوديندرون القلبي",
+    "subtitle": "Philodendron hederaceum",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D9%81%D9%8A%D9%84%D9%88%D8%AF%D9%8A%D9%86%D8%AF%D8%B1%D9%88%D9%86%20%D8%A7%D9%84%D9%82%D9%84%D8%A8%D9%8A&tab=indoor",
+    "content": "فيلوديندرون القلبي Philodendron hederaceum"
+  },
+  {
+    "title": "إيوبيا Euphorbia milii",
+    "displayTitle": "Euphorbia milii إيوبيا",
+    "subtitle": "Euphorbia milii",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%A5%D9%8A%D9%88%D8%A8%D9%8A%D8%A7&tab=indoor",
+    "content": "إيوبيا Euphorbia milii"
+  },
+  {
+    "title": "سينغونيوم Syngonium podophyllum",
+    "displayTitle": "Syngonium podophyllum سينغونيوم",
+    "subtitle": "Syngonium podophyllum",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%B3%D9%8A%D9%86%D8%BA%D9%88%D9%86%D9%8A%D9%88%D9%85&tab=indoor",
+    "content": "سينغونيوم Syngonium podophyllum"
+  },
+  {
+    "title": "بوثوس ذهبي Epipremnum aureum",
+    "displayTitle": "Epipremnum aureum بوثوس ذهبي",
+    "subtitle": "Epipremnum aureum",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%A8%D9%88%D8%AB%D9%88%D8%B3%20%D8%B0%D9%87%D8%A8%D9%8A&tab=indoor",
+    "content": "بوثوس ذهبي Epipremnum aureum"
+  },
+  {
+    "title": "سيندابسوس Scindapsus pictus",
+    "displayTitle": "Scindapsus pictus سيندابسوس",
+    "subtitle": "Scindapsus pictus",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%B3%D9%8A%D9%86%D8%AF%D8%A7%D8%A8%D8%B3%D9%88%D8%B3&tab=indoor",
+    "content": "سيندابسوس Scindapsus pictus"
+  },
+  {
+    "title": "أراوكاريا Araucaria heterophylla",
+    "displayTitle": "Araucaria heterophylla أراوكاريا",
+    "subtitle": "Araucaria heterophylla",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%A3%D8%B1%D8%A7%D9%88%D9%83%D8%A7%D8%B1%D9%8A%D8%A7&tab=indoor",
+    "content": "أراوكاريا Araucaria heterophylla"
+  },
+  {
+    "title": "رافينيا Ravenea rivularis",
+    "displayTitle": "Ravenea rivularis رافينيا",
+    "subtitle": "Ravenea rivularis",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%B1%D8%A7%D9%81%D9%8A%D9%86%D9%8A%D8%A7&tab=indoor",
+    "content": "رافينيا Ravenea rivularis"
+  },
+  {
+    "title": "شيفليرا Schefflera arboricola",
+    "displayTitle": "Schefflera arboricola شيفليرا",
+    "subtitle": "Schefflera arboricola",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%B4%D9%8A%D9%81%D9%84%D9%8A%D8%B1%D8%A7&tab=indoor",
+    "content": "شيفليرا Schefflera arboricola"
+  },
+  {
+    "title": "دراكينا Dracaena marginata",
+    "displayTitle": "Dracaena marginata دراكينا",
+    "subtitle": "Dracaena marginata",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%AF%D8%B1%D8%A7%D9%83%D9%8A%D9%86%D8%A7&tab=indoor",
+    "content": "دراكينا Dracaena marginata"
+  },
+  {
+    "title": "دراكينا ضيقة الأوراق Dracaena angustifolia",
+    "displayTitle": "Dracaena angustifolia دراكينا ضيقة الأوراق",
+    "subtitle": "Dracaena angustifolia",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%AF%D8%B1%D8%A7%D9%83%D9%8A%D9%86%D8%A7%20%D8%B6%D9%8A%D9%82%D8%A9%20%D8%A7%D9%84%D8%A3%D9%88%D8%B1%D8%A7%D9%82&tab=indoor",
+    "content": "دراكينا ضيقة الأوراق Dracaena angustifolia"
+  },
+  {
+    "title": "سانسيفيريا أسطوانية Sansevieria cylindrica",
+    "displayTitle": "Sansevieria cylindrica سانسيفيريا أسطوانية",
+    "subtitle": "Sansevieria cylindrica",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%B3%D8%A7%D9%86%D8%B3%D9%8A%D9%81%D9%8A%D8%B1%D9%8A%D8%A7%20%D8%A3%D8%B3%D8%B7%D9%88%D8%A7%D9%86%D9%8A%D8%A9&tab=indoor",
+    "content": "سانسيفيريا أسطوانية Sansevieria cylindrica"
+  },
+  {
+    "title": "باتشيرا Pachira glabra",
+    "displayTitle": "Pachira glabra باتشيرا",
+    "subtitle": "Pachira glabra",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%A8%D8%A7%D8%AA%D8%B4%D9%8A%D8%B1%D8%A7&tab=indoor",
+    "content": "باتشيرا Pachira glabra"
+  },
+  {
+    "title": "فيكس مطاطي Ficus elastica",
+    "displayTitle": "Ficus elastica فيكس مطاطي",
+    "subtitle": "Ficus elastica",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D9%81%D9%8A%D9%83%D8%B3%20%D9%85%D8%B7%D8%A7%D8%B7%D9%8A&tab=indoor",
+    "content": "فيكس مطاطي Ficus elastica"
+  },
+  {
+    "title": "كروتون Codiaeum variegatum",
+    "displayTitle": "Codiaeum variegatum كروتون",
+    "subtitle": "Codiaeum variegatum",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D9%83%D8%B1%D9%88%D8%AA%D9%88%D9%86&tab=indoor",
+    "content": "كروتون Codiaeum variegatum"
+  },
+  {
+    "title": "فيكس ميكروكاربا Ficus microcapa",
+    "displayTitle": "Ficus microcapa فيكس ميكروكاربا",
+    "subtitle": "Ficus microcapa",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D9%81%D9%8A%D9%83%D8%B3%20%D9%85%D9%8A%D9%83%D8%B1%D9%88%D9%83%D8%A7%D8%B1%D8%A8%D8%A7&tab=indoor",
+    "content": "فيكس ميكروكاربا Ficus microcapa"
+  },
+  {
+    "title": "كلانشو Kalanchoe blossfeldiana",
+    "displayTitle": "Kalanchoe blossfeldiana كلانشو",
+    "subtitle": "Kalanchoe blossfeldiana",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D9%83%D9%84%D8%A7%D9%86%D8%B4%D9%88&tab=indoor",
+    "content": "كلانشو Kalanchoe blossfeldiana"
+  },
+  {
+    "title": "الجهنمية الجرداء Bougainvillea glabra",
+    "displayTitle": "Bougainvillea glabra الجهنمية الجرداء",
+    "subtitle": "Bougainvillea glabra",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D8%AC%D9%87%D9%86%D9%85%D9%8A%D8%A9%20%D8%A7%D9%84%D8%AC%D8%B1%D8%AF%D8%A7%D8%A1&tab=indoor",
+    "content": "الجهنمية الجرداء Bougainvillea glabra"
+  },
+  {
+    "title": "دراكينا عطرية Dracaena fragrans",
+    "displayTitle": "Dracaena fragrans دراكينا عطرية",
+    "subtitle": "Dracaena fragrans",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%AF%D8%B1%D8%A7%D9%83%D9%8A%D9%86%D8%A7%20%D8%B9%D8%B7%D8%B1%D9%8A%D8%A9&tab=indoor",
+    "content": "دراكينا عطرية Dracaena fragrans"
+  },
+  {
+    "title": "زاميا Zamioculcas zamiifolia",
+    "displayTitle": "Zamioculcas zamiifolia زاميا",
+    "subtitle": "Zamioculcas zamiifolia",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%B2%D8%A7%D9%85%D9%8A%D8%A7&tab=indoor",
+    "content": "زاميا Zamioculcas zamiifolia"
+  },
+  {
+    "title": "خزامى Lavandula angustifolia",
+    "displayTitle": "Lavandula angustifolia خزامى",
+    "subtitle": "Lavandula angustifolia",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%AE%D8%B2%D8%A7%D9%85%D9%89&tab=indoor",
+    "content": "خزامى Lavandula angustifolia"
+  },
+  {
+    "title": "عشب الليمون Cymbopogon citratus",
+    "displayTitle": "Cymbopogon citratus عشب الليمون",
+    "subtitle": "Cymbopogon citratus",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%B9%D8%B4%D8%A8%20%D8%A7%D9%84%D9%84%D9%8A%D9%85%D9%88%D9%86&tab=indoor",
+    "content": "عشب الليمون Cymbopogon citratus"
+  },
+  {
+    "title": "موناردا Monarda punctata",
+    "displayTitle": "Monarda punctata موناردا",
+    "subtitle": "Monarda punctata",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D9%85%D9%88%D9%86%D8%A7%D8%B1%D8%AF%D8%A7&tab=indoor",
+    "content": "موناردا Monarda punctata"
+  },
+  {
+    "title": "بليكترا Plectranthus amboinicus",
+    "displayTitle": "Plectranthus amboinicus بليكترا",
+    "subtitle": "Plectranthus amboinicus",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%A8%D9%84%D9%8A%D9%83%D8%AA%D8%B1%D8%A7&tab=indoor",
+    "content": "بليكترا Plectranthus amboinicus"
+  },
+  {
+    "title": "مريمية Salvia officinalis",
+    "displayTitle": "Salvia officinalis مريمية",
+    "subtitle": "Salvia officinalis",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D9%85%D8%B1%D9%8A%D9%85%D9%8A%D8%A9&tab=indoor",
+    "content": "مريمية Salvia officinalis"
+  },
+  {
+    "title": "زعتر Thymus vulgaris",
+    "displayTitle": "Thymus vulgaris زعتر",
+    "subtitle": "Thymus vulgaris",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%B2%D8%B9%D8%AA%D8%B1&tab=indoor",
+    "content": "زعتر Thymus vulgaris"
+  },
+  {
+    "title": "نعناع أخضر Mentha spicata",
+    "displayTitle": "Mentha spicata نعناع أخضر",
+    "subtitle": "Mentha spicata",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D9%86%D8%B9%D9%86%D8%A7%D8%B9%20%D8%A3%D8%AE%D8%B6%D8%B1&tab=indoor",
+    "content": "نعناع أخضر Mentha spicata"
+  },
+  {
+    "title": "إكليل الجبل Salvia rosmarinus",
+    "displayTitle": "Salvia rosmarinus إكليل الجبل",
+    "subtitle": "Salvia rosmarinus",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%A5%D9%83%D9%84%D9%8A%D9%84%20%D8%A7%D9%84%D8%AC%D8%A8%D9%84&tab=indoor",
+    "content": "إكليل الجبل Salvia rosmarinus"
+  },
+  {
+    "title": "جيرانيوم Pelargonium graveolens",
+    "displayTitle": "Pelargonium graveolens جيرانيوم",
+    "subtitle": "Pelargonium graveolens",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%AC%D9%8A%D8%B1%D8%A7%D9%86%D9%8A%D9%88%D9%85&tab=indoor",
+    "content": "جيرانيوم Pelargonium graveolens"
+  },
+  {
+    "title": "إكسورا Ixora coccinea",
+    "displayTitle": "Ixora coccinea إكسورا",
+    "subtitle": "Ixora coccinea",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%A5%D9%83%D8%B3%D9%88%D8%B1%D8%A7&tab=indoor",
+    "content": "إكسورا Ixora coccinea"
+  },
+  {
+    "title": "فيكس بنجاميا Ficus benjamina",
+    "displayTitle": "Ficus benjamina فيكس بنجاميا",
+    "subtitle": "Ficus benjamina",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D9%81%D9%8A%D9%83%D8%B3%20%D8%A8%D9%86%D8%AC%D8%A7%D9%85%D9%8A%D8%A7&tab=indoor",
+    "content": "فيكس بنجاميا Ficus benjamina"
+  },
+  {
+    "title": "ديبسياس Dypsis lutescens",
+    "displayTitle": "Dypsis lutescens ديبسياس",
+    "subtitle": "Dypsis lutescens",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%AF%D9%8A%D8%A8%D8%B3%D9%8A%D8%A7%D8%B3&tab=indoor",
+    "content": "ديبسياس Dypsis lutescens"
+  },
+  {
+    "title": "زنبق السلام Spathiphyllum",
+    "displayTitle": "Spathiphyllum زنبق السلام",
+    "subtitle": "Spathiphyllum",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%B2%D9%86%D8%A8%D9%82%20%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85&tab=indoor",
+    "content": "زنبق السلام Spathiphyllum"
+  },
+  {
+    "title": "أنثوريوم Anthurium andraeanum",
+    "displayTitle": "Anthurium andraeanum أنثوريوم",
+    "subtitle": "Anthurium andraeanum",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%A3%D9%86%D8%AB%D9%88%D8%B1%D9%8A%D9%88%D9%85&tab=indoor",
+    "content": "أنثوريوم Anthurium andraeanum"
+  },
+  {
+    "title": "دراكينا ساندر Dracaena sanderiana",
+    "displayTitle": "Dracaena sanderiana دراكينا ساندر",
+    "subtitle": "Dracaena sanderiana",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%AF%D8%B1%D8%A7%D9%83%D9%8A%D9%86%D8%A7%20%D8%B3%D8%A7%D9%86%D8%AF%D8%B1&tab=indoor",
+    "content": "دراكينا ساندر Dracaena sanderiana"
+  },
+  {
+    "title": "نبات الثعبان Sansevieria trifasciata",
+    "displayTitle": "Sansevieria trifasciata نبات الثعبان",
+    "subtitle": "Sansevieria trifasciata",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D9%86%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AB%D8%B9%D8%A8%D8%A7%D9%86&tab=indoor",
+    "content": "نبات الثعبان Sansevieria trifasciata"
+  },
+  {
+    "title": "كاتارانثوس وردي Catharanthus roseus",
+    "displayTitle": "Catharanthus roseus كاتارانثوس وردي",
+    "subtitle": "Catharanthus roseus",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D9%83%D8%A7%D8%AA%D8%A7%D8%B1%D8%A7%D9%86%D8%AB%D9%88%D8%B3%20%D9%88%D8%B1%D8%AF%D9%8A&tab=indoor",
+    "content": "كاتارانثوس وردي Catharanthus roseus"
+  },
+  {
+    "title": "زنبق الفهد Ledebouria socialis",
+    "displayTitle": "Ledebouria socialis زنبق الفهد",
+    "subtitle": "Ledebouria socialis",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%B2%D9%86%D8%A8%D9%82%20%D8%A7%D9%84%D9%81%D9%87%D8%AF&tab=indoor",
+    "content": "زنبق الفهد Ledebouria socialis"
+  },
+  {
+    "title": "ديفينباخيا Dieffenbachia seguine",
+    "displayTitle": "Dieffenbachia seguine ديفينباخيا",
+    "subtitle": "Dieffenbachia seguine",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%AF%D9%8A%D9%81%D9%8A%D9%86%D8%A8%D8%A7%D8%AE%D9%8A%D8%A7&tab=indoor",
+    "content": "ديفينباخيا Dieffenbachia seguine"
+  },
+  {
+    "title": "أجلونيما Aglaonema commutatum",
+    "displayTitle": "Aglaonema commutatum أجلونيما",
+    "subtitle": "Aglaonema commutatum",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%A3%D8%AC%D9%84%D9%88%D9%86%D9%8A%D9%85%D8%A7&tab=indoor",
+    "content": "أجلونيما Aglaonema commutatum"
+  },
+  {
+    "title": "فيلوديندرون زانادو Philodendron xanadu",
+    "displayTitle": "Philodendron xanadu فيلوديندرون زانادو",
+    "subtitle": "Philodendron xanadu",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D9%81%D9%8A%D9%84%D9%88%D8%AF%D9%8A%D9%86%D8%AF%D8%B1%D9%88%D9%86%20%D8%B2%D8%A7%D9%86%D8%A7%D8%AF%D9%88&tab=indoor",
+    "content": "فيلوديندرون زانادو Philodendron xanadu"
+  },
+  {
+    "title": "تريدسكينتيا Tradescantia spathacea",
+    "displayTitle": "Tradescantia spathacea تريدسكينتيا",
+    "subtitle": "Tradescantia spathacea",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%AA%D8%B1%D9%8A%D8%AF%D8%B3%D9%83%D9%8A%D9%86%D8%AA%D9%8A%D8%A7&tab=indoor",
+    "content": "تريدسكينتيا Tradescantia spathacea"
+  },
+  {
+    "title": "سانسيفيريا مخططة Sansevieria trifasciata var. laurentii",
+    "displayTitle": "Sansevieria trifasciata var. laurentii سانسيفيريا مخططة",
+    "subtitle": "Sansevieria trifasciata var. laurentii",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%B3%D8%A7%D9%86%D8%B3%D9%8A%D9%81%D9%8A%D8%B1%D9%8A%D8%A7%20%D9%85%D8%AE%D8%B7%D8%B7%D8%A9&tab=indoor",
+    "content": "سانسيفيريا مخططة Sansevieria trifasciata var. laurentii"
+  },
+  {
+    "title": "بوكارنيا Beaucarnea recurvata",
+    "displayTitle": "Beaucarnea recurvata بوكارنيا",
+    "subtitle": "Beaucarnea recurvata",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%A8%D9%88%D9%83%D8%A7%D8%B1%D9%86%D9%8A%D8%A7&tab=indoor",
+    "content": "بوكارنيا Beaucarnea recurvata"
+  },
+  {
+    "title": "نبات العنكبوت Chlorophytum comosum",
+    "displayTitle": "Chlorophytum comosum نبات العنكبوت",
+    "subtitle": "Chlorophytum comosum",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D9%86%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B9%D9%86%D9%83%D8%A8%D9%88%D8%AA&tab=indoor",
+    "content": "نبات العنكبوت Chlorophytum comosum"
+  },
+  {
+    "title": "تريدسكينتيا بنفسجية Tradescantia pallida",
+    "displayTitle": "Tradescantia pallida تريدسكينتيا بنفسجية",
+    "subtitle": "Tradescantia pallida",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%AA%D8%B1%D9%8A%D8%AF%D8%B3%D9%83%D9%8A%D9%86%D8%AA%D9%8A%D8%A7%20%D8%A8%D9%86%D9%81%D8%B3%D8%AC%D9%8A%D8%A9&tab=indoor",
+    "content": "تريدسكينتيا بنفسجية Tradescantia pallida"
+  },
+  {
+    "title": "دراكينا كمبودية Dracaena cambodiana",
+    "displayTitle": "Dracaena cambodiana دراكينا كمبودية",
+    "subtitle": "Dracaena cambodiana",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%AF%D8%B1%D8%A7%D9%83%D9%8A%D9%86%D8%A7%20%D9%83%D9%85%D8%A8%D9%88%D8%AF%D9%8A%D8%A9&tab=indoor",
+    "content": "دراكينا كمبودية Dracaena cambodiana"
+  },
+  {
+    "title": "دراكينا منعكسة Dracaena reflexa",
+    "displayTitle": "Dracaena reflexa دراكينا منعكسة",
+    "subtitle": "Dracaena reflexa",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%AF%D8%B1%D8%A7%D9%83%D9%8A%D9%86%D8%A7%20%D9%85%D9%86%D8%B9%D9%83%D8%B3%D8%A9&tab=indoor",
+    "content": "دراكينا منعكسة Dracaena reflexa"
+  },
+  {
+    "title": "سيكاس Cycas revoluta",
+    "displayTitle": "Cycas revoluta سيكاس",
+    "subtitle": "Cycas revoluta",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%B3%D9%8A%D9%83%D8%A7%D8%B3&tab=indoor",
+    "content": "سيكاس Cycas revoluta"
+  },
+  {
+    "title": "بورتيولا ‏Portulaca umbraticola",
+    "displayTitle": "‏Portulaca umbraticola بورتيولا",
+    "subtitle": "‏Portulaca umbraticola",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%A8%D9%88%D8%B1%D8%AA%D9%8A%D9%88%D9%84%D8%A7&tab=indoor",
+    "content": "بورتيولا ‏Portulaca umbraticola"
+  },
+  {
+    "title": "بورتيولا كبيرة الأزهار Portulaca grandiflora",
+    "displayTitle": "Portulaca grandiflora بورتيولا كبيرة الأزهار",
+    "subtitle": "Portulaca grandiflora",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%A8%D9%88%D8%B1%D8%AA%D9%8A%D9%88%D9%84%D8%A7%20%D9%83%D8%A8%D9%8A%D8%B1%D8%A9%20%D8%A7%D9%84%D8%A3%D8%B2%D9%87%D8%A7%D8%B1&tab=indoor",
+    "content": "بورتيولا كبيرة الأزهار Portulaca grandiflora"
+  },
+  {
+    "title": "ورد هجين Rosa hybrida",
+    "displayTitle": "Rosa hybrida ورد هجين",
+    "subtitle": "Rosa hybrida",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D9%88%D8%B1%D8%AF%20%D9%87%D8%AC%D9%8A%D9%86&tab=indoor",
+    "content": "ورد هجين Rosa hybrida"
+  },
+  {
+    "title": "ألتيرنانثيرا برازيلية Alternanthera brasiliana",
+    "displayTitle": "Alternanthera brasiliana ألتيرنانثيرا برازيلية",
+    "subtitle": "Alternanthera brasiliana",
+    "type": "indoor-plant",
+    "url": "ourPlants.html?search=%D8%A3%D9%84%D8%AA%D9%8A%D8%B1%D9%86%D8%A7%D9%86%D8%AB%D9%8A%D8%B1%D8%A7%20%D8%A8%D8%B1%D8%A7%D8%B2%D9%8A%D9%84%D9%8A%D8%A9&tab=indoor",
+    "content": "ألتيرنانثيرا برازيلية Alternanthera brasiliana"
+  },
+  {
+    "title": "نبات العنكبوت Chlorophytum comosum",
+    "displayTitle": "Chlorophytum comosum نبات العنكبوت",
+    "subtitle": "Chlorophytum comosum",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D9%86%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%B9%D9%86%D9%83%D8%A8%D9%88%D8%AA&tab=outdoor",
+    "content": "نبات العنكبوت Chlorophytum comosum"
+  },
+  {
+    "title": "ليديبوريا فضية Ledebouria socialis",
+    "displayTitle": "Ledebouria socialis ليديبوريا فضية",
+    "subtitle": "Ledebouria socialis",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D9%84%D9%8A%D8%AF%D9%8A%D8%A8%D9%88%D8%B1%D9%8A%D8%A7%20%D9%81%D8%B6%D9%8A%D8%A9&tab=outdoor",
+    "content": "ليديبوريا فضية Ledebouria socialis"
+  },
+  {
+    "title": "أوفوربيا ملياي Euphorbia milii",
+    "displayTitle": "Euphorbia milii  أوفوربيا ملياي",
+    "subtitle": "Euphorbia milii",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%20%D8%A3%D9%88%D9%81%D9%88%D8%B1%D8%A8%D9%8A%D8%A7%20%D9%85%D9%84%D9%8A%D8%A7%D9%8A&tab=outdoor",
+    "content": " أوفوربيا ملياي Euphorbia milii"
+  },
+  {
+    "title": "الألوفيرا Aloe vera",
+    "displayTitle": "Aloe vera الألوفيرا",
+    "subtitle": "Aloe vera",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D8%A3%D9%84%D9%88%D9%81%D9%8A%D8%B1%D8%A7&tab=outdoor",
+    "content": "الألوفيرا Aloe vera"
+  },
+  {
+    "title": "تيكوما صفراء Tecoma stans",
+    "displayTitle": "Tecoma stans تيكوما صفراء",
+    "subtitle": "Tecoma stans",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%AA%D9%8A%D9%83%D9%88%D9%85%D8%A7%20%D8%B5%D9%81%D8%B1%D8%A7%D8%A1&tab=outdoor",
+    "content": "تيكوما صفراء Tecoma stans"
+  },
+  {
+    "title": "القرنفل Dianthus spp.",
+    "displayTitle": "Dianthus spp. القرنفل",
+    "subtitle": "Dianthus spp.",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D9%82%D8%B1%D9%86%D9%81%D9%84&tab=outdoor",
+    "content": "القرنفل Dianthus spp."
+  },
+  {
+    "title": "عشبة ألترنانثيرا Alternanthera brasiliana",
+    "displayTitle": "Alternanthera brasiliana عشبة ألترنانثيرا",
+    "subtitle": "Alternanthera brasiliana",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%B9%D8%B4%D8%A8%D8%A9%20%D8%A3%D9%84%D8%AA%D8%B1%D9%86%D8%A7%D9%86%D8%AB%D9%8A%D8%B1%D8%A7&tab=outdoor",
+    "content": "عشبة ألترنانثيرا Alternanthera brasiliana"
+  },
+  {
+    "title": "بورتولاكا Portulaca Oleracea",
+    "displayTitle": "Portulaca Oleracea بورتولاكا",
+    "subtitle": "Portulaca Oleracea",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A8%D9%88%D8%B1%D8%AA%D9%88%D9%84%D8%A7%D9%83%D8%A7&tab=outdoor",
+    "content": "بورتولاكا Portulaca Oleracea"
+  },
+  {
+    "title": "نبات الحلفا Pennisetum spp.",
+    "displayTitle": "Pennisetum spp. نبات الحلفا",
+    "subtitle": "Pennisetum spp.",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D9%86%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AD%D9%84%D9%81%D8%A7&tab=outdoor",
+    "content": "نبات الحلفا Pennisetum spp."
+  },
+  {
+    "title": "أغاف Foxtail Agave",
+    "displayTitle": "Foxtail Agave أغاف",
+    "subtitle": "Foxtail Agave",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A3%D8%BA%D8%A7%D9%81&tab=outdoor",
+    "content": "أغاف Foxtail Agave"
+  },
+  {
+    "title": "الفربيون Euphorbia",
+    "displayTitle": "Euphorbia الفربيون",
+    "subtitle": "Euphorbia",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D9%81%D8%B1%D8%A8%D9%8A%D9%88%D9%86&tab=outdoor",
+    "content": "الفربيون Euphorbia"
+  },
+  {
+    "title": "الجهنمية Bougainvillea spp.",
+    "displayTitle": "Bougainvillea spp. الجهنمية",
+    "subtitle": "Bougainvillea spp.",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D8%AC%D9%87%D9%86%D9%85%D9%8A%D8%A9&tab=outdoor",
+    "content": "الجهنمية Bougainvillea spp."
+  },
+  {
+    "title": "لانتانا lantana camara",
+    "displayTitle": "lantana camara لانتانا",
+    "subtitle": "lantana camara",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D9%84%D8%A7%D9%86%D8%AA%D8%A7%D9%86%D8%A7&tab=outdoor",
+    "content": "لانتانا lantana camara"
+  },
+  {
+    "title": "نبات الثعبان الأسطواني Dracaena angolensis",
+    "displayTitle": "Dracaena angolensis نبات الثعبان الأسطواني",
+    "subtitle": "Dracaena angolensis",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D9%86%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AB%D8%B9%D8%A8%D8%A7%D9%86%20%D8%A7%D9%84%D8%A3%D8%B3%D8%B7%D9%88%D8%A7%D9%86%D9%8A&tab=outdoor",
+    "content": "نبات الثعبان الأسطواني Dracaena angolensis"
+  },
+  {
+    "title": "نبات المظلة Cyperus aternifolius",
+    "displayTitle": "Cyperus aternifolius نبات المظلة",
+    "subtitle": "Cyperus aternifolius",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D9%86%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%B8%D9%84%D8%A9&tab=outdoor",
+    "content": "نبات المظلة Cyperus aternifolius"
+  },
+  {
+    "title": "نبات المحار Tradescantia spathacea",
+    "displayTitle": "Tradescantia spathacea نبات المحار",
+    "subtitle": "Tradescantia spathacea",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D9%86%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%AD%D8%A7%D8%B1&tab=outdoor",
+    "content": "نبات المحار Tradescantia spathacea"
+  },
+  {
+    "title": "بونسيانا Delonix regia",
+    "displayTitle": "Delonix regia بونسيانا",
+    "subtitle": "Delonix regia",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A8%D9%88%D9%86%D8%B3%D9%8A%D8%A7%D9%86%D8%A7&tab=outdoor",
+    "content": "بونسيانا Delonix regia"
+  },
+  {
+    "title": "شجرة الملنجتونيا Millingtonia hortensis",
+    "displayTitle": "Millingtonia hortensis شجرة الملنجتونيا",
+    "subtitle": "Millingtonia hortensis",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%B4%D8%AC%D8%B1%D8%A9%20%D8%A7%D9%84%D9%85%D9%84%D9%86%D8%AC%D8%AA%D9%88%D9%86%D9%8A%D8%A7&tab=outdoor",
+    "content": "شجرة الملنجتونيا Millingtonia hortensis"
+  },
+  {
+    "title": "شجرة النيم Azadirachta indica",
+    "displayTitle": "Azadirachta indica شجرة النيم",
+    "subtitle": "Azadirachta indica",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%B4%D8%AC%D8%B1%D8%A9%20%D8%A7%D9%84%D9%86%D9%8A%D9%85&tab=outdoor",
+    "content": "شجرة النيم Azadirachta indica"
+  },
+  {
+    "title": "اوليندر Nerium oleander",
+    "displayTitle": "Nerium oleander اوليندر",
+    "subtitle": "Nerium oleander",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%88%D9%84%D9%8A%D9%86%D8%AF%D8%B1&tab=outdoor",
+    "content": "اوليندر Nerium oleander"
+  },
+  {
+    "title": "الفيكس Ficus spp",
+    "displayTitle": "Ficus spp الفيكس",
+    "subtitle": "Ficus spp",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D9%81%D9%8A%D9%83%D8%B3&tab=outdoor",
+    "content": "الفيكس Ficus spp"
+  },
+  {
+    "title": "شجرة الكافور Cinnamomum camphora",
+    "displayTitle": "Cinnamomum camphora شجرة الكافور",
+    "subtitle": "Cinnamomum camphora",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%B4%D8%AC%D8%B1%D8%A9%20%D8%A7%D9%84%D9%83%D8%A7%D9%81%D9%88%D8%B1&tab=outdoor",
+    "content": "شجرة الكافور Cinnamomum camphora"
+  },
+  {
+    "title": "تمرحنا Ligustrum spp",
+    "displayTitle": "Ligustrum spp تمرحنا",
+    "subtitle": "Ligustrum spp",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%AA%D9%85%D8%B1%D8%AD%D9%86%D8%A7&tab=outdoor",
+    "content": "تمرحنا Ligustrum spp"
+  },
+  {
+    "title": "خيار الشمبر Cassia fistula",
+    "displayTitle": "Cassia fistula خيار الشمبر",
+    "subtitle": "Cassia fistula",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%AE%D9%8A%D8%A7%D8%B1%20%D8%A7%D9%84%D8%B4%D9%85%D8%A8%D8%B1&tab=outdoor",
+    "content": "خيار الشمبر Cassia fistula"
+  },
+  {
+    "title": "الياسمين الهندي Plumeria alba",
+    "displayTitle": "Plumeria alba الياسمين الهندي",
+    "subtitle": "Plumeria alba",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D9%8A%D8%A7%D8%B3%D9%85%D9%8A%D9%86%20%D8%A7%D9%84%D9%87%D9%86%D8%AF%D9%8A&tab=outdoor",
+    "content": "الياسمين الهندي Plumeria alba"
+  },
+  {
+    "title": "شجرة التابوبيا Tabebuia spp",
+    "displayTitle": "Tabebuia spp شجرة التابوبيا",
+    "subtitle": "Tabebuia spp",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%B4%D8%AC%D8%B1%D8%A9%20%D8%A7%D9%84%D8%AA%D8%A7%D8%A8%D9%88%D8%A8%D9%8A%D8%A7&tab=outdoor",
+    "content": "شجرة التابوبيا Tabebuia spp"
+  },
+  {
+    "title": "الخبيز الساحلي Thespesia populnea",
+    "displayTitle": "Thespesia populnea الخبيز الساحلي",
+    "subtitle": "Thespesia populnea",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D8%AE%D8%A8%D9%8A%D8%B2%20%D8%A7%D9%84%D8%B3%D8%A7%D8%AD%D9%84%D9%8A&tab=outdoor",
+    "content": "الخبيز الساحلي Thespesia populnea"
+  },
+  {
+    "title": "شجرة الغاف Prosopis cineraria",
+    "displayTitle": "Prosopis cineraria شجرة الغاف",
+    "subtitle": "Prosopis cineraria",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%B4%D8%AC%D8%B1%D8%A9%20%D8%A7%D9%84%D8%BA%D8%A7%D9%81&tab=outdoor",
+    "content": "شجرة الغاف Prosopis cineraria"
+  },
+  {
+    "title": "السدرالبلدي Ziziphus spina-christi",
+    "displayTitle": "Ziziphus spina-christi السدرالبلدي",
+    "subtitle": "Ziziphus spina-christi",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D8%B3%D8%AF%D8%B1%D8%A7%D9%84%D8%A8%D9%84%D8%AF%D9%8A&tab=outdoor",
+    "content": "السدرالبلدي Ziziphus spina-christi"
+  },
+  {
+    "title": "اللوز الهندي Terminalia catappa",
+    "displayTitle": "Terminalia catappa اللوز الهندي",
+    "subtitle": "Terminalia catappa",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D9%84%D9%88%D8%B2%20%D8%A7%D9%84%D9%87%D9%86%D8%AF%D9%8A&tab=outdoor",
+    "content": "اللوز الهندي Terminalia catappa"
+  },
+  {
+    "title": "نخيل واشنطن Washingtonia robusta",
+    "displayTitle": "Washingtonia robusta نخيل واشنطن",
+    "subtitle": "Washingtonia robusta",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D9%86%D8%AE%D9%8A%D9%84%20%D9%88%D8%A7%D8%B4%D9%86%D8%B7%D9%86&tab=outdoor",
+    "content": "نخيل واشنطن Washingtonia robusta"
+  },
+  {
+    "title": "نخلة التمر Phoenix dactylifera",
+    "displayTitle": "Phoenix dactylifera نخلة التمر",
+    "subtitle": "Phoenix dactylifera",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D9%86%D8%AE%D9%84%D8%A9%20%D8%A7%D9%84%D8%AA%D9%85%D8%B1&tab=outdoor",
+    "content": "نخلة التمر Phoenix dactylifera"
+  },
+  {
+    "title": "كف مريم Vitex agnus-castus",
+    "displayTitle": "Vitex agnus-castus كف مريم",
+    "subtitle": "Vitex agnus-castus",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D9%83%D9%81%20%D9%85%D8%B1%D9%8A%D9%85&tab=outdoor",
+    "content": "كف مريم Vitex agnus-castus"
+  },
+  {
+    "title": "شجرة المورينغا Moringa oleifera",
+    "displayTitle": "Moringa oleifera شجرة المورينغا",
+    "subtitle": "Moringa oleifera",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%B4%D8%AC%D8%B1%D8%A9%20%D8%A7%D9%84%D9%85%D9%88%D8%B1%D9%8A%D9%86%D8%BA%D8%A7&tab=outdoor",
+    "content": "شجرة المورينغا Moringa oleifera"
+  },
+  {
+    "title": "شجرة السيسبان Sesbania grandiflora",
+    "displayTitle": "Sesbania grandiflora شجرة السيسبان",
+    "subtitle": "Sesbania grandiflora",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%B4%D8%AC%D8%B1%D8%A9%20%D8%A7%D9%84%D8%B3%D9%8A%D8%B3%D8%A8%D8%A7%D9%86&tab=outdoor",
+    "content": "شجرة السيسبان Sesbania grandiflora"
+  },
+  {
+    "title": "الحبن الأصفر Thevetia peruviana",
+    "displayTitle": "Thevetia peruviana الحبن الأصفر",
+    "subtitle": "Thevetia peruviana",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D8%AD%D8%A8%D9%86%20%D8%A7%D9%84%D8%A3%D8%B5%D9%81%D8%B1&tab=outdoor",
+    "content": "الحبن الأصفر Thevetia peruviana"
+  },
+  {
+    "title": "الكازورينا Casuarina equisetifolia",
+    "displayTitle": "Casuarina equisetifolia الكازورينا",
+    "subtitle": "Casuarina equisetifolia",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D9%83%D8%A7%D8%B2%D9%88%D8%B1%D9%8A%D9%86%D8%A7&tab=outdoor",
+    "content": "الكازورينا Casuarina equisetifolia"
+  },
+  {
+    "title": "شجرة كورديا Cordia sebestena",
+    "displayTitle": "Cordia sebestena شجرة كورديا",
+    "subtitle": "Cordia sebestena",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%B4%D8%AC%D8%B1%D8%A9%20%D9%83%D9%88%D8%B1%D8%AF%D9%8A%D8%A7&tab=outdoor",
+    "content": "شجرة كورديا Cordia sebestena"
+  },
+  {
+    "title": "دمس رمادي Conocarpus erectus",
+    "displayTitle": "Conocarpus erectus دمس رمادي",
+    "subtitle": "Conocarpus erectus",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%AF%D9%85%D8%B3%20%D8%B1%D9%85%D8%A7%D8%AF%D9%8A&tab=outdoor",
+    "content": "دمس رمادي Conocarpus erectus"
+  },
+  {
+    "title": "مريمية فضية Leucophyllum frutescens",
+    "displayTitle": "Leucophyllum frutescens مريمية فضية",
+    "subtitle": "Leucophyllum frutescens",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D9%85%D8%B1%D9%8A%D9%85%D9%8A%D8%A9%20%D9%81%D8%B6%D9%8A%D8%A9&tab=outdoor",
+    "content": "مريمية فضية Leucophyllum frutescens"
+  },
+  {
+    "title": "المشموم البحريني Ocimum basilicum",
+    "displayTitle": "Ocimum basilicum المشموم البحريني",
+    "subtitle": "Ocimum basilicum",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D9%85%D8%B4%D9%85%D9%88%D9%85%20%D8%A7%D9%84%D8%A8%D8%AD%D8%B1%D9%8A%D9%86%D9%8A&tab=outdoor",
+    "content": "المشموم البحريني Ocimum basilicum"
+  },
+  {
+    "title": "غازانيا Gazania rigens",
+    "displayTitle": "Gazania rigens غازانيا",
+    "subtitle": "Gazania rigens",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%BA%D8%A7%D8%B2%D8%A7%D9%86%D9%8A%D8%A7&tab=outdoor",
+    "content": "غازانيا Gazania rigens"
+  },
+  {
+    "title": "البتوتيا المكسيكية Ruellia simplex",
+    "displayTitle": "Ruellia simplex البتوتيا المكسيكية",
+    "subtitle": "Ruellia simplex",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D8%A8%D8%AA%D9%88%D8%AA%D9%8A%D8%A7%20%D8%A7%D9%84%D9%85%D9%83%D8%B3%D9%8A%D9%83%D9%8A%D8%A9&tab=outdoor",
+    "content": "البتوتيا المكسيكية Ruellia simplex"
+  },
+  {
+    "title": "البورتولاكا Portulaca grandiflora",
+    "displayTitle": "Portulaca grandiflora البورتولاكا",
+    "subtitle": "Portulaca grandiflora",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D8%A8%D9%88%D8%B1%D8%AA%D9%88%D9%84%D8%A7%D9%83%D8%A7&tab=outdoor",
+    "content": "البورتولاكا Portulaca grandiflora"
+  },
+  {
+    "title": "شجرة المانجو Mangifera indica L.",
+    "displayTitle": "Mangifera indica L. شجرة المانجو",
+    "subtitle": "Mangifera indica L.",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%B4%D8%AC%D8%B1%D8%A9%20%D8%A7%D9%84%D9%85%D8%A7%D9%86%D8%AC%D9%88&tab=outdoor",
+    "content": "شجرة المانجو Mangifera indica L."
+  },
+  {
+    "title": "الثيل، العشب الأفريقي Cynodon dactylon",
+    "displayTitle": "Cynodon dactylon الثيل، العشب الأفريقي",
+    "subtitle": "Cynodon dactylon",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D8%AB%D9%8A%D9%84%D8%8C%20%D8%A7%D9%84%D8%B9%D8%B4%D8%A8%20%D8%A7%D9%84%D8%A3%D9%81%D8%B1%D9%8A%D9%82%D9%8A&tab=outdoor",
+    "content": "الثيل، العشب الأفريقي Cynodon dactylon"
+  },
+  {
+    "title": "كاسيا جلوكا Senna surattensis",
+    "displayTitle": "Senna surattensis كاسيا جلوكا",
+    "subtitle": "Senna surattensis",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D9%83%D8%A7%D8%B3%D9%8A%D8%A7%20%D8%AC%D9%84%D9%88%D9%83%D8%A7&tab=outdoor",
+    "content": "كاسيا جلوكا Senna surattensis"
+  },
+  {
+    "title": "التوت الأسود Morus nigra L.",
+    "displayTitle": "Morus nigra L. التوت الأسود",
+    "subtitle": "Morus nigra L.",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D8%AA%D9%88%D8%AA%20%D8%A7%D9%84%D8%A3%D8%B3%D9%88%D8%AF&tab=outdoor",
+    "content": "التوت الأسود Morus nigra L."
+  },
+  {
+    "title": "الفينكا Catharanthus roseus",
+    "displayTitle": "Catharanthus roseus الفينكا",
+    "subtitle": "Catharanthus roseus",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D9%81%D9%8A%D9%86%D9%83%D8%A7&tab=outdoor",
+    "content": "الفينكا Catharanthus roseus"
+  },
+  {
+    "title": "الزينيا Zinnia elegans Jacq.",
+    "displayTitle": "Zinnia elegans Jacq. الزينيا",
+    "subtitle": "Zinnia elegans Jacq.",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D8%B2%D9%8A%D9%86%D9%8A%D8%A7&tab=outdoor",
+    "content": "الزينيا Zinnia elegans Jacq."
+  },
+  {
+    "title": "سانسيفيريا Sansevieria trifasciata Prain",
+    "displayTitle": "Sansevieria trifasciata Prain سانسيفيريا",
+    "subtitle": "Sansevieria trifasciata Prain",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%B3%D8%A7%D9%86%D8%B3%D9%8A%D9%81%D9%8A%D8%B1%D9%8A%D8%A7&tab=outdoor",
+    "content": "سانسيفيريا Sansevieria trifasciata Prain"
+  },
+  {
+    "title": "نبات المكحلة Tradescantia pallida",
+    "displayTitle": "Tradescantia pallida نبات المكحلة",
+    "subtitle": "Tradescantia pallida",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D9%86%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D9%83%D8%AD%D9%84%D8%A9&tab=outdoor",
+    "content": "نبات المكحلة Tradescantia pallida"
+  },
+  {
+    "title": "الويديليا Sphagneticola trilobata",
+    "displayTitle": "Sphagneticola trilobata الويديليا",
+    "subtitle": "Sphagneticola trilobata",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D9%88%D9%8A%D8%AF%D9%8A%D9%84%D9%8A%D8%A7&tab=outdoor",
+    "content": "الويديليا Sphagneticola trilobata"
+  },
+  {
+    "title": "��للانتانا المتدلي Lantana montevidensis",
+    "displayTitle": "Lantana montevidensis ��للانتانا المتدلي",
+    "subtitle": "Lantana montevidensis",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%EF%BF%BD%EF%BF%BD%D9%84%D9%84%D8%A7%D9%86%D8%AA%D8%A7%D9%86%D8%A7%20%D8%A7%D9%84%D9%85%D8%AA%D8%AF%D9%84%D9%8A&tab=outdoor",
+    "content": "��للانتانا المتدلي Lantana montevidensis"
+  },
+  {
+    "title": "السنط العربي الشوكي Vachellia nilotica",
+    "displayTitle": "Vachellia nilotica السنط العربي الشوكي",
+    "subtitle": "Vachellia nilotica",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D8%B3%D9%86%D8%B7%20%D8%A7%D9%84%D8%B9%D8%B1%D8%A8%D9%8A%20%D8%A7%D9%84%D8%B4%D9%88%D9%83%D9%8A&tab=outdoor",
+    "content": "السنط العربي الشوكي Vachellia nilotica"
+  },
+  {
+    "title": "قطر الندى، حي العلم Mesembryanthemum cordifolium L.f.",
+    "displayTitle": "Mesembryanthemum cordifolium L.f. قطر الندى، حي العلم",
+    "subtitle": "Mesembryanthemum cordifolium L.f.",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D9%82%D8%B7%D8%B1%20%D8%A7%D9%84%D9%86%D8%AF%D9%89%D8%8C%20%D8%AD%D9%8A%20%D8%A7%D9%84%D8%B9%D9%84%D9%85&tab=outdoor",
+    "content": "قطر الندى، حي العلم Mesembryanthemum cordifolium L.f."
+  },
+  {
+    "title": "الفربيون تيثيمالويدس Euphorbia tithymaloides",
+    "displayTitle": "Euphorbia tithymaloides الفربيون تيثيمالويدس",
+    "subtitle": "Euphorbia tithymaloides",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D9%81%D8%B1%D8%A8%D9%8A%D9%88%D9%86%20%D8%AA%D9%8A%D8%AB%D9%8A%D9%85%D8%A7%D9%84%D9%88%D9%8A%D8%AF%D8%B3&tab=outdoor",
+    "content": "الفربيون تيثيمالويدس Euphorbia tithymaloides"
+  },
+  {
+    "title": "زنبق العنكبوت Crinum asiaticum",
+    "displayTitle": "Crinum asiaticum زنبق العنكبوت",
+    "subtitle": "Crinum asiaticum",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%B2%D9%86%D8%A8%D9%82%20%D8%A7%D9%84%D8%B9%D9%86%D9%83%D8%A8%D9%88%D8%AA&tab=outdoor",
+    "content": "زنبق العنكبوت Crinum asiaticum"
+  },
+  {
+    "title": "الياسمين الزفر Volkameria inermis",
+    "displayTitle": "Volkameria inermis الياسمين الزفر",
+    "subtitle": "Volkameria inermis",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D9%8A%D8%A7%D8%B3%D9%85%D9%8A%D9%86%20%D8%A7%D9%84%D8%B2%D9%81%D8%B1&tab=outdoor",
+    "content": "الياسمين الزفر Volkameria inermis"
+  },
+  {
+    "title": "الجاتروفا Jatropha integerrima",
+    "displayTitle": "Jatropha integerrima الجاتروفا",
+    "subtitle": "Jatropha integerrima",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D8%AC%D8%A7%D8%AA%D8%B1%D9%88%D9%81%D8%A7&tab=outdoor",
+    "content": "الجاتروفا Jatropha integerrima"
+  },
+  {
+    "title": "طاووس الجنة Caesalpinia pulcherrima",
+    "displayTitle": "Caesalpinia pulcherrima طاووس الجنة",
+    "subtitle": "Caesalpinia pulcherrima",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%B7%D8%A7%D9%88%D9%88%D8%B3%20%D8%A7%D9%84%D8%AC%D9%86%D8%A9&tab=outdoor",
+    "content": "طاووس الجنة Caesalpinia pulcherrima"
+  }
+]

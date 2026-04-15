@@ -793,6 +793,7 @@
 
           detailsHtml += `</div>`; // close plant-details-card
           plantDetails.innerHTML = detailsHtml;
+          setTimeout(() => highlightSearchTermOnPage(), 100);
 
           const thumb = document.getElementById('mainThumb');
           if (thumb) {

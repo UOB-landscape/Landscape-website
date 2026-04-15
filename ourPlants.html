@@ -54,8 +54,7 @@
       border-radius: 20px;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      white-space: nowrap;
-      /* Prevent text wrapping inside buttons */
+      white-space: nowrap; /* Prevent text wrapping inside buttons */
       min-height: 32px;
       min-width: fit-content;
     }
@@ -71,12 +70,10 @@
       align-items: center;
       justify-content: center;
       gap: 25px;
-      /* padding: 20px; */
       margin-bottom: 30px;
       margin-top: 20px;
     }
 
-    /* NEW CSS FOR DROPDOWNS - ADD THIS */
     .search-bar {
       flex: 1;
       max-width: 400px;
@@ -249,7 +246,6 @@
       text-align: center;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .search-filters-container {
         flex-direction: column;
@@ -420,43 +416,6 @@
       }
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      const initialHash = (window.location.hash === '#outdoor-plants') ? '#outdoor-plants' : '#indoor-plants';
-      showTab(initialHash);
-
-      if (!window.location.hash) {
-        window.location.hash = '#indoor-plants';
-      }
-
-      showTab(window.location.hash || '#indoor-plants');
-
-      // Force scroll to top after a short delay to override hash behavior
-      setTimeout(() => {
-        window.scrollTo(0, 0);
-      }, 0);
-
-      window.addEventListener('hashchange', () => showTab(window.location.hash));
-
-      const tabIndoor = document.getElementById('tab-indoor');
-      const tabOutdoor = document.getElementById('tab-outdoor');
-
-      if (tabIndoor) {
-        tabIndoor.addEventListener('click', e => {
-          e.preventDefault();
-          window.location.hash = '#indoor-plants';
-          window.scrollTo(0, 0);
-        });
-      }
-
-      if (tabOutdoor) {
-        tabOutdoor.addEventListener('click', e => {
-          e.preventDefault();
-          window.location.hash = '#outdoor-plants';
-          window.scrollTo(0, 0);
-        });
-      }
-    });
-
     // Desktop theme picker
     const btn = document.getElementById('theme-btn');
     const picker = document.getElementById('theme-picker');
@@ -520,7 +479,6 @@
         window.addEventListener('scroll', () => {
           floatingBtn.classList.toggle('show', window.pageYOffset > 300);
         });
-
         floatingBtn.addEventListener('click', (e) => {
           e.preventDefault();
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -541,20 +499,14 @@
 
       // Close menu on scroll
       window.addEventListener('scroll', () => {
-        if (mobileMenu) {
-          mobileMenu.classList.remove('active');
-        }
-        if (mobileThemePicker) {
-          mobileThemePicker.classList.remove('active');
-        }
+        if (mobileMenu) mobileMenu.classList.remove('active');
+        if (mobileThemePicker) mobileThemePicker.classList.remove('active');
       });
 
       // Close menu when clicking links
       document.querySelectorAll('#mobile-menu > li > a').forEach(link => {
         link.addEventListener('click', () => {
-          if (mobileMenu) {
-            mobileMenu.classList.remove('active');
-          }
+          if (mobileMenu) mobileMenu.classList.remove('active');
         });
       });
     });
@@ -621,9 +573,7 @@
               Filters
               <span class="filter-badge" id="indoor-filter-count" style="display: none;">0</span>
             </button>
-            <div class="dropdown-filter-content" id="indoor-filter-dropdown">
-              <!-- All filters will be populated dynamically -->
-            </div>
+            <div class="dropdown-filter-content" id="indoor-filter-dropdown"></div>
           </div>
 
           <!-- Clear Filters Button -->
@@ -762,9 +712,7 @@
               Filters
               <span class="filter-badge" id="outdoor-filter-count" style="display: none;">0</span>
             </button>
-            <div class="dropdown-filter-content" id="outdoor-filter-dropdown">
-              <!-- All filters will be populated dynamically -->
-            </div>
+            <div class="dropdown-filter-content" id="outdoor-filter-dropdown"></div>
           </div>
 
           <!-- Clear Filters Button -->
@@ -811,15 +759,11 @@
       <div class="footer-column">
         <h4>Contact</h4>
         <div class="social-links">
-          <a target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-envelope"></i>
-          </a>
+          <a target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-envelope"></i></a>
           <span>landscape@uob.edu.bh</span>
         </div>
         <div class="social-links">
-          <a target="_blank" rel="noopener noreferrer">
-            <i class="fa-solid fa-phone"></i>
-          </a>
+          <a target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-phone"></i></a>
           <span>+973 1743 8181</span>
         </div>
         <div class="social-links">
@@ -836,50 +780,152 @@
   </footer>
 
   <script>
-    // fetch('http://localhost:3000/api/indoor-plants')
-    //   .then(res => res.json())
-    //   .then(plants => {
-    //     const grid = document.getElementById('indoorGrid');
-    //     plants.forEach(plant => {
-    //       const card = document.createElement('div');
-    //       card.className = 'grid-item';
-    //       card.innerHTML = `
-    //         <img src="${plant.Image}" alt="${plant['Scientific name']}">
-    //         <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
-    //       `;
-    //       card.addEventListener('click', () => {
-    //         window.location.href = `indoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
-    //       });
-    //       grid.appendChild(card);
-    //     });
-    //   })
-    //   .catch(err => console.error('Indoor fetch error:', err));
-    //   console.log('Light values:', indoorPlants.map(p => `"${p['Light Requirements']}"`));
-
-    // fetch('http://localhost:3000/api/outdoor-plants')
-    //   .then(res => res.json())
-    //   .then(plants => {
-    //     const grid = document.querySelector('#outdoor-plants .grid-container');
-    //     plants.forEach(plant => {
-    //       const card = document.createElement('div');
-    //       card.className = 'grid-item';
-    //       card.innerHTML = `
-    //         <img src="${plant.Image}" alt="${plant['Scientific name']}">
-    //         <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
-    //       `;
-    //       card.addEventListener('click', () => {
-    //         window.location.href = `outdoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
-    //       });
-    //       grid.appendChild(card);
-    //     });
-    //   })
-    //   .catch(err => console.error('Outdoor fetch error:', err));
-
-
-    // Indoor Plants - Search, Sort, and Filter
     document.addEventListener('DOMContentLoaded', () => {
       let indoorPlants = [];
       let outdoorPlants = [];
+
+      // Read URL params
+      const urlParams = new URLSearchParams(window.location.search);
+      const searchFromUrl = urlParams.get('search');
+      const tabFromUrl = urlParams.get('tab');
+      const highlightFromUrl = urlParams.get('highlight') || searchFromUrl;
+
+      // Clean URL immediately so search.js doesn't interfere
+      history.replaceState(null, '', window.location.pathname);
+
+      // Switch to correct tab from URL
+      if (tabFromUrl === 'outdoor') {
+        showTab('#outdoor-plants');
+      } else if (tabFromUrl === 'indoor') {
+        showTab('#indoor-plants');
+      } else {
+        const initialHash = (window.location.hash === '#outdoor-plants') ? '#outdoor-plants' : '#indoor-plants';
+        showTab(initialHash);
+        if (!window.location.hash) window.location.hash = '#indoor-plants';
+      }
+
+      setTimeout(() => window.scrollTo(0, 0), 0);
+
+      window.addEventListener('hashchange', () => showTab(window.location.hash));
+
+      const tabIndoor = document.getElementById('tab-indoor');
+      const tabOutdoor = document.getElementById('tab-outdoor');
+
+      if (tabIndoor) {
+        tabIndoor.addEventListener('click', e => {
+          e.preventDefault();
+          window.location.hash = '#indoor-plants';
+          window.scrollTo(0, 0);
+        });
+      }
+
+      if (tabOutdoor) {
+        tabOutdoor.addEventListener('click', e => {
+          e.preventDefault();
+          window.location.hash = '#outdoor-plants';
+          window.scrollTo(0, 0);
+        });
+      }
+
+      function highlightQuery(query, tab) {
+        const queryLower = query.toLowerCase();
+
+        const section = tab === 'outdoor'
+          ? document.querySelector('#outdoor-plants')
+          : document.querySelector('#indoor-plants');
+
+        if (!section) return;
+
+        // Clean previous highlights
+        document.querySelectorAll('mark.search-highlight-text').forEach(el => {
+          const text = document.createTextNode(el.textContent);
+          el.parentElement.replaceChild(text, el);
+        });
+        const existingNav = document.getElementById('search-navigator');
+        if (existingNav) existingNav.remove();
+
+        const walker = document.createTreeWalker(
+          section,
+          NodeFilter.SHOW_TEXT,
+          null,
+          false
+        );
+
+        const nodesToHighlight = [];
+        let node;
+        while (node = walker.nextNode()) {
+          if (node.textContent.toLowerCase().includes(queryLower)) {
+            nodesToHighlight.push(node);
+          }
+        }
+
+        nodesToHighlight.forEach(node => {
+          const regex = new RegExp(`(${query})`, 'gi');
+          const parent = node.parentElement;
+          const parts = node.textContent.split(regex);
+          const fragment = document.createDocumentFragment();
+          parts.forEach(part => {
+            if (part.toLowerCase() === query.toLowerCase()) {
+              const mark = document.createElement('mark');
+              mark.className = 'search-highlight-text';
+              mark.style.background = 'yellow';
+              mark.style.padding = '0 2px';
+              mark.textContent = part;
+              fragment.appendChild(mark);
+            } else {
+              fragment.appendChild(document.createTextNode(part));
+            }
+          });
+          parent.replaceChild(fragment, node);
+        });
+
+        // Build navigator
+        setTimeout(() => {
+          const allMatches = Array.from(section.querySelectorAll('mark.search-highlight-text'));
+          if (allMatches.length === 0) return;
+
+          let currentIndex = 0;
+          allMatches[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+          allMatches[currentIndex].classList.add('search-highlight-active');
+
+          const nav = document.createElement('div');
+          nav.id = 'search-navigator';
+          nav.innerHTML = `
+      <span id="search-nav-counter">${currentIndex + 1}/${allMatches.length}</span>
+      <button id="search-nav-prev" title="Previous match"><i class="fas fa-chevron-up"></i></button>
+      <button id="search-nav-next" title="Next match"><i class="fas fa-chevron-down"></i></button>
+      <button id="search-nav-close" title="Close">✕</button>
+    `;
+
+          const searchWrapper = document.querySelector('.main-search-wrapper');
+          if (searchWrapper) {
+            searchWrapper.style.position = 'relative';
+            searchWrapper.appendChild(nav);
+          } else {
+            document.body.appendChild(nav);
+          }
+
+          function goToMatch(index) {
+            allMatches[currentIndex].classList.remove('search-highlight-active');
+            currentIndex = (index + allMatches.length) % allMatches.length;
+            allMatches[currentIndex].classList.add('search-highlight-active');
+            allMatches[currentIndex].scrollIntoView({ behavior: 'smooth', block: 'center' });
+            document.getElementById('search-nav-counter').textContent = `${currentIndex + 1}/${allMatches.length}`;
+          }
+
+          document.getElementById('search-nav-prev').addEventListener('click', () => goToMatch(currentIndex - 1));
+          document.getElementById('search-nav-next').addEventListener('click', () => goToMatch(currentIndex + 1));
+          document.getElementById('search-nav-close').addEventListener('click', () => {
+            nav.remove();
+            const searchInput = document.getElementById('main-search-input');
+            if (searchInput) searchInput.value = '';
+            section.querySelectorAll('mark.search-highlight-text').forEach(el => {
+              const text = document.createTextNode(el.textContent);
+              el.parentElement.replaceChild(text, el);
+            });
+          });
+        }, 100);
+      }
 
       // Fetch indoor plants
       fetch('https://landscapinguob-api.onrender.com/api/indoor-plants')
@@ -888,10 +934,12 @@
           indoorPlants = plants;
           renderIndoorPlants(indoorPlants);
           setupIndoorControls();
-          if (globalSearchQuery) highlightSearchTermOnPage();
+          if (highlightFromUrl && tabFromUrl !== 'outdoor') {
+            showTab('#indoor-plants');
+            setTimeout(() => highlightQuery(highlightFromUrl, tabFromUrl), 500);
+          }
         })
         .catch(err => console.error('Indoor fetch error:', err));
-      console.log('Light values:', indoorPlants.map(p => `"${p['Light Requirements']}"`));
 
       // Fetch outdoor plants
       fetch('https://landscapinguob-api.onrender.com/api/outdoor-plants')
@@ -900,7 +948,10 @@
           outdoorPlants = plants;
           renderOutdoorPlants(outdoorPlants);
           setupOutdoorControls();
-          if (globalSearchQuery) highlightSearchTermOnPage();
+          if (highlightFromUrl && tabFromUrl === 'outdoor') {
+            showTab('#outdoor-plants');
+            setTimeout(() => highlightQuery(highlightFromUrl, tabFromUrl), 500);
+          }
         })
         .catch(err => console.error('Outdoor fetch error:', err));
 
@@ -911,17 +962,12 @@
         // Extract numbers from strings like "18-30 ℃" or "18-30"
         const matches = tempString.match(/(\d+)-(\d+)/);
         if (matches) {
-          const min = parseInt(matches[1]);
-          const max = parseInt(matches[2]);
-          return (min + max) / 2;
+          return (parseInt(matches[1]) + parseInt(matches[2])) / 2;
         }
 
         // If single number
         const single = tempString.match(/(\d+)/);
-        if (single) {
-          return parseInt(single[1]);
-        }
-
+        if (single) return parseInt(single[1]);
         return null;
       }
 
@@ -949,9 +995,9 @@
           const card = document.createElement('div');
           card.className = 'grid-item';
           card.innerHTML = `
-          <img src="${plant.Image}" alt="${plant['Scientific name']}">
-          <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
-        `;
+            <img src="${plant.Image}" alt="${plant['Scientific name']}">
+            <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
+          `;
           card.addEventListener('click', () => {
             window.location.href = `indoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
           });
@@ -973,9 +1019,9 @@
           const card = document.createElement('div');
           card.className = 'grid-item';
           card.innerHTML = `
-          <img src="${plant.Image}" alt="${plant['Scientific name']}">
-          <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
-        `;
+            <img src="${plant.Image}" alt="${plant['Scientific name']}">
+            <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
+          `;
           card.addEventListener('click', () => {
             window.location.href = `outdoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
           });
@@ -1002,25 +1048,19 @@
         const filterFields = [
           { field: 'Type', label: 'Type' },
           { field: 'Light Requirements', label: 'Light Requirements' },
-          { field: 'Stable temperature', label: 'Temperature Range', transform: getTempCategory },
+          { field: 'Stable temperature', label: 'Temperature Range', transform: getTempCategoryIndoor },
           { field: 'Portable', label: 'Portable' }
         ];
 
-        // Helper function to categorize temperature
-        function getTempCategory(tempString) {
+        function getTempCategoryIndoor(tempString) {
           if (!tempString) return null;
-
           const matches = tempString.match(/(\d+)-(\d+)/);
           if (matches) {
-            const min = parseInt(matches[1]);
-            const max = parseInt(matches[2]);
-            const avg = (min + max) / 2;
-
+            const avg = (parseInt(matches[1]) + parseInt(matches[2])) / 2;
             if (avg >= 25) return 'High (25℃+)';
             if (avg >= 18) return 'Medium (18-25℃)';
             return 'Low (Below 18℃)';
           }
-
           const single = tempString.match(/(\d+)/);
           if (single) {
             const temp = parseInt(single[1]);
@@ -1028,44 +1068,16 @@
             if (temp >= 18) return 'Medium (18-25℃)';
             return 'Low (Below 18℃)';
           }
-
           return null;
         }
 
-        // Helper function to get temperature average
-        function getTempAverage(tempString) {
-          if (!tempString) return null;
-
-          const matches = tempString.match(/(\d+)-(\d+)/);
-          if (matches) {
-            const min = parseInt(matches[1]);
-            const max = parseInt(matches[2]);
-            return (min + max) / 2;
-          }
-
-          const single = tempString.match(/(\d+)/);
-          if (single) {
-            return parseInt(single[1]);
-          }
-
-          return null;
-        }
-
-        // Populate all filters dynamically
         if (filterDropdown) {
           filterFields.forEach(({ field, label, transform }) => {
             let uniqueValues;
-
             if (transform) {
-              // Apply transformation function (e.g., for temperature)
-              uniqueValues = [...new Set(
-                indoorPlants.map(p => transform(p[field])).filter(Boolean)
-              )].sort();
+              uniqueValues = [...new Set(indoorPlants.map(p => transform(p[field])).filter(Boolean))].sort();
             } else {
-              // Get unique values directly
-              uniqueValues = [...new Set(
-                indoorPlants.map(p => p[field]).filter(Boolean)
-              )].sort();
+              uniqueValues = [...new Set(indoorPlants.map(p => p[field]).filter(Boolean))].sort();
             }
 
             if (uniqueValues.length > 0) {
@@ -1093,10 +1105,7 @@
                 checkbox.id = `indoor-${field.replace(/\s+/g, '-').toLowerCase()}-${index}`;
                 checkbox.value = value;
                 checkbox.dataset.filter = field;
-                if (transform) {
-                  checkbox.dataset.transform = 'true';
-                }
-
+                if (transform) checkbox.dataset.transform = 'true';
                 const labelEl = document.createElement('label');
                 labelEl.htmlFor = checkbox.id;
                 labelEl.textContent = value;
@@ -1133,9 +1142,7 @@
 
         // Close dropdowns when clicking outside
         document.addEventListener('click', (e) => {
-          if (!e.target.closest('.sort-dropdown')) {
-            sortDropdown?.classList.remove('show');
-          }
+          if (!e.target.closest('.sort-dropdown')) sortDropdown?.classList.remove('show');
           if (!e.target.closest('.dropdown-filter')) {
             filterDropdown?.classList.remove('show');
             filterBtn?.classList.remove('active');
@@ -1170,27 +1177,18 @@
             if (e.target.type === 'checkbox') {
               const filterField = e.target.dataset.filter;
               const value = e.target.value;
-              const hasTransform = e.target.dataset.transform === 'true';
-
-              if (!currentFilters[filterField]) {
-                currentFilters[filterField] = [];
-              }
-
+              if (!currentFilters[filterField]) currentFilters[filterField] = [];
               if (e.target.checked) {
-                if (!currentFilters[filterField].includes(value)) {
-                  currentFilters[filterField].push(value);
-                }
+                if (!currentFilters[filterField].includes(value)) currentFilters[filterField].push(value);
               } else {
                 currentFilters[filterField] = currentFilters[filterField].filter(v => v !== value);
               }
-
               updateFilterCount();
               applyFilters();
             }
           });
         }
 
-        // Update filter count badge
         function updateFilterCount() {
           const totalFilters = Object.values(currentFilters).reduce((sum, arr) => sum + arr.length, 0);
           if (filterCount) {
@@ -1203,11 +1201,9 @@
           }
         }
 
-        // Apply filters and sorting
         function applyFilters() {
           let filtered = [...indoorPlants];
 
-          // Apply search
           if (currentSearch) {
             filtered = filtered.filter(plant =>
               plant['Common name']?.toLowerCase().includes(currentSearch.toLowerCase()) ||
@@ -1215,19 +1211,15 @@
             );
           }
 
-          // Apply all dynamic filters
           Object.keys(currentFilters).forEach(field => {
             if (currentFilters[field].length > 0) {
               filtered = filtered.filter(plant => {
                 let plantValue;
-
-                // Special handling for temperature (needs transformation)
                 if (field === 'Stable temperature') {
-                  plantValue = getTempCategory(plant[field]);
+                  plantValue = getTempCategoryIndoor(plant[field]);
                 } else {
                   plantValue = (plant[field] || '').toString().trim();
                 }
-
                 return currentFilters[field].some(filterValue =>
                   plantValue && plantValue.toLowerCase() === filterValue.toLowerCase()
                 );
@@ -1235,24 +1227,18 @@
             }
           });
 
-          // Apply sort
           if (currentSortProperty && currentSortOrder) {
             const isAscending = currentSortOrder === 'asc';
-
             if (currentSortProperty === 'name') {
-              filtered.sort((a, b) => {
-                const nameA = a['Common name'] || '';
-                const nameB = b['Common name'] || '';
-                return isAscending ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
-              });
+              filtered.sort((a, b) => isAscending
+                ? (a['Common name'] || '').localeCompare(b['Common name'] || '')
+                : (b['Common name'] || '').localeCompare(a['Common name'] || ''));
             } else if (currentSortProperty === 'light') {
               const lightOrder = { 'low': 1, 'medium': 2, 'high': 3 };
               filtered.sort((a, b) => {
-                const aLight = (a['Light Requirements'] || '').toLowerCase();
-                const bLight = (b['Light Requirements'] || '').toLowerCase();
-                const aValue = lightOrder[aLight] || 0;
-                const bValue = lightOrder[bLight] || 0;
-                return isAscending ? aValue - bValue : bValue - aValue;
+                const aVal = lightOrder[(a['Light Requirements'] || '').toLowerCase()] || 0;
+                const bVal = lightOrder[(b['Light Requirements'] || '').toLowerCase()] || 0;
+                return isAscending ? aVal - bVal : bVal - aVal;
               });
             } else if (currentSortProperty === 'temp') {
               filtered.sort((a, b) => {
@@ -1266,7 +1252,6 @@
           renderIndoorPlants(filtered);
         }
 
-        // Search input
         if (searchInput) {
           searchInput.addEventListener('input', (e) => {
             currentSearch = e.target.value;
@@ -1274,38 +1259,26 @@
           });
         }
 
-        // Clear filters button
         if (clearFiltersBtn) {
           clearFiltersBtn.addEventListener('click', () => {
             currentSearch = '';
             if (searchInput) searchInput.value = '';
-
             currentSortProperty = '';
             currentSortOrder = '';
             sortDropdown?.querySelectorAll('.sort-arrow').forEach(a => a.classList.remove('active'));
-
-            // Reset all filters
-            Object.keys(currentFilters).forEach(key => {
-              currentFilters[key] = [];
-            });
-
-            filterDropdown?.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-              checkbox.checked = false;
-            });
-
+            Object.keys(currentFilters).forEach(key => { currentFilters[key] = []; });
+            filterDropdown?.querySelectorAll('input[type="checkbox"]').forEach(cb => { cb.checked = false; });
             updateFilterCount();
             renderIndoorPlants(indoorPlants);
           });
         }
 
-        // Check if filters have values on page load
         if (searchInput && searchInput.value) {
           currentSearch = searchInput.value;
           applyFilters();
         }
       }
 
-      // Setup outdoor controls
       function setupOutdoorControls() {
         const searchInput = document.getElementById('searchInput2');
         const sortBtn = document.getElementById('outdoor-sort-btn');
@@ -1320,85 +1293,44 @@
         let currentSortOrder = '';
         let currentFilters = {};
 
-        // Define which fields to create filters for
         const filterFields = [
           { field: 'Category', label: 'Category' },
-          {
-            field: 'Water requirement',
-            label: 'Water Requirement',
-            sortOrder: ['High', 'Medium', 'Low']
-          },
-          {
-            field: 'Sun requirement',
-            label: 'Sun Requirement',
-            sortOrder: ['Full shade', 'Partial shade', 'Partial sun', 'Full sun']
-          },
+          { field: 'Water requirement', label: 'Water Requirement' },
+          { field: 'Sun requirement', label: 'Sun Requirement' },
           { field: 'Shade', label: 'Shade' },
-          {
-            field: 'waste',
-            label: 'Waste',
-            sortOrder: ['High', 'Medium', 'Low']
-          },
-          {
-            field: 'Evaporation mitigation',
-            label: 'Evaporation Mitigation',
-            sortOrder: ['High', 'Medium', 'Low']
-          },
-          {
-            field: 'Drought tolerance',
-            label: 'Drought Tolerance',
-            sortOrder: ['High', 'Medium', 'Low']
-          },
-          {
-            field: 'Heat tolerance',
-            label: 'Heat Tolerance',
-            sortOrder: ['High', 'Medium', 'Low']
-          },
+          { field: 'waste', label: 'Waste' },
+          { field: 'Evaporation mitigation', label: 'Evaporation Mitigation' },
+          { field: 'Drought tolerance', label: 'Drought Tolerance' },
+          { field: 'Heat tolerance', label: 'Heat Tolerance' },
           { field: 'Continuous bloom', label: 'Continuous Bloom' },
-          {
-            field: 'Environmental impact',
-            label: 'Environmental Impact',
-            sortOrder: ['High', 'Medium', 'Low']
-          },
+          { field: 'Environmental impact', label: 'Environmental Impact' },
           { field: 'Portable', label: 'Portable' },
         ];
 
-        // Populate all filters dynamically
         if (filterDropdown) {
           filterFields.forEach(({ field, label }) => {
-            // Get unique values for this field
             const uniqueValues = [...new Set(outdoorPlants.map(p => p[field]).filter(Boolean))].sort();
-
             if (uniqueValues.length > 0) {
-              // Initialize filter array
               currentFilters[field] = [];
-
-              // Create filter section
               const section = document.createElement('div');
               section.className = 'filter-section';
-
               const heading = document.createElement('h4');
               heading.textContent = label;
               section.appendChild(heading);
-
               const optionsContainer = document.createElement('div');
               optionsContainer.className = 'filter-options';
 
-              // Create checkbox for each unique value
               uniqueValues.forEach((value, index) => {
                 const option = document.createElement('div');
                 option.className = 'filter-option';
-
                 const checkbox = document.createElement('input');
                 checkbox.type = 'checkbox';
                 checkbox.id = `outdoor-${field.replace(/\s+/g, '-').toLowerCase()}-${index}`;
                 checkbox.value = value;
                 checkbox.dataset.filter = field;
-
                 const labelEl = document.createElement('label');
                 labelEl.htmlFor = checkbox.id;
                 labelEl.textContent = value;
-
                 option.appendChild(checkbox);
                 option.appendChild(labelEl);
                 optionsContainer.appendChild(option);
@@ -1410,14 +1342,12 @@
           });
         }
 
-        // Helper function to parse numeric values
         function parseNumeric(value) {
           if (!value) return null;
           const num = parseFloat(value);
           return isNaN(num) ? null : num;
         }
 
-        // Toggle sort dropdown
         if (sortBtn && sortDropdown) {
           sortBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -1426,7 +1356,6 @@
           });
         }
 
-        // Toggle filter dropdown
         if (filterBtn && filterDropdown) {
           filterBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -1436,65 +1365,44 @@
           });
         }
 
-        // Close dropdowns when clicking outside
         document.addEventListener('click', (e) => {
-          if (!e.target.closest('.sort-dropdown')) {
-            sortDropdown?.classList.remove('show');
-          }
+          if (!e.target.closest('.sort-dropdown')) sortDropdown?.classList.remove('show');
           if (!e.target.closest('.dropdown-filter')) {
             filterDropdown?.classList.remove('show');
             filterBtn?.classList.remove('active');
           }
         });
 
-        // Handle sort arrow clicks
         if (sortDropdown) {
           sortDropdown.querySelectorAll('.sort-arrow').forEach(arrow => {
             arrow.addEventListener('click', (e) => {
               e.stopPropagation();
-
-              // Remove active class from all arrows
               sortDropdown.querySelectorAll('.sort-arrow').forEach(a => a.classList.remove('active'));
-
-              // Add active class to clicked arrow
               arrow.classList.add('active');
-
-              // Set current sort
               currentSortProperty = arrow.dataset.property;
               currentSortOrder = arrow.dataset.order;
-
-              // Apply filters
               applyFilters();
             });
           });
         }
 
-        // Handle filter checkboxes
         if (filterDropdown) {
           filterDropdown.addEventListener('change', (e) => {
             if (e.target.type === 'checkbox') {
               const filterField = e.target.dataset.filter;
               const value = e.target.value;
-
-              if (!currentFilters[filterField]) {
-                currentFilters[filterField] = [];
-              }
-
+              if (!currentFilters[filterField]) currentFilters[filterField] = [];
               if (e.target.checked) {
-                if (!currentFilters[filterField].includes(value)) {
-                  currentFilters[filterField].push(value);
-                }
+                if (!currentFilters[filterField].includes(value)) currentFilters[filterField].push(value);
               } else {
                 currentFilters[filterField] = currentFilters[filterField].filter(v => v !== value);
               }
-
               updateFilterCount();
               applyFilters();
             }
           });
         }
 
-        // Update filter count badge
         function updateFilterCount() {
           const totalFilters = Object.values(currentFilters).reduce((sum, arr) => sum + arr.length, 0);
           if (filterCount) {
@@ -1507,11 +1415,9 @@
           }
         }
 
-        // Apply filters and sorting
         function applyFilters() {
           let filtered = [...outdoorPlants];
 
-          // Apply search
           if (currentSearch) {
             filtered = filtered.filter(plant =>
               plant['Common name']?.toLowerCase().includes(currentSearch.toLowerCase()) ||
@@ -1519,7 +1425,6 @@
             );
           }
 
-          // Apply all dynamic filters
           Object.keys(currentFilters).forEach(field => {
             if (currentFilters[field].length > 0) {
               filtered = filtered.filter(plant => {
@@ -1531,81 +1436,65 @@
             }
           });
 
-          // Apply sort
           if (currentSortProperty && currentSortOrder) {
             const isAscending = currentSortOrder === 'asc';
-
             if (currentSortProperty === 'name') {
-              filtered.sort((a, b) => {
-                const nameA = a['Common name'] || '';
-                const nameB = b['Common name'] || '';
-                return isAscending ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
-              });
+              filtered.sort((a, b) => isAscending
+                ? (a['Common name'] || '').localeCompare(b['Common name'] || '')
+                : (b['Common name'] || '').localeCompare(a['Common name'] || ''));
             } else if (currentSortProperty === 'water') {
-              const waterOrder = { 'low': 1, 'medium': 2, 'high': 3 };
+              const order = { 'low': 1, 'medium': 2, 'high': 3 };
               filtered.sort((a, b) => {
-                const aWater = (a['Water requirement'] || '').toLowerCase();
-                const bWater = (b['Water requirement'] || '').toLowerCase();
-                const aValue = waterOrder[aWater] || 0;
-                const bValue = waterOrder[bWater] || 0;
-                return isAscending ? aValue - bValue : bValue - aValue;
+                const aVal = order[(a['Water requirement'] || '').toLowerCase()] || 0;
+                const bVal = order[(b['Water requirement'] || '').toLowerCase()] || 0;
+                return isAscending ? aVal - bVal : bVal - aVal;
               });
             } else if (currentSortProperty === 'sun') {
-              const sunOrder = { 'full shade': 1, 'partial shade': 2, 'partial sun': 3, 'full sun': 4 };
+              const order = { 'full shade': 1, 'partial shade': 2, 'partial sun': 3, 'full sun': 4 };
               filtered.sort((a, b) => {
-                const aSun = (a['Sun requirement'] || '').toLowerCase();
-                const bSun = (b['Sun requirement'] || '').toLowerCase();
-                const aValue = sunOrder[aSun] || 0;
-                const bValue = sunOrder[bSun] || 0;
-                return isAscending ? aValue - bValue : bValue - aValue;
+                const aVal = order[(a['Sun requirement'] || '').toLowerCase()] || 0;
+                const bVal = order[(b['Sun requirement'] || '').toLowerCase()] || 0;
+                return isAscending ? aVal - bVal : bVal - aVal;
               });
             } else if (currentSortProperty === 'waste') {
-              const wasteOrder = { 'low': 1, 'medium': 2, 'high': 3 };
+              const order = { 'low': 1, 'medium': 2, 'high': 3 };
               filtered.sort((a, b) => {
-                const aWaste = (a['waste'] || '').toLowerCase();
-                const bWaste = (b['waste'] || '').toLowerCase();
-                const aValue = wasteOrder[aWaste] || 0;
-                const bValue = wasteOrder[bWaste] || 0;
-                return isAscending ? aValue - bValue : bValue - aValue;
+                const aVal = order[(a['waste'] || '').toLowerCase()] || 0;
+                const bVal = order[(b['waste'] || '').toLowerCase()] || 0;
+                return isAscending ? aVal - bVal : bVal - aVal;
               });
             } else if (currentSortProperty === 'drought') {
-              const droughtOrder = { 'low': 1, 'medium': 2, 'high': 3 };
+              const order = { 'low': 1, 'medium': 2, 'high': 3 };
               filtered.sort((a, b) => {
-                const aDrought = (a['Drought tolerance'] || '').toLowerCase();
-                const bDrought = (b['Drought tolerance'] || '').toLowerCase();
-                const aValue = droughtOrder[aDrought] || 0;
-                const bValue = droughtOrder[bDrought] || 0;
-                return isAscending ? aValue - bValue : bValue - aValue;
+                const aVal = order[(a['Drought tolerance'] || '').toLowerCase()] || 0;
+                const bVal = order[(b['Drought tolerance'] || '').toLowerCase()] || 0;
+                return isAscending ? aVal - bVal : bVal - aVal;
               });
             } else if (currentSortProperty === 'heat') {
-              const heatOrder = { 'low': 1, 'medium': 2, 'high': 3 };
+              const order = { 'low': 1, 'medium': 2, 'high': 3 };
               filtered.sort((a, b) => {
-                const aHeat = (a['Heat tolerance'] || '').toLowerCase();
-                const bHeat = (b['Heat tolerance'] || '').toLowerCase();
-                const aValue = heatOrder[aHeat] || 0;
-                const bValue = heatOrder[bHeat] || 0;
-                return isAscending ? aValue - bValue : bValue - aValue;
+                const aVal = order[(a['Heat tolerance'] || '').toLowerCase()] || 0;
+                const bVal = order[(b['Heat tolerance'] || '').toLowerCase()] || 0;
+                return isAscending ? aVal - bVal : bVal - aVal;
               });
             } else if (currentSortProperty === 'impact') {
-              const impactOrder = { 'low': 1, 'medium': 2, 'high': 3 };
+              const order = { 'low': 1, 'medium': 2, 'high': 3 };
               filtered.sort((a, b) => {
-                const aImpact = (a['Environmental impact'] || '').toLowerCase();
-                const bImpact = (b['Environmental impact'] || '').toLowerCase();
-                const aValue = impactOrder[aImpact] || 0;
-                const bValue = impactOrder[bImpact] || 0;
-                return isAscending ? aValue - bValue : bValue - aValue;
+                const aVal = order[(a['Environmental impact'] || '').toLowerCase()] || 0;
+                const bVal = order[(b['Environmental impact'] || '').toLowerCase()] || 0;
+                return isAscending ? aVal - bVal : bVal - aVal;
               });
             } else if (currentSortProperty === 'oxygen') {
               filtered.sort((a, b) => {
-                const aOxygen = parseNumeric(a['Oxygen gas production (g/year)']) || 0;
-                const bOxygen = parseNumeric(b['Oxygen gas production (g/year)']) || 0;
-                return isAscending ? aOxygen - bOxygen : bOxygen - aOxygen;
+                const aVal = parseNumeric(a['Oxygen gas production (g/year)']) || 0;
+                const bVal = parseNumeric(b['Oxygen gas production (g/year)']) || 0;
+                return isAscending ? aVal - bVal : bVal - aVal;
               });
             } else if (currentSortProperty === 'co2') {
               filtered.sort((a, b) => {
-                const aCO2 = parseNumeric(a['Carbon dioxide gas absorption (g/year)']) || 0;
-                const bCO2 = parseNumeric(b['Carbon dioxide gas absorption (g/year)']) || 0;
-                return isAscending ? aCO2 - bCO2 : bCO2 - aCO2;
+                const aVal = parseNumeric(a['Carbon dioxide gas absorption (g/year)']) || 0;
+                const bVal = parseNumeric(b['Carbon dioxide gas absorption (g/year)']) || 0;
+                return isAscending ? aVal - bVal : bVal - aVal;
               });
             }
           }
@@ -1613,7 +1502,6 @@
           renderOutdoorPlants(filtered);
         }
 
-        // Search input
         if (searchInput) {
           searchInput.addEventListener('input', (e) => {
             currentSearch = e.target.value;
@@ -1621,31 +1509,20 @@
           });
         }
 
-        // Clear filters button
         if (clearFiltersBtn) {
           clearFiltersBtn.addEventListener('click', () => {
             currentSearch = '';
             if (searchInput) searchInput.value = '';
-
             currentSortProperty = '';
             currentSortOrder = '';
             sortDropdown?.querySelectorAll('.sort-arrow').forEach(a => a.classList.remove('active'));
-
-            // Reset all filters
-            Object.keys(currentFilters).forEach(key => {
-              currentFilters[key] = [];
-            });
-
-            filterDropdown?.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-              checkbox.checked = false;
-            });
-
+            Object.keys(currentFilters).forEach(key => { currentFilters[key] = []; });
+            filterDropdown?.querySelectorAll('input[type="checkbox"]').forEach(cb => { cb.checked = false; });
             updateFilterCount();
             renderOutdoorPlants(outdoorPlants);
           });
         }
 
-        // Check if filters have values on page load
         if (searchInput && searchInput.value) {
           currentSearch = searchInput.value;
           applyFilters();
