@@ -287,6 +287,10 @@ function highlightSearchTermOnPage() {
           if (parent.closest('nav, footer, script, style, #search-navigator, .main-search-results')) {
             return NodeFilter.FILTER_REJECT;
           }
+          // Skip hidden elements
+          if (parent.closest('[style*="display: none"]') || parent.closest('[style*="display:none"]')) {
+            return NodeFilter.FILTER_REJECT;
+          }
           return NodeFilter.FILTER_ACCEPT;
         }
       },

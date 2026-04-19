@@ -54,7 +54,8 @@
       border-radius: 20px;
       cursor: pointer;
       transition: background-color 0.3s ease;
-      white-space: nowrap; /* Prevent text wrapping inside buttons */
+      white-space: nowrap;
+      /* Prevent text wrapping inside buttons */
       min-height: 32px;
       min-width: fit-content;
     }
@@ -789,6 +790,8 @@
       const searchFromUrl = urlParams.get('search');
       const tabFromUrl = urlParams.get('tab');
       const highlightFromUrl = urlParams.get('highlight') || searchFromUrl;
+      const filterParam = urlParams.get('filter');
+      const filterValueParam = urlParams.get('filterValue');
 
       // Clean URL immediately so search.js doesn't interfere
       history.replaceState(null, '', window.location.pathname);
@@ -936,7 +939,11 @@
           setupIndoorControls();
           if (highlightFromUrl && tabFromUrl !== 'outdoor') {
             showTab('#indoor-plants');
-            setTimeout(() => highlightQuery(highlightFromUrl, tabFromUrl), 500);
+            setTimeout(() => {
+              highlightQuery(highlightFromUrl, tabFromUrl);
+              const searchInputEl = document.getElementById('main-search-input');
+              if (searchInputEl) searchInputEl.value = highlightFromUrl;
+            }, 500);
           }
         })
         .catch(err => console.error('Indoor fetch error:', err));
@@ -950,7 +957,11 @@
           setupOutdoorControls();
           if (highlightFromUrl && tabFromUrl === 'outdoor') {
             showTab('#outdoor-plants');
-            setTimeout(() => highlightQuery(highlightFromUrl, tabFromUrl), 500);
+            setTimeout(() => {
+              highlightQuery(highlightFromUrl, tabFromUrl);
+              const searchInputEl = document.getElementById('main-search-input');
+              if (searchInputEl) searchInputEl.value = highlightFromUrl;
+            }, 500);
           }
         })
         .catch(err => console.error('Outdoor fetch error:', err));
@@ -1277,6 +1288,18 @@
           currentSearch = searchInput.value;
           applyFilters();
         }
+
+        if (filterParam && filterValueParam) {
+          const checkbox = filterDropdown.querySelector(
+            `input[data-filter="${filterParam}"][value="${filterValueParam}"]`
+          );
+          if (checkbox) {
+            checkbox.checked = true;
+            currentFilters[filterParam] = [filterValueParam];
+            updateFilterCount();
+            applyFilters();
+          }
+        }
       }
 
       function setupOutdoorControls() {
@@ -1526,6 +1549,18 @@
         if (searchInput && searchInput.value) {
           currentSearch = searchInput.value;
           applyFilters();
+        }
+
+        if (filterParam && filterValueParam) {
+          const checkbox = filterDropdown.querySelector(
+            `input[data-filter="${filterParam}"][value="${filterValueParam}"]`
+          );
+          if (checkbox) {
+            checkbox.checked = true;
+            currentFilters[filterParam] = [filterValueParam];
+            updateFilterCount();
+            applyFilters();
+          }
         }
       }
     });

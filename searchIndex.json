@@ -27,7 +27,7 @@
   {
     "title": "About",
     "url": "about.html",
-    "content": "About UoB Landscapes About Us Where Science Meets Design Meet Our Team 🔬 Scientific Research 🏗️ Engineering Excellence 💻 Digital Innovation 🌱 Future Growth Biologists Landscape Engineers Software Engineers Where Science Meets Design - A collaborative platform uniting biology, engineering, and technology to create a sustainable and data-driven campus environment. The University of Bahrain Landscapes initiative envisions a collaborative platform where science, engineering, and technology unite to create a sustainable and data-driven campus environment. By integrating biological research, landscape design, and digital innovation, the project aims to cultivate a living repository of plant data and design proposals that evolve with time. This ongoing collaboration lays the groundwork for a greener, smarter, and more connected university landscape that reflects the harmony between nature, knowledge, and technology. This initiative lays the foundation for a continuously evolving landscape strategy, where scientific insight and engineering creativity converge to shape a greener, smarter campus experience. Biologists from the College of Science meticulously document indoor plant species, creating a comprehensive database that serves as a valuable resource for botanical research and education. Landscape engineers from the College of Engineering design innovative outdoor and indoor landscaping proposals with detailed plans and 3D models that bring visions to life. Software engineers from the College of IT develop and maintain the platform, ensuring seamless data integration and user-friendly access to all landscape information. Both biological surveys and engineering designs are part of an ongoing process, with future expansions planned to cover additional locations and introduce new proposals across campus. College of Science College of Engineering College of Information Technology"
+    "content": "About UoB Landscapes About Us Where Science Meets Design Our Methods & Practices Meet Our Team 🔬 Scientific Research 🏗️ Engineering Excellence 💻 Digital Innovation 🌱 Future Growth Irrigation Techniques SDG in Daily Operations Portable Plants Service Biologists Landscape Engineers Software Engineers Where Science Meets Design - A collaborative platform uniting biology, engineering, and technology to create a sustainable and data-driven campus environment. The University of Bahrain Landscapes initiative envisions a collaborative platform where science, engineering, and technology unite to create a sustainable and data-driven campus environment. By integrating biological research, landscape design, and digital innovation, the project aims to cultivate a living repository of plant data and design proposals that evolve with time. This ongoing collaboration lays the groundwork for a greener, smarter, and more connected university landscape that reflects the harmony between nature, knowledge, and technology. This initiative lays the foundation for a continuously evolving landscape strategy, where scientific insight and engineering creativity converge to shape a greener, smarter campus experience. Biologists from the College of Science meticulously document indoor plant species, creating a comprehensive database that serves as a valuable resource for botanical research and education. Landscape engineers from the College of Engineering design innovative outdoor and indoor landscaping proposals with detailed plans and 3D models that bring visions to life. Software engineers from the College of IT develop and maintain the platform, ensuring seamless data integration and user-friendly access to all landscape information. Both biological surveys and engineering designs are part of an ongoing process, with future expansions planned to cover additional locations and introduce new proposals across campus. How we maintain and enhance the UOB campus landscape through sustainable methods and innovative services. We employ smart irrigation methods across campus, including drip irrigation and scheduled watering systems that minimize water waste while keeping our landscape healthy year-round. Our team monitors soil moisture levels and adjusts watering schedules seasonally to ensure optimal plant health while conserving water resources. Our daily landscaping operations are guided by the UN Sustainable Development Goals. Every decision we make on campus reflects our commitment to a greener and more sustainable environment. We contribute to SDG 3 by maintaining green spaces that support well-being, SDG 4 by engaging students in hands-on research and training, SDG 6 by using smart irrigation to minimize water waste, SDG 11 by creating a livable and sustainable campus, SDG 13 by planting species that absorb CO₂ and reduce heat, and SDG 15 by documenting and protecting campus biodiversity. We offer a portable plants service for campus events and occasions. Our collection of plants in portable pots is carefully selected for their visual appeal and suitability for both indoor and outdoor settings — from formal ceremonies and outdoor gatherings to department exhibitions and special university occasions. Our team handles the full process, from selecting and arranging the right plants to delivering and retrieving them after the event, ensuring a seamless experience for every occasion. Browse our University of Bahrain students contributing through hands-on training in biological research, landscape design, and software development. College of Science College of Engineering College of Information Technology"
   },
   {
     "title": "كركديه صيني Hibiscus rosa-sinensis",
@@ -494,14 +494,6 @@
     "content": "تيكوما صفراء Tecoma stans"
   },
   {
-    "title": "القرنفل Dianthus spp.",
-    "displayTitle": "Dianthus spp. القرنفل",
-    "subtitle": "Dianthus spp.",
-    "type": "outdoor-plant",
-    "url": "ourPlants.html?search=%D8%A7%D9%84%D9%82%D8%B1%D9%86%D9%81%D9%84&tab=outdoor",
-    "content": "القرنفل Dianthus spp."
-  },
-  {
     "title": "عشبة ألترنانثيرا Alternanthera brasiliana",
     "displayTitle": "Alternanthera brasiliana عشبة ألترنانثيرا",
     "subtitle": "Alternanthera brasiliana",
@@ -534,14 +526,6 @@
     "content": "أغاف Foxtail Agave"
   },
   {
-    "title": "الفربيون Euphorbia",
-    "displayTitle": "Euphorbia الفربيون",
-    "subtitle": "Euphorbia",
-    "type": "outdoor-plant",
-    "url": "ourPlants.html?search=%D8%A7%D9%84%D9%81%D8%B1%D8%A8%D9%8A%D9%88%D9%86&tab=outdoor",
-    "content": "الفربيون Euphorbia"
-  },
-  {
     "title": "الجهنمية Bougainvillea spp.",
     "displayTitle": "Bougainvillea spp. الجهنمية",
     "subtitle": "Bougainvillea spp.",
@@ -556,22 +540,6 @@
     "type": "outdoor-plant",
     "url": "ourPlants.html?search=%D9%84%D8%A7%D9%86%D8%AA%D8%A7%D9%86%D8%A7&tab=outdoor",
     "content": "لانتانا lantana camara"
-  },
-  {
-    "title": "نبات الثعبان الأسطواني Dracaena angolensis",
-    "displayTitle": "Dracaena angolensis نبات الثعبان الأسطواني",
-    "subtitle": "Dracaena angolensis",
-    "type": "outdoor-plant",
-    "url": "ourPlants.html?search=%D9%86%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D8%AB%D8%B9%D8%A8%D8%A7%D9%86%20%D8%A7%D9%84%D8%A3%D8%B3%D8%B7%D9%88%D8%A7%D9%86%D9%8A&tab=outdoor",
-    "content": "نبات الثعبان الأسطواني Dracaena angolensis"
-  },
-  {
-    "title": "نبات المظلة Cyperus aternifolius",
-    "displayTitle": "Cyperus aternifolius نبات المظلة",
-    "subtitle": "Cyperus aternifolius",
-    "type": "outdoor-plant",
-    "url": "ourPlants.html?search=%D9%86%D8%A8%D8%A7%D8%AA%20%D8%A7%D9%84%D9%85%D8%B8%D9%84%D8%A9&tab=outdoor",
-    "content": "نبات المظلة Cyperus aternifolius"
   },
   {
     "title": "نبات المحار Tradescantia spathacea",
@@ -614,28 +582,12 @@
     "content": "اوليندر Nerium oleander"
   },
   {
-    "title": "الفيكس Ficus spp",
-    "displayTitle": "Ficus spp الفيكس",
-    "subtitle": "Ficus spp",
-    "type": "outdoor-plant",
-    "url": "ourPlants.html?search=%D8%A7%D9%84%D9%81%D9%8A%D9%83%D8%B3&tab=outdoor",
-    "content": "الفيكس Ficus spp"
-  },
-  {
     "title": "شجرة الكافور Cinnamomum camphora",
     "displayTitle": "Cinnamomum camphora شجرة الكافور",
     "subtitle": "Cinnamomum camphora",
     "type": "outdoor-plant",
     "url": "ourPlants.html?search=%D8%B4%D8%AC%D8%B1%D8%A9%20%D8%A7%D9%84%D9%83%D8%A7%D9%81%D9%88%D8%B1&tab=outdoor",
     "content": "شجرة الكافور Cinnamomum camphora"
-  },
-  {
-    "title": "تمرحنا Ligustrum spp",
-    "displayTitle": "Ligustrum spp تمرحنا",
-    "subtitle": "Ligustrum spp",
-    "type": "outdoor-plant",
-    "url": "ourPlants.html?search=%D8%AA%D9%85%D8%B1%D8%AD%D9%86%D8%A7&tab=outdoor",
-    "content": "تمرحنا Ligustrum spp"
   },
   {
     "title": "خيار الشمبر Cassia fistula",
@@ -652,14 +604,6 @@
     "type": "outdoor-plant",
     "url": "ourPlants.html?search=%D8%A7%D9%84%D9%8A%D8%A7%D8%B3%D9%85%D9%8A%D9%86%20%D8%A7%D9%84%D9%87%D9%86%D8%AF%D9%8A&tab=outdoor",
     "content": "الياسمين الهندي Plumeria alba"
-  },
-  {
-    "title": "شجرة التابوبيا Tabebuia spp",
-    "displayTitle": "Tabebuia spp شجرة التابوبيا",
-    "subtitle": "Tabebuia spp",
-    "type": "outdoor-plant",
-    "url": "ourPlants.html?search=%D8%B4%D8%AC%D8%B1%D8%A9%20%D8%A7%D9%84%D8%AA%D8%A7%D8%A8%D9%88%D8%A8%D9%8A%D8%A7&tab=outdoor",
-    "content": "شجرة التابوبيا Tabebuia spp"
   },
   {
     "title": "الخبيز الساحلي Thespesia populnea",
@@ -740,14 +684,6 @@
     "type": "outdoor-plant",
     "url": "ourPlants.html?search=%D8%A7%D9%84%D8%AD%D8%A8%D9%86%20%D8%A7%D9%84%D8%A3%D8%B5%D9%81%D8%B1&tab=outdoor",
     "content": "الحبن الأصفر Thevetia peruviana"
-  },
-  {
-    "title": "الكازورينا Casuarina equisetifolia",
-    "displayTitle": "Casuarina equisetifolia الكازورينا",
-    "subtitle": "Casuarina equisetifolia",
-    "type": "outdoor-plant",
-    "url": "ourPlants.html?search=%D8%A7%D9%84%D9%83%D8%A7%D8%B2%D9%88%D8%B1%D9%8A%D9%86%D8%A7&tab=outdoor",
-    "content": "الكازورينا Casuarina equisetifolia"
   },
   {
     "title": "شجرة كورديا Cordia sebestena",
@@ -846,14 +782,6 @@
     "content": "الفينكا Catharanthus roseus"
   },
   {
-    "title": "الزينيا Zinnia elegans Jacq.",
-    "displayTitle": "Zinnia elegans Jacq. الزينيا",
-    "subtitle": "Zinnia elegans Jacq.",
-    "type": "outdoor-plant",
-    "url": "ourPlants.html?search=%D8%A7%D9%84%D8%B2%D9%8A%D9%86%D9%8A%D8%A7&tab=outdoor",
-    "content": "الزينيا Zinnia elegans Jacq."
-  },
-  {
     "title": "سانسيفيريا Sansevieria trifasciata Prain",
     "displayTitle": "Sansevieria trifasciata Prain سانسيفيريا",
     "subtitle": "Sansevieria trifasciata Prain",
@@ -878,12 +806,12 @@
     "content": "الويديليا Sphagneticola trilobata"
   },
   {
-    "title": "��للانتانا المتدلي Lantana montevidensis",
-    "displayTitle": "Lantana montevidensis ��للانتانا المتدلي",
+    "title": "اللانتانا المتدلي Lantana montevidensis",
+    "displayTitle": "Lantana montevidensis اللانتانا المتدلي",
     "subtitle": "Lantana montevidensis",
     "type": "outdoor-plant",
-    "url": "ourPlants.html?search=%EF%BF%BD%EF%BF%BD%D9%84%D9%84%D8%A7%D9%86%D8%AA%D8%A7%D9%86%D8%A7%20%D8%A7%D9%84%D9%85%D8%AA%D8%AF%D9%84%D9%8A&tab=outdoor",
-    "content": "��للانتانا المتدلي Lantana montevidensis"
+    "url": "ourPlants.html?search=%D8%A7%D9%84%D9%84%D8%A7%D9%86%D8%AA%D8%A7%D9%86%D8%A7%20%D8%A7%D9%84%D9%85%D8%AA%D8%AF%D9%84%D9%8A&tab=outdoor",
+    "content": "اللانتانا المتدلي Lantana montevidensis"
   },
   {
     "title": "السنط العربي الشوكي Vachellia nilotica",
@@ -900,14 +828,6 @@
     "type": "outdoor-plant",
     "url": "ourPlants.html?search=%D9%82%D8%B7%D8%B1%20%D8%A7%D9%84%D9%86%D8%AF%D9%89%D8%8C%20%D8%AD%D9%8A%20%D8%A7%D9%84%D8%B9%D9%84%D9%85&tab=outdoor",
     "content": "قطر الندى، حي العلم Mesembryanthemum cordifolium L.f."
-  },
-  {
-    "title": "الفربيون تيثيمالويدس Euphorbia tithymaloides",
-    "displayTitle": "Euphorbia tithymaloides الفربيون تيثيمالويدس",
-    "subtitle": "Euphorbia tithymaloides",
-    "type": "outdoor-plant",
-    "url": "ourPlants.html?search=%D8%A7%D9%84%D9%81%D8%B1%D8%A8%D9%8A%D9%88%D9%86%20%D8%AA%D9%8A%D8%AB%D9%8A%D9%85%D8%A7%D9%84%D9%88%D9%8A%D8%AF%D8%B3&tab=outdoor",
-    "content": "الفربيون تيثيمالويدس Euphorbia tithymaloides"
   },
   {
     "title": "زنبق العنكبوت Crinum asiaticum",
@@ -940,5 +860,13 @@
     "type": "outdoor-plant",
     "url": "ourPlants.html?search=%D8%B7%D8%A7%D9%88%D9%88%D8%B3%20%D8%A7%D9%84%D8%AC%D9%86%D8%A9&tab=outdoor",
     "content": "طاووس الجنة Caesalpinia pulcherrima"
+  },
+  {
+    "title": "توليب أفريقي spathodea campanulata",
+    "displayTitle": "spathodea campanulata توليب أفريقي",
+    "subtitle": "spathodea campanulata",
+    "type": "outdoor-plant",
+    "url": "ourPlants.html?search=%D8%AA%D9%88%D9%84%D9%8A%D8%A8%20%D8%A3%D9%81%D8%B1%D9%8A%D9%82%D9%8A&tab=outdoor",
+    "content": "توليب أفريقي spathodea campanulata"
   }
 ]
