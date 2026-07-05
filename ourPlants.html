@@ -25,10 +25,10 @@
       background: url('images/about2.jpg');
       background-size: cover;
       background-position: 50% 30%;
-      padding: 120px 40px 50px;
+      padding: 200px 40px 70px;
       text-align: center;
       color: white;
-      margin-top: 65px;
+      /* margin-top: 65px; */
       position: relative;
     }
 
@@ -333,61 +333,62 @@
 </head>
 
 <body class="our-plants-page">
-  <nav class="navbar">
-    <div class="nav-left">
-      <div class="logo-space" title="Logo">
-        <img src="images/UOB-new-logo.png" alt="University of Bahrain" />
+  <div class="nav-wrapper">
+    <nav class="navbar">
+      <div class="nav-left">
+        <div class="logo-space" title="Logo">
+          <img src="images/UOB-new-logo.png" alt="University of Bahrain" />
+        </div>
+        <button class="hamburger" id="hamburger">&#9776;</button>
       </div>
-      <button class="hamburger" id="hamburger">&#9776;</button>
-    </div>
+      <div class="nav-center">
+        <ul id="mobile-menu">
+          <li><a href="home.html">HOME</a></li>
+          <li><a href="ourPlants.html" class="active">OUR PLANTS</a></li>
+          <li><a href="projects.html">PROJECTS</a></li>
+          <li><a href="Buildings.html">LOCATIONS</a></li>
+          <li><a href="statistics.html">STATISTICS</a></li>
+          <li><a href="about.html">ABOUT</a></li>
 
-    <div class="nav-center">
-      <ul id="mobile-menu">
-        <li><a href="home.html">HOME</a></li>
-        <li><a href="ourPlants.html" class="active">OUR PLANTS</a></li>
-        <li><a href="projects.html">PROJECTS</a></li>
-        <li><a href="Buildings.html">LOCATIONS</a></li>
-        <li><a href="statistics.html">STATISTICS</a></li>
-        <li><a href="about.html">ABOUT</a></li>
+          <li class="mobile-controls">
+            <div class="dropdown">
+              <button class="theme-btn" id="mobile-theme-btn">🎨</button>
+              <div class="theme-picker" id="mobile-theme-picker">
+                <div class="theme-option" data-theme="default"></div>
+                <div class="theme-option" data-theme="blue"></div>
+              </div>
+            </div>
+            <button class="arabic-btn" onclick="translate()">عربي</button>
+          </li>
+        </ul>
+      </div>
 
-        <li class="mobile-controls">
+      <div class="nav-right">
+        <div class="controls">
+          <button class="arabic-btn" onclick="translate()">عربي</button>
           <div class="dropdown">
-            <button class="theme-btn" id="mobile-theme-btn">🎨</button>
-            <div class="theme-picker" id="mobile-theme-picker">
+            <button class="theme-btn" id="theme-btn">🎨</button>
+            <div class="theme-picker" id="theme-picker">
               <div class="theme-option" data-theme="default"></div>
               <div class="theme-option" data-theme="blue"></div>
             </div>
           </div>
-          <button class="arabic-btn" onclick="translate()">عربي</button>
-        </li>
-      </ul>
-    </div>
-
-    <div class="nav-right">
-      <div class="controls">
-        <button class="arabic-btn" onclick="translate()">عربي</button>
-        <div class="dropdown">
-          <button class="theme-btn" id="theme-btn">🎨</button>
-          <div class="theme-picker" id="theme-picker">
-            <div class="theme-option" data-theme="default"></div>
-            <div class="theme-option" data-theme="blue"></div>
+          <div class="main-search-wrapper">
+            <input type="search" id="main-search-input" placeholder="Search…" autocomplete="off" />
+            <div id="main-search-results" class="main-search-results"></div>
           </div>
         </div>
-        <div class="main-search-wrapper">
-          <input type="search" id="main-search-input" placeholder="Search…" autocomplete="off" />
-          <div id="main-search-results" class="main-search-results"></div>
-        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- PLANTS SUBNAV -->
-  <nav class="plants-subnav">
-    <ul>
-      <li><a href="#indoor-plants" id="tab-indoor">INDOOR PLANTS</a></li>
-      <li><a href="#outdoor-plants" id="tab-outdoor">OUTDOOR PLANTS</a></li>
-    </ul>
-  </nav>
+    <!-- PLANTS SUBNAV -->
+    <nav class="plants-subnav">
+      <ul>
+        <li><a href="#indoor-plants" id="tab-indoor">INDOOR PLANTS</a></li>
+        <li><a href="#outdoor-plants" id="tab-outdoor">OUTDOOR PLANTS</a></li>
+      </ul>
+    </nav>
+  </div>
 
   <section class="hero-section">
     <h1 id="hero-title">Indoor Plants</h1>
@@ -513,7 +514,7 @@
     });
   </script>
 
-  <main class="grid-section">
+  <main class="grid-section" style="padding: 40px 50px 60px;">
     <section id="indoor-plants" class="plants-section">
       <div class="search-filters-container">
         <div class="search-bar">
@@ -728,7 +729,7 @@
   </main>
 
   <button class="floating-btn" title="Back to top">
-    <i class="fas fa-arrow-up"></i>
+    <i class="fas fa-chevron-up"></i>
   </button>
 
   <footer>
@@ -792,6 +793,7 @@
       const highlightFromUrl = urlParams.get('highlight') || searchFromUrl;
       const filterParam = urlParams.get('filter');
       const filterValueParam = urlParams.get('filterValue');
+      const scrollToId = urlParams.get('scrollTo');
 
       // Clean URL immediately so search.js doesn't interfere
       history.replaceState(null, '', window.location.pathname);
@@ -1005,12 +1007,15 @@
         plants.forEach(plant => {
           const card = document.createElement('div');
           card.className = 'grid-item';
+          card.dataset.id = plant["Plant ID"];
           card.innerHTML = `
-            <img src="${plant.Image}" alt="${plant['Scientific name']}">
-            <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
-          `;
+    <div style="position: relative;">
+      <img src="${plant.Image}" alt="${plant['Scientific name']}">
+    </div>
+    <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
+  `;
           card.addEventListener('click', () => {
-            window.location.href = `indoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
+            window.location.href = `indoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}&from=indoor`;
           });
           grid.appendChild(card);
         });
@@ -1029,12 +1034,16 @@
         plants.forEach(plant => {
           const card = document.createElement('div');
           card.className = 'grid-item';
+          card.dataset.id = plant["Plant ID"];
           card.innerHTML = `
-            <img src="${plant.Image}" alt="${plant['Scientific name']}">
-            <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
-          `;
+    <div style="position: relative;">
+      <img src="${plant.Image}" alt="${plant['Scientific name']}">
+    </div>
+    <h3>${plant['Common name']} <br><small>(${plant['Scientific name']})</small></h3>
+  `;
+
           card.addEventListener('click', () => {
-            window.location.href = `outdoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}`;
+            window.location.href = `outdoorPlant.html?id=${encodeURIComponent(plant["Plant ID"])}&from=outdoor`;
           });
           grid.appendChild(card);
         });

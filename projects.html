@@ -22,71 +22,73 @@
       background: url('images/2.JPG');
       background-size: cover;
       background-position: 50% 50%;
-      padding: 120px 40px 80px;
+      padding: 200px 40px 70px;
       text-align: center;
       color: white;
-      margin-top: 65px;
+      /* margin-top: 65px; */
       position: relative;
     }
   </style>
 </head>
 
 <body>
-  <nav class="navbar">
-    <div class="nav-left">
-      <div class="logo-space" title="Logo">
-        <img src="images/UOB-new-logo.png" alt="University of Bahrain" />
+  <div class="nav-wrapper">
+    <nav class="navbar">
+      <div class="nav-left">
+        <div class="logo-space" title="Logo">
+          <img src="images/UOB-new-logo.png" alt="University of Bahrain" />
+        </div>
+        <button class="hamburger" id="hamburger">&#9776;</button>
       </div>
-      <button class="hamburger" id="hamburger">&#9776;</button>
-    </div>
 
-    <div class="nav-center">
-      <ul id="mobile-menu">
-        <li><a href="home.html">HOME</a></li>
-        <li><a href="ourPlants.html">OUR PLANTS</a></li>
-        <li><a href="projects.html" class="active">PROJECTS</a></li>
-        <li><a href="Buildings.html">LOCATIONS</a></li>
-        <li><a href="statistics.html">STATISTICS</a></li>
-        <li><a href="about.html">ABOUT</a></li>
+      <div class="nav-center">
+        <ul id="mobile-menu">
+          <li><a href="home.html">HOME</a></li>
+          <li><a href="ourPlants.html">OUR PLANTS</a></li>
+          <li><a href="projects.html" class="active">PROJECTS</a></li>
+          <li><a href="Buildings.html">LOCATIONS</a></li>
+          <li><a href="statistics.html">STATISTICS</a></li>
+          <li><a href="about.html">ABOUT</a></li>
 
-        <li class="mobile-controls">
+          <li class="mobile-controls">
+            <div class="dropdown">
+              <button class="theme-btn" id="mobile-theme-btn">🎨</button>
+              <div class="theme-picker" id="mobile-theme-picker">
+                <div class="theme-option" data-theme="default"></div>
+                <div class="theme-option" data-theme="blue"></div>
+              </div>
+            </div>
+            <button class="arabic-btn" onclick="translate()">عربي</button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="nav-right">
+        <div class="controls">
+          <button class="arabic-btn" onclick="translate()">عربي</button>
           <div class="dropdown">
-            <button class="theme-btn" id="mobile-theme-btn">🎨</button>
-            <div class="theme-picker" id="mobile-theme-picker">
+            <button class="theme-btn" id="theme-btn">🎨</button>
+            <div class="theme-picker" id="theme-picker">
               <div class="theme-option" data-theme="default"></div>
               <div class="theme-option" data-theme="blue"></div>
             </div>
           </div>
-          <button class="arabic-btn" onclick="translate()">عربي</button>
-        </li>
-      </ul>
-    </div>
-
-    <div class="nav-right">
-      <div class="controls">
-        <button class="arabic-btn" onclick="translate()">عربي</button>
-        <div class="dropdown">
-          <button class="theme-btn" id="theme-btn">🎨</button>
-          <div class="theme-picker" id="theme-picker">
-            <div class="theme-option" data-theme="default"></div>
-            <div class="theme-option" data-theme="blue"></div>
+          <div class="main-search-wrapper">
+            <input type="search" id="main-search-input" placeholder="Search…" autocomplete="off" />
+            <div id="main-search-results" class="main-search-results"></div>
           </div>
         </div>
-        <div class="main-search-wrapper">
-          <input type="search" id="main-search-input" placeholder="Search…" autocomplete="off" />
-          <div id="main-search-results" class="main-search-results"></div>
-        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- Projects Sub‑Navigation -->
-  <nav class="projects-subnav">
-    <ul>
-      <li><a href="#before-after" id="tab-before">BEFORE & AFTER</a></li>
-      <li><a href="#reports" id="tab-reports">REPORTS</a></li>
-    </ul>
-  </nav>
+    <!-- Projects Sub‑Navigation -->
+    <nav class="projects-subnav">
+      <ul>
+        <li><a href="#before-after" id="tab-before">BEFORE & AFTER</a></li>
+        <li><a href="#reports" id="tab-reports">REPORTS</a></li>
+      </ul>
+    </nav>
+  </div>
 
   <section class="hero-section">
     <h1>Projects & Annual Reports</h1>
@@ -1431,7 +1433,7 @@
     };
   </script>
   <script src="search.js"></script>
-  
+
   <footer>
     <div class="footer-container">
       <div class="footer-column">

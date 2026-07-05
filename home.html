@@ -124,8 +124,6 @@
     </div>
   </main>
 
-  <!-- <div style="padding: 10px;"></div> -->
-
   <div class="carousel-container">
     <h2 style="text-align:center; margin-top: 20px; margin-bottom: 90px;">Explore Our Landscape Locations</h2>
     <div class="carousel-wrapper">
@@ -209,10 +207,77 @@
     </div>
   </div>
 
-  <!-- ========================================
-       SUSTAINABILITY SECTION - REDESIGNED
-       ======================================== -->
-  <section class="sustainability-section">
+  <!-- Plant of the Week -->
+  <section class="potw-section">
+    <div class="potw-container">
+      <div class="potw-header">
+        <div class="potw-label">🌿 This Week's Spotlight</div>
+      </div>
+
+      <div class="potw-layout">
+
+        <!-- Left: Plant of the Week -->
+        <div class="potw-left-column">
+          <div class="potw-main-header">
+            <h3>Plant of the Week</h3>
+            <a id="potw-link" href="#" class="potw-btn">View Details</a>
+          </div>
+          <div class="potw-main">
+            <div class="potw-image-wrapper">
+              <img id="potw-image" src="" alt="" />
+              <div class="potw-image-overlay">
+                <h2 id="potw-common">Loading...</h2>
+                <p id="potw-scientific"></p>
+              </div>
+            </div>
+            <div class="potw-features-list">
+              <div class="potw-feature">
+                <div class="potw-feature-icon">☀️</div>
+                <div class="potw-feature-text">
+                  <h4>Light</h4>
+                  <p id="potw-feat1-value">—</p>
+                </div>
+              </div>
+              <div class="potw-feature">
+                <div class="potw-feature-icon">💧</div>
+                <div class="potw-feature-text">
+                  <h4>Water</h4>
+                  <p id="potw-feat2-value">—</p>
+                </div>
+              </div>
+              <div class="potw-feature">
+                <div class="potw-feature-icon">🌡️</div>
+                <div class="potw-feature-text">
+                  <h4>Temperature</h4>
+                  <p id="potw-feat3-value">—</p>
+                </div>
+              </div>
+              <div class="potw-feature">
+                <div class="potw-feature-icon">🌿</div>
+                <div class="potw-feature-text">
+                  <h4>Category</h4>
+                  <p id="potw-feat4-value">—</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Featured Plants -->
+        <div class="potw-right-column">
+          <div class="potw-main-header">
+            <h3>Featured Plants</h3>
+            <a href="ourPlants.html" class="featured-view-all">View All</a>
+          </div>
+          <div class="featured-list" id="featured-list"></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SUSTAINABILITY SECTION -->
+  <section class="sustainability-section" id="sdg">
     <div class="sustainability-container">
 
       <!-- Header with SDG Wheel on Left -->
@@ -289,6 +354,8 @@
   </section>
 
   <section class="map-section-wrapper">
+    <div class="map-deco-1"></div>
+    <!-- <div class="map-deco-2"></div> -->
     <div class="map-header">
       <h2>Interactive Campus Map</h2>
       <p>Navigate through our campus facilities. Click on any building icon to explore its location and details.</p>
@@ -492,7 +559,7 @@
         }
       });
 
-      // Optional: maintain active state on click (if navigation doesn't reload)
+      // Maintain active state on click (if navigation doesn't reload)
       navLinks.forEach(link => {
         link.addEventListener('click', function (e) {
           navLinks.forEach(l => l.classList.remove('active'));
@@ -616,6 +683,109 @@
         });
       });
     });
+
+    // Counter animation
+    function animateCounter(element, target, duration = 2000) {
+      const start = 0;
+      const increment = target / (duration / 16);
+      let current = start;
+
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        element.textContent = Math.floor(current).toLocaleString() + '+';
+      }, 16);
+    }
+
+    // Trigger when stats come into view
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counters = entry.target.querySelectorAll('.stat-mini-number');
+          counters.forEach(counter => {
+            const text = counter.textContent.replace(/[^0-9]/g, '');
+            const target = parseInt(text);
+            if (target) animateCounter(counter, target);
+          });
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    const statsGrid = document.querySelector('.stats-mini-grid');
+    if (statsGrid) statsObserver.observe(statsGrid);
+
+    // Plant of the Week
+    async function loadPlantOfTheWeek() {
+      try {
+        const weekNumber = Math.floor(Date.now() / (1000 * 60 * 60 * 24 * 7));
+
+        const [indoorRes, outdoorRes] = await Promise.all([
+          fetch('https://landscapinguob-api.onrender.com/api/indoor-plants'),
+          fetch('https://landscapinguob-api.onrender.com/api/outdoor-plants')
+        ]);
+
+        const indoor = await indoorRes.json();
+        const outdoor = await outdoorRes.json();
+        const allPlants = [
+          ...indoor.map(p => ({ ...p, _type: 'indoor' })),
+          ...outdoor.map(p => ({ ...p, _type: 'outdoor' }))
+        ];
+
+        if (!allPlants.length) return;
+
+        const plant = allPlants[weekNumber % allPlants.length];
+
+        document.getElementById('potw-image').src = plant.Image || '';
+        document.getElementById('potw-image').alt = plant['Common name'] || '';
+        document.getElementById('potw-common').textContent = plant['Common name'] || '';
+        document.getElementById('potw-scientific').textContent = plant['Scientific name'] || '';
+
+        document.getElementById('potw-feat1-value').textContent = plant['Light Requirements'] || plant['Sun requirement'] || '—';
+        document.getElementById('potw-feat2-value').textContent = plant['Watering'] || plant['Water requirement'] || '—';
+        document.getElementById('potw-feat3-value').textContent = plant['Stable temperature'] || plant['Heat tolerance'] || '—';
+        document.getElementById('potw-feat4-value').textContent = plant['Type'] || plant['Category'] || '—';
+
+        const detailPage = plant._type === 'outdoor' ? 'outdoorPlant.html' : 'indoorPlant.html';
+        document.getElementById('potw-link').href = `${detailPage}?id=${encodeURIComponent(plant['Plant ID'])}`;
+
+        // Featured plants - inside try block so allPlants and plant are accessible
+        const featuredPlants = allPlants
+          .filter(p => p['Plant ID'] !== plant['Plant ID'])
+          .sort(() => Math.random() - 0.5)
+          .slice(0, 4);
+
+        const featuredList = document.getElementById('featured-list');
+        featuredList.innerHTML = '';
+
+        featuredPlants.forEach(p => {
+          const featuredDetailPage = p._type === 'outdoor' ? 'outdoorPlant.html' : 'indoorPlant.html';
+          const tag = p['Type'] || p['Category'] || p._type;
+          const card = document.createElement('a');
+          card.className = 'featured-card';
+          card.href = `${featuredDetailPage}?id=${encodeURIComponent(p['Plant ID'])}`;
+          card.innerHTML = `
+        <img class="featured-card-image" src="${p.Image || ''}" alt="${p['Common name'] || ''}">
+        <div class="featured-card-info">
+          <h4>${p['Common name'] || ''}</h4>
+          <p>${p['Scientific name'] || ''}</p>
+          ${tag ? `<span class="featured-card-tag">${tag}</span>` : ''}
+        </div>
+        <i class="fas fa-chevron-right featured-card-arrow"></i>
+      `;
+          featuredList.appendChild(card);
+        });
+
+      } catch (err) {
+        console.error('Error loading plant of the week:', err);
+        document.querySelector('.potw-section').style.display = 'none';
+      }
+    }
+
+    loadPlantOfTheWeek();
   </script>
   <script src="search.js"></script>
 </body>

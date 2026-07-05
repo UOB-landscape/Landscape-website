@@ -615,7 +615,7 @@
 </head>
 
 <body>
-  <button class="back-button" onclick="history.back()">
+  <button class="back-button" onclick="goBack()">
     <i class="fas fa-arrow-left"></i>
   </button>
 
@@ -630,6 +630,16 @@
   </div>
 
   <script>
+    function goBack() {
+      const params = new URLSearchParams(window.location.search);
+      const from = params.get('from');
+      const plantId = params.get('id');
+      if (from === 'outdoor') {
+        window.location.href = `ourPlants.html?tab=outdoor&scrollTo=${encodeURIComponent(plantId)}#outdoor-plants`;
+      } else {
+        window.location.href = `ourPlants.html?tab=indoor&scrollTo=${encodeURIComponent(plantId)}#indoor-plants`;
+      }
+    }
     (function () {
       const params = new URLSearchParams(window.location.search);
       const plantId = params.get("id");
